@@ -52,6 +52,15 @@
   .pct.tbd{color:#b0aa9c; font-size:13px; font-style:italic;}
   .target{font-family:Arial,sans-serif; font-size:10.5px; color:#8a8a8a;}
 
+  /* multi-metric card variant, used where a driver has more than one target group */
+  .multi-rows{display:flex; flex-direction:column; gap:5px; margin-top:2px;}
+  .multi-row{display:flex; align-items:baseline; justify-content:space-between; font-family:Arial,sans-serif;}
+  .multi-row .mlbl{font-size:10.5px; color:#8a8a8a;}
+  .multi-row .mpct{font-size:14px; font-weight:bold;}
+  .multi-row .mpct.pos{color:var(--ready);}
+  .multi-row .mpct.neg{color:var(--blocked);}
+  .multi-row .mtgt{font-size:9.5px; color:#b0aa9c; margin-left:4px; font-weight:normal;}
+
   footer{
     margin-top:28px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
     border-top:1px solid var(--line); padding-top:14px;
@@ -88,13 +97,26 @@
             <div class="target">Target: 5%</div>
           </div>
         </a>
-        <a class="card placeholder" href="driver-5.html">
+        <a class="card" href="driver-5.html">
           <div>
             <div class="driver-num">Driver 5</div>
-            <div class="driver-name">Not yet built</div>
-            <div class="driver-owner">&nbsp;</div>
+            <div class="driver-name">Inspector/Tech Efficiency</div>
+            <div class="driver-owner">Owner: Blake · Aug 2026</div>
           </div>
-          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+          <div class="multi-rows">
+            <div class="multi-row">
+              <span class="mlbl">Inspector</span>
+              <span><span class="mpct pos">82.9%</span><span class="mtgt">/ 80%</span></span>
+            </div>
+            <div class="multi-row">
+              <span class="mlbl">Service Tech</span>
+              <span><span class="mpct pos">104.1%</span><span class="mtgt">/ 85%</span></span>
+            </div>
+            <div class="multi-row">
+              <span class="mlbl">Radon Tech</span>
+              <span><span class="mpct neg">74.4%</span><span class="mtgt">/ 90%</span></span>
+            </div>
+          </div>
         </a>
         <a class="card placeholder" href="driver-6.html">
           <div>
