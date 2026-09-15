@@ -2,145 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Driver 1 — Weighted Slot Model, August 2026</title>
+<title>August 2026 — Inspector Available Capacity</title>
 <style>
-  :root{
-    --black:#1a1a1a; --gold:#f4c94c; --gold-dark:#b8922e;
-    --line:#e6e2d8; --ready:#4a8a5c; --blocked:#c0503f; --waiting:#c98a2c; --paper:#fdfcf9;
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
   }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
-  .wrap{max-width:900px;margin:0 auto;padding:40px 28px 60px;}
-  header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:20px;}
-  h1{font-size:25px;margin:0 0 4px 0;color:var(--black);}
-  .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
-  .headline{
-    background:var(--black); color:var(--gold); font-family:Arial,sans-serif;
-    padding:18px 20px; border-radius:6px; margin:22px 0; font-size:14.5px; line-height:1.6;
-  }
-  .headline b{color:#fff;}
-  .headline .big{font-size:30px;font-weight:bold;color:var(--gold);}
-  h2{
-    font-family:Arial,sans-serif; font-size:13.5px; text-transform:uppercase; letter-spacing:1px;
-    color:var(--gold-dark); border-bottom:1px solid var(--line); padding-bottom:6px; margin-top:34px;
-  }
-  table.sheet{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:13.2px;margin:10px 0;}
-  table.sheet th{
-    text-align:right; font-size:10.5px; text-transform:uppercase; letter-spacing:0.4px; color:#7a7a7a;
-    border-bottom:2px solid var(--black); padding:7px 8px; background:#f5f2ea;
-  }
-  table.sheet th:first-child{text-align:left;}
-  table.sheet td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;}
-  table.sheet td:first-child{text-align:left;font-weight:bold;}
-  table.sheet tr:hover{background:#faf8f2;}
-  .neg{color:var(--blocked);font-weight:bold;}
-  .pos{color:var(--ready);}
-  .excluded{background:#f4f0e6;color:#9a9186;}
-  .excluded td:first-child{font-weight:normal;font-style:italic;}
-  .partial{background:#fbf1e6;}
-  tfoot td{border-top:2px solid var(--black);border-bottom:none;font-weight:bold;padding-top:9px;}
-  .tag{
-    display:inline-block;font-size:9.5px;font-family:Arial,sans-serif;font-weight:bold;
-    text-transform:uppercase;letter-spacing:0.3px;color:#fff;padding:1px 6px;border-radius:7px;margin-left:5px;
-  }
-  .tag-excl{background:var(--blocked);}
-  .tag-partial{background:var(--waiting);}
-  .notes{
-    background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold-dark);
-    padding:12px 16px;font-family:Arial,sans-serif;font-size:12.8px;margin:10px 0;line-height:1.6;
-  }
-  .notes b{color:var(--black);}
-  ul.formula{font-family:Arial,sans-serif;font-size:13px;line-height:1.7;padding-left:20px;margin:8px 0;}
-  footer{
-    margin-top:32px;font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;
-    border-top:1px solid var(--line);padding-top:14px;
-  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  h1 { font-size:28px; margin:0 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.eff.neg { color:var(--decide); }
+  tr.flagged td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  .method-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0; }
+  .method-list li { margin-bottom:4px; }
+  .method-list b { color:var(--gold-dark); }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="eyebrow">Marigold · Cash Flow Driver Dashboard · Driver #1</div>
+  <h1>August 2026 — Inspector Available Capacity</h1>
+  <div class="sub">Weighted slots consumed ÷ available slots, core team only. Mark Rahja excluded.</div>
 
-  <header>
-    <h1>Driver 1 — Inspector Available Capacity</h1>
-    <div class="meta">Weighted slot model · August 2026 · reviewed Sept 15, 2026 · cash-flow-drivers-build-checklist-v3.md</div>
-  </header>
+  <section>
+    <h2>Team result</h2>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Metric</th><th class="num">Value</th></tr>
+      <tr><td>Available slots</td><td class="num">490</td></tr>
+      <tr><td>Weighted slots consumed</td><td class="num">510.4</td></tr>
+      <tr><td>% filled</td><td class="num eff">104.2%</td></tr>
+      <tr class="avg-row"><td>% available (target: 5%)</td><td class="num eff neg">–4.2%</td></tr>
+    </table>
+    </div>
+    <p class="note">The team was over capacity in August, not under it. Every exclusion variant tested this build (16 people down to 12) converged on a result between –0.7% and –5.0% once confirmed absences were folded in — this isn't sensitive to who's counted, it's a real reading. See Hiring Impact below for what closing this gap would take.</p>
+  </section>
 
-  <div class="headline">
-    <span class="big">–4.2% available</span><br>
-    Core team (15 — Dan Kosel included, Mark Rahja excluded) · 510.4 weighted slots consumed / 490 available · 104.2% filled<br><br>
-    Fully reconciled: 13 confirmed planned blocks folded in, Matt Clarity's Saturday count corrected to reflect both his regular Week 4 slot and the August 5th-Saturday (confirmed — anyone covering a 5th Saturday works it in addition to their regular rotation, not instead of it). <b>The team was meaningfully over capacity in August.</b>
-  </div>
+  <section>
+    <h2>Home Inspectors — core team</h2>
+    <div class="group-meta">13 regular + Travis East and Joel Terry flagged (post-solo window only) · group avg –4.2% available (weighted)</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th class="num">Slots</th><th class="num">Raw count</th><th class="num">Weighted</th><th class="num">% Avail (raw)</th><th class="num">% Avail (weighted)</th></tr>
+      <tr><td>Kelly Brill</td><td class="num">15</td><td class="num">14</td><td class="num">12.6</td><td class="num eff">6.7%</td><td class="num eff">16.0%</td></tr>
+      <tr><td>Matt Clarity</td><td class="num">50</td><td class="num">46</td><td class="num">44.6</td><td class="num eff">8.0%</td><td class="num eff">10.8%</td></tr>
+      <tr><td>Stephen Hines</td><td class="num">44</td><td class="num">43</td><td class="num">43.4</td><td class="num eff">2.3%</td><td class="num eff">1.4%</td></tr>
+      <tr><td>Mitchell Bowser</td><td class="num">35</td><td class="num">38</td><td class="num">35.3</td><td class="num eff neg">–8.6%</td><td class="num eff neg">–0.9%</td></tr>
+      <tr><td>Jake Miller</td><td class="num">34</td><td class="num">35</td><td class="num">34.4</td><td class="num eff neg">–2.9%</td><td class="num eff neg">–1.2%</td></tr>
+      <tr><td>Tony Weinand</td><td class="num">40</td><td class="num">40</td><td class="num">41.5</td><td class="num eff">0.0%</td><td class="num eff neg">–3.8%</td></tr>
+      <tr><td>Walker Russek</td><td class="num">34</td><td class="num">35</td><td class="num">35.8</td><td class="num eff neg">–2.9%</td><td class="num eff neg">–5.3%</td></tr>
+      <tr><td>Kyle Grovenstein</td><td class="num">36</td><td class="num">37</td><td class="num">37.9</td><td class="num eff neg">–2.8%</td><td class="num eff neg">–5.3%</td></tr>
+      <tr><td>Kyle Kanipes</td><td class="num">42</td><td class="num">43</td><td class="num">44.6</td><td class="num eff neg">–2.4%</td><td class="num eff neg">–6.2%</td></tr>
+      <tr><td>Aaron Vandeventer</td><td class="num">40</td><td class="num">43</td><td class="num">43.8</td><td class="num eff neg">–7.5%</td><td class="num eff neg">–9.5%</td></tr>
+      <tr><td>Matt Mossey</td><td class="num">38</td><td class="num">44</td><td class="num">43.5</td><td class="num eff neg">–15.8%</td><td class="num eff neg">–14.5%</td></tr>
+      <tr><td>Anthony Link-Danko</td><td class="num">30</td><td class="num">33</td><td class="num">34.5</td><td class="num eff neg">–10.0%</td><td class="num eff neg">–15.0%</td></tr>
+      <tr><td>Dan Kosel</td><td class="num">32</td><td class="num">36</td><td class="num">37.6</td><td class="num eff neg">–12.5%</td><td class="num eff neg">–17.5%</td></tr>
+      <tr class="flagged"><td>Travis East (post-solo)</td><td class="num">10</td><td class="num">10</td><td class="num">9.7</td><td class="num eff">0.0%</td><td class="num eff">3.0%</td></tr>
+      <tr class="flagged"><td>Joel Terry (post-solo)</td><td class="num">10</td><td class="num">12</td><td class="num">11.2</td><td class="num eff neg">–20.0%</td><td class="num eff neg">–12.0%</td></tr>
+      <tr class="avg-row"><td>Core team total (15)</td><td class="num">490</td><td class="num">509</td><td class="num">510.4</td><td class="num eff neg">–3.9%</td><td class="num eff neg">–4.2%</td></tr>
+    </table>
+    </div>
+    <p class="note">Dan Kosel included at a reduced 9 slots/week (no Monday morning slot) — a scheduling input, not a role exclusion. Travis East and Joel Terry counted only from their first solo inspection forward (Aug 25 and Aug 24 respectively) — their full-month totals would understate them, since both were training beforehand.</p>
+  </section>
 
-  <h2>Per-Inspector Breakdown — August 2026</h2>
-  <table class="sheet">
-    <thead><tr><th>Inspector</th><th>Slots</th><th>Raw count</th><th>Weighted</th><th>% Avail (raw)</th><th>% Avail (weighted)</th></tr></thead>
-    <tbody>
-      <tr><td>Joel Terry <span class="tag tag-partial">Post-solo only</span></td><td>10</td><td>12</td><td>11.2</td><td class="neg">–20.0%</td><td class="neg">–12.0%</td></tr>
-      <tr><td>Dan Kosel</td><td>32</td><td>36</td><td>37.6</td><td class="neg">–12.5%</td><td class="neg">–17.5%</td></tr>
-      <tr><td>Anthony Link-Danko</td><td>30</td><td>33</td><td>34.5</td><td class="neg">–10.0%</td><td class="neg">–15.0%</td></tr>
-      <tr><td>Aaron Vandeventer</td><td>40</td><td>43</td><td>43.8</td><td class="neg">–7.5%</td><td class="neg">–9.5%</td></tr>
-      <tr><td>Mitchell Bowser</td><td>35</td><td>38</td><td>35.3</td><td class="neg">–8.6%</td><td class="neg">–0.9%</td></tr>
-      <tr><td>Matt Mossey</td><td>38</td><td>44</td><td>43.5</td><td class="neg">–15.8%</td><td class="neg">–14.5%</td></tr>
-      <tr><td>Kyle Kanipes</td><td>42</td><td>43</td><td>44.6</td><td class="neg">–2.4%</td><td class="neg">–6.2%</td></tr>
-      <tr><td>Kyle Grovenstein</td><td>36</td><td>37</td><td>37.9</td><td class="neg">–2.8%</td><td class="neg">–5.3%</td></tr>
-      <tr><td>Walker Russek</td><td>34</td><td>35</td><td>35.8</td><td class="neg">–2.9%</td><td class="neg">–5.3%</td></tr>
-      <tr><td>Jake Miller</td><td>34</td><td>35</td><td>34.4</td><td class="neg">–2.9%</td><td class="neg">–1.2%</td></tr>
-      <tr><td>Tony Weinand</td><td>40</td><td>40</td><td>41.5</td><td>0.0%</td><td class="neg">–3.8%</td></tr>
-      <tr><td>Stephen Hines</td><td>44</td><td>43</td><td>43.4</td><td class="pos">2.3%</td><td class="pos">1.4%</td></tr>
-      <tr><td>Matt Clarity</td><td>50</td><td>46</td><td>44.6</td><td class="pos">8.0%</td><td class="pos">10.8%</td></tr>
-      <tr class="partial"><td>Travis East <span class="tag tag-partial">Post-solo only</span></td><td>10</td><td>10</td><td>9.7</td><td>0.0%</td><td class="pos">3.0%</td></tr>
-      <tr><td>Kelly Brill</td><td>15</td><td>14</td><td>12.6</td><td class="pos">6.7%</td><td class="pos">16.0%</td></tr>
-    </tbody>
-    <tfoot>
-      <tr><td>Core team total (15)</td><td>490</td><td>509</td><td>510.4</td><td class="neg">–3.9%</td><td class="neg">–4.2%</td></tr>
-    </tfoot>
-  </table>
+  <section>
+    <h2>Excluded</h2>
+    <div class="group-meta">1 person · not scored against the core team target</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th>Role</th><th class="num">Slots</th><th class="num">Raw count</th><th class="num">Weighted</th><th class="num">% Avail (weighted)</th></tr>
+      <tr><td>Mark Rahja</td><td>Service Lead</td><td class="num">18.5</td><td class="num">10</td><td class="num">7.9</td><td class="num eff">57.3%</td></tr>
+    </table>
+    </div>
+    <p class="note">1 slot/day (not 2), works only when needed. Not comparable to standard rotation capacity — excluded from the core team result above.</p>
+  </section>
 
-  <table class="sheet" style="margin-top:6px;">
-    <tbody>
-      <tr class="excluded"><td>Mark Rahja <span class="tag tag-excl">Excluded</span></td><td>18.5</td><td>10</td><td>7.9</td><td>45.9%</td><td>57.3%</td></tr>
-    </tbody>
-  </table>
+  <section>
+    <h2>Methodology</h2>
+    <ul class="method-list">
+      <li><b>Numerator (weighted):</b> each booking's weight = its Spectora duration ÷ the team's average duration (3.26 hrs = "1 slot"). TISH/Brett Fredrichs excluded (technician, not inspector). Multi-inspector bookings count full duration for both people.</li>
+      <li><b>Denominator (slots):</b> standard day = 2 slots, extended "long" day (8:30–7:00) = 3 slots.</li>
+      <li><b>Long-day assignments:</b> Aaron Vandeventer (Mon), Mitchell Bowser/Matt Clarity/Joel Terry (Tue), Kelly Brill (Thu), Stephen Hines (Mon+Thu, alternating weeks).</li>
+      <li><b>Saturday rotation:</b> +2 slots/month unless starred (flex, no bonus). Starred: Matt Mossey, Travis East, Mitchell Bowser, Joel Terry, Anthony Link-Danko, Kyle Kanipes. Matt Clarity gets +4 — confirmed he works both his regular Week 4 Saturday and the August 5th-Saturday.</li>
+      <li><b>PTO:</b> docks the actual day's slot value (2 or 3), from the calendar export plus every confirmed block from the Spectora events export cross-check.</li>
+      <li><b>Mark Rahja:</b> 1 slot/day, only when needed — excluded from core team. <b>Dan Kosel:</b> 9 slots/week (no Monday morning) — included.</li>
+      <li><b>New hires (Joel Terry, Travis East):</b> counted only from first solo inspection forward.</li>
+      <li><b>Open-slot review:</b> every gap gets cross-checked against Spectora's own events export (full-month, categorized) before falling back to manual confirmation.</li>
+    </ul>
+  </section>
 
-  <h2>Confirmed Planned Blocks (PTO calendar + Spectora events export)</h2>
-  <div class="notes">
-    <b>From the calendar fix (Sept 15):</b> Aaron Vandeventer (Aug 3), Kyle Grovenstein (Aug 7, 10, 11), Walker Russek (Aug 12–14), Anthony Link-Danko (Aug 21, 24–27).<br><br>
-    <b>Confirmed against Spectora's own events export</b> (full-month categorized pull, "Other - Internal Ops" tab): Stephen Hines (Aug 4), Mitchell Bowser (Aug 6, 7), Matt Mossey (Aug 7), Aaron Vandeventer (Aug 10, 31), Anthony Link-Danko (Aug 20), Joel Terry (Aug 25), Jake Miller (Aug 28) — every one of these matched an explicit "Out"/"Off" entry in Spectora, independent confirmation beyond the original manual review.<br><br>
-    Joel Terry's Aug 4, 11, and 17 also show as blocked in Spectora, but fall before his Aug 24 solo-start date — already outside his counted window, so no numeric effect. Included here for completeness: they're consistent with him still training well before his official solo date.
-  </div>
+  <section>
+    <h2>Confirmed planned blocks</h2>
+    <p class="note"><b>Confirmed via Spectora events export</b> (full-month categorized pull, "Other - Internal Ops" tab), independent of the original manual review: Aaron Vandeventer (Aug 3, 10, 31), Kyle Grovenstein (Aug 7, 10, 11), Walker Russek (Aug 12–14), Anthony Link-Danko (Aug 20, 21, 24–27), Stephen Hines (Aug 4), Mitchell Bowser (Aug 6, 7), Matt Mossey (Aug 7), Joel Terry (Aug 25), Jake Miller (Aug 28) — every one matched an explicit "Out"/"Off" entry in Spectora.</p>
+    <p class="note">Joel Terry's Aug 4, 11, and 17 also show as blocked in Spectora, but fall before his Aug 24 solo-start date — already outside his counted window, so no numeric effect.</p>
+  </section>
 
-  <h2>Still Genuinely Open (confirmed via Spectora events export)</h2>
-  <div class="notes">
-    <b>Matt Clarity's four Tuesdays</b> (Aug 4, 11, 18, 25) and <b>Mitchell Bowser's Aug 25</b> show no "Off"/"Out" entry anywhere in Spectora's events export — confirmed genuine open availability, not unlogged time off. The export even shows why: an <b>"Inspector Meeting" logged 8–9am</b> on most of those Tuesdays, matching the team meeting explanation exactly. <b>Kyle Kanipes' Aug 19</b> gap checked the same way — just a logged lunch/drive break, no block. No model change needed — 3 slots stays correct for Tuesday, since that's ideal available capacity (a 3rd inspection could still fit around the meeting), not a reflection of what actually got booked.
-  </div>
+  <section>
+    <h2>Still genuinely open</h2>
+    <p class="note"><b>Matt Clarity's four Tuesdays</b> (Aug 4, 11, 18, 25) and <b>Mitchell Bowser's Aug 25</b> show no "Off"/"Out" entry anywhere in Spectora — confirmed genuine open availability. The export shows why: an <b>"Inspector Meeting" logged 8–9am</b> on most of those Tuesdays, matching the team meeting explanation exactly. <b>Kyle Kanipes' Aug 19</b> checked the same way — just a lunch/drive break, no block. No model change needed: Tuesday long-day still counts as 3 slots, since that's ideal available capacity, not a reflection of what actually got booked.</p>
+  </section>
 
-  <h2>Methodology</h2>
-  <ul class="formula">
-    <li><b>Numerator (weighted):</b> each booking's weight = its Spectora duration ÷ the team's average duration (3.26 hrs = "1 slot"). TISH/Brett Fredrichs excluded. Multi-inspector bookings count full duration for both people.</li>
-    <li><b>Denominator (slots):</b> standard day = 2 slots, extended "long" day (8:30–7:00) = 3 slots.</li>
-    <li><b>Long-day assignments:</b> Aaron Vandeventer (Mon), Mitchell Bowser/Matt Clarity/Joel Terry (Tue), Kelly Brill (Thu), Stephen Hines (Mon+Thu, alternating weeks).</li>
-    <li><b>Saturday rotation:</b> +2 slots/month unless starred (flex, no bonus). Starred: Matt Mossey, Travis East, Mitchell Bowser, Joel Terry, Anthony Link-Danko, Kyle Kanipes. <b>Matt Clarity gets +4</b> — confirmed he works both his regular Week 4 Saturday and the August 5th-Saturday.</li>
-    <li><b>PTO:</b> docks the actual day's slot value (2 or 3), from the calendar export plus every confirmed block from the Spectora events export cross-check.</li>
-    <li><b>Mark Rahja:</b> 1 slot/day, only when needed — excluded from core team. <b>Dan Kosel:</b> 9 slots/week (no Monday morning) — included.</li>
-    <li><b>New hires (Joel Terry, Travis East):</b> counted only from first solo inspection forward.</li>
-    <li><b>Open-slot review:</b> every gap gets cross-checked against Spectora's own events export (full-month, categorized) before falling back to manual confirmation — see Step 5 of the skill.</li>
-  </ul>
-
-  <h2>Hiring Impact (from Blake's meeting notes)</h2>
-  <div class="notes">
-    Original note: "Unknown until we keep adding inspectors and this goes down. Each additional inspector brings approximately $7,008 a week." That figure checks out against the original checklist's $364–416K driver impact: <b>$7,008 × 52 weeks = $364,416</b> — the dollar range was never "5% of revenue," it's the value of hiring enough inspectors to close the gap, priced per hire.<br><br>
-    Using August's real numbers to answer "how many": holding demand (weighted consumption, 510.4) constant, the team needs <b>537.3 total slots</b> to reach 5% available — a gap of <b>47.3 slots</b> from the current 490. A standard inspector (no long day, no Saturday) contributes roughly 42 slots/month in this model, so closing the gap takes about <b>1.1 additional standard hires</b> — essentially one person, worth roughly the $364K figure already in the checklist. This assumes demand holds steady; a hire that also grows total bookings would need more slots to reach the same %, and one who takes on a long-day or Saturday rotation would close the gap faster than this estimate.
-  </div>
-
-  <h2>Open Items</h2>
-  <div class="notes">
-    <b>Revenue base and "MHI service team" scope</b> — still unconfirmed from the original checklist: whether the driver's $364–416K impact is based on MHI revenue alone or combined with MHS, and whether "service team" means inspectors specifically or a broader group. Not answerable from this build's data sources — needs a direct answer.
-  </div>
+  <section>
+    <h2>Hiring impact</h2>
+    <p class="note">Per Blake's original meeting notes: "Each additional inspector brings approximately $7,008 a week." This <b>is</b> the revenue base behind the checklist's $364–416K driver impact — <b>$7,008 × 52 weeks = $364,416</b> for one hire. Confirmed: the dollar figure was never "5% of a separate MHI/MHS revenue pool," it's the direct value of hiring enough inspectors to close the availability gap.</p>
+    <p class="note">Holding demand (weighted consumption, 510.4) constant, the team needs <b>537.3 total slots</b> to reach 5% available — a gap of <b>47.3 slots</b> from the current 490. A standard inspector (no long day, no Saturday) contributes roughly 42 slots/month, so closing the gap takes about <b>1.1 additional standard hires</b> — essentially one person, worth roughly the $364K figure already in the checklist. Assumes demand holds steady; a hire who also grows total bookings needs more slots to reach the same %.</p>
+  </section>
 
   <footer>
-    Driver 1 of 9 · Cash Flow Driver Dashboard · Owner: Blake · Sept 24 L10 is 9 days out.
+    Marigold Cash Flow Driver Dashboard · Driver #1 · August 2026 · Numerator: Spectora inspection durations, weighted against the team's average booking length. Denominator: a slot model (2/day standard, 3/day on long-night rotations, +2/month for Saturday rotation unless flexed) built from the Inspector/Tech Schedule sheet, PTO calendar, and Spectora events export. Owner: Blake. Sept 24 L10 is the near-term deadline.
   </footer>
-
 </div>
 </body>
 </html>
