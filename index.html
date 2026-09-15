@@ -11,38 +11,56 @@
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
-  .wrap{max-width:820px;margin:0 auto;padding:40px 24px 60px;}
+  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
   header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
   h1{font-size:26px;margin:0 0 4px 0;color:var(--black);}
   .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
-  .grid{display:flex;flex-direction:column;gap:10px;}
+
+  .board{display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:14px;align-items:stretch;}
+  .row-label{
+    writing-mode:vertical-rl; transform:rotate(180deg);
+    font-family:Arial,sans-serif; font-size:13px; font-weight:bold; letter-spacing:1px;
+    text-transform:uppercase; color:#fff; background:var(--black);
+    padding:14px 8px; border-radius:8px; flex:0 0 34px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .row-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; flex:1;}
+
   a.card{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; flex-direction:column; justify-content:space-between; gap:10px;
     text-decoration:none; color:inherit;
     background:#fff; border:1px solid var(--line); border-radius:8px;
-    padding:16px 20px; transition:box-shadow .15s, transform .15s;
+    padding:14px 16px; min-height:90px;
+    transition:box-shadow .15s, transform .15s;
   }
   a.card:hover{box-shadow:0 4px 14px rgba(0,0,0,0.08); transform:translateY(-1px);}
-  a.card.placeholder{
-    background:#f5f2ea; color:#9a9186; pointer-events:none; cursor:default;
-  }
-  .card-left{display:flex; flex-direction:column; gap:2px;}
+  a.card.placeholder{background:#f5f2ea; color:#9a9186; pointer-events:none; cursor:default;}
+
   .driver-num{
-    font-family:Arial,sans-serif; font-size:10.5px; text-transform:uppercase;
+    font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase;
     letter-spacing:0.5px; color:var(--gold-dark); font-weight:bold;
   }
   .placeholder .driver-num{color:#b0aa9c;}
-  .driver-name{font-size:17px; font-weight:bold;}
-  .driver-owner{font-family:Arial,sans-serif; font-size:12px; color:#8a8a8a;}
-  .card-right{display:flex; align-items:center; gap:12px;}
-  .pct{font-size:26px; font-weight:bold; font-family:Arial,sans-serif;}
+  .driver-name{font-size:14.5px; font-weight:bold; line-height:1.25;}
+  .driver-owner{font-family:Arial,sans-serif; font-size:11px; color:#8a8a8a;}
+
+  .card-bottom{display:flex; align-items:baseline; justify-content:space-between;}
+  .pct{font-size:22px; font-weight:bold; font-family:Arial,sans-serif;}
   .pct.neg{color:var(--blocked);}
   .pct.pos{color:var(--ready);}
-  .pct.tbd{color:#b0aa9c; font-size:15px; font-style:italic;}
-  .target{font-family:Arial,sans-serif; font-size:11px; color:#8a8a8a;}
+  .pct.tbd{color:#b0aa9c; font-size:13px; font-style:italic;}
+  .target{font-family:Arial,sans-serif; font-size:10.5px; color:#8a8a8a;}
+
   footer{
     margin-top:28px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
     border-top:1px solid var(--line); padding-top:14px;
+  }
+
+  @media (max-width:640px){
+    .row{flex-direction:column;}
+    .row-label{writing-mode:horizontal-tb; transform:none; flex:0 0 auto; padding:6px 10px;}
+    .row-cards{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -51,101 +69,108 @@
 
   <header>
     <h1>Cash Flow Driver Dashboard</h1>
-    <div class="meta">9 drivers · from the 6/9/26 EOS meeting · Sept 24 L10 is the near-term deadline</div>
+    <div class="meta">9 drivers · from the 6/9/26 EOS meeting · grouped by business unit · Sept 24 L10 is the near-term deadline</div>
   </header>
 
-  <div class="grid">
+  <div class="board">
 
-    <a class="card" href="driver-1.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 1</div>
-        <div class="driver-name">Inspector Available Capacity</div>
-        <div class="driver-owner">Owner: Blake</div>
+    <div class="row">
+      <div class="row-label">MHI</div>
+      <div class="row-cards">
+        <a class="card" href="driver-1.html">
+          <div>
+            <div class="driver-num">Driver 1</div>
+            <div class="driver-name">Inspector Available Capacity</div>
+            <div class="driver-owner">Owner: Blake</div>
+          </div>
+          <div class="card-bottom">
+            <div class="pct neg">–4.2%</div>
+            <div class="target">Target: 5%</div>
+          </div>
+        </a>
+        <a class="card placeholder" href="driver-5.html">
+          <div>
+            <div class="driver-num">Driver 5</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
+        <a class="card placeholder" href="driver-6.html">
+          <div>
+            <div class="driver-num">Driver 6</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
       </div>
-      <div class="card-right">
-        <div>
-          <div class="pct neg">–4.2%</div>
-          <div class="target">Target: 5%</div>
-        </div>
-      </div>
-    </a>
+    </div>
 
-    <a class="card placeholder" href="driver-2.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 2</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
+    <div class="row">
+      <div class="row-label">MHS</div>
+      <div class="row-cards">
+        <a class="card placeholder" href="driver-2.html">
+          <div>
+            <div class="driver-num">Driver 2</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
+        <a class="card placeholder" href="driver-4.html">
+          <div>
+            <div class="driver-num">Driver 4</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
+        <a class="card placeholder" href="driver-9.html">
+          <div>
+            <div class="driver-num">Driver 9</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
       </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
+    </div>
 
-    <a class="card placeholder" href="driver-3.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 3</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
+    <div class="row">
+      <div class="row-label">OPS</div>
+      <div class="row-cards">
+        <a class="card placeholder" href="driver-3.html">
+          <div>
+            <div class="driver-num">Driver 3</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
+        <a class="card placeholder" href="driver-7.html">
+          <div>
+            <div class="driver-num">Driver 7</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
+        <a class="card placeholder" href="driver-8.html">
+          <div>
+            <div class="driver-num">Driver 8</div>
+            <div class="driver-name">Not yet built</div>
+            <div class="driver-owner">&nbsp;</div>
+          </div>
+          <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+        </a>
       </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-4.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 4</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-5.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 5</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-6.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 6</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-7.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 7</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-8.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 8</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
-
-    <a class="card placeholder" href="driver-9.html">
-      <div class="card-left">
-        <div class="driver-num">Driver 9</div>
-        <div class="driver-name">Not yet built</div>
-        <div class="driver-owner">&nbsp;</div>
-      </div>
-      <div class="card-right"><div class="pct tbd">TBD</div></div>
-    </a>
+    </div>
 
   </div>
 
   <footer>
-    cash-flow-drivers-build-checklist-v3.md · click a driver for full methodology and numbers. Placeholder rows link to driver-N.html — drop each file in as it's built and the card will light up automatically once you fill in its real name/owner/number below.
+    cash-flow-drivers-build-checklist-v3.md · rows grouped by business unit (MHI / MHS / OPS), per driver #1–9 assignment · click a driver for full methodology and numbers · placeholder cards link to driver-N.html — they'll go live automatically once each file is dropped in.
   </footer>
 
 </div>
