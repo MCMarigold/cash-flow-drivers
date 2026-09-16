@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driver 9 — Sales KPIs Achieved · Marigold Cash Flow Driver Dashboard</title>
+<style>
+  :root{
+    --black:#1a1a1a; --gold:#f4c94c; --gold-dark:#b8922e;
+    --line:#e6e2d8; --ready:#4a8a5c; --blocked:#c0503f; --waiting:#c98a2c; --paper:#fdfcf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
+  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
+  header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
+  .back{font-family:Arial,sans-serif;font-size:12px;color:var(--gold-dark);text-decoration:none;font-weight:bold;}
+  .back:hover{text-decoration:underline;}
+  h1{font-size:26px;margin:10px 0 4px 0;color:var(--black);}
+  .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:20px 22px;margin-bottom:16px;
+  }
+  .card h2{
+    font-size:16px;margin:0 0 12px 0;color:var(--black);
+    font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:0.5px;
+  }
+
+  .tag{
+    display:inline-block;font-family:Arial,sans-serif;font-size:10.5px;font-weight:bold;
+    letter-spacing:0.3px;text-transform:uppercase;padding:3px 9px;border-radius:11px;
+    margin-left:8px;vertical-align:middle;
+  }
+  .tag.locked{background:#e4efe6;color:var(--ready);}
+  .tag.auto{background:#e6eef5;color:#3a6b8a;}
+  .tag.watch{background:#f7ecd3;color:var(--waiting);}
+
+  .headline{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+  .headline-pct{
+    font-family:Arial,sans-serif;font-size:48px;font-weight:bold;color:var(--blocked);line-height:1;
+  }
+  .headline-pct .target{display:block;font-size:13px;font-weight:normal;color:#8a8a8a;margin-top:4px;}
+  .headline-text{font-family:Arial,sans-serif;font-size:13.5px;color:#4a4a4a;max-width:460px;line-height:1.5;}
+
+  table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;margin-top:6px;}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:center;}
+  th{background:#faf6ea;font-weight:bold;color:var(--black);}
+  td.name{text-align:left;font-weight:bold;}
+  td.hit{color:var(--ready);font-weight:bold;}
+  td.miss{color:var(--blocked);font-weight:bold;}
+  tr.avg td{background:#faf6ea;font-weight:bold;}
+  .footnote{font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;margin-top:8px;}
+
+  .formula{font-family:Arial,sans-serif;font-size:13.5px;line-height:1.6;color:#333;}
+
+  ul{margin:6px 0 0 18px;padding:0;font-family:Arial,sans-serif;font-size:13px;line-height:1.55;}
+  li{margin-bottom:8px;}
+
+  footer{
+    margin-top:24px;font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;
+    border-top:1px solid var(--line);padding-top:14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">&larr; Back to dashboard</a>
+    <h1>Driver 9 — Sales KPIs Achieved</h1>
+    <div class="meta">Owner: Ron &nbsp;·&nbsp; Source: Marigold - EOS - Scorecard.xlsx (live, Drive) &nbsp;·&nbsp; Period: August 2026 (4 weeks, Aug 6 – Aug 27)</div>
+  </header>
+
+  <div class="card">
+    <h2>Headline <span class="tag locked">Locked scope + method</span></h2>
+    <div class="headline">
+      <div class="headline-pct">18.75%<span class="target">of KPIs met · Target: 100%</span></div>
+      <div class="headline-text">
+        Average of each week's "KPIs met &divide; 4," across the four August weeks. Scope is the checklist's original 4 KPIs — Meetings set, Sales Calls, Estimates sent, Estimates won.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Detail — all 16 KPI-weeks <span class="tag auto">Pulled from live Scorecard</span></h2>
+    <table>
+      <tr>
+        <th style="text-align:left;">KPI</th>
+        <th>Goal</th>
+        <th>Aug 6</th>
+        <th>Aug 13</th>
+        <th>Aug 20</th>
+        <th>Aug 27</th>
+      </tr>
+      <tr>
+        <td class="name">Meetings set by sales team</td>
+        <td>5</td>
+        <td class="miss">2 ✗</td>
+        <td class="miss">3 ✗</td>
+        <td class="hit">5 ✓</td>
+        <td class="miss">2 ✗</td>
+      </tr>
+      <tr>
+        <td class="name"># Sales Calls</td>
+        <td>115</td>
+        <td class="miss">50 ✗</td>
+        <td class="miss">38 ✗</td>
+        <td class="miss">51 ✗</td>
+        <td class="miss">40 ✗</td>
+      </tr>
+      <tr>
+        <td class="name"># Estimates sent</td>
+        <td>16</td>
+        <td class="hit">19 ✓</td>
+        <td class="miss">6 ✗</td>
+        <td class="hit">17 ✓</td>
+        <td class="miss">13 ✗</td>
+      </tr>
+      <tr>
+        <td class="name"># Estimates won</td>
+        <td>12</td>
+        <td class="miss">9 ✗</td>
+        <td class="miss">3 ✗</td>
+        <td class="miss">7 ✗</td>
+        <td class="miss">7 ✗</td>
+      </tr>
+      <tr class="avg">
+        <td class="name">KPIs met this week</td>
+        <td>—</td>
+        <td>1 / 4 (25%)</td>
+        <td>0 / 4 (0%)</td>
+        <td>2 / 4 (50%)</td>
+        <td>0 / 4 (0%)</td>
+      </tr>
+    </table>
+    <div class="footnote">Average of the four weekly percentages = 18.75%.</div>
+  </div>
+
+  <div class="card">
+    <h2>Formula</h2>
+    <div class="formula">
+      For each of the 4 KPIs, each week: <strong>met</strong> if actual &ge; goal. Weekly score = KPIs met &divide; 4. Monthly headline = average of the four weekly scores.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What's still worth flagging <span class="tag watch">Watch</span></h2>
+    <ul>
+      <li><strong>Ownership split, not yet reconciled:</strong> on the live Scorecard, Estimates sent/won are logged under <em>Minh</em>, not Ron. Driver 9 still rolls them up under Ron per the checklist's owner field — worth confirming with Ron/Minh that's intentional, since it means Ron's Driver 9 score depends on two numbers he doesn't directly control.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Driver 9 of 9 · cash-flow-drivers-build-checklist-v3.md · Sept 24 L10 is the near-term deadline.
+  </footer>
+
+</div>
+</body>
+</html>
