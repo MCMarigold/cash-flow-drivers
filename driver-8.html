@@ -2,64 +2,73 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Driver 8 — Employee Tenure — Built from Marigold roster</title>
+<title>August 2026 — Average Employee Tenure</title>
 <style>
   :root {
-    --gold: #b8860b; --gold-light: #f5e9d0; --ink: #2b2620; --muted: #6b6255;
-    --border: #e0d6c0; --bg: #fdfaf4; --card: #ffffff;
-    --mhi: #6b4c00; --mhs: #2e6f95; --shared: #7a5230;
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
   }
-  body { background: var(--bg); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; margin:0; padding:40px 24px; }
-  .wrap { max-width: 920px; margin:0 auto; }
-  h1 { font-size:26px; margin-bottom:4px; border-bottom:3px solid var(--gold); padding-bottom:12px; }
-  .subhead { color:var(--muted); font-size:14px; margin-bottom:26px; font-family:Arial, sans-serif; }
-  .flag { display:inline-block; background:var(--gold-light); border:1px solid var(--gold); color:#7a5c00; font-family:Arial, sans-serif; font-size:12.5px; padding:4px 10px; border-radius:4px; margin-top:6px; }
-  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
-  .card h2 { font-size:17px; margin-top:0; margin-bottom:12px; color:#6b4c00; }
-  .body-txt { font-family:Arial, sans-serif; font-size:14px; line-height:1.6; }
-  .stat-row { display:flex; gap:18px; flex-wrap:wrap; margin:14px 0 6px; }
-  .stat { flex:1; min-width:150px; border:1px solid var(--border); border-radius:6px; padding:14px 16px; text-align:center; font-family:Arial, sans-serif; }
-  .stat .num { font-size:28px; font-weight:700; }
-  .stat .lbl { font-size:12px; color:var(--muted); margin-top:2px; }
-  .stat.overall .num { color:var(--gold); }
-  .stat.mhi .num { color:var(--mhi); }
-  .stat.mhs .num { color:var(--mhs); }
-  .stat.shared .num { color:var(--shared); }
-  table { width:100%; border-collapse:collapse; font-family:Arial, sans-serif; font-size:13px; margin-top:8px; }
-  th, td { border:1px solid var(--border); padding:6px 9px; text-align:left; vertical-align:top; }
-  th { background:var(--gold-light); font-weight:600; color:#6b4c00; }
-  td.num { text-align:right; font-variant-numeric: tabular-nums; }
-  .note { font-family:Arial, sans-serif; font-size:13px; color:var(--muted); background:#faf6ec; border-left:3px solid var(--gold); padding:10px 14px; margin-top:12px; }
-  .warn { font-family:Arial, sans-serif; font-size:13px; color:#7a3b1f; background:#fbeee6; border-left:3px solid #c0603a; padding:10px 14px; margin-top:12px; }
-  .decide-item { font-family:Arial, sans-serif; font-size:14px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed var(--border); }
-  .decide-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
-  .decide-item .q { font-weight:700; margin-bottom:3px; }
-  .decide-item .lean { font-size:12.5px; color:var(--muted); font-style:italic; }
-  .badge { display:inline-block; font-family:Arial, sans-serif; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; color:#fff; }
-  .badge-ok { background:#2f7a4f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--good); line-height:1; }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat { }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #8</div>
+  <h1>Average Employee Tenure</h1>
+  <div class="sub">Mean of (report date − hire date) across active employees, in years. Guardrail — hold at 2.2 yrs. Source: Marigold Home roster export (people table).</div>
 
-  <h1>Driver 8 — Average Employee Tenure</h1>
-  <div class="subhead">
-    Owner: Britney &nbsp;·&nbsp; Guardrail metric — hold at 2.2 yrs &nbsp;·&nbsp; Built from the Marigold Home roster export
-    <br><span class="flag">Sept 24 L10 in 8 days — this driver can now report a real number</span>
-  </div>
-
-  <div class="card">
-    <h2>Headline numbers</h2>
-    <div class="stat-row">
-      <div class="stat overall"><div class="num">2.56</div><div class="lbl">OVERALL (n=36)</div></div>
-      <div class="stat mhi"><div class="num">2.38</div><div class="lbl">MHI (n=21)</div></div>
-      <div class="stat mhs"><div class="num">1.60</div><div class="lbl">MHS (n=5)</div></div>
-      <div class="stat shared"><div class="num">3.42</div><div class="lbl">Office Staff (n=10)</div></div>
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct">2.56 yrs<span class="tgt">Overall · hold at 2.2</span></div>
     </div>
-  </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">2.38 yrs</div><div class="clbl">MHI (n=21)</div></div>
+      <div class="compare-stat"><div class="cnum">1.60 yrs</div><div class="clbl">MHS (n=5)</div></div>
+      <div class="compare-stat"><div class="cnum">3.42 yrs</div><div class="clbl">Office Staff (n=10)</div></div>
+    </div>
+  </section>
 
-  <div class="card">
-    <h2>MHI — Home Inspections (n=21, avg 2.38 yrs)</h2>
+  <section>
+    <h2>Detail — MHI (Home Inspections)</h2>
+    <div class="group-meta">n=21 active · avg 2.38 yrs</div>
+    <div class="table-wrap">
     <table>
       <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
       <tr><td>Blake Pederson-Perovich</td><td>General Manager MHI</td><td class='num'>6.07</td></tr>
@@ -84,10 +93,13 @@
 <tr><td>Travis East</td><td>Home Inspector</td><td class='num'>0.09</td></tr>
 <tr><td>Joel Terry</td><td>Home Inspector</td><td class='num'>0.09</td></tr>
     </table>
-  </div>
+    </div>
+  </section>
 
-  <div class="card">
-    <h2>MHS — Home Services (n=5, avg 1.60 yrs)</h2>
+  <section>
+    <h2>Detail — MHS (Home Services)</h2>
+    <div class="group-meta">n=5 active · avg 1.60 yrs</div>
+    <div class="table-wrap">
     <table>
       <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
       <tr><td>Brett Fredrichs</td><td>Lead Radon Mitigator</td><td class='num'>3.55</td></tr>
@@ -96,10 +108,13 @@
 <tr><td>Minh Nguyen</td><td>General Manger MHS</td><td class='num'>0.87</td></tr>
 <tr><td>Dominic Reed</td><td>Assistant Mitigation Tech</td><td class='num'>0.45</td></tr>
     </table>
-  </div>
+    </div>
+  </section>
 
-  <div class="card">
-    <h2>Office Staff — held out of MHI/MHS comparison (n=10, avg 3.42 yrs)</h2>
+  <section>
+    <h2>Detail — Office Staff</h2>
+    <div class="group-meta">n=10 active · avg 3.42 yrs · counted in Overall, held out of the MHI/MHS comparison</div>
+    <div class="table-wrap">
     <table>
       <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
       <tr><td>Curtis Larson</td><td>Owner</td><td class='num'>8.44</td></tr>
@@ -113,41 +128,53 @@
 <tr><td>Alicia Ortloff</td><td>Client Care Coordinator</td><td class='num'>0.96</td></tr>
 <tr><td>Megan Kouri</td><td>Social Media Manager</td><td class='num'>0.54</td></tr>
     </table>
-  </div>
+    </div>
+  </section>
 
-  <div class="card">
+  <section>
+    <h2>Formula</h2>
+    <p class="note" style="font-size:14px;">For each active person: <strong style="color:var(--text);">tenure = report date − hire date</strong>, in years. A rehire's clock resets — only the current active record's tenure counts. Overall = mean across all active people (MHI + MHS + Office Staff). MHI/MHS shown separately for comparison only; the 2.2 guardrail applies to the Overall figure.</p>
+  </section>
+
+  <section>
     <h2>Excluded from the calculation</h2>
-    <div class="body-txt">
-      <b>Marigold Home Inspections</b> — a placeholder/equipment record, not a real employee.<br>
-      <b>Stanford Baker</b> — hire date of 9/21/2026 is still ahead of today; tenure field reads <code>#ERROR!</code> since he
-      hasn't started yet. Excluded until his start date passes.
+    <div class="card">
+      <p><strong style="color:var(--text);">Marigold Home Inspections</strong> — a placeholder/equipment record, not a real employee.</p>
+      <p><strong style="color:var(--text);">Stanford Baker</strong> — hire date of 9/21/2026 is still ahead of today; excluded until his start date passes.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
-    <h2>Confirmed decisions applied</h2>
-    <div class="body-txt">
-      <span class="badge badge-ok">Rehire clock resets</span> — the roster already implements this: a rehire gets a fresh record
-      (e.g. Anthony Link-Danko, Austin Cooper each have an inactive prior-stint record plus a current active one), so I used the
-      tenure figure attached to each active record as-is rather than summing across stints.<br><br>
-      <span class="badge badge-ok">Contractors &amp; employees both count</span> — anyone active regardless of W2/1099/contractor
-      status is included (e.g. Monique Ocon, "Active, Contractor").<br><br>
-      <span class="badge badge-ok">Inactive excluded</span> — every terminated/inactive record is dropped from the calculation.
+  <section>
+    <h2>Decisions applied</h2>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p>Rehire clock resets — the roster already implements this with a fresh record per stint (e.g. Anthony Link-Danko, Austin Cooper). Used each active record's tenure as-is.</p>
     </div>
-  </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p>Contractors and employees both count, as long as active (e.g. Monique Ocon, "Active, Contractor"). Inactive/terminated records excluded entirely.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p>Ron Conner counted under Office Staff, not MHI, per Maggie.</p>
+    </div>
+  </section>
 
-  <div class="card">
-    <h2>Still open — Decide items this data doesn't settle</h2>
-    <div class="decide-item">
-      <div class="q">Tolerance band around 2.2</div>
-      Checklist suggests 2.0–2.4 as "holding." With the real figure landing at 2.56, this still needs Britney's sign-off before it's a pass/fail gauge.
+  <section>
+    <h2>Open items</h2>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p>Tolerance band around 2.2 — checklist suggests 2.0–2.4 as "holding." Not yet confirmed with Britney.</p>
     </div>
-    <div class="decide-item">
-      <div class="q">Tiers instead of a flat average?</div>
-      Still genuinely open — no lean recorded in the checklist. Worth revisiting once Britney sees how skewed young the roster is (median tenure is well under the mean, since a large chunk of MHI hired inside the last 18 months).
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p>Tiers instead of a flat average — still genuinely open, no lean recorded. Worth revisiting since a large share of MHI hired within the last 18 months pulls the mean down more than a tiered view would show.</p>
     </div>
-  </div>
+  </section>
 
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #8 · Built from the Marigold Home roster export · Sept 24 L10 is the near-term deadline.
+  </footer>
 </div>
 </body>
 </html>
