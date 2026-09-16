@@ -41,6 +41,17 @@
   .method-list b { color:var(--gold-dark); }
   footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
   .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--good); line-height:1; }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
 </style>
 </head>
 <body>
@@ -51,17 +62,16 @@
   <div class="sub">Weighted slots consumed ÷ available slots, core team only. Mark Rahja excluded.</div>
 
   <section>
-    <h2>Team result</h2>
-    <div class="table-wrap">
-    <table>
-      <tr><th>Metric</th><th class="num">Value</th></tr>
-      <tr><td>Available slots</td><td class="num">490</td></tr>
-      <tr><td>Weighted slots consumed</td><td class="num">510.4</td></tr>
-      <tr><td>% filled</td><td class="num eff">104.2%</td></tr>
-      <tr class="avg-row"><td>% available (target: 5%)</td><td class="num eff neg">–4.2%</td></tr>
-    </table>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct neg">–4.2%<span class="tgt">Core team (15, Mark Rahja excluded) · target 5%</span></div>
     </div>
-    <p class="note">The team was over capacity in August, not under it. Every exclusion variant tested this build (16 people down to 12) converged on a result between –0.7% and –5.0% once confirmed absences were folded in — this isn't sensitive to who's counted, it's a real reading. See Hiring Impact below for what closing this gap would take.</p>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">490</div><div class="clbl">Available slots</div></div>
+      <div class="compare-stat"><div class="cnum">510.4</div><div class="clbl">Weighted slots consumed</div></div>
+      <div class="compare-stat"><div class="cnum neg">104.2%</div><div class="clbl">Filled</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">The team was over capacity in August, not under it. Every exclusion variant tested this build (16 people down to 12) converged on a result between –0.7% and –5.0% once confirmed absences were folded in — this isn't sensitive to who's counted, it's a real reading. See Hiring Impact below for what closing this gap would take.</p>
   </section>
 
   <section>
