@@ -32,6 +32,8 @@
   th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
   td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
   td.eff { font-weight:700; color:var(--gold-dark); }
+  tr.trainee td { color: var(--confirm); }
+  tr.under td { color: var(--decide); }
   tr.flagged td { color: var(--decide); }
   .avg-row td { font-weight:700; background:#F6F1E3; }
   .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
@@ -97,7 +99,7 @@
     <div class="table-wrap">
     <table>
       <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Pts / Hr</th></tr>
-      <tr><td>Derek Lanz</td><td class="num">115.25</td><td class="num">154.82</td><td class="num eff">0.744</td></tr>
+      <tr class="under"><td>Derek Lanz</td><td class="num">115.25</td><td class="num">154.82</td><td class="num eff">0.744</td></tr>
     </table>
     </div>
     <p class="note">Only one person in this bucket — a 90% target with a sample size of one is worth keeping in mind.</p>
@@ -117,12 +119,12 @@
       <tr><td>Stephen Hines</td><td class="num">150.50</td><td class="num">177.80</td><td class="num eff">0.847</td></tr>
       <tr><td>Aaron Vandeventer</td><td class="num">155.00</td><td class="num">183.83</td><td class="num eff">0.843</td></tr>
       <tr><td>Kyle Grovenstein</td><td class="num">130.25</td><td class="num">158.60</td><td class="num eff">0.821</td></tr>
-      <tr><td>Walker Russek</td><td class="num">125.50</td><td class="num">156.98</td><td class="num eff">0.799</td></tr>
-      <tr><td>Anthony Link-Danko</td><td class="num">115.50</td><td class="num">146.77</td><td class="num eff">0.787</td></tr>
-      <tr><td>Tony Weinand</td><td class="num">140.25</td><td class="num">181.00</td><td class="num eff">0.775</td></tr>
-      <tr><td>Kyle Kanipes</td><td class="num">152.75</td><td class="num">198.57</td><td class="num eff">0.769</td></tr>
-      <tr class="flagged"><td>Travis East (trainee)</td><td class="num">70.00</td><td class="num">180.30</td><td class="num eff">0.388</td></tr>
-      <tr class="flagged"><td>Joel Terry (trainee)</td><td class="num">68.50</td><td class="num">182.47</td><td class="num eff">0.375</td></tr>
+      <tr class="under"><td>Walker Russek</td><td class="num">125.50</td><td class="num">156.98</td><td class="num eff">0.799</td></tr>
+      <tr class="under"><td>Anthony Link-Danko</td><td class="num">115.50</td><td class="num">146.77</td><td class="num eff">0.787</td></tr>
+      <tr class="under"><td>Tony Weinand</td><td class="num">140.25</td><td class="num">181.00</td><td class="num eff">0.775</td></tr>
+      <tr class="under"><td>Kyle Kanipes</td><td class="num">152.75</td><td class="num">198.57</td><td class="num eff">0.769</td></tr>
+      <tr class="trainee"><td>Travis East (trainee)</td><td class="num">70.00</td><td class="num">180.30</td><td class="num eff">0.388</td></tr>
+      <tr class="trainee"><td>Joel Terry (trainee)</td><td class="num">68.50</td><td class="num">182.47</td><td class="num eff">0.375</td></tr>
     </table>
     </div>
   </section>
@@ -144,7 +146,7 @@
     <h2>Note</h2>
     <div class="card confirm">
       <span class="tag confirm">Policy</span>
-      <p>Travis East and Joel Terry (flagged red above) are excluded from the Home Inspector group average until they've had a full month of data past their first-solo date. Expect their ratios to run lower in the meantime — trainees get extra ramp time by design, not a performance issue.</p>
+      <p>Travis East and Joel Terry (in blue above) are excluded from the Home Inspector group average until they've had a full month of data past their first-solo date. Expect their ratios to run lower in the meantime — trainees get extra ramp time by design, not a performance issue.</p>
     </div>
   </section>
 
