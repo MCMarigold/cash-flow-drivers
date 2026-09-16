@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Driver 6 — Cross-Selling / Ancillary Attach Rate — August 2026</title>
+<title>August 2026 — Cross-Selling / Ancillary Attach Rate</title>
 <style>
   :root {
     --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
@@ -13,7 +13,9 @@
   body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
   .wrap { max-width: 1000px; margin:0 auto; }
   .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
-  h1 { font-size:28px; margin:0 0 4px; color:#33301f; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
   .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
   .data-flag {
     display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700;
@@ -41,18 +43,42 @@
   .avg-row td { font-weight:700; background:#F6F1E3; }
   .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
   footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--good); line-height:1; }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
   .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">Marigold · Cash Flow Driver Dashboard · Driver #6</div>
-  <h1>Cross-Selling / Ancillary Attach Rate</h1>
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #6</div>
+  <h1>August 2026 — Cross-Selling / Ancillary Attach Rate</h1>
   <div class="sub">MHI only, August 2026 · all 548 inspections in the denominator, no fee filter · separate build from the CC ancillary attach rate skill</div>
   <span class="data-flag">August 2026 — real data, from your export</span>
 
   <section>
-    <h2>Headline metrics</h2>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct neg">51.1%<span class="tgt">Attach rate · target 55%</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">0.83</div><div class="clbl">Avg add-ons / inspection</div></div>
+      <div class="compare-stat"><div class="cnum">$95,078</div><div class="clbl">Total add-on revenue</div></div>
+      <div class="compare-stat"><div class="cnum">25.2%</div><div class="clbl">Add-on % of revenue</div></div>
+      <div class="compare-stat"><div class="cnum">548</div><div class="clbl">Total inspections</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">548 is every inspection in the export — including the 7 zero/no-fee bookings and 2 marked unpaid — per the denominator decision. August is running 2.1 points ahead of the Apr–Jun baseline (49.0%) and just 3.9 points off the 55% target, with add-ons now a slightly larger share of total revenue than the baseline period (23.8%).</p>
+  </section>
+
+  <section>
+    <h2>Headline vs. baseline, in detail</h2>
     <div class="table-wrap">
     <table>
       <tr><th>Metric</th><th class="num">August 2026</th><th class="num">Apr–Jun baseline</th><th class="num">Change</th></tr>
@@ -65,8 +91,8 @@
       <tr><td>Add-on revenue, % of total</td><td class="num">25.2%</td><td class="num">23.8%</td><td class="num" style="color:var(--good);">+1.4 pts</td></tr>
     </table>
     </div>
-    <p class="note">548 is every inspection in the export — including the 7 zero/no-fee bookings and 2 marked unpaid — per the denominator decision. August is running 2.1 points ahead of the spring baseline and just 3.9 points off the 55% target, with add-ons now a slightly larger share of total revenue than the baseline period.</p>
   </section>
+
 
   <section>
     <h2>Add-on count distribution</h2>
