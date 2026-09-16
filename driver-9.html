@@ -2,159 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Driver 9 — Sales KPIs Achieved · Marigold Cash Flow Driver Dashboard</title>
+<title>August 2026 — Sales KPIs Achieved</title>
 <style>
-  :root{
-    --black:#1a1a1a; --gold:#f4c94c; --gold-dark:#b8922e;
-    --line:#e6e2d8; --ready:#4a8a5c; --blocked:#c0503f; --waiting:#c98a2c; --paper:#fdfcf9;
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
   }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
-  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
-  header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
-  .back{font-family:Arial,sans-serif;font-size:12px;color:var(--gold-dark);text-decoration:none;font-weight:bold;}
-  .back:hover{text-decoration:underline;}
-  h1{font-size:26px;margin:10px 0 4px 0;color:var(--black);}
-  .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.hit { font-weight:700; color:var(--good); }
+  td.miss { font-weight:700; color:var(--decide); }
+  tr.flagged td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
 
-  .card{
-    background:#fff;border:1px solid var(--line);border-radius:8px;
-    padding:20px 22px;margin-bottom:16px;
-  }
-  .card h2{
-    font-size:16px;margin:0 0 12px 0;color:var(--black);
-    font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:0.5px;
-  }
-
-  .tag{
-    display:inline-block;font-family:Arial,sans-serif;font-size:10.5px;font-weight:bold;
-    letter-spacing:0.3px;text-transform:uppercase;padding:3px 9px;border-radius:11px;
-    margin-left:8px;vertical-align:middle;
-  }
-  .tag.locked{background:#e4efe6;color:var(--ready);}
-  .tag.auto{background:#e6eef5;color:#3a6b8a;}
-  .tag.watch{background:#f7ecd3;color:var(--waiting);}
-
-  .headline{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
-  .headline-pct{
-    font-family:Arial,sans-serif;font-size:48px;font-weight:bold;color:var(--blocked);line-height:1;
-  }
-  .headline-pct .target{display:block;font-size:13px;font-weight:normal;color:#8a8a8a;margin-top:4px;}
-  .headline-text{font-family:Arial,sans-serif;font-size:13.5px;color:#4a4a4a;max-width:460px;line-height:1.5;}
-
-  table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;margin-top:6px;}
-  th,td{border:1px solid var(--line);padding:7px 10px;text-align:center;}
-  th{background:#faf6ea;font-weight:bold;color:var(--black);}
-  td.name{text-align:left;font-weight:bold;}
-  td.hit{color:var(--ready);font-weight:bold;}
-  td.miss{color:var(--blocked);font-weight:bold;}
-  tr.avg td{background:#faf6ea;font-weight:bold;}
-  .footnote{font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;margin-top:8px;}
-
-  .formula{font-family:Arial,sans-serif;font-size:13.5px;line-height:1.6;color:#333;}
-
-  ul{margin:6px 0 0 18px;padding:0;font-family:Arial,sans-serif;font-size:13px;line-height:1.55;}
-  li{margin-bottom:8px;}
-
-  footer{
-    margin-top:24px;font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;
-    border-top:1px solid var(--line);padding-top:14px;
-  }
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--decide); line-height:1; }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #9</div>
+  <h1>August 2026 — Sales KPIs Achieved</h1>
+  <div class="sub">KPIs on pace ÷ KPIs eligible, scored weekly and averaged across the month. Source: Marigold - EOS - Scorecard.xlsx (live, Drive).</div>
 
-  <header>
-    <a class="back" href="index.html">&larr; Back to dashboard</a>
-    <h1>Driver 9 — Sales KPIs Achieved</h1>
-    <div class="meta">Owner: Ron &nbsp;·&nbsp; Source: Marigold - EOS - Scorecard.xlsx (live, Drive) &nbsp;·&nbsp; Period: August 2026 (4 weeks, Aug 6 – Aug 27)</div>
-  </header>
-
-  <div class="card">
-    <h2>Headline <span class="tag locked">Locked scope + method</span></h2>
-    <div class="headline">
-      <div class="headline-pct">18.75%<span class="target">of KPIs met · Target: 100%</span></div>
-      <div class="headline-text">
-        Average of each week's "KPIs met &divide; 4," across the four August weeks. Scope is the checklist's original 4 KPIs — Meetings set, Sales Calls, Estimates sent, Estimates won.
-      </div>
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct">18.75%<span class="tgt">of KPIs met · Target 100%</span></div>
+      <p class="note" style="max-width:460px;">Average of each week's "KPIs met ÷ 4," across the four August weeks. Scope is the checklist's original 4 KPIs — Meetings set, Sales Calls, Estimates sent, Estimates won.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
-    <h2>Detail — all 16 KPI-weeks <span class="tag auto">Pulled from live Scorecard</span></h2>
+  <section>
+    <h2>Detail — all 16 KPI-weeks</h2>
+    <div class="group-meta">Owner: Ron · 4 KPIs × 4 weeks · pulled from the live EOS Scorecard</div>
+    <div class="table-wrap">
     <table>
+      <tr><th>KPI</th><th class="num">Goal</th><th class="num">Aug 6</th><th class="num">Aug 13</th><th class="num">Aug 20</th><th class="num">Aug 27</th></tr>
       <tr>
-        <th style="text-align:left;">KPI</th>
-        <th>Goal</th>
-        <th>Aug 6</th>
-        <th>Aug 13</th>
-        <th>Aug 20</th>
-        <th>Aug 27</th>
+        <td>Meetings set by sales team</td>
+        <td class="num">5</td>
+        <td class="num miss">2 ✗</td>
+        <td class="num miss">3 ✗</td>
+        <td class="num hit">5 ✓</td>
+        <td class="num miss">2 ✗</td>
       </tr>
       <tr>
-        <td class="name">Meetings set by sales team</td>
-        <td>5</td>
-        <td class="miss">2 ✗</td>
-        <td class="miss">3 ✗</td>
-        <td class="hit">5 ✓</td>
-        <td class="miss">2 ✗</td>
+        <td># Sales Calls</td>
+        <td class="num">115</td>
+        <td class="num miss">50 ✗</td>
+        <td class="num miss">38 ✗</td>
+        <td class="num miss">51 ✗</td>
+        <td class="num miss">40 ✗</td>
       </tr>
       <tr>
-        <td class="name"># Sales Calls</td>
-        <td>115</td>
-        <td class="miss">50 ✗</td>
-        <td class="miss">38 ✗</td>
-        <td class="miss">51 ✗</td>
-        <td class="miss">40 ✗</td>
+        <td># Estimates sent</td>
+        <td class="num">16</td>
+        <td class="num hit">19 ✓</td>
+        <td class="num miss">6 ✗</td>
+        <td class="num hit">17 ✓</td>
+        <td class="num miss">13 ✗</td>
       </tr>
       <tr>
-        <td class="name"># Estimates sent</td>
-        <td>16</td>
-        <td class="hit">19 ✓</td>
-        <td class="miss">6 ✗</td>
-        <td class="hit">17 ✓</td>
-        <td class="miss">13 ✗</td>
+        <td># Estimates won</td>
+        <td class="num">12</td>
+        <td class="num miss">9 ✗</td>
+        <td class="num miss">3 ✗</td>
+        <td class="num miss">7 ✗</td>
+        <td class="num miss">7 ✗</td>
       </tr>
-      <tr>
-        <td class="name"># Estimates won</td>
-        <td>12</td>
-        <td class="miss">9 ✗</td>
-        <td class="miss">3 ✗</td>
-        <td class="miss">7 ✗</td>
-        <td class="miss">7 ✗</td>
-      </tr>
-      <tr class="avg">
-        <td class="name">KPIs met this week</td>
-        <td>—</td>
-        <td>1 / 4 (25%)</td>
-        <td>0 / 4 (0%)</td>
-        <td>2 / 4 (50%)</td>
-        <td>0 / 4 (0%)</td>
+      <tr class="avg-row">
+        <td>KPIs met this week</td>
+        <td class="num">—</td>
+        <td class="num">1 / 4 (25%)</td>
+        <td class="num">0 / 4 (0%)</td>
+        <td class="num">2 / 4 (50%)</td>
+        <td class="num">0 / 4 (0%)</td>
       </tr>
     </table>
-    <div class="footnote">Average of the four weekly percentages = 18.75%.</div>
-  </div>
-
-  <div class="card">
-    <h2>Formula</h2>
-    <div class="formula">
-      For each of the 4 KPIs, each week: <strong>met</strong> if actual &ge; goal. Weekly score = KPIs met &divide; 4. Monthly headline = average of the four weekly scores.
     </div>
-  </div>
+    <p class="note">Average of the four weekly percentages = 18.75%.</p>
+  </section>
 
-  <div class="card">
-    <h2>What's still worth flagging <span class="tag watch">Watch</span></h2>
-    <ul>
-      <li><strong>Ownership split, not yet reconciled:</strong> on the live Scorecard, Estimates sent/won are logged under <em>Minh</em>, not Ron. Driver 9 still rolls them up under Ron per the checklist's owner field — worth confirming with Ron/Minh that's intentional, since it means Ron's Driver 9 score depends on two numbers he doesn't directly control.</li>
-    </ul>
-  </div>
+  <section>
+    <h2>Formula</h2>
+    <p class="note" style="font-size:14px;">For each of the 4 KPIs, each week: <strong style="color:var(--text);">met</strong> if actual ≥ goal. Weekly score = KPIs met ÷ 4. Monthly headline = average of the four weekly scores.</p>
+  </section>
+
+  <section>
+    <h2>Note</h2>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p>Ownership split, not yet reconciled: on the live Scorecard, Estimates sent/won are logged under <strong>Minh</strong>, not Ron. Driver 9 still rolls them up under Ron per the checklist's owner field — worth confirming with Ron/Minh that's intentional, since it means Ron's Driver 9 score depends on two numbers he doesn't directly control.</p>
+    </div>
+  </section>
 
   <footer>
-    Driver 9 of 9 · cash-flow-drivers-build-checklist-v3.md · Sept 24 L10 is the near-term deadline.
+    Marigold Cash Flow Driver Dashboard · Driver #9 · August 2026 · Sourced live from Marigold - EOS - Scorecard.xlsx (Sales section). Sept 24 L10 is the near-term deadline.
   </footer>
-
 </div>
 </body>
 </html>
