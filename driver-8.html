@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Driver 8 — Employee Tenure — Built from Marigold roster</title>
+<style>
+  :root {
+    --gold: #b8860b; --gold-light: #f5e9d0; --ink: #2b2620; --muted: #6b6255;
+    --border: #e0d6c0; --bg: #fdfaf4; --card: #ffffff;
+    --mhi: #6b4c00; --mhs: #2e6f95; --shared: #7a5230;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; margin:0; padding:40px 24px; }
+  .wrap { max-width: 920px; margin:0 auto; }
+  h1 { font-size:26px; margin-bottom:4px; border-bottom:3px solid var(--gold); padding-bottom:12px; }
+  .subhead { color:var(--muted); font-size:14px; margin-bottom:26px; font-family:Arial, sans-serif; }
+  .flag { display:inline-block; background:var(--gold-light); border:1px solid var(--gold); color:#7a5c00; font-family:Arial, sans-serif; font-size:12.5px; padding:4px 10px; border-radius:4px; margin-top:6px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  .card h2 { font-size:17px; margin-top:0; margin-bottom:12px; color:#6b4c00; }
+  .body-txt { font-family:Arial, sans-serif; font-size:14px; line-height:1.6; }
+  .stat-row { display:flex; gap:18px; flex-wrap:wrap; margin:14px 0 6px; }
+  .stat { flex:1; min-width:150px; border:1px solid var(--border); border-radius:6px; padding:14px 16px; text-align:center; font-family:Arial, sans-serif; }
+  .stat .num { font-size:28px; font-weight:700; }
+  .stat .lbl { font-size:12px; color:var(--muted); margin-top:2px; }
+  .stat.overall .num { color:var(--gold); }
+  .stat.mhi .num { color:var(--mhi); }
+  .stat.mhs .num { color:var(--mhs); }
+  .stat.shared .num { color:var(--shared); }
+  table { width:100%; border-collapse:collapse; font-family:Arial, sans-serif; font-size:13px; margin-top:8px; }
+  th, td { border:1px solid var(--border); padding:6px 9px; text-align:left; vertical-align:top; }
+  th { background:var(--gold-light); font-weight:600; color:#6b4c00; }
+  td.num { text-align:right; font-variant-numeric: tabular-nums; }
+  .note { font-family:Arial, sans-serif; font-size:13px; color:var(--muted); background:#faf6ec; border-left:3px solid var(--gold); padding:10px 14px; margin-top:12px; }
+  .warn { font-family:Arial, sans-serif; font-size:13px; color:#7a3b1f; background:#fbeee6; border-left:3px solid #c0603a; padding:10px 14px; margin-top:12px; }
+  .decide-item { font-family:Arial, sans-serif; font-size:14px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed var(--border); }
+  .decide-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .decide-item .q { font-weight:700; margin-bottom:3px; }
+  .decide-item .lean { font-size:12.5px; color:var(--muted); font-style:italic; }
+  .badge { display:inline-block; font-family:Arial, sans-serif; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; color:#fff; }
+  .badge-ok { background:#2f7a4f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Driver 8 — Average Employee Tenure</h1>
+  <div class="subhead">
+    Owner: Britney &nbsp;·&nbsp; Guardrail metric — hold at 2.2 yrs &nbsp;·&nbsp; Built from the Marigold Home roster export
+    <br><span class="flag">Sept 24 L10 in 8 days — this driver can now report a real number</span>
+  </div>
+
+  <div class="card">
+    <h2>Headline numbers</h2>
+    <div class="stat-row">
+      <div class="stat overall"><div class="num">2.56</div><div class="lbl">OVERALL (n=36)</div></div>
+      <div class="stat mhi"><div class="num">2.38</div><div class="lbl">MHI (n=21)</div></div>
+      <div class="stat mhs"><div class="num">1.60</div><div class="lbl">MHS (n=5)</div></div>
+      <div class="stat shared"><div class="num">3.42</div><div class="lbl">Office Staff (n=10)</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>MHI — Home Inspections (n=21, avg 2.38 yrs)</h2>
+    <table>
+      <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
+      <tr><td>Blake Pederson-Perovich</td><td>General Manager MHI</td><td class='num'>6.07</td></tr>
+<tr><td>Noah Carlson</td><td>Services Tech</td><td class='num'>5.32</td></tr>
+<tr><td>Mitchell Bowser</td><td>Home Inspector / Team Lead</td><td class='num'>4.61</td></tr>
+<tr><td>Jake Miller</td><td>Sr Home Inspector / Trainer</td><td class='num'>3.95</td></tr>
+<tr><td>Tony Weinand</td><td>Sr Home Inspector / Team Lead</td><td class='num'>3.55</td></tr>
+<tr><td>Matt Mossey</td><td>Home Inspector / Trainer</td><td class='num'>3.11</td></tr>
+<tr><td>Mark Rahja</td><td>Services Lead</td><td class='num'>3.11</td></tr>
+<tr><td>Dan Kosel</td><td>Assistant Inspector Manager</td><td class='num'>3.00</td></tr>
+<tr><td>Derek Lanz</td><td>Services Tech</td><td class='num'>2.59</td></tr>
+<tr><td>Brayden Rogosheske</td><td>Services Tech</td><td class='num'>2.44</td></tr>
+<tr><td>Kyle Kanipes</td><td>Home Inspector</td><td class='num'>2.23</td></tr>
+<tr><td>Walker Russek</td><td>Home Inspector</td><td class='num'>2.15</td></tr>
+<tr><td>Stephen Hines</td><td>Home Inspector</td><td class='num'>2.04</td></tr>
+<tr><td>Aaron Vandeventer</td><td>Home Inspector</td><td class='num'>1.39</td></tr>
+<tr><td>Kelly Brill</td><td>Home Inspector</td><td class='num'>1.27</td></tr>
+<tr><td>Austin Cooper</td><td>Services Tech</td><td class='num'>1.08</td></tr>
+<tr><td>Kyle Grovenstein</td><td>Home Inspector</td><td class='num'>0.98</td></tr>
+<tr><td>Anthony Link-Danko</td><td>Home Inspector</td><td class='num'>0.54</td></tr>
+<tr><td>Matt Clarity</td><td>Home Inspector</td><td class='num'>0.40</td></tr>
+<tr><td>Travis East</td><td>Home Inspector</td><td class='num'>0.09</td></tr>
+<tr><td>Joel Terry</td><td>Home Inspector</td><td class='num'>0.09</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>MHS — Home Services (n=5, avg 1.60 yrs)</h2>
+    <table>
+      <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
+      <tr><td>Brett Fredrichs</td><td>Lead Radon Mitigator</td><td class='num'>3.55</td></tr>
+<tr><td>Alycia Bonneville</td><td>Routine Home Maintenance Tech</td><td class='num'>1.59</td></tr>
+<tr><td>Josh Miller</td><td>Estimator</td><td class='num'>1.55</td></tr>
+<tr><td>Minh Nguyen</td><td>General Manger MHS</td><td class='num'>0.87</td></tr>
+<tr><td>Dominic Reed</td><td>Assistant Mitigation Tech</td><td class='num'>0.45</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Office Staff — held out of MHI/MHS comparison (n=10, avg 3.42 yrs)</h2>
+    <table>
+      <tr><th>Name</th><th>Title</th><th class="num">Tenure (yrs)</th></tr>
+      <tr><td>Curtis Larson</td><td>Owner</td><td class='num'>8.44</td></tr>
+<tr><td>Britney Ahlmann</td><td>Director of Operations</td><td class='num'>6.15</td></tr>
+<tr><td>Ron Conner</td><td>Relationship Manager</td><td class='num'>5.38</td></tr>
+<tr><td>Sara Bonk</td><td>Client Care Coordinator</td><td class='num'>3.39</td></tr>
+<tr><td>Maggie Cox</td><td>Client Care Manager</td><td class='num'>3.30</td></tr>
+<tr><td>Deb Pulskamp</td><td>Client Care Coordinator</td><td class='num'>2.55</td></tr>
+<tr><td>Monique Ocon</td><td>Client Care Coordinator</td><td class='num'>2.21</td></tr>
+<tr><td>Carolyn Derksen</td><td>Operations Coordinator</td><td class='num'>1.25</td></tr>
+<tr><td>Alicia Ortloff</td><td>Client Care Coordinator</td><td class='num'>0.96</td></tr>
+<tr><td>Megan Kouri</td><td>Social Media Manager</td><td class='num'>0.54</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Excluded from the calculation</h2>
+    <div class="body-txt">
+      <b>Marigold Home Inspections</b> — a placeholder/equipment record, not a real employee.<br>
+      <b>Stanford Baker</b> — hire date of 9/21/2026 is still ahead of today; tenure field reads <code>#ERROR!</code> since he
+      hasn't started yet. Excluded until his start date passes.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Confirmed decisions applied</h2>
+    <div class="body-txt">
+      <span class="badge badge-ok">Rehire clock resets</span> — the roster already implements this: a rehire gets a fresh record
+      (e.g. Anthony Link-Danko, Austin Cooper each have an inactive prior-stint record plus a current active one), so I used the
+      tenure figure attached to each active record as-is rather than summing across stints.<br><br>
+      <span class="badge badge-ok">Contractors &amp; employees both count</span> — anyone active regardless of W2/1099/contractor
+      status is included (e.g. Monique Ocon, "Active, Contractor").<br><br>
+      <span class="badge badge-ok">Inactive excluded</span> — every terminated/inactive record is dropped from the calculation.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Still open — Decide items this data doesn't settle</h2>
+    <div class="decide-item">
+      <div class="q">Tolerance band around 2.2</div>
+      Checklist suggests 2.0–2.4 as "holding." With the real figure landing at 2.56, this still needs Britney's sign-off before it's a pass/fail gauge.
+    </div>
+    <div class="decide-item">
+      <div class="q">Tiers instead of a flat average?</div>
+      Still genuinely open — no lean recorded in the checklist. Worth revisiting once Britney sees how skewed young the roster is (median tenure is well under the mean, since a large chunk of MHI hired inside the last 18 months).
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
