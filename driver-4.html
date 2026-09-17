@@ -123,6 +123,19 @@
   </section>
 
   <section>
+    <h2>Mitigation — site visit vs. phone quote</h2>
+    <div class="group-meta">HCP-only (Square doesn't carry scheduling data, so this can't extend to RHM or the 3 Square stragglers)</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Quote type</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still pending</th><th class="num">Close rate</th></tr>
+      <tr><td>Site-visit quotes</td><td class="num">31</td><td class="num">16</td><td class="num">9</td><td class="num">6</td><td class="num eff">51.6%</td></tr>
+      <tr><td>Phone quotes</td><td class="num">37</td><td class="num">15</td><td class="num">15</td><td class="num">7</td><td class="num eff">40.5%</td></tr>
+    </table>
+    </div>
+    <p class="note">Split using <code>schedule.scheduled_start</code>: set = a site visit was actually booked, null = no appointment was ever scheduled, consistent with the "phone quotes without a site visit" workflow in the CCC-MHS Mitigation SOP. It's a proxy, not an explicit quote-type field, and 31 vs. 37 is still a small enough sample that the ~11-point gap isn't necessarily stable month to month.</p>
+  </section>
+
+  <section>
     <h2>Formula</h2>
     <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Close rate = quotes accepted ÷ quotes sent</strong>, for real (non-test, non-handyman) MHS quotes with a send date in August, judged as of today. Combined = Mitigation + RHM pooled together; each line is also reported separately since they're different sales motions on different systems. "Sent" excludes Drafts (never delivered) in both systems.</p>
   </section>
@@ -159,7 +172,7 @@
     </div>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p><b>Phone-quote vs. site-visit split.</b> Not built out — collapsing to one stage means the driver doesn't distinguish phone quotes from in-person ones for either line. Flagging as a possible future refinement, not a blocker.</p>
+      <p><b>Phone-quote vs. site-visit split — built for Mitigation, missing for RHM.</b> See the breakout above: site visits close ~11 points better than phone quotes this month. This only covers HCP (Mitigation); Square's export has no scheduling data, so RHM and the 3 Square stragglers aren't split out. Worth deciding whether this becomes a permanent line on the page or stays a one-off diagnostic.</p>
     </div>
   </section>
 
