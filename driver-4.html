@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>August 2026 — Follow-Up Close Rate</title>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.locked { border-left:4px solid var(--good); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.locked { background:#e6efe3; color:var(--good); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--decide); line-height:1; }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+  .compare-row { display:flex; gap:28px; flex-wrap:wrap; }
+  .compare-stat { font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:24px; font-weight:700; color:#33301f; }
+  .compare-stat .clbl { font-size:11.5px; color:var(--muted); margin-top:2px; }
+
+  .split-row { display:flex; gap:20px; flex-wrap:wrap; margin-top:16px; }
+  .split-card { flex:1; min-width:260px; background:#F6F1E3; border:1px solid var(--border); border-radius:10px; padding:14px 18px; }
+  .split-card .slbl { font-family:Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold-dark); font-weight:700; }
+  .split-card .spct { font-family:Arial,sans-serif; font-size:30px; font-weight:700; margin-top:4px; }
+  .split-card .stgt { font-family:Arial,sans-serif; font-size:11.5px; color:var(--muted); margin-top:2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #4</div>
+  <h1>August 2026 — Follow-Up Close Rate</h1>
+  <div class="sub">MHS — Mitigation + RHM, August 2026 · 77 real quotes sent · Sources: Housecall Pro (Mitigation, live API) + Square (Mitigation stragglers + RHM, CSV export)</div>
+
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">Follow-up close rate measures what share of MHS quotes sent turn into accepted jobs, across both product lines: Radon Mitigation and Routine Home Maintenance (RHM, launched April 2026). Mitigation moved to Housecall Pro this year (fully ramped by 8/10–8/11); RHM has always run on Square, which is also where any Mitigation quotes that slipped through outside HCP during the cutover are still tracked.</p>
+      <p>Handyman estimates (143 historical Square rows) are excluded entirely — MHS discontinued handyman services, and no Handyman quote has been sent since May 2026.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline — combined (Mitigation + RHM)</h2>
+    <div class="headline-row">
+      <div class="headline-pct">41.6%<span class="tgt">Close rate · target 70%</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">77</div><div class="clbl">Real quotes sent</div></div>
+      <div class="compare-stat"><div class="cnum">32</div><div class="clbl">Accepted</div></div>
+      <div class="compare-stat"><div class="cnum">29</div><div class="clbl">Declined / expired</div></div>
+      <div class="compare-stat"><div class="cnum">16</div><div class="clbl">Still resolving</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">16 of the 77 August quotes (21%) haven't been decided yet as of this report. That's expected lag, not a data gap — next month's report will note how those 16 finally landed.</p>
+
+    <div class="split-row">
+      <div class="split-card">
+        <div class="slbl">Mitigation</div>
+        <div class="spct" style="color:var(--decide);">43.7%</div>
+        <div class="stgt">31 accepted ÷ 71 sent (68 HCP + 3 Square stragglers)</div>
+      </div>
+      <div class="split-card">
+        <div class="slbl">RHM</div>
+        <div class="spct" style="color:var(--decide);">16.7%</div>
+        <div class="stgt">1 accepted ÷ 6 sent — thin sample, always has been</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Outcome detail, by line</h2>
+    <div class="group-meta">Real (non-test, non-handyman) quotes sent in August, by current outcome</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Line</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still resolving</th><th class="num">Close rate</th></tr>
+      <tr><td>Mitigation</td><td class="num">71</td><td class="num">31</td><td class="num">27</td><td class="num">13</td><td class="num eff">43.7%</td></tr>
+      <tr><td>RHM</td><td class="num">6</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num eff">16.7%</td></tr>
+      <tr class="avg-row"><td>Combined</td><td class="num">77</td><td class="num">32</td><td class="num">29</td><td class="num">16</td><td class="num">41.6%</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Backlog check — quotes sent before August</h2>
+    <div class="group-meta">This section changed materially from last cut — HCP-only data showed a clean 0; the Square export tells a different story</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Line</th><th class="num">Sent before Aug 1</th><th class="num">Genuinely stale (sent, still undecided)</th></tr>
+      <tr><td>Mitigation (HCP, since 5/26)</td><td class="num">6</td><td class="num eff">0</td></tr>
+      <tr><td>Mitigation (Square, pre-cutover history)</td><td class="num">972</td><td class="num" style="color:var(--decide); font-weight:700;">7</td></tr>
+      <tr><td>RHM (Square)</td><td class="num">90</td><td class="num">0</td></tr>
+    </table>
+    </div>
+    <p class="note"><b>7 Mitigation quotes were actually sent to a customer and never decided</b> — some over a year ago: Beth Steen and Joel Reis (both 3/2025, Undelivered), Patrick Chuckas and Jeff Barraclough (7/2025, Pending), Troy Seberson and Jeff Vitko (11/2025, Pending), Cameron Serk (1/2026, Pending). 10 additional pre-cutover Drafts exist but were never actually sent, so they aren't counted as backlog here. None of these 7 are in this month's headline — they predate August and were never resolved, so they're a separate follow-up item, not a close-rate input.</p>
+  </section>
+
+  <section>
+    <h2>Formula</h2>
+    <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Close rate = quotes accepted ÷ quotes sent</strong>, for real (non-test, non-handyman) MHS quotes with a send date in August, judged as of today. Combined = Mitigation + RHM pooled together; each line is also reported separately since they're different sales motions on different systems. "Sent" excludes Drafts (never delivered) in both systems.</p>
+  </section>
+
+  <section>
+    <h2>Decisions applied</h2>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>RHM added to Driver 4, sourced from Square.</b> Mitigation now spans two sources for August: Housecall Pro (68 real sent quotes, the live system) plus 3 Square-sent Mitigation quotes from the cutover tail that never made it into HCP (Anne Pederson, Flynn & Mackenzie Rice, Jonathan Meidl — all Expired, real unanswered quotes, not duplicates). 3 other August Square Mitigation records were confirmed duplicates of HCP records already counted (Tim Parker, Bao Dang, Shante Lantos) and are excluded to avoid double-counting.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Handyman excluded entirely.</b> MHS discontinued handyman services; 143 historical Square rows (all pre-May-2026) are dropped from scope rather than folded into either line.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Draft-status quotes don't count as "sent."</b> Applies to both Mitigation and RHM — a Draft was never delivered to the customer, so it's excluded from the sent denominator and from the backlog count. Pending/Undelivered quotes did go out and count as sent, whether or not they were ever decided.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Formula stays single-stage (accepted ÷ sent), no "appointment held" step</b> — this applies to RHM the same way it was decided for Mitigation: neither system tracks a separate booked-appointment stage that reliably precedes every quote.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Open items</h2>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Target value.</b> This page shows 70%, matching the v5 checklist's inline meta note — but that number doesn't appear to have gone through a written Decide closure anywhere, and a separate working tracker had 55%/70%/77% all floating as candidates. Worth a direct confirm with Minh before this is presented at the Sept 24 L10 as a locked target. Unclear whether 70% was meant as a combined target or Mitigation-only — RHM's 16.7% on n=6 would need its own conversation if the target applies per-line.</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p><b>The 7-quote Mitigation backlog needs an owner and a next step.</b> These are real, answerable quotes sitting unresolved for months — some over a year. Worth deciding whether the estimator does a fresh follow-up round on these specific 7 before they're written off, and whether "stale quote backlog" becomes its own tracked line on this page going forward rather than a one-time callout.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Phone-quote vs. site-visit split.</b> Not built out — collapsing to one stage means the driver doesn't distinguish phone quotes from in-person ones for either line. Flagging as a possible future refinement, not a blocker.</p>
+    </div>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #4 · August 2026 (n=77 real quotes sent: 71 Mitigation, 6 RHM) · Owner: Minh · Sept 24 L10 is 7 days out. Sources: Housecall Pro API (/estimates) + estimates-export-20260917T1447.csv (Square, all-time export).
+  </footer>
+</div>
+</body>
+</html>
