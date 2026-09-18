@@ -41,7 +41,8 @@
   table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
   th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
   th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
-  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  th.num, td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.num { color:#33301f; }
   td.eff { font-weight:700; color:var(--gold-dark); }
   tr.flagged td { color: var(--decide); }
   .avg-row td { font-weight:700; background:#F6F1E3; }
@@ -99,13 +100,13 @@
       <tr><td>Target</td><td class="num">55.0%</td><td class="num">55.0%</td><td class="num"></td></tr>
       <tr><td>Avg add-ons per inspection</td><td class="num">0.94</td><td class="num">0.90</td><td class="num" style="color:var(--good);">+0.04</td></tr>
       <tr><td>Total inspections (denominator)</td><td class="num">485</td><td class="num">1,593</td><td class="num"></td></tr>
-      <tr><td>Total booking revenue (in-scope)</td><td class="num">$356,313</td><td class="num">$1,161,087</td><td class="num"></td></tr>
+      <tr><td>Total booking revenue (all)</td><td class="num">$377,983</td><td class="num">$1,236,347</td><td class="num"></td></tr>
       <tr><td>Total add-on revenue</td><td class="num eff">$95,078</td><td class="num">$299,932</td><td class="num"></td></tr>
-      <tr><td>Add-on revenue, % of total</td><td class="num">26.7%</td><td class="num">25.8%</td><td class="num" style="color:var(--good);">+0.9 pts</td></tr>
+      <tr><td>Add-on revenue, % of total</td><td class="num">25.2%</td><td class="num">24.3%</td><td class="num" style="color:var(--good);">+0.9 pts</td></tr>
       <tr><td>Add-on revenue per inspection</td><td class="num eff">$196.04</td><td class="num">$188.28</td><td class="num" style="color:var(--good);">+4.1%</td></tr>
     </table>
     </div>
-    <p class="note">The baseline is now recalculated on the same rules as August — same exclusion list, same family definitions, 2nd Kitchen included, Pests/CE-pattern line items excluded. This is an apples-to-apples comparison — the +1.5pt attach-rate change is a real (if modest) improvement, not a scope artifact. Per-inspection is the fairer revenue comparison since the periods are different lengths (1 month vs. a full quarter) — on that basis, ancillary revenue per inspection is up 4.1%. Raw monthly totals tell a flatter story: baseline averaged ~$99,977/month in add-on revenue vs. August's $95,078, so August ran slightly lighter in absolute monthly dollars even though each job earned more.</p>
+    <p class="note">The baseline is now recalculated on the same rules as August — same exclusion list, same family definitions, 2nd Kitchen included, Pests/CE-pattern line items excluded. This is an apples-to-apples comparison — the +1.5pt attach-rate change is a real (if modest) improvement, not a scope artifact. "Total booking revenue" is all inspections in the period, including the excluded ones — August's $21,670 in excluded-type revenue and the baseline's $75,260 are folded back in here, which is why the % of total is lower than if only in-scope revenue were used as the denominator. Per-inspection is the fairer revenue comparison since the periods are different lengths (1 month vs. a full quarter) — on that basis, ancillary revenue per inspection is up 4.1%. Raw monthly totals tell a flatter story: baseline averaged ~$99,977/month in add-on revenue vs. August's $95,078, so August ran slightly lighter in absolute monthly dollars even though each job earned more.</p>
   </section>
 
 
@@ -120,6 +121,7 @@
       <tr><td>2</td><td class="num">100</td><td class="num">20.6%</td></tr>
       <tr><td>3</td><td class="num">30</td><td class="num">6.2%</td></tr>
       <tr><td>4</td><td class="num">5</td><td class="num">1.0%</td></tr>
+      <tr><td>5+</td><td class="num">0</td><td class="num">0.0%</td></tr>
     </table>
     </div>
   </section>
@@ -170,18 +172,18 @@
     <div class="group-meta">No real home inspection to cross-sell onto — these don't count toward the attach rate at all, in either the numerator or denominator</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Service type</th><th class="num">Bookings</th><th class="num">Revenue (out of scope)</th></tr>
-      <tr><td>Standalone add-on only</td><td class="num">29</td><td class="num">—</td></tr>
-      <tr><td>TISH</td><td class="num">16</td><td class="num"></td></tr>
-      <tr><td>Phase 2</td><td class="num">7</td><td class="num"></td></tr>
-      <tr><td>Re-Inspection</td><td class="num">5</td><td class="num"></td></tr>
-      <tr><td>Walk &amp; Talk</td><td class="num">4</td><td class="num"></td></tr>
-      <tr><td>Preventative Maintenance</td><td class="num">1</td><td class="num"></td></tr>
-      <tr><td>CE Instruction (Off-Site)</td><td class="num">1</td><td class="num"></td></tr>
+      <tr><th>Service type</th><th class="num">Bookings</th><th class="num">Revenue</th></tr>
+      <tr><td>Standalone add-on only</td><td class="num">29</td><td class="num">$7,880</td></tr>
+      <tr><td>TISH</td><td class="num">16</td><td class="num">$3,975</td></tr>
+      <tr><td>Phase 2</td><td class="num">7</td><td class="num">$6,940</td></tr>
+      <tr><td>Re-Inspection</td><td class="num">5</td><td class="num">$900</td></tr>
+      <tr><td>Walk &amp; Talk</td><td class="num">4</td><td class="num">$865</td></tr>
+      <tr><td>Preventative Maintenance</td><td class="num">1</td><td class="num">$1,110</td></tr>
+      <tr><td>CE Instruction (Off-Site)</td><td class="num">1</td><td class="num">$0</td></tr>
       <tr class="avg-row"><td>Total excluded</td><td class="num">63</td><td class="num">$21,670</td></tr>
     </table>
     </div>
-    <p class="note">Standalone add-on-only and TISH/Phase 2/Re-Inspection/Walk & Talk are the original four service-type exclusions — no full ancillary cross-sell applies. Preventative Maintenance is added this round: townhome-association work that doesn't fit this driver's mold. The CE Instruction booking is the class itself, not an inspection — its "Pests in The Home" line item was already excluded, and now the whole booking is too. None of these 63 had any add-ons, so removing them doesn't change the attach count, only the denominator.</p>
+    <p class="note">Standalone add-on-only and TISH/Phase 2/Re-Inspection/Walk & Talk are the original four service-type exclusions — no full ancillary cross-sell applies. Preventative Maintenance is added this round: townhome-association work that doesn't fit this driver's mold. The CE Instruction booking is the class itself, not an inspection — its "Pests in The Home" line item was already excluded, and now the whole booking is too (it shows $0 since the class itself was comp). None of these 63 had any add-ons, so removing them doesn't change the attach count, only the denominator.</p>
   </section>
 
   <section>
