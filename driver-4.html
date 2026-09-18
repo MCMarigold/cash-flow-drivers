@@ -10,8 +10,8 @@
   "owner": "Minh",
   "period": "Aug 2026",
   "metrics": [
-    {"label": "Combined", "value": "41.6%", "target": "/ 70%", "state": "neg"},
-    {"label": "Mitigation", "value": "43.7%", "state": "neg"},
+    {"label": "Combined", "value": "40.8%", "target": "/ 70%", "state": "neg"},
+    {"label": "Mitigation", "value": "42.9%", "state": "neg"},
     {"label": "RHM", "value": "16.7%", "state": "neg"}
   ]
 }
@@ -45,6 +45,7 @@
   table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
   th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
   th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  th.num { text-align:right; }
   td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
   td.eff { font-weight:700; color:var(--gold-dark); }
   .avg-row td { font-weight:700; background:#F6F1E3; }
@@ -76,33 +77,34 @@
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #4</div>
   <h1>August 2026 — Follow-Up Close Rate</h1>
-  <div class="sub">MHS — Mitigation + RHM, August 2026 · 77 real quotes sent · Sources: Housecall Pro (Mitigation, live API) + Square (Mitigation stragglers + RHM, CSV export)</div>
+  <div class="sub">MHS — Mitigation + RHM, August 2026 · 76 real quotes sent · Sources: Housecall Pro (Mitigation, live API + jobs export) + Square (Mitigation stragglers + RHM) + Spectora (order history)</div>
 
   <section style="margin-top:20px;">
     <div class="card">
       <p style="margin:0;">Follow-up close rate measures what share of MHS quotes sent turn into accepted jobs, across both product lines: Radon Mitigation and Routine Home Maintenance (RHM, launched April 2026). Mitigation moved to Housecall Pro this year (fully ramped by 8/10–8/11); RHM has always run on Square, which is also where any Mitigation quotes that slipped through outside HCP during the cutover are still tracked.</p>
       <p>Handyman estimates (143 historical Square rows) are excluded entirely — MHS discontinued handyman services, and no Handyman quote has been sent since May 2026.</p>
+      <p>Financially, this driver is about conversion on a pipeline that's already there: closing this month's real sent quotes at the 70% target instead of the actual rate would have produced about $18,187 more in August alone (see Revenue at target below) — almost entirely from Mitigation, since RHM's dollar volume is still too small to move the number much either way.</p>
     </div>
   </section>
 
   <section>
     <h2>Headline — combined (Mitigation + RHM)</h2>
     <div class="headline-row">
-      <div class="headline-pct neg">41.6%<span class="tgt">Close rate · target 70%</span></div>
+      <div class="headline-pct neg">40.8%<span class="tgt">Close rate · target 70%</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;">
-      <div class="compare-stat"><div class="cnum">77</div><div class="clbl">Real quotes sent</div></div>
-      <div class="compare-stat"><div class="cnum">32</div><div class="clbl">Accepted</div></div>
+      <div class="compare-stat"><div class="cnum">76</div><div class="clbl">Real quotes sent</div></div>
+      <div class="compare-stat"><div class="cnum">31</div><div class="clbl">Accepted</div></div>
       <div class="compare-stat"><div class="cnum">29</div><div class="clbl">Declined / expired</div></div>
       <div class="compare-stat"><div class="cnum">16</div><div class="clbl">Still resolving</div></div>
     </div>
-    <p class="note" style="margin-top:14px;">16 of the 77 August quotes (21%) haven't been decided yet as of this report. That's expected lag, not a data gap — next month's report will note how those 16 finally landed.</p>
+    <p class="note" style="margin-top:14px;">16 of the 76 August quotes (21%) haven't been decided yet as of this report. That's expected lag, not a data gap — next month's report will note how those 16 finally landed.</p>
 
     <div class="split-row">
       <div class="split-card">
         <div class="slbl">Mitigation</div>
-        <div class="spct" style="color:var(--decide);">43.7%</div>
-        <div class="stgt">31 accepted ÷ 71 sent (68 HCP + 3 Square stragglers)</div>
+        <div class="spct" style="color:var(--decide);">42.9%</div>
+        <div class="stgt">30 accepted ÷ 70 sent (67 HCP + 3 Square stragglers)</div>
       </div>
       <div class="split-card">
         <div class="slbl">RHM</div>
@@ -118,11 +120,59 @@
     <div class="table-wrap">
     <table>
       <tr><th>Line</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still resolving</th><th class="num">Close rate</th></tr>
-      <tr><td>Mitigation</td><td class="num">71</td><td class="num">31</td><td class="num">27</td><td class="num">13</td><td class="num eff">43.7%</td></tr>
+      <tr><td>Mitigation</td><td class="num">70</td><td class="num">30</td><td class="num">27</td><td class="num">13</td><td class="num eff">42.9%</td></tr>
       <tr><td>RHM</td><td class="num">6</td><td class="num">1</td><td class="num">2</td><td class="num">3</td><td class="num eff">16.7%</td></tr>
-      <tr class="avg-row"><td>Combined</td><td class="num">77</td><td class="num">32</td><td class="num">29</td><td class="num">16</td><td class="num">41.6%</td></tr>
+      <tr class="avg-row"><td>Combined</td><td class="num">76</td><td class="num">31</td><td class="num">29</td><td class="num">16</td><td class="num">40.8%</td></tr>
     </table>
     </div>
+  </section>
+
+  <section>
+    <h2>Revenue — August, real dollars</h2>
+    <div class="group-meta">Excludes 10 records that would distort the math — see flagged-for-review below. "Completed & earned" is cross-referenced against Housecall Pro job records and Spectora order history, not just the quoted amount.</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Line</th><th class="num">Sent value</th><th class="num">Accepted</th><th class="num">Completed &amp; earned</th><th class="num">Booked, not yet done</th><th class="num">Declined/expired</th><th class="num">Still pending</th></tr>
+      <tr><td>Mitigation</td><td class="num">$114,279.00</td><td class="num">$62,085.00</td><td class="num eff">28 jobs, $54,705.00</td><td class="num">2 jobs, $6,415.00</td><td class="num">$29,289.00</td><td class="num">$22,905.00</td></tr>
+      <tr><td>RHM</td><td class="num">$551.75</td><td class="num">$109.00</td><td class="num eff">1 job, $1,200.00</td><td class="num">—</td><td class="num">$183.50</td><td class="num">$259.25</td></tr>
+      <tr class="avg-row"><td>Combined</td><td class="num">$114,830.75</td><td class="num eff">$62,194.00</td><td class="num">29 jobs, $55,905.00</td><td class="num">2 jobs, $6,415.00</td><td class="num">$29,472.50</td><td class="num">$23,164.25</td></tr>
+    </table>
+    </div>
+    <p class="note"><b>28 of 30 accepted Mitigation quotes (93.3%) have already been completed and earned</b> — the other 2 (Bethany Harshbarger, $2,550; Lynette Albrecht, $3,865) are Scheduled but not yet performed. Completed jobs' actual billed total runs about $965 under what was originally quoted, which is a normal margin of price adjustment at install and not a red flag on its own, but worth a glance if that gap grows in future months.</p>
+    <p class="note"><b>RHM's one August acceptance (Pete Bittorf) shows something worth watching:</b> the initial Square quote was $109, but Spectora's order history shows it converted into a $1,200 RHM Annual Package (paid, confirmed) — the "1 job, $1,200" in the table is that annual package, not the original $109 quote. RHM's subscription model means a small initial quote can convert into a much larger recurring commitment. That's one data point, not a pattern yet, but it means RHM's quoted dollar value likely understates its real revenue potential in a way Mitigation's one-time pricing doesn't.</p>
+
+    <h2 style="margin-top:22px;">Revenue at target (70% close rate)</h2>
+    <div class="group-meta">Holding August's sent pipeline fixed and asking what closing at target instead of actual would have produced</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Line</th><th class="num">Actual accepted</th><th class="num">Accepted @ 70%</th><th class="num">Monthly gap</th></tr>
+      <tr><td>Mitigation</td><td class="num">$62,085.00</td><td class="num">$79,995.30</td><td class="num eff">+$17,910.30</td></tr>
+      <tr><td>RHM</td><td class="num">$109.00</td><td class="num">$386.23</td><td class="num eff">+$277.23</td></tr>
+      <tr class="avg-row"><td>Combined</td><td class="num">$62,194.00</td><td class="num">$80,381.53</td><td class="num">+$18,187.53</td></tr>
+    </table>
+    </div>
+    <p class="note">Method: target close rate × this month's total sent value, compared to what actually closed — a simple "same pipeline, better conversion" read, not a forecast of pipeline growth. Rough ×12 extrapolation puts the annualized gap around <b>$218,000</b>, but that's a single thin month stretched over a year (RHM alone is n=6) and should be treated as a rough order of magnitude. It's also notably higher than the ~$100K annual impact figure already on this driver elsewhere in the checklist — worth reconciling which number the L10 should carry, rather than running both.</p>
+    <p class="note">Nearly all the dollar opportunity sits in Mitigation — RHM's whole sent pipeline this month is worth $551.75, so even its far-from-target 16.7% close rate barely moves the needle in dollars, whatever it means for the relationship/pipeline side.</p>
+
+    <h2 style="margin-top:22px;">Excluded from revenue math (and, for #109, from every count on this page) — flagged for review</h2>
+    <div class="group-meta">Still counted normally in every close-rate number elsewhere on this page — excluded only from the $ figures above</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Customer</th><th class="num">Amount</th><th>Status</th><th>Why flagged</th></tr>
+      <tr><td>Christine Longwell</td><td class="num">$120,000.00</td><td>Expired</td><td>~60x the median deal size ($2,050) — likely error or duplicate, not a typical residential job</td></tr>
+      <tr><td>Christine Longwell</td><td class="num">$112,500.00</td><td>Expired</td><td>Same customer, same concern</td></tr>
+      <tr><td>"Test Ahlmann" / null-name (Est. #109)</td><td class="num">$54.00</td><td>Accepted</td><td>Test record — name fields blank on the estimate, but address matches known staff test account (see note above); excluded from all counts, not just revenue</td></tr>
+      <tr><td>John Zattoni</td><td class="num">$0.00</td><td>Expired</td><td>Never priced — may need to be created/sent, or a test estimate</td></tr>
+      <tr><td>John Zattoni</td><td class="num">$0.00</td><td>Expired</td><td>Same customer, second $0 estimate</td></tr>
+      <tr><td>Emily Ames</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+      <tr><td>Jean Reed</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+      <tr><td>Janelle Kelly</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+      <tr><td>Lyn Wayne</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+      <tr><td>Loren Brimeyer</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+      <tr><td>Jeff Sheffield</td><td class="num">$0.00</td><td>Expired</td><td>Never priced</td></tr>
+    </table>
+    </div>
+    <p class="note">All 10 expired without ever carrying a normal dollar value — worth Minh's team checking whether the $0 ones are estimator follow-up gaps (quote never actually built) versus test/placeholder records, and whether Longwell's two large figures are a real commercial opportunity that deserves separate tracking or a data-entry issue to correct upstream in HCP.</p>
   </section>
 
   <section>
@@ -130,23 +180,25 @@
     <div class="group-meta">This section changed materially from last cut — HCP-only data showed a clean 0; the Square export tells a different story</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Line</th><th class="num">Sent before Aug 1</th><th class="num">Genuinely stale (sent, still undecided)</th></tr>
-      <tr><td>Mitigation (HCP, since 5/26)</td><td class="num">6</td><td class="num eff">0</td></tr>
-      <tr><td>Mitigation (Square, pre-cutover history)</td><td class="num">972</td><td class="num" style="color:var(--decide); font-weight:700;">7</td></tr>
-      <tr><td>RHM (Square)</td><td class="num">90</td><td class="num">0</td></tr>
+      <tr><th>Line</th><th class="num">Sent before Aug 1</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Genuinely stale (sent, still undecided)</th></tr>
+      <tr><td>Mitigation (HCP, since 5/26)</td><td class="num">6</td><td class="num">0</td><td class="num">6</td><td class="num eff">0</td></tr>
+      <tr><td>Mitigation (Square, pre-cutover history)</td><td class="num">962</td><td class="num">477</td><td class="num">478</td><td class="num" style="color:var(--decide); font-weight:700;">7</td></tr>
+      <tr><td>RHM (Square)</td><td class="num">83</td><td class="num">32</td><td class="num">51</td><td class="num">0</td></tr>
     </table>
     </div>
-    <p class="note"><b>7 Mitigation quotes were actually sent to a customer and never decided</b> — some over a year ago: Beth Steen and Joel Reis (both 3/2025, Undelivered), Patrick Chuckas and Jeff Barraclough (7/2025, Pending), Troy Seberson and Jeff Vitko (11/2025, Pending), Cameron Serk (1/2026, Pending). 10 additional pre-cutover Drafts exist but were never actually sent, so they aren't counted as backlog here. None of these 7 are in this month's headline — they predate August and were never resolved, so they're a separate follow-up item, not a close-rate input.</p>
+    <p class="note"><b>7 Mitigation quotes were actually sent to a customer and never decided</b> — some over a year ago: Beth Steen and Joel Reis (both 3/2025, Undelivered), Patrick Chuckas and Jeff Barraclough (7/2025, Pending), Troy Seberson and Jeff Vitko (11/2025, Pending), Cameron Serk (1/2026, Pending). 10 additional pre-cutover Drafts exist but were never actually sent, so they aren't counted here (matches the Draft-isn't-"sent" rule applied elsewhere on this page — the earlier count of 972 included those 10 Drafts by mistake, corrected to 962 here). None of these 7 are in this month's headline — they predate August and were never resolved, so they're a separate follow-up item, not a close-rate input.</p>
+    <p class="note">Once these 7 are resolved (accepted, declined, or written off), Square can be dropped from Mitigation's data sources entirely — Housecall Pro will be the sole system of record for this line, and this page's Mitigation references to Square should be cut accordingly.</p>
+    <p class="note"><b>Truest baseline for comparison: 49.6%</b> (477 accepted ÷ 962 sent) — the full pre-cutover Square Mitigation history, effectively Marigold's steady-state Mitigation close rate before any system disruption. This month's 43.7% Mitigation rate and the site-visit/phone split below can both be read against this baseline where relevant, rather than against the 70% target alone.</p>
   </section>
 
   <section>
     <h2>Mitigation — site visit vs. phone quote</h2>
-    <div class="group-meta">HCP-only (Square doesn't carry scheduling data, so this can't extend to RHM or the 3 Square stragglers)</div>
+    <div class="group-meta">HCP-only, Mitigation only — RHM always requires a site visit to quote, so this split doesn't apply there</div>
     <div class="table-wrap">
     <table>
       <tr><th>Quote type</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still pending</th><th class="num">Close rate</th></tr>
       <tr><td>Site-visit quotes</td><td class="num">31</td><td class="num">16</td><td class="num">9</td><td class="num">6</td><td class="num eff">51.6%</td></tr>
-      <tr><td>Phone quotes</td><td class="num">37</td><td class="num">15</td><td class="num">15</td><td class="num">7</td><td class="num eff">40.5%</td></tr>
+      <tr><td>Phone quotes</td><td class="num">36</td><td class="num">14</td><td class="num">15</td><td class="num">7</td><td class="num eff">38.9%</td></tr>
     </table>
     </div>
     <p class="note">Split using <code>schedule.scheduled_start</code>: set = a site visit was actually booked, null = no appointment was ever scheduled, consistent with the "phone quotes without a site visit" workflow in the CCC-MHS Mitigation SOP. It's a proxy, not an explicit quote-type field, and 31 vs. 37 is still a small enough sample that the ~11-point gap isn't necessarily stable month to month.</p>
@@ -161,19 +213,7 @@
     <h2>Decisions applied</h2>
     <div class="card locked">
       <span class="tag locked">Decided</span>
-      <p><b>RHM added to Driver 4, sourced from Square.</b> Mitigation now spans two sources for August: Housecall Pro (68 real sent quotes, the live system) plus 3 Square-sent Mitigation quotes from the cutover tail that never made it into HCP (Anne Pederson, Flynn & Mackenzie Rice, Jonathan Meidl — all Expired, real unanswered quotes, not duplicates). 3 other August Square Mitigation records were confirmed duplicates of HCP records already counted (Tim Parker, Bao Dang, Shante Lantos) and are excluded to avoid double-counting.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Decided</span>
-      <p><b>Handyman excluded entirely.</b> MHS discontinued handyman services; 143 historical Square rows (all pre-May-2026) are dropped from scope rather than folded into either line.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Decided</span>
       <p><b>Draft-status quotes don't count as "sent."</b> Applies to both Mitigation and RHM — a Draft was never delivered to the customer, so it's excluded from the sent denominator and from the backlog count. Pending/Undelivered quotes did go out and count as sent, whether or not they were ever decided.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Decided</span>
-      <p><b>Formula stays single-stage (accepted ÷ sent), no "appointment held" step</b> — this applies to RHM the same way it was decided for Mitigation: neither system tracks a separate booked-appointment stage that reliably precedes every quote.</p>
     </div>
   </section>
 
@@ -187,14 +227,30 @@
       <span class="tag decide">Decide</span>
       <p><b>The 7-quote Mitigation backlog needs an owner and a next step.</b> These are real, answerable quotes sitting unresolved for months — some over a year. Worth deciding whether the estimator does a fresh follow-up round on these specific 7 before they're written off, and whether "stale quote backlog" becomes its own tracked line on this page going forward rather than a one-time callout.</p>
     </div>
+    <div class="card locked">
+      <span class="tag locked">Corrected</span>
+      <p><b>A test record slipped past the original name-match filter.</b> Estimate #109 ($54, accepted) had blank first/last name fields, so the exact-name exclusion list didn't catch it — its address ties it to the same staff test account ("Test Ahlmann" / "Britney Ahlmann") found in the Jobs export. Excluded now; all counts on this page (68→67 HCP sent, 31→30 HCP accepted, and everything derived from them) reflect the correction.</p>
+    </div>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p><b>Phone-quote vs. site-visit split — built for Mitigation, missing for RHM.</b> See the breakout above: site visits close ~11 points better than phone quotes this month. This only covers HCP (Mitigation); Square's export has no scheduling data, so RHM and the 3 Square stragglers aren't split out. Worth deciding whether this becomes a permanent line on the page or stays a one-off diagnostic.</p>
+      <p><b>2 accepted Mitigation jobs are booked but not yet completed</b> (Bethany Harshbarger $2,550, Lynette Albrecht $3,865) — real, expected revenue, just not earned yet. Worth a glance next month to confirm they landed rather than stalled.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>RHM's quote-to-subscription conversion is one data point, not a pattern.</b> Pete Bittorf's $109 quote became a $1,200 annual package — worth watching a few more months before treating RHM's quoted dollar value as representative of its real revenue.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Annual impact figure needs reconciling.</b> The revenue-at-target math implies roughly $218K/year at a rough ×12 extrapolation, versus the ~$100K figure already attached to this driver in the checklist. Both can't be the number presented at the L10 — worth a quick check on how the original $100K was derived before picking which one carries forward.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Christine Longwell's $120K/$112.5K estimates and the 8 zero-dollar estimates</b> are excluded from the revenue math pending review (see that section) — need Minh's team to confirm whether these are real, data errors, or unfinished quotes before they're either restored to the revenue figures or written off.</p>
     </div>
   </section>
 
   <footer>
-    Marigold Cash Flow Driver Dashboard · Driver #4 · August 2026 (n=77 real quotes sent: 71 Mitigation, 6 RHM) · Owner: Minh · Sept 24 L10 is 7 days out. Sources: Housecall Pro API (/estimates) + estimates-export-20260917T1447.csv (Square, all-time export).
+    Marigold Cash Flow Driver Dashboard · Driver #4 · August 2026 (n=76 real quotes sent: 70 Mitigation, 6 RHM) · Owner: Minh · Sept 24 L10 is 7 days out. Sources: Housecall Pro API (/estimates + jobs export) + Square estimates export + Spectora order history.
   </footer>
 </div>
 </body>
