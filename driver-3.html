@@ -50,6 +50,12 @@
   .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
   .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
   .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+  /* Color-coded against the 90% target: green at/above it, gold within 10
+     points under it, rust further below. Applies to the combined headline
+     number and each of the three split-card percentages. */
+  .headline-pct.on-target, .split-card .spct.on-target { color:var(--good); }
+  .headline-pct.near-target, .split-card .spct.near-target { color:var(--gold); }
+  .headline-pct.off-target, .split-card .spct.off-target { color:var(--decide); }
   .compare-row { display:flex; gap:28px; flex-wrap:wrap; }
   .compare-stat { font-family:Arial,sans-serif; }
   .compare-stat .cnum { font-size:24px; font-weight:700; color:#33301f; }
@@ -416,6 +422,14 @@
 
   function pct(stats){ return stats.people === 0 ? 0 : Math.round(100 * stats.passing / stats.people); }
 
+  // Overall target per the Sept 2026 L10 decision: 90%, all staff.
+  var TARGET_PCT = 90;
+  function targetClass(value){
+    if (value >= TARGET_PCT) return "on-target";
+    if (value >= TARGET_PCT - 10) return "near-target";
+    return "off-target";
+  }
+
   function renderHeadline(){
     var seats = allSeats();
     var overall = computeStats(seats);
@@ -423,8 +437,10 @@
     var mhi = computeStats(columnsSeats(CHART_MHI_COLUMNS));
     var mhs = computeStats(columnsSeats(CHART_MHS_COLUMNS));
 
+    var overallPct = pct(overall);
+    document.getElementById("headlinePct").className = "headline-pct " + targetClass(overallPct);
     document.getElementById("headlinePct").innerHTML =
-      pct(overall) + '%<span class="tgt">Right-person rate · target 90% (all staff)</span>';
+      overallPct + '%<span class="tgt">Right-person rate · target 90% (all staff)</span>';
 
     document.getElementById("compareRow").innerHTML =
       '<div class="compare-stat"><div class="cnum">' + overall.people + '</div><div class="clbl">People scored</div></div>' +
@@ -432,10 +448,11 @@
       '<div class="compare-stat"><div class="cnum">' + (overall.people - overall.passing) + '</div><div class="clbl">Failing</div></div>' +
       '<div class="compare-stat"><div class="cnum">' + overall.vacantSeats + '</div><div class="clbl">Vacant seats, excluded</div></div>';
 
+    var leadershipPct = pct(leadership), mhiPct = pct(mhi), mhsPct = pct(mhs);
     document.getElementById("splitRow").innerHTML =
-      '<div class="split-card"><div class="slbl">Leadership &amp; Support</div><div class="spct">' + pct(leadership) + '%</div><div class="stgt">' + leadership.passing + ' of ' + leadership.people + ' people</div></div>' +
-      '<div class="split-card"><div class="slbl">MHI Field Ops</div><div class="spct">' + pct(mhi) + '%</div><div class="stgt">' + mhi.passing + ' of ' + mhi.people + ' people</div></div>' +
-      '<div class="split-card"><div class="slbl">MHS Field Ops</div><div class="spct">' + pct(mhs) + '%</div><div class="stgt">' + mhs.passing + ' of ' + mhs.people + ' people (' + mhs.vacantSeats + ' vacant seat)</div></div>';
+      '<div class="split-card"><div class="slbl">Leadership &amp; Support</div><div class="spct ' + targetClass(leadershipPct) + '">' + leadershipPct + '%</div><div class="stgt">' + leadership.passing + ' of ' + leadership.people + ' people</div></div>' +
+      '<div class="split-card"><div class="slbl">MHI Field Ops</div><div class="spct ' + targetClass(mhiPct) + '">' + mhiPct + '%</div><div class="stgt">' + mhi.passing + ' of ' + mhi.people + ' people</div></div>' +
+      '<div class="split-card"><div class="slbl">MHS Field Ops</div><div class="spct ' + targetClass(mhsPct) + '">' + mhsPct + '%</div><div class="stgt">' + mhs.passing + ' of ' + mhs.people + ' people (' + mhs.vacantSeats + ' vacant seat)</div></div>';
 
     var seatCount = seats.length;
     var vacantSeatCount = seats.filter(function(s){return s.vacant;}).length;
