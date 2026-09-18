@@ -50,7 +50,9 @@
   .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
 
   .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
-  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--decide); line-height:1; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
   .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
 </style>
 </head>
@@ -71,7 +73,7 @@
   <section>
     <h2>Headline</h2>
     <div class="headline-row">
-      <div class="headline-pct">18.75%<span class="tgt">of KPIs met · Target 100%</span></div>
+      <div class="headline-pct neg">18.75%<span class="tgt">of KPIs met · Target 100%</span></div>
       <p class="note" style="max-width:460px;">Average of each week's "KPIs met ÷ 4," across the four August weeks. Scope is the checklist's original 4 KPIs — Meetings set, Sales Calls, Estimates sent, Estimates won.</p>
     </div>
   </section>
