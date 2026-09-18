@@ -136,7 +136,7 @@
   <section style="margin-top:20px;">
     <div class="card">
       <p style="margin:0;">This driver measures whether employees are in roles that fit both their core values and the EOS GWC framework: Get It, Want It, and Capacity to do the job. The goal is for all employees to meet the defined right-person/right-seat criteria.</p>
-      <p>The estimated annual financial impact is $110K–$160K. The original model combines approximately $50K–$80K in potential reduced labor costs with approximately $60K–$80K in additional produced revenue, based on an assumption that a wrong-person/wrong-seat employee produces about 20% less than a right-fit employee. The current model still needs confirmation of the underlying math, so this figure should be treated as an estimate rather than a finalized financial value.</p>
+      <p>The estimated annual financial impact is <b>~$142K/yr</b> at a 90% right-seat rate ($49,920 in reduced labor cost + ~$92,452 in added revenue), built and verified against real Q2 2026 Spectora/MHS data at $30/hr and a 20%-lower-output assumption for a wrong-fit employee. The model assumes the 10% wrong-seat rate is spread proportionally across the org rather than concentrated in field-production roles — see the Financial model and Decisions sections below for the full math and why that assumption was chosen.</p>
     </div>
   </section>
 
@@ -171,6 +171,26 @@
   </section>
 
   <section>
+    <h2>Financial model — worked example (Sept 2026)</h2>
+    <div class="card">
+      <p style="margin:0;"><b>Labor-cost side checks out.</b> At the 90% target, 10% of the 40-person scored population is 4 people. At a $30/hr blended rate and a standard 2,080-hr work year, one FTE costs $62,400/yr in wages. Four wrong-seat people at 20% lower output means 20% of that $249,600 in combined wages is going toward reduced output: <b>$49,920/yr</b> — right at the low end of the $50–80K "reduced labor cost" range already in the estimate above.</p>
+    </div>
+    <div class="card">
+      <p style="margin:0;"><b>Revenue side, using real Q2 2026 data.</b> Pulled from the MHI Spectora export (Apr–Jun 2026, cancelled orders excluded) and the MHS orders export filtered to the same window:</p>
+      <p class="note" style="margin-top:8px;">MHI: 1,808 active orders, $1,236,346.54 in revenue. The 8 home inspectors with attributed bookings this quarter averaged $78,482 each — annualized (×4 run-rate), about <b>$314K/yr per home inspector</b>. The 4 team leads average about $310K/yr on the same basis.</p>
+      <p class="note" style="margin-top:8px;">MHS: $166,230.72 in active revenue across 300 orders (jobs credited to more than one name split evenly). Brett Fredrichs annualizes to about $335K/yr, Dominic Reed to about $229K/yr. Alycia Bonneville's RHM number is about $60K/yr — a real figure, but it reflects low RHM demand so far rather than her true potential in the role. Josh Miller (Estimator) shows almost no revenue of his own, which is structurally correct — he generates quotes and the revenue posts to whoever installs the job.</p>
+    </div>
+    <div class="card">
+      <p style="margin:0;"><b>Combined per-person impact, at 20%.</b> One wrong-seated home inspector or team lead: ~$62,800/yr in lost revenue (20% of ~$314K) + $12,480/yr in wasted wages ≈ <b>$75K/yr total</b>. One wrong-seated MHS field tech in Brett's role: ~$79K/yr; in Dominic's role: ~$58K/yr. An admin or support seat with no direct Spectora-attributed revenue: labor-cost only, ~$12,480/yr.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p style="margin:0;"><b>Resolved: assume the wrong 10% is spread proportionally across the org, not concentrated in field roles.</b> Splitting the 40 scored people into 16 with reliable Spectora-attributed revenue (MHI asst. inspector manager, team leads, and non-trainee home inspectors; MHS mitigation lead, mitigation tech, and RHM tech) and 24 without (leadership/support, MHI service techs, trainees, MHS estimator), the blended average across those 16 producers is <b>$288,913/yr</b> per person. At a proportional 10% wrong-seat rate, that's 1.6 of the 4 wrong-seat people landing in a revenue-producing seat and 2.4 in a non-producing one.</p>
+      <p class="note" style="margin-top:8px;">Labor-cost impact stays $49,920/yr (unchanged — it applies to all 4 regardless of seat). Revenue impact: 1.6 × 20% × $288,913 ≈ <b>$92,452/yr</b>. Combined: <b>≈$142,372/yr</b> — which lands squarely inside the original $110–160K range, so the estimate holds under this assumption.</p>
+    </div>
+  </section>
+
+  <section>
     <h2>Decisions applied</h2>
     <div class="card locked">
       <span class="tag locked">Decided</span>
@@ -187,10 +207,6 @@
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
       <p><b>Who's actually failing.</b> Every person below defaults to a pass as a placeholder — real GWC/People Analyzer scoring from Curtis hasn't been entered yet. Update the roster's g/w/c flags once real scoring comes in.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p><b>How the $110–160K figure was derived.</b> The blurb above gives the original model's breakdown ($50–80K reduced labor cost + $60–80K added revenue, at a 20%-lower-productivity assumption for a wrong-fit employee), but that underlying model still needs to be verified before it's treated as a locked figure.</p>
     </div>
     <div class="card decide">
       <span class="tag decide">Decide</span>
