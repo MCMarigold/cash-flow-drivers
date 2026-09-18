@@ -11,10 +11,10 @@
   "owner": "Curtis",
   "period": "Sept 2026",
   "metrics": [
-    {"label": "Combined", "value": "100%", "target": "/ TBD threshold", "state": "neutral"},
-    {"label": "Leadership & Support", "value": "100%", "state": "neutral"},
-    {"label": "MHI Field Ops", "value": "100%", "state": "neutral"},
-    {"label": "MHS Field Ops", "value": "100%", "state": "neutral"}
+    {"label": "Combined", "value": "98%", "target": "/ 90% target", "state": "good"},
+    {"label": "Leadership & Support", "value": "94%", "state": "good"},
+    {"label": "MHI Field Ops", "value": "100%", "state": "good"},
+    {"label": "MHS Field Ops", "value": "100%", "state": "good"}
   ]
 }
 </script>
@@ -74,6 +74,11 @@
 
   .org-grid { display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:20px 14px; }
   .org-col { display:flex; flex-direction:column; align-items:center; flex:0 1 210px; }
+  /* Functional Leads has 5 chains — narrow them just enough (and keep them
+     all the same width) so all 5 sit on one row instead of wrapping. */
+  .org-grid.leads-5 { gap:20px 10px; }
+  .org-grid.leads-5 .org-col { flex-basis:172px; }
+  .org-grid.leads-5 .seat-card { min-width:0; }
   /* Inside a column, the main axis is vertical, so the seat-card's row-context
      "flex: 1 1 190px" would set a 190px HEIGHT basis instead of a width one —
      forcing every card to the same height no matter how many names it holds.
@@ -87,6 +92,7 @@
     box-shadow:0 1px 3px rgba(0,0,0,0.04);
   }
   .seat-card.vacant { background:#F6F1E3; border-style:dashed; }
+  .seat-card.conflict { border-left:4px solid var(--decide); }
   /* Title gets the card's full width, on its own line, with the count
      underneath — so a long job title doesn't wrap and inflate the card's
      height just because it's competing for space with the count badge.
@@ -119,7 +125,7 @@
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #3</div>
   <h1>September 2026 — Wrong People / Wrong Seats</h1>
-  <div class="sub">All business units — Leadership, Business Support, MHI, MHS · Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail)</div>
+  <div class="sub">All business units — Leadership, Business Support, MHI, MHS · Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory (roster verification)</div>
 
   <section style="margin-top:20px;">
     <div class="card">
@@ -134,12 +140,12 @@
       <div class="headline-pct" id="headlinePct">—<span class="tgt" id="headlineTgt">loading…</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;" id="compareRow"></div>
-    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until Curtis's actual monthly scoring is applied. Legend: <span class="gwc-badge on" style="display:inline-flex;">G</span> pass &nbsp; <span class="gwc-badge off" style="display:inline-flex;">W</span> fail.</p>
+    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Legend: <span class="gwc-badge on" style="display:inline-flex;">G</span> pass &nbsp; <span class="gwc-badge off" style="display:inline-flex;">W</span> fail.</p>
     <div class="split-row" id="splitRow"></div>
   </section>
 
   <section>
-    <h2>Accountability chart — Leadership, Sales, Marketing, Finance/HR, Engineer, Client Care</h2>
+    <h2>Accountability chart — Leadership &amp; Operations</h2>
     <div class="chart-block" id="chartMain"></div>
   </section>
 
@@ -155,7 +161,7 @@
 
   <section>
     <h2>Formula</h2>
-    <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Right-person-right-seat % = people scoring a pass ÷ total people in filled seats.</strong> A pass requires all three GWC checks (Get it / Want it / Capacity) — the standard EOS default, provisional until the real threshold from the EOS notes is confirmed. Vacant seats are excluded from both numerator and denominator.</p>
+    <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Right-person-right-seat % = people scoring a pass ÷ total people in filled seats.</strong> A pass requires all three GWC checks (Get it / Want it / Capacity) — confirmed with Britney. Vacant seats are excluded from both numerator and denominator.</p>
   </section>
 
   <section>
@@ -163,10 +169,6 @@
     <div class="card locked">
       <span class="tag locked">Decided</span>
       <p><b>Scope: everyone named on the accountability chart, not just leadership.</b> Pulled from the main chart plus the MHI and MHS detail pages.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Decided</span>
-      <p><b>Scoring owner and interval: Curtis, monthly.</b> Per the checklist's driver-3 build notes.</p>
     </div>
     <div class="card locked">
       <span class="tag locked">Decided</span>
@@ -186,7 +188,11 @@
     </div>
     <div class="card decide">
       <span class="tag decide">Decide</span>
-      <p><b>The real pass/fail threshold.</b> Noted in the EOS notes as "decided but the numbers need to be found" — this page assumes a straight all-three-boxes pass until Curtis pulls the actual threshold.</p>
+      <p><b>Scoring owner and interval.</b> Should department heads be responsible for scoring their own employees each month, or should Curtis own all of it?</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p><b>Leadership &amp; Operations needs an update.</b> Recent developments with fractional HR and fractional CFO solutions will change roles in this section — Finance / HR most directly — so this part of the chart should be revisited once those decisions are final.</p>
     </div>
   </section>
 
@@ -203,6 +209,14 @@
   // To add someone: push a new {name, g, w, c} into that seat's
   // people array. To remove someone: delete their entry.
   // To mark a fail: flip the relevant flag (g/w/c) to false.
+  // Add "seatConflict: true" to a seat that has more than one person in a
+  // box the EOS model says should only hold one (e.g. Finance / HR right
+  // now). That seat is shown as failing (its denominator forced to 1, its
+  // numerator 0) and counts as exactly ONE wrong seat toward the headline
+  // math, no matter how many names are actually crammed into it.
+  // Within a seat that holds more than one name, list them in order of
+  // tenure (longest-tenured first, per Airtable's Tenure field) — when you
+  // add or remove someone, keep that box's remaining names in tenure order.
   // ============================================================
 
   var p = function(name, g, w, c){
@@ -230,23 +244,24 @@
       { title:"Relationship Manager", vacant:true, people:[] } ],
     [ { title:"Marketing", people:[ p("Britney Ahlmann") ] },
       { title:"Social Media Manager", people:[ p("Megan Kouri") ] } ],
-    [ { title:"Finance / HR", people:[ p("Curtis Larson"), p("Britney Ahlmann") ] },
+    [ { title:"Finance / HR", seatConflict:true, people:[ p("Curtis Larson"), p("Britney Ahlmann") ] },
       { title:"Operations Coordinator", people:[ p("Carolyn Derksen") ] } ],
     [ { title:"Engineer", people:[ p("Britney Ahlmann") ] } ],
     [ { title:"Client Care", people:[ p("Maggie Cox") ] },
-      { title:"Client Care Coordinator", people:[ p("Sara Bonk"), p("Monique Ocon"), p("Deb Pulskamp"), p("Alicia Ortloff") ] } ],
+      { title:"Lead Client Care Coordinator", people:[ p("Deb Pulskamp") ] },
+      { title:"Client Care Coordinator", people:[ p("Sara Bonk"), p("Monique Ocon"), p("Alicia Ortloff") ] } ],
   ];
 
   var CHART_MHI_COLUMNS = [
     [ { title:"Assistant Inspector Manager", people:[ p("Dan Kosel") ] },
-      { title:"Team Lead", people:[ p("Mitchell Bowser"), p("Matt Mossey"), p("Tony Weinand"), p("Walker Russek") ] },
+      { title:"Team Lead", people:[ p("Mitchell Bowser"), p("Tony Weinand"), p("Matt Mossey"), p("Walker Russek") ] },
       { title:"Home Inspector", people:[
-        p("Jake Miller"), p("Kyle Kanipes"), p("Kelly Brill"), p("Matt Clarity"),
-        p("Kyle Grovenstein"), p("Stephen Hines"), p("Anthony Link-Danko"), p("Aaron Vandeventer"),
+        p("Jake Miller"), p("Kyle Kanipes"), p("Stephen Hines"), p("Aaron Vandeventer"),
+        p("Kelly Brill"), p("Kyle Grovenstein"), p("Anthony Link-Danko"), p("Matt Clarity"),
         p("Joel Terry"), p("Travis East")
       ] } ],
     [ { title:"Service Lead", people:[ p("Mark Rahja") ] },
-      { title:"Service Tech", people:[ p("Austin Cooper"), p("Derek Lanz"), p("Brayden Rogosheske"), p("Noah Carlson") ] } ],
+      { title:"Service Tech", people:[ p("Noah Carlson"), p("Derek Lanz"), p("Brayden Rogosheske"), p("Austin Cooper") ] } ],
   ];
 
   var CHART_MHS_COLUMNS = [
@@ -268,7 +283,8 @@
 
   function renderSeatCard(seat){
     var el = document.createElement("div");
-    el.className = "seat-card" + (seat.vacant ? " vacant" : "") + (seat.exclude ? " context" : "");
+    el.className = "seat-card" + (seat.vacant ? " vacant" : "") + (seat.exclude ? " context" : "") +
+      (seat.seatConflict ? " conflict" : "");
     var titleRow = '<div class="seat-title-row"><span class="seat-title">' + seat.title + '</span>';
     if (seat.vacant){
       titleRow += '<span class="seat-agg">Vacant</span></div>';
@@ -283,6 +299,21 @@
         return '<div class="person-row"><span class="person-name">' + person.name + '</span></div>';
       }).join("");
       el.innerHTML = titleRow + ctxRows;
+      return el;
+    }
+    if (seat.seatConflict){
+      // More than one person in a seat the EOS model says should hold only
+      // one — that's itself a wrong-seat condition, regardless of each
+      // person's individual GWC. Shown as 0/1 and counted as one wrong seat.
+      titleRow += '<span class="seat-agg">0/1</span></div>';
+      var conflictRows = seat.people.map(function(person){
+        return '<div class="person-row">' +
+          '<span class="person-name fail">' + person.name + '</span>' +
+          '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
+          '</div>';
+      }).join("");
+      el.innerHTML = titleRow + conflictRows +
+        '<div class="vacant-label" style="margin-top:6px;">Two people in a one-person seat — counts as 1 wrong seat, not 2.</div>';
       return el;
     }
     var passing = seat.people.filter(personPasses).length;
@@ -325,7 +356,7 @@
   // keeps a report visually attached to the seat above it. A column with
   // only one seat (Engineer, RHM Technician, Estimator) just has no
   // connector below it.
-  function renderColumns(containerId, columns, tierLabel){
+  function renderColumns(containerId, columns, tierLabel, gridClass){
     var container = document.getElementById(containerId);
     var tierEl = document.createElement("div");
     tierEl.className = "tier";
@@ -334,7 +365,7 @@
     label.textContent = tierLabel;
     tierEl.appendChild(label);
     var grid = document.createElement("div");
-    grid.className = "org-grid";
+    grid.className = "org-grid" + (gridClass ? " " + gridClass : "");
     columns.forEach(function(chain){
       var col = document.createElement("div");
       col.className = "org-col";
@@ -369,9 +400,18 @@
   function computeStats(seats){
     var scoreable = seats.filter(function(s){ return !s.exclude; });
     var filled = scoreable.filter(function(s){ return !s.vacant; });
-    var people = filled.reduce(function(acc, s){ return acc.concat(s.people); }, []);
-    var passing = people.filter(personPasses).length;
-    return { people: people.length, passing: passing, vacantSeats: scoreable.length - filled.length };
+    var totalPeople = 0, totalPassing = 0;
+    filled.forEach(function(s){
+      if (s.seatConflict){
+        // More than one person in a one-person seat counts as exactly ONE
+        // wrong seat toward the math — not one entry per name in it.
+        totalPeople += 1;
+      } else {
+        totalPeople += s.people.length;
+        totalPassing += s.people.filter(personPasses).length;
+      }
+    });
+    return { people: totalPeople, passing: totalPassing, vacantSeats: scoreable.length - filled.length };
   }
 
   function pct(stats){ return stats.people === 0 ? 0 : Math.round(100 * stats.passing / stats.people); }
@@ -384,7 +424,7 @@
     var mhs = computeStats(columnsSeats(CHART_MHS_COLUMNS));
 
     document.getElementById("headlinePct").innerHTML =
-      pct(overall) + '%<span class="tgt">Right-person rate · target not yet set</span>';
+      pct(overall) + '%<span class="tgt">Right-person rate · target 90% (all staff)</span>';
 
     document.getElementById("compareRow").innerHTML =
       '<div class="compare-stat"><div class="cnum">' + overall.people + '</div><div class="clbl">People scored</div></div>' +
@@ -402,7 +442,7 @@
     document.getElementById("footerNote").textContent =
       "Marigold Cash Flow Driver Dashboard · Driver #3 · Sept 2026 (" + seatCount + " named seats: " +
       (seatCount - vacantSeatCount) + " filled, " + vacantSeatCount + " vacant; " + overall.people +
-      " people scored) · Owner: Curtis · Sept 24 L10 is 6 days out. Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail).";
+      " people scored) · Owner: Curtis · Sept 24 L10 is 6 days out. Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory.";
   }
 
   // These two are shown only for clarity — Blake and Minh are already scored
@@ -417,7 +457,7 @@
   ]}];
 
   renderChart("chartMain", CHART_MAIN, true);
-  renderColumns("chartMain", MAIN_LEAD_COLUMNS, "Functional Leads & Direct Reports");
+  renderColumns("chartMain", MAIN_LEAD_COLUMNS, "Functional Leads & Direct Reports", "leads-5");
   renderChart("chartMHI", MHI_HEAD_CONTEXT, true);
   renderColumns("chartMHI", CHART_MHI_COLUMNS, "Field reporting lines");
   renderChart("chartMHS", MHS_HEAD_CONTEXT, true);
