@@ -10,9 +10,9 @@
   "owner": "Blake",
   "period": "Aug 2026",
   "metrics": [
-    {"label": "Inspector", "value": "82.9%", "target": "/ 80%", "state": "pos"},
-    {"label": "Service Tech", "value": "104.1%", "target": "/ 85%", "state": "pos"},
-    {"label": "Radon Tech", "value": "74.4%", "target": "/ 90%", "state": "neg"}
+    {"label": "Inspector", "value": "79.9%", "target": "/ 80%", "state": "neg"},
+    {"label": "Service Tech", "value": "100.6%", "target": "/ 85%", "state": "pos"},
+    {"label": "Radon Tech", "value": "71.2%", "target": "/ 90%", "state": "neg"}
   ]
 }
 </script>
@@ -36,9 +36,11 @@
   .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
   .card.decide { border-left:4px solid var(--decide); }
   .card.confirm { border-left:4px solid var(--confirm); }
+  .card.good { border-left:4px solid var(--good); }
   .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
   .tag.decide { background:#f7e9e2; color:var(--decide); }
   .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.good { background:#e6efe3; color:var(--good); }
   .card p { margin:6px 0 0; font-size:14.5px; }
   table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
   th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
@@ -47,7 +49,6 @@
   td.eff { font-weight:700; color:var(--gold-dark); }
   tr.trainee td { color: var(--confirm); }
   tr.under td { color: var(--decide); }
-  tr.flagged td { color: var(--decide); }
   .avg-row td { font-weight:700; background:#F6F1E3; }
   .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
   footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
@@ -68,8 +69,8 @@
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #5</div>
-  <h1>August 2026 — Efficiency by Role</h1>
-  <div class="sub">Points ÷ Hours, split into the three target groups. Blake and Mark Rahja excluded.</div>
+  <h1>August 2026 — Inspector/Tech Efficiency</h1>
+  <div class="sub">Points ÷ Hours worked. Points pulled directly from Airtable's Points Summary table (ground truth), not estimated from calendar exports.</div>
 
   <section style="margin-top:20px;">
     <div class="card">
@@ -81,29 +82,29 @@
   <section>
     <h2>Headline</h2>
     <div class="headline-row">
-      <div class="headline-pct">86.3%<span class="tgt">Team average · targets vary by role (see below)</span></div>
+      <div class="headline-pct">83.2%<span class="tgt">Team average · targets vary by role (see below)</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;">
-      <div class="compare-stat"><div class="cnum pos">82.9%</div><div class="clbl">Inspector (n=12) · target 80%</div></div>
-      <div class="compare-stat"><div class="cnum pos">104.1%</div><div class="clbl">Service Tech (n=3) · target 85%</div></div>
-      <div class="compare-stat"><div class="cnum neg">74.4%</div><div class="clbl">Radon Tech (n=1) · target 90%</div></div>
+      <div class="compare-stat"><div class="cnum neg">79.9%</div><div class="clbl">Inspector (n=12) · target 80%</div></div>
+      <div class="compare-stat"><div class="cnum pos">100.6%</div><div class="clbl">Service Tech (n=3) · target 85%</div></div>
+      <div class="compare-stat"><div class="cnum neg">71.2%</div><div class="clbl">Radon Tech (n=1) · target 90%</div></div>
     </div>
-    <p class="note" style="margin-top:14px;">Team average excludes Travis East and Joel Terry (trainee-timing artifact, see below) and the Other bucket (Dan Kosel, Mark Rahja — not scored against a role target). Radon Tech is a group of one (Derek Lanz), currently below its 90% target.</p>
+    <p class="note" style="margin-top:14px;">Team average excludes Travis East and Joel Terry (trainee-timing policy, see below) and the Other bucket (Dan Kosel, Mark Rahja). Radon Tech is a group of one (Derek Lanz). Inspector average sits just under its 80% target, not above it.</p>
   </section>
 
   <section>
     <h2>Service Techs — target 85%</h2>
-    <div class="group-meta">3 people · group avg 104.1%</div>
+    <div class="group-meta">3 people · group avg 100.6%</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Pts / Hr</th></tr>
-      <tr><td>Brayden Rogosheske</td><td class="num">172.50</td><td class="num">148.90</td><td class="num eff">1.159</td></tr>
-      <tr><td>Austin Cooper</td><td class="num">179.25</td><td class="num">166.42</td><td class="num eff">1.077</td></tr>
-      <tr><td>Noah Carlson</td><td class="num">71.00</td><td class="num">79.88</td><td class="num eff">0.889</td></tr>
-      <tr class="avg-row"><td>Group average</td><td class="num">140.92</td><td class="num">131.73</td><td class="num eff">1.041</td></tr>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Brayden Rogosheske</td><td class="num">168.75</td><td class="num">148.90</td><td class="num eff">113.3%</td></tr>
+      <tr><td>Austin Cooper</td><td class="num">170.00</td><td class="num">166.42</td><td class="num eff">102.2%</td></tr>
+      <tr><td>Noah Carlson</td><td class="num">69.00</td><td class="num">79.88</td><td class="num eff">86.4%</td></tr>
+      <tr class="avg-row"><td>Group average</td><td class="num">135.92</td><td class="num">131.73</td><td class="num eff">100.6%</td></tr>
     </table>
     </div>
-    <p class="note">Moved per your note — Noah Carlson now counts as a technician, not a Home Inspector. All three techs are still ahead of the inspector group average.</p>
+    <p class="note">Noah Carlson counts as a technician, not a Home Inspector, per your earlier note. All three techs are ahead of the inspector group average.</p>
   </section>
 
   <section>
@@ -111,8 +112,8 @@
     <div class="group-meta">1 person</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Pts / Hr</th></tr>
-      <tr class="under"><td>Derek Lanz</td><td class="num">115.25</td><td class="num">154.82</td><td class="num eff">0.744</td></tr>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr class="under"><td>Derek Lanz</td><td class="num">110.25</td><td class="num">154.82</td><td class="num eff">71.2%</td></tr>
     </table>
     </div>
     <p class="note">Only one person in this bucket — a 90% target with a sample size of one is worth keeping in mind.</p>
@@ -120,24 +121,24 @@
 
   <section>
     <h2>Home Inspectors — target 80%</h2>
-    <div class="group-meta">12 regular + Travis East and Joel Terry flagged · group avg 82.9% (regular only)</div>
+    <div class="group-meta">12 regular + Travis East and Joel Terry flagged · group avg 79.9% (regular only)</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Pts / Hr</th></tr>
-      <tr><td>Matt Mossey</td><td class="num">160.25</td><td class="num">183.77</td><td class="num eff">0.872</td></tr>
-      <tr><td>Mitchell Bowser</td><td class="num">132.25</td><td class="num">152.65</td><td class="num eff">0.866</td></tr>
-      <tr><td>Jake Miller</td><td class="num">129.25</td><td class="num">149.92</td><td class="num eff">0.862</td></tr>
-      <tr><td>Kelly Brill</td><td class="num">48.25</td><td class="num">56.62</td><td class="num eff">0.852</td></tr>
-      <tr><td>Matt Clarity</td><td class="num">156.50</td><td class="num">184.25</td><td class="num eff">0.849</td></tr>
-      <tr><td>Stephen Hines</td><td class="num">150.50</td><td class="num">177.80</td><td class="num eff">0.847</td></tr>
-      <tr><td>Aaron Vandeventer</td><td class="num">155.00</td><td class="num">183.83</td><td class="num eff">0.843</td></tr>
-      <tr><td>Kyle Grovenstein</td><td class="num">130.25</td><td class="num">158.60</td><td class="num eff">0.821</td></tr>
-      <tr class="under"><td>Walker Russek</td><td class="num">125.50</td><td class="num">156.98</td><td class="num eff">0.799</td></tr>
-      <tr class="under"><td>Anthony Link-Danko</td><td class="num">115.50</td><td class="num">146.77</td><td class="num eff">0.787</td></tr>
-      <tr class="under"><td>Tony Weinand</td><td class="num">140.25</td><td class="num">181.00</td><td class="num eff">0.775</td></tr>
-      <tr class="under"><td>Kyle Kanipes</td><td class="num">152.75</td><td class="num">198.57</td><td class="num eff">0.769</td></tr>
-      <tr class="trainee"><td>Travis East (trainee)</td><td class="num">70.00</td><td class="num">180.30</td><td class="num eff">0.388</td></tr>
-      <tr class="trainee"><td>Joel Terry (trainee)</td><td class="num">68.50</td><td class="num">182.47</td><td class="num eff">0.375</td></tr>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Kelly Brill</td><td class="num">48.25</td><td class="num">56.62</td><td class="num eff">85.2%</td></tr>
+      <tr><td>Mitchell Bowser</td><td class="num">127.25</td><td class="num">152.65</td><td class="num eff">83.4%</td></tr>
+      <tr><td>Matt Mossey</td><td class="num">152.00</td><td class="num">183.77</td><td class="num eff">82.7%</td></tr>
+      <tr><td>Matt Clarity</td><td class="num">152.00</td><td class="num">184.25</td><td class="num eff">82.5%</td></tr>
+      <tr><td>Jake Miller</td><td class="num">122.00</td><td class="num">149.92</td><td class="num eff">81.4%</td></tr>
+      <tr><td>Stephen Hines</td><td class="num">143.00</td><td class="num">177.80</td><td class="num eff">80.4%</td></tr>
+      <tr><td>Kyle Grovenstein</td><td class="num">127.25</td><td class="num">158.60</td><td class="num eff">80.2%</td></tr>
+      <tr class="under"><td>Aaron Vandeventer</td><td class="num">145.50</td><td class="num">183.83</td><td class="num eff">79.2%</td></tr>
+      <tr class="under"><td>Walker Russek</td><td class="num">123.75</td><td class="num">156.98</td><td class="num eff">78.8%</td></tr>
+      <tr class="under"><td>Anthony Link-Danko</td><td class="num">112.50</td><td class="num">146.77</td><td class="num eff">76.7%</td></tr>
+      <tr class="under"><td>Kyle Kanipes</td><td class="num">148.25</td><td class="num">198.57</td><td class="num eff">74.7%</td></tr>
+      <tr class="under"><td>Tony Weinand</td><td class="num">132.75</td><td class="num">181.00</td><td class="num eff">73.3%</td></tr>
+      <tr class="trainee"><td>Travis East (trainee)</td><td class="num">70.00</td><td class="num">180.30</td><td class="num eff">38.8%</td></tr>
+      <tr class="trainee"><td>Joel Terry (trainee)</td><td class="num">68.50</td><td class="num">182.47</td><td class="num eff">37.5%</td></tr>
     </table>
     </div>
   </section>
@@ -147,16 +148,24 @@
     <div class="group-meta">2 people · not scored against a target</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Name</th><th>Job Title</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Pts / Hr</th></tr>
-      <tr><td>Dan Kosel</td><td>Assistant Manager</td><td class="num">126.50</td><td class="num">174.98</td><td class="num eff">0.723</td></tr>
-      <tr><td>Mark Rahja</td><td>Service Lead</td><td class="num">65.25*</td><td class="num">133.35</td><td class="num eff">0.489*</td></tr>
+      <tr><th>Name</th><th>Job Title</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Dan Kosel</td><td>Assistant Manager</td><td class="num">117.00</td><td class="num">174.98</td><td class="num eff">66.9%</td></tr>
+      <tr><td>Mark Rahja</td><td>Service Lead</td><td class="num">73.00</td><td class="num">133.35</td><td class="num eff">54.7%</td></tr>
     </table>
     </div>
-    <p class="note">Dan Kosel: doesn't fit inspector / tech / radon tech cleanly by title. Mark Rahja: points marked with * — his calculated total (65.25) is known to be inflated by operational calendar blocks that shouldn't count (per your earlier note), so treat this figure as unreliable until cleaned up.</p>
+    <p class="note">Doesn't fit the same mold as a normal working inspector — held out of the scored group and averages per your call, even though Airtable's own Team field tags both as "Inspector." Points are still sourced from Airtable, so these figures are accurate, just not compared against the 80% target.</p>
   </section>
 
   <section>
     <h2>Note</h2>
+    <div class="card good">
+      <span class="tag good">Source change</span>
+      <p>Points are now pulled directly from Airtable's Points Tracking / Points Summary tables rather than estimated from the Spectora and calendar exports. That calendar-based approach had real, confirmed errors (Sewer Scope overcounted, a wrong category mapping on Well Yield, Water Test undercounted) that this sidesteps entirely. Every number above is Airtable's own recorded total for August.</p>
+    </div>
+    <div class="card good">
+      <span class="tag good">Source change</span>
+      <p>Dan Kosel and Mark Rahja are held in the Other bucket, not scored as regular Inspectors. Airtable's own Team field tags both as "Inspector," but per your call they don't fit the same mold as a normal working inspector and stay out of the scored group and the averages.</p>
+    </div>
     <div class="card confirm">
       <span class="tag confirm">Policy</span>
       <p>Travis East and Joel Terry (in blue above) are excluded from the Home Inspector group average until they've had a full month of data past their first-solo date. Expect their ratios to run lower in the meantime — trainees get extra ramp time by design, not a performance issue.</p>
@@ -164,7 +173,7 @@
   </section>
 
   <footer>
-    Marigold Cash Flow Driver Dashboard · Driver #5 · August 2026 · Role groupings from Gusto job titles. Points reconciled against Airtable Points Summary; hours from Gusto time tracking (Total hours, excludes PTO). Blake Pederson-Perovich and Mark Rahja excluded per direction.
+    Marigold Cash Flow Driver Dashboard · Driver #5 · August 2026 · Points sourced directly from Airtable's Points Tracking / Points Summary tables (Scheduling Tracking // Radon base). Role groupings: Service Tech and Radon Tech from Gusto job titles; Dan Kosel and Mark Rahja held in Other per your direction, despite Airtable's Team field tagging both as Inspector. Hours from Gusto time tracking (Total hours, excludes PTO). Blake Pederson-Perovich excluded (Airtable Team: Other).
   </footer>
 </div>
 </body>
