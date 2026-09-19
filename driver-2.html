@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sept 2026 — MHS Marketing Leads (Draft)</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 2,
+  "name": "MHS Marketing Leads (Draft)",
+  "owner": "Minh",
+  "period": "Sept 2026",
+  "headline": {"value": "TBD", "target": "Target: 40/wk", "state": "neutral"}
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a; --draft: #c98a2c;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.draft { border-left:4px solid var(--draft); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.draft { background:#fdf1d6; color:#8a6d1f; }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.eff.neg { color:var(--decide); }
+  td.tbd { color:#b0aa9c; font-style:italic; }
+  tr.flagged td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  .method-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0; }
+  .method-list li { margin-bottom:4px; }
+  .method-list b { color:var(--gold-dark); }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.tbd { color:#b0aa9c; font-style:italic; font-size:34px; }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.tbd { color:#b0aa9c; font-style:italic; font-size:16px; }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #2</div>
+  <h1>Sept 2026 — MHS Marketing Leads <span style="color:var(--draft);">(Draft)</span></h1>
+  <div class="sub">Unique new leads per week, MHS only, reported as a 4-week rolling average — draft build, placeholder numbers</div>
+
+  <section style="margin-top:20px;">
+    <div class="card draft">
+      <span class="tag draft">Draft — placeholder data</span>
+      <p style="margin:0;">This page is a working draft of the layout and formula, not a finalized reading. The weekly counts below are placeholders. Today's interim numbers are being pulled from Marigold's email notifications for new Google leads; Minh's direct export/API access — the intended long-term source — isn't available until Monday. Nothing here should be reported at the Sept 24 L10 until the real numbers are dropped in.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <p style="margin:0;">MHS marketing leads tracks the number of unique new leads coming into Marigold Home Services each week. The goal is to increase the 4-week rolling average from 9 to 40 leads per week.</p>
+      <p>The estimated annual financial impact is approximately $409K in potential revenue. This is based on the expected revenue generated from increasing lead volume and converting those leads into booked MHS work. As other demand-side drivers, such as follow-up close rate, improve, the revenue opportunity from additional leads can increase as well.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct tbd">— <span class="tgt">4-wk rolling average · target 40/wk · baseline 9/wk</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum tbd">TBD</div><div class="clbl">This week (unique leads)</div></div>
+      <div class="compare-stat"><div class="cnum tbd">TBD</div><div class="clbl">4-wk rolling avg</div></div>
+      <div class="compare-stat"><div class="cnum tbd">TBD</div><div class="clbl">Booked estimates (tracked, not counted)</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">Numbers populate once the interim email-notification pull and dedupe pass are done. See "Data sources" below for what's feeding this today vs. once Minh's export is live.</p>
+  </section>
+
+  <section>
+    <h2>Weekly leads by source — placeholder</h2>
+    <div class="group-meta">Draft table structure · counts to be filled in from the email pull</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Week</th><th class="num">Google leads (email)</th><th class="num">Site forms</th><th class="num">Phone (MHS line)</th><th class="num">Paid channels</th><th class="num">Deduped total</th></tr>
+      <tr><td>Week of Aug 25</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td></tr>
+      <tr><td>Week of Sept 1</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td></tr>
+      <tr><td>Week of Sept 8</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td></tr>
+      <tr><td>Week of Sept 15</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td></tr>
+      <tr class="avg-row"><td>4-week rolling avg</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="num tbd">—</td></tr>
+    </table>
+    </div>
+    <p class="note">Dedupe applied at the "Deduped total" column only — one lead per person per 30 days across all sources (phone + email match). Per-source columns show raw touches before dedupe.</p>
+  </section>
+
+  <section>
+    <h2>Lead &rarr; estimate &rarr; job funnel — context</h2>
+    <div class="group-meta">Shows where leads go after they enter the pipeline · estimate/job figures pull live from driver-4.html</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Stage</th><th class="num">Count</th><th class="num">% of leads</th><th>Owned by</th></tr>
+      <tr><td>Leads (new, deduped)</td><td class="num tbd" id="funnel-leads">—</td><td class="num tbd" id="funnel-leads-pct">—</td><td>Driver 2 (this page)</td></tr>
+      <tr><td>Estimate scheduled</td><td class="num tbd">—</td><td class="num tbd">—</td><td class="note">Driver 4 doesn't publish a distinct "appointment held" total — not pulled</td></tr>
+      <tr><td>Estimate sent</td><td class="num tbd" id="funnel-est-sent">—</td><td class="num tbd" id="funnel-est-sent-pct">—</td><td class="note">Live from Driver 4</td></tr>
+      <tr><td>Estimate accepted</td><td class="num tbd" id="funnel-est-accepted">—</td><td class="num tbd" id="funnel-est-accepted-pct">—</td><td class="note">Live from Driver 4</td></tr>
+      <tr><td>Job completed &amp; invoiced</td><td class="num tbd" id="funnel-job-completed">—</td><td class="num tbd" id="funnel-job-completed-pct">—</td><td class="note">Live from Driver 4</td></tr>
+    </table>
+    </div>
+    <p class="note" style="margin-top:8px;" id="funnel-source-note">Estimate sent / accepted / completed figures are pulled live, client-side, from driver-4.html's own reconciled monthly totals (HCP + Square, test/duplicate records already excluded) — the same source-of-truth choice used elsewhere on this dashboard, rather than driver 9's weekly scorecard figures, which driver 9's own page flags as not yet reconciled against driver 4. This only works once both pages are served together (e.g. on GitHub Pages); opening the file directly on your computer will show placeholders. Driver 9 wasn't needed here — driver 4 already tracks completed/earned jobs directly.</p>
+    <p class="note">"% of leads" only calculates once this week's deduped lead count is set — see the <code>CURRENT_LEADS</code> value near the bottom of the page source once your email pull is done.</p>
+  </section>
+
+  <section>
+    <h2>Definitions — decided</h2>
+    <div class="card decide">
+      <span class="tag decide">Decide — resolved</span>
+      <p style="margin:0;"><b>What counts as a lead:</b> any inbound contact expressing interest counts as a new lead — including price-shoppers and existing customers asking about a different service. Broadest definition, chosen for consistency across sources over precision; revisit once real volume is visible.</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide — resolved</span>
+      <p style="margin:0;"><b>Dedupe rule:</b> one lead per person per 30 days, matched on phone and email, regardless of how many channels or times they reach out in that window.</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide — resolved (interim)</span>
+      <p style="margin:0;"><b>Booked estimates as leads:</b> not folded into the headline count. HCP-booked estimates are tracked as their own labeled line (see Headline above) so the number doesn't double-count with Driver 4 (follow-up close rate) and Driver 9 (sales KPIs), which already own the estimate stage. Revisit if pre-estimate lead volume proves too thin to be a meaningful weekly number on its own.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Still open</h2>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p style="margin:0;">Does HCP Pipeline capture leads from all three intake doors automatically, or only what someone manually types in?</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p style="margin:0;">Is there a source field that gets populated reliably, or does accurate source attribution depend on someone tagging it by hand?</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p style="margin:0;">Which lead channels are actually live right now (site forms via ActiveCampaign, paid/LSA reporting, etc.)?</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p style="margin:0;">Is there a path from RingCentral into HCP for phone leads, or does phone-lead counting stay a manual process indefinitely?</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Data sources</h2>
+    <ul class="method-list">
+      <li><b>Interim (today's draft):</b> Marigold's email notifications for new Google leads, parsed manually/semi-manually. Doesn't require access to Minh's system, but loses whatever metrics his system calculates natively, and is more manual than a direct pull.</li>
+      <li><b>Target (from Monday):</b> Minh's Google leads source, pulled directly — the intended system of record for this driver once access is set up. Closest to source, includes his existing calculated fields.</li>
+      <li><b>HCP Pipeline:</b> booked estimates — tracked separately from the headline lead count (see Definitions above), once source-tagging reliability is confirmed.</li>
+      <li><b>RingCentral:</b> inbound calls to the MHS line (763-244-1122) — phone-lead counting stays manual until a RingCentral→HCP path exists (open item above).</li>
+      <li><b>ActiveCampaign:</b> site form submissions — status of this feed to be confirmed (open item above).</li>
+      <li><b>Paid channels (LSA, etc.):</b> platform-reported leads — to be added once channel status is confirmed.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #2 · Sept 2026 (draft) · Formula: unique new leads per week, deduped one-per-person-per-30-days, reported as a 4-week rolling average. Owner: Minh. Sept 24 L10 is the near-term deadline — this driver is not yet ready for that meeting.
+  </footer>
+</div>
+
+<script>
+// Pulls estimate/job counts for the funnel section live from driver-4.html,
+// the same way index.html pulls each driver's headline card. Only works when
+// this page is served alongside driver-4.html (e.g. GitHub Pages) — opening
+// the file directly (file://) will just leave the funnel's estimate/job cells
+// as placeholders, same as a driver page that hasn't been built yet.
+(function () {
+  // Set this to the current period's deduped lead count once your email pull
+  // (or later, Minh's export) gives you a real number. Leave as null until then.
+  const CURRENT_LEADS = null;
+
+  function pct(n, d) {
+    if (typeof n !== 'number' || typeof d !== 'number' || !d) return null;
+    return Math.round((100 * n) / d) + '%';
+  }
+
+  function setCell(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (value === null || value === undefined) return; // leave placeholder as-is
+    el.textContent = value;
+    el.classList.remove('tbd');
+  }
+
+  async function loadFunnel() {
+    setCell('funnel-leads', CURRENT_LEADS);
+    setCell('funnel-leads-pct', CURRENT_LEADS !== null ? '100%' : null);
+
+    try {
+      const res = await fetch('driver-4.html', { cache: 'no-cache' });
+      if (!res.ok) return;
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const block = doc.getElementById('driver-funnel');
+      if (!block) return;
+      const data = JSON.parse(block.textContent);
+
+      setCell('funnel-est-sent', data.estimate_sent);
+      setCell('funnel-est-sent-pct', pct(data.estimate_sent, CURRENT_LEADS));
+      setCell('funnel-est-accepted', data.estimate_accepted);
+      setCell('funnel-est-accepted-pct', pct(data.estimate_accepted, CURRENT_LEADS));
+      setCell('funnel-job-completed', data.job_completed);
+      setCell('funnel-job-completed-pct', pct(data.job_completed, CURRENT_LEADS));
+
+      const note = document.getElementById('funnel-source-note');
+      if (note && data.period) {
+        note.textContent =
+          'Estimate sent / accepted / completed figures pulled live, client-side, from driver-4.html (' + data.period + ') — driver 4\'s reconciled monthly totals (HCP + Square, test/duplicate records excluded), not driver 9\'s weekly scorecard figures, which driver 9\'s own page flags as unreconciled against driver 4. This only works once both pages are served together (e.g. GitHub Pages); opening the file directly on your computer shows placeholders. Driver 9 wasn\'t needed here — driver 4 already tracks completed/earned jobs directly.';
+      }
+    } catch (err) {
+      // fetch blocked or driver-4.html unavailable — leave placeholders
+    }
+  }
+
+  loadFunnel();
+})();
+</script>
+</body>
+</html>
