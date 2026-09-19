@@ -49,6 +49,8 @@
   .pct{font-size:22px; font-weight:bold; font-family:Arial,sans-serif;}
   .pct.neg{color:var(--blocked);}
   .pct.pos{color:var(--ready);}
+  .pct.draft{color:var(--waiting);}
+  .pct.neutral{color:#8a8a8a;}
   .pct.tbd{color:#b0aa9c; font-size:13px; font-style:italic;}
   .target{font-family:Arial,sans-serif; font-size:10.5px; color:#8a8a8a;}
 
@@ -59,6 +61,8 @@
   .multi-row .mpct{font-size:14px; font-weight:bold;}
   .multi-row .mpct.pos{color:var(--ready);}
   .multi-row .mpct.neg{color:var(--blocked);}
+  .multi-row .mpct.draft{color:var(--waiting);}
+  .multi-row .mpct.neutral{color:#8a8a8a;}
   .multi-row .mtgt{font-size:9.5px; color:#b0aa9c; margin-left:4px; font-weight:normal;}
 
   footer{
@@ -205,7 +209,12 @@
   }
 
   function stateClass(state) {
-    return state === 'pos' ? 'pos' : state === 'neg' ? 'neg' : '';
+    // Mirrors the state vocabulary driver pages use in their driver-summary
+    // block: pos/neg are the clear win/loss colors, draft is the in-progress
+    // gold used for "under goal, work ongoing" numbers, neutral is muted gray
+    // for a metric that isn't being judged pos/neg. Anything else (missing,
+    // or a state we don't recognize) falls back to plain body-text color.
+    return ['pos', 'neg', 'draft', 'neutral'].includes(state) ? state : '';
   }
 
   function renderCard(card, data) {
@@ -228,10 +237,9 @@
         const row = document.createElement('div');
         row.className = 'multi-row';
         const cls = stateClass(m.state);
-        const style = m.state === 'neutral' ? ' style="color:#8a8a8a;"' : '';
         row.innerHTML = `
           <span class="mlbl">${m.label}</span>
-          <span><span class="mpct ${cls}"${style}>${m.value}</span>${m.target ? `<span class="mtgt">${m.target}</span>` : ''}</span>
+          <span><span class="mpct ${cls}">${m.value}</span>${m.target ? `<span class="mtgt">${m.target}</span>` : ''}</span>
         `;
         wrap.appendChild(row);
       });
