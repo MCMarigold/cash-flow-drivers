@@ -19,32 +19,72 @@
   .backlink a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
   .backlink a:hover{text-decoration:underline;}
 
-  .months{display:flex;flex-direction:column;gap:14px;}
-  .month{
-    background:#fff;border:1px solid var(--line);border-radius:8px;
-    padding:16px 20px;
+  .month-section{margin-bottom:36px;}
+  .month-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;}
+  .month-name{font-size:19px;font-weight:bold;color:var(--black);}
+  .month-note{font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;}
+
+  /* Board — same layout/orientation as the live dashboard */
+  .board{display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:14px;align-items:stretch;}
+  .row-label{
+    writing-mode:vertical-rl; transform:rotate(180deg);
+    font-family:Arial,sans-serif; font-size:13px; font-weight:bold; letter-spacing:1px;
+    text-transform:uppercase; color:#fff; background:var(--black);
+    padding:14px 8px; border-radius:8px; flex:0 0 34px;
+    display:flex; align-items:center; justify-content:center;
   }
-  .month-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;}
-  .month-name{font-size:17px;font-weight:bold;color:var(--black);}
-  .month-note{font-family:Arial,sans-serif;font-size:11px;color:#8a8a8a;}
-  .snap-grid{display:flex;flex-wrap:wrap;gap:8px;}
-  a.snap{
-    font-family:Arial,sans-serif;font-size:12px;text-decoration:none;color:var(--black);
-    background:#f5f2ea;border:1px solid var(--line);border-radius:6px;
-    padding:6px 10px;transition:box-shadow .15s;
+  .row-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; flex:1;}
+
+  a.card{
+    display:flex; flex-direction:column; justify-content:space-between; gap:10px;
+    text-decoration:none; color:inherit;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:14px 16px; min-height:90px;
+    transition:box-shadow .15s, transform .15s;
   }
-  a.snap:hover{box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-  a.snap .dnum{color:var(--gold-dark);font-weight:bold;margin-right:4px;}
-  .not-yet{
-    font-family:Arial,sans-serif;font-size:12px;color:#b0aa9c;font-style:italic;
-    background:#f9f7f1;border:1px dashed var(--line);border-radius:6px;
-    padding:6px 10px;
+  a.card:hover{box-shadow:0 4px 14px rgba(0,0,0,0.08); transform:translateY(-1px);}
+  a.card.placeholder{background:#f5f2ea; color:#9a9186; pointer-events:none; cursor:default;}
+
+  .driver-num{
+    font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase;
+    letter-spacing:0.5px; color:var(--gold-dark); font-weight:bold;
   }
-  .no-snaps{font-family:Arial,sans-serif;font-size:12px;color:#b0aa9c;font-style:italic;}
+  .placeholder .driver-num{color:#b0aa9c;}
+  .driver-name{font-size:14.5px; font-weight:bold; line-height:1.25;}
+  .driver-owner{font-family:Arial,sans-serif; font-size:11px; color:#8a8a8a;}
+
+  .card-bottom{display:flex; align-items:baseline; justify-content:space-between;}
+  .pct{font-size:22px; font-weight:bold; font-family:Arial,sans-serif;}
+  .pct.neg{color:var(--blocked);}
+  .pct.pos{color:var(--ready);}
+  .pct.draft{color:var(--waiting);}
+  .pct.neutral{color:#8a8a8a;}
+  .pct.tbd{color:#b0aa9c; font-size:13px; font-style:italic;}
+  .target{font-family:Arial,sans-serif; font-size:10.5px; color:#8a8a8a;}
+
+  .multi-rows{display:flex; flex-direction:column; gap:5px; margin-top:2px;}
+  .multi-row{display:flex; align-items:baseline; justify-content:space-between; font-family:Arial,sans-serif;}
+  .multi-row .mlbl{font-size:10.5px; color:#8a8a8a;}
+  .multi-row .mpct{font-size:14px; font-weight:bold;}
+  .multi-row .mpct.pos{color:var(--ready);}
+  .multi-row .mpct.neg{color:var(--blocked);}
+  .multi-row .mpct.draft{color:var(--waiting);}
+  .multi-row .mpct.neutral{color:#8a8a8a;}
+  .multi-row .mtgt{font-size:9.5px; color:#b0aa9c; margin-left:4px; font-weight:normal;}
+
+  .live-flag{font-family:Arial,sans-serif; font-size:9.5px; color:var(--waiting); font-style:italic; margin-top:2px;}
 
   footer{
     margin-top:28px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
     border-top:1px solid var(--line); padding-top:14px;
+  }
+
+  @media (max-width:640px){
+    .row{flex-direction:column;}
+    .row-label{writing-mode:horizontal-tb; transform:none; flex:0 0 auto; padding:6px 10px;}
+    .row-cards{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -55,42 +95,143 @@
 
   <header>
     <h1>Cash Flow Driver Archive</h1>
-    <div class="meta">Frozen month-end snapshots of each driver page &middot; live pages get overwritten each month, these don't</div>
+    <div class="meta">Frozen month-end checkpoints of the full dashboard &middot; same layout as the live board, one snapshot per month</div>
   </header>
 
-  <div class="months">
+  <div id="months"></div>
 
-    <!--
-      MONTHLY TEMPLATE — copy this block for each newly-archived month, newest at top.
-      One <a class="snap"> per driver page actually archived that month (skip drivers
-      that weren't built, or that were still mid-month/not yet closed out that month).
-      File path is <YYYY-MM>/driver-N.html.
-    -->
-    <div class="month">
-      <div class="month-head">
-        <div class="month-name">August 2026</div>
-        <div class="month-note">9 of 9 drivers archived &middot; full dashboard checkpoint</div>
-      </div>
-      <div class="snap-grid">
-        <a class="snap" href="2026-08/driver-1.html"><span class="dnum">D1</span>Inspector Available Capacity</a>
-        <a class="snap" href="2026-08/driver-2.html"><span class="dnum">D2</span>MHS Marketing Leads</a>
-        <a class="snap" href="2026-08/driver-3.html"><span class="dnum">D3</span>Wrong People / Wrong Seats</a>
-        <a class="snap" href="2026-08/driver-4.html"><span class="dnum">D4</span>Follow-Up Close Rate</a>
-        <a class="snap" href="2026-08/driver-5.html"><span class="dnum">D5</span>Inspector/Tech Efficiency</a>
-        <a class="snap" href="2026-08/driver-6.html"><span class="dnum">D6</span>Cross-Selling / Ancillary Attach Rate</a>
-        <a class="snap" href="2026-08/driver-7.html"><span class="dnum">D7</span>AI Process Efficiencies</a>
-        <a class="snap" href="2026-08/driver-8.html"><span class="dnum">D8</span>Average Employee Tenure</a>
-        <a class="snap" href="2026-08/driver-9.html"><span class="dnum">D9</span>Sales KPIs Achieved</a>
-      </div>
-      <div class="month-note" style="margin-top:8px;">D1, D2, D4, D5, D6, D9 show closed-out August performance data. D3, D7, D8 are ops-style drivers that track live/current state rather than a finalized prior month — they're captured here as they stood when this checkpoint was taken (Sept 19, ahead of the Sept 24 L10), not as "August" figures.</div>
-    </div>
-
-  </div>
-
-  <footer>
-    How to add a month: this archive is a full dashboard checkpoint, not just closed-out numbers — every time you archive, copy all 9 current driver-N.html files into &lt;YYYY-MM&gt;/, whatever state each one is in, then add a card here linking to them. Performance-style drivers (1, 2, 4, 5, 6, 9) will show last month's finalized numbers since that's a complete dataset; ops-style drivers (3, 7, 8) will show whatever's live as of the checkpoint date, since they track current state against an approaching deadline rather than a closed month. See the archiving workflow note in the project for the full monthly checklist.
-  </footer>
+  <footer id="footerNote">Loading archive history…</footer>
 
 </div>
+
+<script>
+// Reads data/history.json (one level up from archive/) and renders one
+// dashboard-style board per archived month, newest first. Same row grouping
+// and card rendering as the live index.html, so adding a new month here is
+// just appending to history.json — no HTML edits needed.
+(function () {
+  const DRIVER_GROUPS = [
+    { label: 'MHI', nums: [1, 5, 6] },
+    { label: 'MHS', nums: [2, 4, 9] },
+    { label: 'OPS', nums: [3, 7, 8] },
+  ];
+
+  function stateClass(state) {
+    return ['pos', 'neg', 'draft', 'neutral'].includes(state) ? state : '';
+  }
+
+  function renderCardBottom(data) {
+    if (Array.isArray(data.metrics) && data.metrics.length) {
+      const wrap = document.createElement('div');
+      wrap.className = 'multi-rows';
+      data.metrics.forEach(m => {
+        const row = document.createElement('div');
+        row.className = 'multi-row';
+        const cls = stateClass(m.state);
+        row.innerHTML = `
+          <span class="mlbl">${m.label}</span>
+          <span><span class="mpct ${cls}">${m.value}</span>${m.target ? `<span class="mtgt">${m.target}</span>` : ''}</span>
+        `;
+        wrap.appendChild(row);
+      });
+      return wrap;
+    }
+    if (data.headline) {
+      const bottom = document.createElement('div');
+      bottom.className = 'card-bottom';
+      const cls = stateClass(data.headline.state);
+      bottom.innerHTML = `
+        <div class="pct ${cls}">${data.headline.value}</div>
+        <div class="target">${data.headline.target || ''}</div>
+      `;
+      return bottom;
+    }
+    const bottom = document.createElement('div');
+    bottom.className = 'card-bottom';
+    bottom.innerHTML = '<div class="pct tbd">see page</div>';
+    return bottom;
+  }
+
+  function renderCard(monthKey, n, data) {
+    const a = document.createElement('a');
+    if (!data) {
+      a.className = 'card placeholder';
+      a.href = '#';
+      a.innerHTML = `
+        <div>
+          <div class="driver-num">Driver ${n}</div>
+          <div class="driver-name">Not archived this month</div>
+          <div class="driver-owner">&nbsp;</div>
+        </div>
+        <div class="card-bottom"><div class="pct tbd">TBD</div></div>
+      `;
+      return a;
+    }
+    a.className = 'card';
+    a.href = `${monthKey}/driver-${n}.html`;
+    const ownerLine = data.owner ? `Owner: ${data.owner}` : ' ';
+    const top = document.createElement('div');
+    top.innerHTML = `
+      <div class="driver-num">Driver ${n}</div>
+      <div class="driver-name">${data.name || ''}</div>
+      <div class="driver-owner">${ownerLine}</div>
+      ${data.note ? `<div class="live-flag">Live state, not a closed month</div>` : ''}
+    `;
+    a.appendChild(top);
+    a.appendChild(renderCardBottom(data));
+    return a;
+  }
+
+  function renderMonth(monthKey, monthData) {
+    const section = document.createElement('div');
+    section.className = 'month-section';
+
+    const archivedCount = DRIVER_GROUPS.flatMap(g => g.nums).filter(n => monthData.drivers[n]).length;
+
+    const head = document.createElement('div');
+    head.className = 'month-head';
+    head.innerHTML = `
+      <div class="month-name">${monthData.label || monthKey}</div>
+      <div class="month-note">${archivedCount} of 9 drivers archived</div>
+    `;
+    section.appendChild(head);
+
+    const board = document.createElement('div');
+    board.className = 'board';
+    DRIVER_GROUPS.forEach(group => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `<div class="row-label">${group.label}</div>`;
+      const rowCards = document.createElement('div');
+      rowCards.className = 'row-cards';
+      group.nums.forEach(n => {
+        rowCards.appendChild(renderCard(monthKey, n, monthData.drivers[String(n)]));
+      });
+      row.appendChild(rowCards);
+      board.appendChild(row);
+    });
+    section.appendChild(board);
+    return section;
+  }
+
+  fetch('../data/history.json', { cache: 'no-cache' })
+    .then(res => res.json())
+    .then(data => {
+      const months = data.months || {};
+      const keys = Object.keys(months).sort().reverse();
+      const container = document.getElementById('months');
+      if (!keys.length) {
+        container.innerHTML = '<p style="font-family:Arial,sans-serif;color:#8a8a8a;">No months archived yet.</p>';
+      } else {
+        keys.forEach(k => container.appendChild(renderMonth(k, months[k])));
+      }
+      document.getElementById('footerNote').textContent =
+        'How to add a month: archive all 9 current driver-N.html files into <YYYY-MM>/, then add that month’s data to data/history.json under months.<YYYY-MM>.drivers — this page rebuilds itself from that file, no HTML edits needed. Performance-style drivers (1, 2, 4, 5, 6, 9) carry last month’s finalized numbers; ops-style drivers (3, 7, 8) carry live/current state as of the checkpoint date (flagged above). See the archiving workflow note in the project for the full monthly checklist.';
+    })
+    .catch(() => {
+      document.getElementById('footerNote').textContent = 'Could not load data/history.json — check the file exists at the repo root under data/.';
+    });
+})();
+</script>
 </body>
 </html>
