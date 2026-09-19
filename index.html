@@ -15,6 +15,9 @@
   header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
   h1{font-size:26px;margin:0 0 4px 0;color:var(--black);}
   .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
+  .footer-links{font-family:Arial,sans-serif;font-size:12.5px;text-align:right;margin-top:10px;}
+  .footer-links a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
+  .footer-links a:hover{text-decoration:underline;}
 
   .board{display:flex;flex-direction:column;gap:14px;}
   .row{display:flex;gap:14px;align-items:stretch;}
@@ -74,7 +77,7 @@
     .row{flex-direction:column;}
     .row-label{writing-mode:horizontal-tb; transform:none; flex:0 0 auto; padding:6px 10px;}
     .row-cards{grid-template-columns:1fr;}
-  }
+    }
 </style>
 </head>
 <body>
@@ -179,8 +182,10 @@
 
   </div>
 
+  <div class="footer-links"><a href="archive/index.html">Archive &rarr;</a></div>
+
   <footer>
-    cash-flow-drivers-build-checklist-v3.md · rows grouped by business unit (MHI / MHS / OPS), per driver #1–9 assignment · click a driver for full methodology and numbers · each card is pulled live from its driver-N.html page — placeholder cards go live automatically once a page with a driver-summary block is dropped in, no index edits needed.
+    cash-flow-drivers-build-checklist-v3.md · rows grouped by business unit (MHI / MHS / OPS), per driver #1–9 assignment · click a driver for full methodology and numbers · each card is pulled live from its driver-N.html page — placeholder cards go live automatically once a page with a driver-summary block is dropped in, no index edits needed. Before overwriting a driver page with a new month's numbers, archive the outgoing version — see the Archive link below.
   </footer>
 
 </div>
@@ -224,7 +229,7 @@
     card.querySelector('.driver-name').textContent = data.name || '';
     const ownerLine = [data.owner ? `Owner: ${data.owner}` : null, data.period || null]
       .filter(Boolean).join(' · ');
-    card.querySelector('.driver-owner').textContent = ownerLine || '\u00a0';
+    card.querySelector('.driver-owner').textContent = ownerLine || ' ';
 
     // Remove whatever bottom section is currently there, then rebuild it.
     card.querySelector('.card-bottom')?.remove();
