@@ -19,6 +19,29 @@
   .footer-links a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
   .footer-links a:hover{text-decoration:underline;}
 
+  .archive-tool{
+    margin-top:18px; padding:12px 16px; background:#f5f2ea; border:1px solid var(--line);
+    border-radius:8px; font-family:Arial,sans-serif; display:none; align-items:center;
+    gap:10px; flex-wrap:wrap;
+  }
+  .archive-tool.visible{display:flex;}
+  .archive-tool label{font-size:11.5px; color:#7a7a7a;}
+  .archive-tool input[type="month"]{
+    font-family:Arial,sans-serif; font-size:12.5px; padding:4px 6px;
+    border:1px solid var(--line); border-radius:5px; background:#fff;
+  }
+  .archive-tool button{
+    font-family:Arial,sans-serif; font-size:12.5px; font-weight:bold; color:#fff;
+    background:var(--gold-dark); border:none; border-radius:5px; padding:7px 12px;
+    cursor:pointer;
+  }
+  .archive-tool button:hover{background:#9a7622;}
+  .archive-tool button:disabled{background:#c9bfa3; cursor:default;}
+  .archive-status{
+    flex-basis:100%; font-size:11.5px; color:#6a6a6a; line-height:1.5; white-space:pre-wrap;
+  }
+  .archive-status.err{color:var(--blocked);}
+
   .board{display:flex;flex-direction:column;gap:14px;}
   .row{display:flex;gap:14px;align-items:stretch;}
   .row-label{
@@ -182,6 +205,13 @@
 
   </div>
 
+  <div class="archive-tool" id="archiveTool">
+    <label for="archiveMonth">Checkpoint month:</label>
+    <input type="month" id="archiveMonth">
+    <button id="archiveBtn" type="button">&#128230; Generate archive snapshot</button>
+    <div class="archive-status" id="archiveStatus">Builds a zip with all 9 current driver pages + an updated history.json for the month above. Download it, unzip, then upload into your repo on GitHub — clicking this again later for the same month regenerates fresh files that safely overwrite the old ones (same paths, same JSON keys), it doesn't create duplicates.</div>
+  </div>
+
   <div class="footer-links"><a href="archive/index.html">Archive &rarr;</a></div>
 
   <footer>
@@ -190,6 +220,7 @@
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 // Each driver page (driver-1.html ... driver-9.html) may contain a hidden block like:
 //   <script type="application/json" id="driver-summary">{ ... }<\/script>
@@ -291,6 +322,158 @@
   }
 
   DRIVER_NUMS.forEach(loadDriver);
+})();
+</script>
+
+<script>
+// "Generate archive snapshot" — builds a downloadable zip that mirrors the
+// archive/<month>/ + data/history.json structure, by fetching the current
+// live driver pages and the current history.json, then packaging fresh
+// copies. Doesn't write to GitHub itself (a static page can't do that
+// safely) — it just automates the gathering/packaging step. Running it
+// again for the same month overwrites the same file paths and the same
+// JSON keys, so re-uploading the result "refreshes" that month instead of
+// duplicating anything.
+(function () {
+  const OPS_DRIVER_NUMS = [3, 7, 8]; // live/current-state drivers, not a closed prior month
+  const ALL_DRIVER_NUMS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function monthLabel(monthKey) {
+    const [y, m] = monthKey.split('-').map(Number);
+    return `${MONTH_NAMES[m - 1]} ${y}`;
+  }
+
+  function setStatus(msg, isErr) {
+    const el = document.getElementById('archiveStatus');
+    el.textContent = msg;
+    el.classList.toggle('err', !!isErr);
+  }
+
+  function buildBanner(n, label) {
+    const isOps = OPS_DRIVER_NUMS.includes(n);
+    const text = isOps
+      ? `&#128230; Archived snapshot &mdash; part of the ${label} dashboard checkpoint (this driver runs on live/current data, not a closed prior month).`
+      : `&#128230; Archived snapshot &mdash; ${label}, frozen at this checkpoint.`;
+    return `<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;`
+      + `font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">`
+      + `${text} `
+      + `<a href="../../driver-${n}.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; `
+      + `<a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a>`
+      + `</div>`;
+  }
+
+  function patchDriverHtml(rawHtml, n, label) {
+    let html = rawHtml.replace('href="index.html"', 'href="../../index.html"');
+    html = html.replace('<body>', '<body>\n' + buildBanner(n, label));
+    return html;
+  }
+
+  async function fetchExistingHistory() {
+    try {
+      const res = await fetch('data/history.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('not found');
+      return await res.json();
+    } catch (e) {
+      // No existing history.json (or can't reach it) — start fresh.
+      return {
+        _readme: "Running record of each driver's month-end headline, seeded from that month's driver-summary block at archive time. Feeds the future trends/heatmap tab.",
+        months: {}
+      };
+    }
+  }
+
+  async function generateSnapshot() {
+    const monthInput = document.getElementById('archiveMonth');
+    const btn = document.getElementById('archiveBtn');
+    const monthKey = monthInput.value; // "2026-08"
+    if (!monthKey) {
+      setStatus('Pick a checkpoint month first.', true);
+      return;
+    }
+    if (typeof JSZip === 'undefined') {
+      setStatus('Could not load the zip library (JSZip) — check your internet connection and try again.', true);
+      return;
+    }
+
+    btn.disabled = true;
+    setStatus('Fetching current history.json…');
+
+    const history = await fetchExistingHistory();
+    const label = monthLabel(monthKey);
+    if (!history.months[monthKey]) history.months[monthKey] = { label, drivers: {} };
+    history.months[monthKey].label = label;
+
+    const zip = new JSZip();
+    const included = [];
+    const skipped = [];
+
+    for (const n of ALL_DRIVER_NUMS) {
+      setStatus(`Fetching driver-${n}.html…`);
+      try {
+        const res = await fetch(`driver-${n}.html`, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('404');
+        const rawHtml = await res.text();
+        const doc = new DOMParser().parseFromString(rawHtml, 'text/html');
+        const block = doc.getElementById('driver-summary');
+        if (!block) throw new Error('no driver-summary block');
+        const data = JSON.parse(block.textContent);
+
+        const entry = { name: data.name, owner: data.owner };
+        if (Array.isArray(data.metrics)) entry.metrics = data.metrics;
+        else if (data.headline) entry.headline = data.headline;
+        if (OPS_DRIVER_NUMS.includes(n)) {
+          entry.note = 'ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data';
+        }
+        history.months[monthKey].drivers[String(n)] = entry;
+
+        const patched = patchDriverHtml(rawHtml, n, label);
+        zip.file(`archive/${monthKey}/driver-${n}.html`, patched);
+        included.push(n);
+      } catch (e) {
+        skipped.push(n);
+      }
+    }
+
+    zip.file('data/history.json', JSON.stringify(history, null, 2));
+
+    setStatus('Building zip…');
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `archive-${monthKey}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    let msg = `Done. Included drivers: ${included.join(', ') || 'none'}.`;
+    if (skipped.length) msg += ` Skipped (couldn't fetch or no data yet): ${skipped.join(', ')}.`;
+    msg += ` Unzip and upload archive/${monthKey}/ + data/history.json into your repo on GitHub — this will safely overwrite that month's existing files if you're refreshing it.`;
+    if (included.length === 0) {
+      msg = "Couldn't fetch any driver pages. This tool only works when viewing the live published site (mcmarigold.github.io/...), not a file opened directly from your computer.";
+      setStatus(msg, true);
+    } else {
+      setStatus(msg, false);
+    }
+    btn.disabled = false;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hidden by default so a regular visitor never sees or can click this —
+    // only shows up when the page is loaded with ?tools=1 in the URL.
+    // Bookmark: index.html?tools=1
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tools') !== '1') return;
+
+    document.getElementById('archiveTool').classList.add('visible');
+    const today = new Date();
+    document.getElementById('archiveMonth').value =
+      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`;
+    document.getElementById('archiveBtn').addEventListener('click', generateSnapshot);
+  });
 })();
 </script>
 </body>
