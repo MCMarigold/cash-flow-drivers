@@ -19,10 +19,33 @@
   .backlink a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
   .backlink a:hover{text-decoration:underline;}
 
+  /* Month-to-month navigator */
+  .nav-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    margin-bottom:8px;
+  }
+  .nav-btn{
+    font-family:Arial,sans-serif; font-size:13px; font-weight:bold; color:var(--black);
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:9px 14px; cursor:pointer; display:flex; align-items:center; gap:6px;
+    transition:background .15s, box-shadow .15s;
+  }
+  .nav-btn:hover:not(:disabled){background:#f5f2ea; box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+  .nav-btn:disabled{color:#c9c2b3; border-color:var(--line); cursor:default; background:#fff;}
+  .nav-center{text-align:center; flex:1;}
+  .nav-dots{font-family:Arial,sans-serif; font-size:11px; color:#b0aa9c; margin-top:2px;}
+  .nav-dot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--line); margin:0 2px;}
+  .nav-dot.active{background:var(--gold-dark);}
+
   .month-section{margin-bottom:36px;}
-  .month-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  .month-head{display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap;
     border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;}
   .month-name{font-size:19px;font-weight:bold;color:var(--black);}
+  .month-name .live-pill{
+    font-family:Arial,sans-serif; font-size:10.5px; font-weight:bold; letter-spacing:0.3px;
+    color:#fff; background:var(--waiting); border-radius:10px; padding:2px 8px; margin-left:8px;
+    vertical-align:middle; text-transform:uppercase;
+  }
   .month-note{font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;}
 
   /* Board — same layout/orientation as the live dashboard */
@@ -85,6 +108,7 @@
     .row{flex-direction:column;}
     .row-label{writing-mode:horizontal-tb; transform:none; flex:0 0 auto; padding:6px 10px;}
     .row-cards{grid-template-columns:1fr;}
+    .nav-btn span.lbl{display:none;}
   }
 </style>
 </head>
@@ -95,26 +119,46 @@
 
   <header>
     <h1>Cash Flow Driver Archive</h1>
-    <div class="meta">Frozen month-end checkpoints of the full dashboard &middot; same layout as the live board, one snapshot per month</div>
+    <div class="meta">Frozen month-end checkpoints of the full dashboard &middot; same layout as the live board &middot; use the arrows below to page through months</div>
   </header>
 
-  <div id="months"></div>
+  <div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" type="button">&larr; <span class="lbl">Older</span></button>
+    <div class="nav-center">
+      <div class="nav-dots" id="navDots"></div>
+    </div>
+    <button class="nav-btn" id="nextBtn" type="button"><span class="lbl">Newer</span> &rarr;</button>
+  </div>
+
+  <div id="stage">
+    <div class="month-section">
+      <div class="month-head"><div class="month-name">Loading…</div></div>
+    </div>
+  </div>
 
   <footer id="footerNote">Loading archive history…</footer>
 
 </div>
 
 <script>
-// Reads data/history.json (one level up from archive/) and renders one
-// dashboard-style board per archived month, newest first. Same row grouping
-// and card rendering as the live index.html, so adding a new month here is
-// just appending to history.json — no HTML edits needed.
+// Pages through the archive one month at a time (arrows / dots / left-right
+// keyboard keys). Slide 0 is always "Current" — pulled live from the
+// driver-N.html pages the same way the live dashboard does, one level up
+// from this page. Slides after that are archived checkpoints from
+// data/history.json, newest first, so the natural flow after archiving a
+// new month is: land here on Current, press the left arrow once to land
+// exactly on last month's frozen checkpoint. Adding a new month is still
+// just appending to history.json — no HTML edits needed here.
 (function () {
   const DRIVER_GROUPS = [
     { label: 'MHI', nums: [1, 5, 6] },
     { label: 'MHS', nums: [2, 4, 9] },
     { label: 'OPS', nums: [3, 7, 8] },
   ];
+  const ALL_DRIVER_NUMS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  let slides = [];   // [{ key, label, current, drivers: {n: data|undefined} }]
+  let idx = 0;        // current slide index into `slides`
 
   function stateClass(state) {
     return ['pos', 'neg', 'draft', 'neutral'].includes(state) ? state : '';
@@ -152,15 +196,16 @@
     return bottom;
   }
 
-  function renderCard(monthKey, n, data) {
+  function renderCard(slide, n, data) {
     const a = document.createElement('a');
+    const href = slide.current ? `../driver-${n}.html` : `${slide.key}/driver-${n}.html`;
     if (!data) {
       a.className = 'card placeholder';
-      a.href = '#';
+      a.href = slide.current ? href : '#';
       a.innerHTML = `
         <div>
           <div class="driver-num">Driver ${n}</div>
-          <div class="driver-name">Not archived this month</div>
+          <div class="driver-name">${slide.current ? 'Not built yet' : 'Not archived this month'}</div>
           <div class="driver-owner">&nbsp;</div>
         </div>
         <div class="card-bottom"><div class="pct tbd">TBD</div></div>
@@ -168,13 +213,14 @@
       return a;
     }
     a.className = 'card';
-    a.href = `${monthKey}/driver-${n}.html`;
-    const ownerLine = data.owner ? `Owner: ${data.owner}` : ' ';
+    a.href = href;
+    const ownerLine = [data.owner ? `Owner: ${data.owner}` : null, data.period || null]
+      .filter(Boolean).join(' · ');
     const top = document.createElement('div');
     top.innerHTML = `
       <div class="driver-num">Driver ${n}</div>
       <div class="driver-name">${data.name || ''}</div>
-      <div class="driver-owner">${ownerLine}</div>
+      <div class="driver-owner">${ownerLine || '&nbsp;'}</div>
       ${data.note ? `<div class="live-flag">Live state, not a closed month</div>` : ''}
     `;
     a.appendChild(top);
@@ -182,17 +228,17 @@
     return a;
   }
 
-  function renderMonth(monthKey, monthData) {
+  function renderSlide(slide) {
     const section = document.createElement('div');
     section.className = 'month-section';
 
-    const archivedCount = DRIVER_GROUPS.flatMap(g => g.nums).filter(n => monthData.drivers[n]).length;
+    const archivedCount = ALL_DRIVER_NUMS.filter(n => slide.drivers[n]).length;
 
     const head = document.createElement('div');
     head.className = 'month-head';
     head.innerHTML = `
-      <div class="month-name">${monthData.label || monthKey}</div>
-      <div class="month-note">${archivedCount} of 9 drivers archived</div>
+      <div class="month-name">${slide.label}${slide.current ? '<span class="live-pill">Live</span>' : ''}</div>
+      <div class="month-note">${slide.current ? `${archivedCount} of 9 driver pages loaded` : `${archivedCount} of 9 drivers archived`}</div>
     `;
     section.appendChild(head);
 
@@ -205,7 +251,7 @@
       const rowCards = document.createElement('div');
       rowCards.className = 'row-cards';
       group.nums.forEach(n => {
-        rowCards.appendChild(renderCard(monthKey, n, monthData.drivers[String(n)]));
+        rowCards.appendChild(renderCard(slide, n, slide.drivers[n]));
       });
       row.appendChild(rowCards);
       board.appendChild(row);
@@ -214,23 +260,76 @@
     return section;
   }
 
-  fetch('../data/history.json', { cache: 'no-cache' })
-    .then(res => res.json())
-    .then(data => {
-      const months = data.months || {};
-      const keys = Object.keys(months).sort().reverse();
-      const container = document.getElementById('months');
-      if (!keys.length) {
-        container.innerHTML = '<p style="font-family:Arial,sans-serif;color:#8a8a8a;">No months archived yet.</p>';
-      } else {
-        keys.forEach(k => container.appendChild(renderMonth(k, months[k])));
-      }
-      document.getElementById('footerNote').textContent =
-        'How to add a month: archive all 9 current driver-N.html files into <YYYY-MM>/, then add that month’s data to data/history.json under months.<YYYY-MM>.drivers — this page rebuilds itself from that file, no HTML edits needed. Performance-style drivers (1, 2, 4, 5, 6, 9) carry last month’s finalized numbers; ops-style drivers (3, 7, 8) carry live/current state as of the checkpoint date (flagged above). See the archiving workflow note in the project for the full monthly checklist.';
-    })
-    .catch(() => {
-      document.getElementById('footerNote').textContent = 'Could not load data/history.json — check the file exists at the repo root under data/.';
-    });
+  function renderDots() {
+    const dots = document.getElementById('navDots');
+    dots.innerHTML = slides
+      .map((s, i) => `<span class="nav-dot${i === idx ? ' active' : ''}"></span>`)
+      .join('');
+  }
+
+  function renderStage() {
+    const stage = document.getElementById('stage');
+    stage.innerHTML = '';
+    stage.appendChild(renderSlide(slides[idx]));
+    renderDots();
+    // idx 0 (Current, the newest) can't go further right/newer; the oldest
+    // archived slide can't go further left/older.
+    document.getElementById('nextBtn').disabled = idx === 0;
+    document.getElementById('prevBtn').disabled = idx === slides.length - 1;
+  }
+
+  function goTo(newIdx) {
+    if (newIdx < 0 || newIdx >= slides.length) return;
+    idx = newIdx;
+    renderStage();
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(idx + 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(idx - 1));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goTo(idx + 1);
+    if (e.key === 'ArrowRight') goTo(idx - 1);
+  });
+
+  async function loadCurrentDrivers() {
+    const drivers = {};
+    await Promise.all(ALL_DRIVER_NUMS.map(async (n) => {
+      try {
+        const res = await fetch(`../driver-${n}.html`, { cache: 'no-cache' });
+        if (!res.ok) return;
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const block = doc.getElementById('driver-summary');
+        if (!block) return;
+        drivers[n] = JSON.parse(block.textContent);
+      } catch (e) { /* leave undefined -> placeholder card */ }
+    }));
+    return drivers;
+  }
+
+  Promise.all([
+    fetch('../data/history.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : { months: {} }).catch(() => ({ months: {} })),
+    loadCurrentDrivers(),
+  ]).then(([history, currentDrivers]) => {
+    const months = history.months || {};
+    const archivedKeys = Object.keys(months).sort().reverse();
+
+    slides = [
+      { key: 'current', label: 'Current', current: true, drivers: currentDrivers },
+      ...archivedKeys.map(k => ({
+        key: k,
+        label: months[k].label || k,
+        current: false,
+        drivers: months[k].drivers || {},
+      })),
+    ];
+    idx = 0;
+    renderStage();
+
+    document.getElementById('footerNote').textContent = archivedKeys.length
+      ? `Use the arrows (or ← / → keys) to page between the live current board and each frozen checkpoint, newest to oldest. To add a new checkpoint, use the "Generate archive snapshot" tool on the live dashboard (index.html?tools=1) — it adds a month to data/history.json and this page picks it up automatically, no edits needed here.`
+      : `No months archived yet — you're looking at the live current board. Once you archive a month with the "Generate archive snapshot" tool on the live dashboard (index.html?tools=1), the left arrow will step back to it.`;
+  });
 })();
 </script>
 </body>
