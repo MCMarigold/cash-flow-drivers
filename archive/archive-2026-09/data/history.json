@@ -1,0 +1,330 @@
+{
+  "_readme": "Running record of each driver's month-end headline, seeded from that month's driver-summary block at archive time. Feeds the future trends/heatmap tab. Add one entry per driver per month when you archive that driver's page — see the archiving workflow doc. Do not backfill months you don't have real archived pages for.",
+  "_schema": {
+    "months": {
+      "<YYYY-MM>": {
+        "label": "<e.g. August 2026>",
+        "drivers": {
+          "<driver number as string, e.g. \"2\">": {
+            "name": "<from driver-summary.name>",
+            "owner": "<from driver-summary.owner>",
+            "headline": {
+              "value": "<from driver-summary.headline.value, e.g. 11.5/wk>",
+              "target": "<from driver-summary.headline.target>",
+              "state": "<pos | neg | draft | neutral>"
+            },
+            "metrics": "<optional: copy driver-summary.metrics verbatim for multi-metric drivers instead of headline>"
+          }
+        }
+      }
+    }
+  },
+  "months": {
+    "2026-08": {
+      "label": "August 2026",
+      "drivers": {
+        "1": {
+          "name": "Inspector Available Capacity",
+          "owner": "Blake",
+          "headline": {
+            "value": "–3.7%",
+            "target": "Target: 5%",
+            "state": "neg"
+          }
+        },
+        "2": {
+          "name": "MHS Marketing Leads",
+          "owner": "Minh",
+          "headline": {
+            "value": "11.5/wk",
+            "target": "Goal: 40/wk",
+            "state": "draft"
+          }
+        },
+        "3": {
+          "name": "Wrong People / Wrong Seats",
+          "owner": "Curtis",
+          "note": "ops-style driver, tracks live/current state — captured as of the Sept 19 checkpoint, not closed August data",
+          "metrics": [
+            {
+              "label": "Combined",
+              "value": "98%",
+              "target": "/ 90% target",
+              "state": "pos"
+            },
+            {
+              "label": "Leadership & Support",
+              "value": "94%",
+              "state": "pos"
+            },
+            {
+              "label": "MHI Field Ops",
+              "value": "100%",
+              "state": "pos"
+            },
+            {
+              "label": "MHS Field Ops",
+              "value": "100%",
+              "state": "pos"
+            }
+          ]
+        },
+        "4": {
+          "name": "Follow-Up Close Rate",
+          "owner": "Minh",
+          "metrics": [
+            {
+              "label": "Combined",
+              "value": "40.8%",
+              "target": "/ 70%",
+              "state": "neg"
+            },
+            {
+              "label": "Mitigation",
+              "value": "42.9%",
+              "state": "neg"
+            },
+            {
+              "label": "RHM",
+              "value": "16.7%",
+              "state": "neg"
+            }
+          ]
+        },
+        "5": {
+          "name": "Inspector/Tech Efficiency",
+          "owner": "Blake",
+          "metrics": [
+            {
+              "label": "Inspector",
+              "value": "79.9%",
+              "target": "/ 80%",
+              "state": "neg"
+            },
+            {
+              "label": "Service Tech",
+              "value": "100.6%",
+              "target": "/ 85%",
+              "state": "pos"
+            },
+            {
+              "label": "Radon Tech",
+              "value": "71.2%",
+              "target": "/ 90%",
+              "state": "neg"
+            }
+          ]
+        },
+        "6": {
+          "name": "Cross-Selling / Ancillary Attach Rate",
+          "owner": "Maggie",
+          "headline": {
+            "value": "57.7%",
+            "target": "Target: 55%",
+            "state": "pos"
+          }
+        },
+        "7": {
+          "name": "AI Process Efficiencies",
+          "owner": "Britney",
+          "note": "ops-style driver, tracks live/current state — captured as of the Sept 19 checkpoint, not closed August data",
+          "headline": {
+            "value": "2 hrs",
+            "target": "Target: 40 hrs/wk",
+            "state": "neg"
+          }
+        },
+        "8": {
+          "name": "Average Employee Tenure",
+          "owner": "Britney",
+          "note": "ops-style driver, tracks live/current state — captured as of the Sept 19 checkpoint, not closed August data",
+          "metrics": [
+            {
+              "label": "Overall",
+              "value": "2.56 yrs",
+              "target": "/ hold 2.2",
+              "state": "pos"
+            },
+            {
+              "label": "MHI",
+              "value": "2.38 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "MHS",
+              "value": "1.60 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "Office Staff",
+              "value": "3.42 yrs",
+              "state": "neutral"
+            }
+          ]
+        },
+        "9": {
+          "name": "Sales KPIs Achieved",
+          "owner": "Ron",
+          "headline": {
+            "value": "18.75%",
+            "target": "Target: 100%",
+            "state": "neg"
+          }
+        }
+      }
+    },
+    "2026-09": {
+      "label": "September 2026",
+      "drivers": {
+        "1": {
+          "name": "Inspector Available Capacity",
+          "owner": "Blake",
+          "headline": {
+            "value": "–3.7%",
+            "target": "Target: 5%",
+            "state": "neg"
+          }
+        },
+        "2": {
+          "name": "MHS Marketing Leads",
+          "owner": "Minh",
+          "headline": {
+            "value": "11.5/wk",
+            "target": "Goal: 40/wk",
+            "state": "draft"
+          }
+        },
+        "3": {
+          "name": "Wrong People / Wrong Seats",
+          "owner": "Curtis",
+          "metrics": [
+            {
+              "label": "Combined",
+              "value": "98%",
+              "target": "/ 90% target",
+              "state": "pos"
+            },
+            {
+              "label": "Leadership & Support",
+              "value": "94%",
+              "state": "pos"
+            },
+            {
+              "label": "MHI Field Ops",
+              "value": "100%",
+              "state": "pos"
+            },
+            {
+              "label": "MHS Field Ops",
+              "value": "100%",
+              "state": "pos"
+            }
+          ],
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "4": {
+          "name": "Follow-Up Close Rate",
+          "owner": "Minh",
+          "metrics": [
+            {
+              "label": "Combined",
+              "value": "40.8%",
+              "target": "/ 70%",
+              "state": "neg"
+            },
+            {
+              "label": "Mitigation",
+              "value": "42.9%",
+              "state": "neg"
+            },
+            {
+              "label": "RHM",
+              "value": "16.7%",
+              "state": "neg"
+            }
+          ]
+        },
+        "5": {
+          "name": "Inspector/Tech Efficiency",
+          "owner": "Blake",
+          "metrics": [
+            {
+              "label": "Inspector",
+              "value": "79.9%",
+              "target": "/ 80%",
+              "state": "neg"
+            },
+            {
+              "label": "Service Tech",
+              "value": "100.6%",
+              "target": "/ 85%",
+              "state": "pos"
+            },
+            {
+              "label": "Radon Tech",
+              "value": "71.2%",
+              "target": "/ 90%",
+              "state": "neg"
+            }
+          ]
+        },
+        "6": {
+          "name": "Cross-Selling / Ancillary Attach Rate",
+          "owner": "Maggie",
+          "headline": {
+            "value": "57.7%",
+            "target": "Target: 55%",
+            "state": "pos"
+          }
+        },
+        "7": {
+          "name": "AI Process Efficiencies",
+          "owner": "Britney",
+          "headline": {
+            "value": "2 hrs",
+            "target": "Target: 40 hrs/wk",
+            "state": "neg"
+          },
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "8": {
+          "name": "Average Employee Tenure",
+          "owner": "Britney",
+          "metrics": [
+            {
+              "label": "Overall",
+              "value": "2.56 yrs",
+              "target": "/ hold 2.2",
+              "state": "pos"
+            },
+            {
+              "label": "MHI",
+              "value": "2.38 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "MHS",
+              "value": "1.60 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "Office Staff",
+              "value": "3.42 yrs",
+              "state": "neutral"
+            }
+          ],
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "9": {
+          "name": "Sales KPIs Achieved",
+          "owner": "Ron",
+          "headline": {
+            "value": "18.75%",
+            "target": "Target: 100%",
+            "state": "neg"
+          }
+        }
+      }
+    }
+  }
+}
