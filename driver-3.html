@@ -107,8 +107,10 @@
   .seat-title-row { display:flex; flex-direction:column; gap:1px; border-bottom:1px solid var(--border); padding-bottom:5px; margin-bottom:6px; }
   .seat-title { font-family:Arial,sans-serif; font-weight:700; font-size:11.5px; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.01em; line-height:1.25; }
   .seat-agg { font-family:Arial,sans-serif; font-size:10px; color:var(--muted); white-space:nowrap; }
-  .person-row { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:3px 0; }
-  .person-row + .person-row { border-top:1px dotted var(--border); }
+  .person-row, .person-top { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:3px 0; }
+  .person-entry + .person-entry { border-top:1px dotted var(--border); }
+  .person-entry { padding:3px 0; }
+  .person-entry .person-top { padding:0; }
   .person-name { font-size:13.5px; color:var(--text); }
   .person-name.fail { color:var(--decide); font-weight:700; }
   .gwc { display:flex; gap:3px; flex-shrink:0; }
@@ -118,6 +120,16 @@
   }
   .gwc-badge.on { background:var(--good); color:#fff; }
   .gwc-badge.off { background:transparent; border:1px solid var(--decide); color:var(--decide); }
+  /* Core values row — 5 icon badges (one emoji per value) under each name,
+     separate from the GWC checks above. Each icon carries a +/±/- rating
+     underneath it, colored green/gold/rust. */
+  .cv-row { display:flex; align-items:flex-start; gap:7px; margin-top:4px; flex-wrap:wrap; }
+  .cv-badge { display:flex; flex-direction:column; align-items:center; width:16px; }
+  .cv-emoji { font-size:13px; line-height:1; }
+  .cv-state { font-family:Arial,sans-serif; font-size:8.5px; font-weight:700; line-height:1.2; margin-top:2px; }
+  .cv-state.plus { color:var(--good); }
+  .cv-state.mixed { color:var(--gold-dark); }
+  .cv-state.minus { color:var(--decide); }
   .vacant-label { font-family:Arial,sans-serif; font-size:12.5px; color:var(--muted); font-style:italic; }
   .seat-card.context .person-name { color:var(--muted); }
 
@@ -147,6 +159,7 @@
     </div>
     <div class="compare-row" style="margin-top:14px;" id="compareRow"></div>
     <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Legend: <span class="gwc-badge on" style="display:inline-flex;">G</span> pass &nbsp; <span class="gwc-badge off" style="display:inline-flex;">W</span> fail.</p>
+    <p class="note" style="margin-top:6px;">Each person also shows a row of 5 core-values icons — ✨ Excellent work, 📈 Personal best, 🤝 Meet people where they are, ❤️ Relationship, 🌱 Humble &amp; growing (per the Mission &amp; Values doc, still pending leadership approval) — each with a <span class="cv-state plus" style="display:inline;">+</span> strong / <span class="cv-state mixed" style="display:inline;">±</span> mixed / <span class="cv-state minus" style="display:inline;">–</span> weak rating underneath. These are shown for reference and are not yet folded into the right-seat % above (see Open Items). Every person defaults to all-+ as a placeholder until real per-person scoring comes in.</p>
     <div class="split-row" id="splitRow"></div>
   </section>
 
@@ -175,7 +188,7 @@
     <p class="note"><b>Labor-cost side checks out.</b> At the 90% target, 10% of the 40-person scored population is 4 people. At a $30/hr blended rate and a standard 2,080-hr work year, one FTE costs $62,400/yr in wages. Four wrong-seat people at 20% lower output means 20% of that $249,600 in combined wages is going toward reduced output: <b>$49,920/yr</b> — right at the low end of the $50–80K "reduced labor cost" range already in the estimate above.</p>
     <p class="note"><b>Revenue side, using real Q2 2026 data.</b> Pulled from the MHI Spectora export (Apr–Jun 2026, cancelled orders excluded) and the MHS orders export filtered to the same window: MHI logged 1,808 active orders and $1,236,346.54 in revenue — the 8 home inspectors with attributed bookings this quarter averaged $78,482 each, or about <b>$314K/yr per home inspector</b> annualized (×4 run-rate); the 4 team leads average about $310K/yr on the same basis.</p>
     <p class="note">MHS logged $166,230.72 in active revenue across 300 orders (jobs credited to more than one name split evenly). Brett Fredrichs annualizes to about $335K/yr, Dominic Reed to about $229K/yr. Alycia Bonneville's RHM number is about $60K/yr — a real figure, but it reflects low RHM demand so far rather than her true potential in the role. Josh Miller (Estimator) shows almost no revenue of his own, which is structurally correct — he generates quotes and the revenue posts to whoever installs the job.</p>
-    <p class="note"><b>Combined per-person impact, at 20%.</b> One wrong-seated home inspector or team lead: ~$62,800/yr in lost revenue (20% of ~$314K) + $12,480/yr in wasted wages ≈ <b>$75K/yr total</b>. One wrong-seated MHS field tech in Brett's role: ~$79K/yr; in Dominic's role: ~$58K/yr. An admin or support seat with no direct Spectora-attributed revenue: labor-cost only, ~$12,480/yr.</p>
+    <p class="note"><b>Combined per-person impact, at 20% lower output.</b> One wrong-seated home inspector or team lead: ~$62,800/yr in lost revenue (20% of ~$314K) + $12,480/yr in wasted wages ≈ <b>$75K/yr total</b>. One wrong-seated MHS field tech in Brett's role: ~$79K/yr; in Dominic's role: ~$58K/yr. An admin or support seat with no direct Spectora-attributed revenue: labor-cost only, ~$12,480/yr.</p>
     <p class="note"><b>Resolved: assume the wrong 10% is spread proportionally across the org, not concentrated in field roles.</b> Splitting the 40 scored people into 16 with reliable Spectora-attributed revenue (MHI asst. inspector manager, team leads, and non-trainee home inspectors; MHS mitigation lead, mitigation tech, and RHM tech) and 24 without (leadership/support, MHI service techs, trainees, MHS estimator), the blended average across those 16 producers is <b>$288,913/yr</b> per person. At a proportional 10% wrong-seat rate, that's 1.6 of the 4 wrong-seat people landing in a revenue-producing seat and 2.4 in a non-producing one.</p>
     <p class="note">Labor-cost impact stays $49,920/yr (unchanged — it applies to all 4 regardless of seat). Revenue impact: 1.6 × 20% × $288,913 ≈ <b>$92,452/yr</b>. Combined: <b>≈$142,372/yr</b> — which lands squarely inside the original $110–160K range, so the estimate holds under this assumption.</p>
   </section>
@@ -197,6 +210,14 @@
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
       <p><b>Who's actually failing.</b> Every person below defaults to a pass as a placeholder — real GWC/People Analyzer scoring from Curtis hasn't been entered yet. Update the roster's g/w/c flags once real scoring comes in.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Core values scores are placeholders too.</b> Every person defaults to all-+ across the 5 core values (Excellent work / Personal best / Meet people / Relationship / Humble &amp; growing) until real per-person +/±/- ratings come in — same open question as GWC: who scores this and how often. Sourced from the Mission &amp; Values doc, which is itself still "pending leadership approval" as of its July 2, 2026 update, so the 5 values themselves could still change.</p>
+    </div>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p><b>Should core values feed into the right-seat %.</b> Right now the formula above is GWC-only; the 5 core-values badges are shown for reference but don't affect the score. Confirm with Curtis/Britney whether a values shortfall (e.g. two or more "-" ratings) should also count as a wrong-seat flag, or stay a separate coaching signal.</p>
     </div>
     <div class="card decide">
       <span class="tag decide">Decide</span>
@@ -231,8 +252,15 @@
   // add or remove someone, keep that box's remaining names in tenure order.
   // ============================================================
 
-  var p = function(name, g, w, c){
-    return { name: name, g: (g !== false), w: (w !== false), c: (c !== false) };
+  // cv (core values) is an optional array of 5 states, one per core value in
+  // order [Excellent work, Personal best, Meet people, Relationship, Humble &
+  // growing], each "+" / "+/-" / "-". Omit it (or leave any slot undefined)
+  // to default to "+" as a placeholder until real scoring is entered.
+  var p = function(name, g, w, c, cv){
+    var defaults = ["+","+","+","+","+"];
+    var vals = (cv || []).slice(0, 5);
+    while (vals.length < 5) vals.push(defaults[vals.length]);
+    return { name: name, g: (g !== false), w: (w !== false), c: (c !== false), cv: vals };
   };
 
   var CHART_MAIN = [
@@ -293,6 +321,29 @@
     return '<span class="gwc-badge ' + (on ? "on" : "off") + '">' + letter + '</span>';
   }
 
+  // One emoji per core value, in the same order as the cv arrays:
+  // [Excellent work, Personal best, Meet people, Relationship, Humble & growing]
+  var CV_ICONS = [
+    { emoji: "✨", label: "Excellent work" },
+    { emoji: "📈", label: "Personal best" },
+    { emoji: "🤝", label: "Meet people where they are" },
+    { emoji: "❤️", label: "Relationship" },
+    { emoji: "🌱", label: "Humble & growing" }
+  ];
+  function cvBadge(icon, state){
+    var cls = state === "+" ? "plus" : state === "-" ? "minus" : "mixed";
+    var label = state === "+" ? "+" : state === "-" ? "–" : "±";
+    return '<span class="cv-badge" title="' + icon.label + ': ' + state + '">' +
+      '<span class="cv-emoji">' + icon.emoji + '</span>' +
+      '<span class="cv-state ' + cls + '">' + label + '</span>' +
+      '</span>';
+  }
+  function cvRow(person){
+    return '<div class="cv-row">' + CV_ICONS.map(function(icon, i){
+      return cvBadge(icon, person.cv[i]);
+    }).join("") + '</div>';
+  }
+
   function renderSeatCard(seat){
     var el = document.createElement("div");
     el.className = "seat-card" + (seat.vacant ? " vacant" : "") + (seat.exclude ? " context" : "") +
@@ -319,9 +370,11 @@
       // person's individual GWC. Shown as 0/1 and counted as one wrong seat.
       titleRow += '<span class="seat-agg">0/1</span></div>';
       var conflictRows = seat.people.map(function(person){
-        return '<div class="person-row">' +
-          '<span class="person-name fail">' + person.name + '</span>' +
-          '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
+        return '<div class="person-entry">' +
+          '<div class="person-top">' +
+            '<span class="person-name fail">' + person.name + '</span>' +
+            '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
+          '</div>' + cvRow(person) +
           '</div>';
       }).join("");
       el.innerHTML = titleRow + conflictRows +
@@ -332,9 +385,11 @@
     titleRow += '<span class="seat-agg">' + passing + '/' + seat.people.length + '</span></div>';
     var rows = seat.people.map(function(person){
       var ok = personPasses(person);
-      return '<div class="person-row">' +
-        '<span class="person-name' + (ok ? "" : " fail") + '">' + person.name + '</span>' +
-        '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
+      return '<div class="person-entry">' +
+        '<div class="person-top">' +
+          '<span class="person-name' + (ok ? "" : " fail") + '">' + person.name + '</span>' +
+          '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
+        '</div>' + cvRow(person) +
         '</div>';
     }).join("");
     el.innerHTML = titleRow + rows;
