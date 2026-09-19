@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marigold Cash Flow Driver Archive</title>
+<style>
+  :root{
+    --black:#1a1a1a; --gold:#f4c94c; --gold-dark:#b8922e;
+    --line:#e6e2d8; --ready:#4a8a5c; --blocked:#c0503f; --waiting:#c98a2c; --paper:#fdfcf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
+  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
+  header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
+  h1{font-size:26px;margin:0 0 4px 0;color:var(--black);}
+  .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
+  .backlink{font-family:Arial,sans-serif;font-size:12.5px;margin-bottom:18px;display:inline-block;}
+  .backlink a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
+  .backlink a:hover{text-decoration:underline;}
+
+  .months{display:flex;flex-direction:column;gap:14px;}
+  .month{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:16px 20px;
+  }
+  .month-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;}
+  .month-name{font-size:17px;font-weight:bold;color:var(--black);}
+  .month-note{font-family:Arial,sans-serif;font-size:11px;color:#8a8a8a;}
+  .snap-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  a.snap{
+    font-family:Arial,sans-serif;font-size:12px;text-decoration:none;color:var(--black);
+    background:#f5f2ea;border:1px solid var(--line);border-radius:6px;
+    padding:6px 10px;transition:box-shadow .15s;
+  }
+  a.snap:hover{box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+  a.snap .dnum{color:var(--gold-dark);font-weight:bold;margin-right:4px;}
+  .not-yet{
+    font-family:Arial,sans-serif;font-size:12px;color:#b0aa9c;font-style:italic;
+    background:#f9f7f1;border:1px dashed var(--line);border-radius:6px;
+    padding:6px 10px;
+  }
+  .no-snaps{font-family:Arial,sans-serif;font-size:12px;color:#b0aa9c;font-style:italic;}
+
+  footer{
+    margin-top:28px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
+    border-top:1px solid var(--line); padding-top:14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="backlink"><a href="../index.html">&larr; Back to dashboard</a></div>
+
+  <header>
+    <h1>Cash Flow Driver Archive</h1>
+    <div class="meta">Frozen month-end snapshots of each driver page &middot; live pages get overwritten each month, these don't</div>
+  </header>
+
+  <div class="months">
+
+    <!--
+      MONTHLY TEMPLATE — copy this block for each newly-archived month, newest at top.
+      One <a class="snap"> per driver page actually archived that month (skip drivers
+      that weren't built, or that were still mid-month/not yet closed out that month).
+      File path is <YYYY-MM>/driver-N.html.
+    -->
+    <div class="month">
+      <div class="month-head">
+        <div class="month-name">August 2026</div>
+        <div class="month-note">9 of 9 drivers archived &middot; full dashboard checkpoint</div>
+      </div>
+      <div class="snap-grid">
+        <a class="snap" href="2026-08/driver-1.html"><span class="dnum">D1</span>Inspector Available Capacity</a>
+        <a class="snap" href="2026-08/driver-2.html"><span class="dnum">D2</span>MHS Marketing Leads</a>
+        <a class="snap" href="2026-08/driver-3.html"><span class="dnum">D3</span>Wrong People / Wrong Seats</a>
+        <a class="snap" href="2026-08/driver-4.html"><span class="dnum">D4</span>Follow-Up Close Rate</a>
+        <a class="snap" href="2026-08/driver-5.html"><span class="dnum">D5</span>Inspector/Tech Efficiency</a>
+        <a class="snap" href="2026-08/driver-6.html"><span class="dnum">D6</span>Cross-Selling / Ancillary Attach Rate</a>
+        <a class="snap" href="2026-08/driver-7.html"><span class="dnum">D7</span>AI Process Efficiencies</a>
+        <a class="snap" href="2026-08/driver-8.html"><span class="dnum">D8</span>Average Employee Tenure</a>
+        <a class="snap" href="2026-08/driver-9.html"><span class="dnum">D9</span>Sales KPIs Achieved</a>
+      </div>
+      <div class="month-note" style="margin-top:8px;">D1, D2, D4, D5, D6, D9 show closed-out August performance data. D3, D7, D8 are ops-style drivers that track live/current state rather than a finalized prior month — they're captured here as they stood when this checkpoint was taken (Sept 19, ahead of the Sept 24 L10), not as "August" figures.</div>
+    </div>
+
+  </div>
+
+  <footer>
+    How to add a month: this archive is a full dashboard checkpoint, not just closed-out numbers — every time you archive, copy all 9 current driver-N.html files into &lt;YYYY-MM&gt;/, whatever state each one is in, then add a card here linking to them. Performance-style drivers (1, 2, 4, 5, 6, 9) will show last month's finalized numbers since that's a complete dataset; ops-style drivers (3, 7, 8) will show whatever's live as of the checkpoint date, since they track current state against an approaching deadline rather than a closed month. See the archiving workflow note in the project for the full monthly checklist.
+  </footer>
+
+</div>
+</body>
+</html>

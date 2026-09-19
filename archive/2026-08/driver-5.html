@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>August 2026 — Efficiency by Role</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 5,
+  "name": "Inspector/Tech Efficiency",
+  "owner": "Blake",
+  "period": "Aug 2026",
+  "metrics": [
+    {"label": "Inspector", "value": "79.9%", "target": "/ 80%", "state": "neg"},
+    {"label": "Service Tech", "value": "100.6%", "target": "/ 85%", "state": "pos"},
+    {"label": "Radon Tech", "value": "71.2%", "target": "/ 90%", "state": "neg"}
+  ]
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.good { border-left:4px solid var(--good); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.good { background:#e6efe3; color:var(--good); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  tr.trainee td { color: var(--confirm); }
+  tr.under td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; August 2026, frozen at month close. <a href="../../driver-5.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #5</div>
+  <h1>August 2026 — Inspector/Tech Efficiency</h1>
+  <div class="sub">Points ÷ Hours worked. Points pulled directly from Airtable's Points Summary table (ground truth), not estimated from calendar exports.</div>
+
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">Inspector and tech efficiency measures productivity against role-specific benchmarks using points completed per hour worked. The goal is to bring inspectors and technicians toward their defined efficiency benchmarks.</p>
+      <p>The estimated annual financial impact is approximately $73.6K. This represents the potential value associated with improving efficiency and creating additional productive capacity. The older model estimated approximately $1,416 in additional weekly income if both inspector and tech efficiency targets were achieved, annualized to $73,632. This is primarily a capacity/revenue opportunity rather than a direct payroll reduction, and the current model still needs to confirm whether any overlap exists with other capacity drivers.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct">83.2%<span class="tgt">Team average · targets vary by role (see below)</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum neg">79.9%</div><div class="clbl">Inspector (n=12) · target 80%</div></div>
+      <div class="compare-stat"><div class="cnum pos">100.6%</div><div class="clbl">Service Tech (n=3) · target 85%</div></div>
+      <div class="compare-stat"><div class="cnum neg">71.2%</div><div class="clbl">Radon Tech (n=1) · target 90%</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">Team average excludes Travis East and Joel Terry (trainee-timing policy, see below) and the Other bucket (Dan Kosel, Mark Rahja). Radon Tech is a group of one (Derek Lanz). Inspector average sits just under its 80% target, not above it.</p>
+  </section>
+
+  <section>
+    <h2>Service Techs — target 85%</h2>
+    <div class="group-meta">3 people · group avg 100.6%</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Brayden Rogosheske</td><td class="num">168.75</td><td class="num">148.90</td><td class="num eff">113.3%</td></tr>
+      <tr><td>Austin Cooper</td><td class="num">170.00</td><td class="num">166.42</td><td class="num eff">102.2%</td></tr>
+      <tr><td>Noah Carlson</td><td class="num">69.00</td><td class="num">79.88</td><td class="num eff">86.4%</td></tr>
+      <tr class="avg-row"><td>Group average</td><td class="num">135.92</td><td class="num">131.73</td><td class="num eff">100.6%</td></tr>
+    </table>
+    </div>
+    <p class="note">Noah Carlson counts as a technician, not a Home Inspector, per your earlier note. All three techs are ahead of the inspector group average.</p>
+  </section>
+
+  <section>
+    <h2>Radon Tech — target 90%</h2>
+    <div class="group-meta">1 person</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr class="under"><td>Derek Lanz</td><td class="num">110.25</td><td class="num">154.82</td><td class="num eff">71.2%</td></tr>
+    </table>
+    </div>
+    <p class="note">Only one person in this bucket — a 90% target with a sample size of one is worth keeping in mind.</p>
+  </section>
+
+  <section>
+    <h2>Home Inspectors — target 80%</h2>
+    <div class="group-meta">12 regular + Travis East and Joel Terry flagged · group avg 79.9% (regular only)</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Kelly Brill</td><td class="num">48.25</td><td class="num">56.62</td><td class="num eff">85.2%</td></tr>
+      <tr><td>Mitchell Bowser</td><td class="num">127.25</td><td class="num">152.65</td><td class="num eff">83.4%</td></tr>
+      <tr><td>Matt Mossey</td><td class="num">152.00</td><td class="num">183.77</td><td class="num eff">82.7%</td></tr>
+      <tr><td>Matt Clarity</td><td class="num">152.00</td><td class="num">184.25</td><td class="num eff">82.5%</td></tr>
+      <tr><td>Jake Miller</td><td class="num">122.00</td><td class="num">149.92</td><td class="num eff">81.4%</td></tr>
+      <tr><td>Stephen Hines</td><td class="num">143.00</td><td class="num">177.80</td><td class="num eff">80.4%</td></tr>
+      <tr><td>Kyle Grovenstein</td><td class="num">127.25</td><td class="num">158.60</td><td class="num eff">80.2%</td></tr>
+      <tr class="under"><td>Aaron Vandeventer</td><td class="num">145.50</td><td class="num">183.83</td><td class="num eff">79.2%</td></tr>
+      <tr class="under"><td>Walker Russek</td><td class="num">123.75</td><td class="num">156.98</td><td class="num eff">78.8%</td></tr>
+      <tr class="under"><td>Anthony Link-Danko</td><td class="num">112.50</td><td class="num">146.77</td><td class="num eff">76.7%</td></tr>
+      <tr class="under"><td>Kyle Kanipes</td><td class="num">148.25</td><td class="num">198.57</td><td class="num eff">74.7%</td></tr>
+      <tr class="under"><td>Tony Weinand</td><td class="num">132.75</td><td class="num">181.00</td><td class="num eff">73.3%</td></tr>
+      <tr class="trainee"><td>Travis East (trainee)</td><td class="num">70.00</td><td class="num">89.25</td><td class="num eff">78.4%</td></tr>
+      <tr class="trainee"><td>Joel Terry (trainee)</td><td class="num">68.50</td><td class="num">85.53</td><td class="num eff">80.1%</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Other</h2>
+    <div class="group-meta">2 people · not scored against a target</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th>Job Title</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+      <tr><td>Dan Kosel</td><td>Assistant Manager</td><td class="num">117.00</td><td class="num">174.98</td><td class="num eff">66.9%</td></tr>
+      <tr><td>Mark Rahja</td><td>Service Lead</td><td class="num">73.00</td><td class="num">133.35</td><td class="num eff">54.7%</td></tr>
+    </table>
+    </div>
+    <p class="note">Doesn't fit the same mold as a normal working inspector — held out of the scored group and averages per your call, even though Airtable's own Team field tags both as "Inspector." Points are still sourced from Airtable, so these figures are accurate, just not compared against the 80% target.</p>
+  </section>
+
+  <section>
+    <h2>Note</h2>
+    <div class="card good">
+      <span class="tag good">Source change</span>
+      <p>Points are now pulled directly from Airtable's Points Tracking / Points Summary tables rather than estimated from the Spectora and calendar exports. That calendar-based approach had real, confirmed errors (Sewer Scope overcounted, a wrong category mapping on Well Yield, Water Test undercounted) that this sidesteps entirely. Every number above is Airtable's own recorded total for August.</p>
+    </div>
+    <div class="card good">
+      <span class="tag good">Source change</span>
+      <p>Dan Kosel and Mark Rahja are held in the Other bucket, not scored as regular Inspectors. Airtable's own Team field tags both as "Inspector," but per your call they don't fit the same mold as a normal working inspector and stay out of the scored group and the averages.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Policy</span>
+      <p>Travis East and Joel Terry (in blue above) now show hours restricted to their post-solo period too (Aug 18 onward for both), so their efficiency ratio is a fair comparison rather than mechanically deflated by a full month of hours against a partial month of points. They're still excluded from the Home Inspector group average until they've accumulated a full month of data past their first-solo date — the ratio is accurate now, there's just not yet enough of it to average in.</p>
+    </div>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #5 · August 2026 · Points sourced directly from Airtable's Points Tracking / Points Summary tables (Scheduling Tracking // Radon base). Role groupings: Service Tech and Radon Tech from Gusto job titles; Dan Kosel and Mark Rahja held in Other per your direction, despite Airtable's Team field tagging both as Inspector. Hours from Gusto time tracking (Total hours, excludes PTO). Blake Pederson-Perovich excluded (Airtable Team: Other).
+  </footer>
+</div>
+</body>
+</html>
