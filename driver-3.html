@@ -11,10 +11,10 @@
   "owner": "Curtis",
   "period": "Sept 2026",
   "metrics": [
-    {"label": "Combined", "value": "98%", "target": "/ 90% target", "state": "on-target"},
-    {"label": "Leadership & Support", "value": "94%", "state": "on-target"},
-    {"label": "MHI Field Ops", "value": "100%", "state": "on-target"},
-    {"label": "MHS Field Ops", "value": "100%", "state": "on-target"}
+    {"label": "Combined", "value": "98%", "target": "/ 90% target", "state": "pos"},
+    {"label": "Leadership & Support", "value": "94%", "state": "pos"},
+    {"label": "MHI Field Ops", "value": "100%", "state": "pos"},
+    {"label": "MHS Field Ops", "value": "100%", "state": "pos"}
   ]
 }
 </script>
@@ -172,22 +172,12 @@
 
   <section>
     <h2>Financial model — worked example (Sept 2026)</h2>
-    <div class="card">
-      <p style="margin:0;"><b>Labor-cost side checks out.</b> At the 90% target, 10% of the 40-person scored population is 4 people. At a $30/hr blended rate and a standard 2,080-hr work year, one FTE costs $62,400/yr in wages. Four wrong-seat people at 20% lower output means 20% of that $249,600 in combined wages is going toward reduced output: <b>$49,920/yr</b> — right at the low end of the $50–80K "reduced labor cost" range already in the estimate above.</p>
-    </div>
-    <div class="card">
-      <p style="margin:0;"><b>Revenue side, using real Q2 2026 data.</b> Pulled from the MHI Spectora export (Apr–Jun 2026, cancelled orders excluded) and the MHS orders export filtered to the same window:</p>
-      <p class="note" style="margin-top:8px;">MHI: 1,808 active orders, $1,236,346.54 in revenue. The 8 home inspectors with attributed bookings this quarter averaged $78,482 each — annualized (×4 run-rate), about <b>$314K/yr per home inspector</b>. The 4 team leads average about $310K/yr on the same basis.</p>
-      <p class="note" style="margin-top:8px;">MHS: $166,230.72 in active revenue across 300 orders (jobs credited to more than one name split evenly). Brett Fredrichs annualizes to about $335K/yr, Dominic Reed to about $229K/yr. Alycia Bonneville's RHM number is about $60K/yr — a real figure, but it reflects low RHM demand so far rather than her true potential in the role. Josh Miller (Estimator) shows almost no revenue of his own, which is structurally correct — he generates quotes and the revenue posts to whoever installs the job.</p>
-    </div>
-    <div class="card">
-      <p style="margin:0;"><b>Combined per-person impact, at 20%.</b> One wrong-seated home inspector or team lead: ~$62,800/yr in lost revenue (20% of ~$314K) + $12,480/yr in wasted wages ≈ <b>$75K/yr total</b>. One wrong-seated MHS field tech in Brett's role: ~$79K/yr; in Dominic's role: ~$58K/yr. An admin or support seat with no direct Spectora-attributed revenue: labor-cost only, ~$12,480/yr.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Decided</span>
-      <p style="margin:0;"><b>Resolved: assume the wrong 10% is spread proportionally across the org, not concentrated in field roles.</b> Splitting the 40 scored people into 16 with reliable Spectora-attributed revenue (MHI asst. inspector manager, team leads, and non-trainee home inspectors; MHS mitigation lead, mitigation tech, and RHM tech) and 24 without (leadership/support, MHI service techs, trainees, MHS estimator), the blended average across those 16 producers is <b>$288,913/yr</b> per person. At a proportional 10% wrong-seat rate, that's 1.6 of the 4 wrong-seat people landing in a revenue-producing seat and 2.4 in a non-producing one.</p>
-      <p class="note" style="margin-top:8px;">Labor-cost impact stays $49,920/yr (unchanged — it applies to all 4 regardless of seat). Revenue impact: 1.6 × 20% × $288,913 ≈ <b>$92,452/yr</b>. Combined: <b>≈$142,372/yr</b> — which lands squarely inside the original $110–160K range, so the estimate holds under this assumption.</p>
-    </div>
+    <p class="note"><b>Labor-cost side checks out.</b> At the 90% target, 10% of the 40-person scored population is 4 people. At a $30/hr blended rate and a standard 2,080-hr work year, one FTE costs $62,400/yr in wages. Four wrong-seat people at 20% lower output means 20% of that $249,600 in combined wages is going toward reduced output: <b>$49,920/yr</b> — right at the low end of the $50–80K "reduced labor cost" range already in the estimate above.</p>
+    <p class="note"><b>Revenue side, using real Q2 2026 data.</b> Pulled from the MHI Spectora export (Apr–Jun 2026, cancelled orders excluded) and the MHS orders export filtered to the same window: MHI logged 1,808 active orders and $1,236,346.54 in revenue — the 8 home inspectors with attributed bookings this quarter averaged $78,482 each, or about <b>$314K/yr per home inspector</b> annualized (×4 run-rate); the 4 team leads average about $310K/yr on the same basis.</p>
+    <p class="note">MHS logged $166,230.72 in active revenue across 300 orders (jobs credited to more than one name split evenly). Brett Fredrichs annualizes to about $335K/yr, Dominic Reed to about $229K/yr. Alycia Bonneville's RHM number is about $60K/yr — a real figure, but it reflects low RHM demand so far rather than her true potential in the role. Josh Miller (Estimator) shows almost no revenue of his own, which is structurally correct — he generates quotes and the revenue posts to whoever installs the job.</p>
+    <p class="note"><b>Combined per-person impact, at 20%.</b> One wrong-seated home inspector or team lead: ~$62,800/yr in lost revenue (20% of ~$314K) + $12,480/yr in wasted wages ≈ <b>$75K/yr total</b>. One wrong-seated MHS field tech in Brett's role: ~$79K/yr; in Dominic's role: ~$58K/yr. An admin or support seat with no direct Spectora-attributed revenue: labor-cost only, ~$12,480/yr.</p>
+    <p class="note"><b>Resolved: assume the wrong 10% is spread proportionally across the org, not concentrated in field roles.</b> Splitting the 40 scored people into 16 with reliable Spectora-attributed revenue (MHI asst. inspector manager, team leads, and non-trainee home inspectors; MHS mitigation lead, mitigation tech, and RHM tech) and 24 without (leadership/support, MHI service techs, trainees, MHS estimator), the blended average across those 16 producers is <b>$288,913/yr</b> per person. At a proportional 10% wrong-seat rate, that's 1.6 of the 4 wrong-seat people landing in a revenue-producing seat and 2.4 in a non-producing one.</p>
+    <p class="note">Labor-cost impact stays $49,920/yr (unchanged — it applies to all 4 regardless of seat). Revenue impact: 1.6 × 20% × $288,913 ≈ <b>$92,452/yr</b>. Combined: <b>≈$142,372/yr</b> — which lands squarely inside the original $110–160K range, so the estimate holds under this assumption.</p>
   </section>
 
   <section>
