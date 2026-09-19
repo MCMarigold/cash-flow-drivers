@@ -85,6 +85,8 @@
   .gantt-label span { color:var(--muted); font-size:10.5px; }
   .gantt-track { grid-column: 2 / span 5; display:grid; grid-template-columns: repeat(5,1fr); height:24px; position:relative; }
   .gantt-track::before { content:''; position:absolute; inset:0; background-image: repeating-linear-gradient(to right, var(--border) 0, var(--border) 1px, transparent 1px, transparent 20%); }
+  /* RHM's gantt has 4 stages, not 5 — gridlines need to land every 25%, not every 20%, to line up under its headers */
+  .gantt-track.cols-4::before { background-image: repeating-linear-gradient(to right, var(--border) 0, var(--border) 1px, transparent 1px, transparent 25%); }
   .gantt-bar { height:18px; align-self:center; border-radius:9px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; z-index:1; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
   .gantt-bar .gcount { color:#fff; font-size:11px; font-weight:700; }
   .gantt-bar.done { background:var(--good); }
@@ -252,19 +254,19 @@
       </div>
       <div class="gantt-row" style="grid-template-columns: 240px repeat(4, 1fr);">
         <div class="gantt-label"><b>Quote sent, no booking yet</b><span>Jessica Coleman, Arlo Gilbert, Emily Ames</span></div>
-        <div class="gantt-track" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar stalled" style="grid-column:1/2;"><span class="gcount">3</span></div></div>
+        <div class="gantt-track cols-4" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar stalled" style="grid-column:1/2;"><span class="gcount">3</span></div></div>
       </div>
       <div class="gantt-row" style="grid-template-columns: 240px repeat(4, 1fr);">
         <div class="gantt-label"><b>Quote &rarr; full journey</b><span>Kristin Karlson — first visit done, next visit already on the calendar</span></div>
-        <div class="gantt-track" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar done" style="grid-column:1/5;"><span class="gcount">1</span></div></div>
+        <div class="gantt-track cols-4" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar done" style="grid-column:1/5;"><span class="gcount">1</span></div></div>
       </div>
       <div class="gantt-row" style="grid-template-columns: 240px repeat(4, 1fr);">
         <div class="gantt-label"><b>MHI referral, no booking yet</b><span>Jennifer Bruns, Kristen Streit, Jessica Braun — not counted above</span></div>
-        <div class="gantt-track" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar referral stalled" style="grid-column:1/2;"><span class="gcount">3</span></div></div>
+        <div class="gantt-track cols-4" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar referral stalled" style="grid-column:1/2;"><span class="gcount">3</span></div></div>
       </div>
       <div class="gantt-row" style="grid-template-columns: 240px repeat(4, 1fr);">
         <div class="gantt-label"><b>MHI referral &rarr; full journey</b><span>Pete Bittorf — not counted above; still reached a recurring subscription</span></div>
-        <div class="gantt-track" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar referral done" style="grid-column:1/5;"><span class="gcount">1</span></div></div>
+        <div class="gantt-track cols-4" style="grid-column: 2 / span 4; grid-template-columns: repeat(4,1fr);"><div class="gantt-bar referral done" style="grid-column:1/5;"><span class="gcount">1</span></div></div>
       </div>
     </div>
     </div>
@@ -272,7 +274,10 @@
 
     <div class="group-meta" style="margin-top:20px;">Conversion rates — same RHM leads, read as a funnel. Only one starting point so far (direct-to-quote)</div>
     <div class="table-wrap">
-    <table>
+    <table style="table-layout:fixed;">
+      <colgroup>
+        <col style="width:16.66%;"><col style="width:16.66%;"><col style="width:16.66%;"><col style="width:16.66%;"><col style="width:16.66%;"><col style="width:16.7%;">
+      </colgroup>
       <tr><th>Starting point</th><th class="num">Count</th><th class="num">No booking / stalled</th><th class="num">First visit booked</th><th class="num">Declined / expired</th><th class="num">Recurring subscription</th></tr>
       <tr class="avg-row"><td>RHM quote (only starting point)</td><td class="num">4</td><td class="num">3 (75%)</td><td class="num">—</td><td class="num tbd">0</td><td class="num eff">1 (25%)</td></tr>
       <tr><td class="note" style="font-style:italic;">MHI referral (not counted)</td><td class="num">4</td><td class="num">3 (75%)</td><td class="num">—</td><td class="num tbd">0</td><td class="num eff">1 (25%)</td></tr>
@@ -299,37 +304,36 @@
       <tr><td>Aug 7, 10, 25, 31</td><td>Jennifer Bruns, Kristen Streit, Pete Bittorf, Jessica Braun (RHM)</td><td class="note">Moved out of the RHM count: an MHI home-inspection order at their address (May&ndash;June 2026) predates their RHM quote &mdash; same self-referral rule as the mitigation row above, applied to RHM. Shown in Lead journeys &mdash; RHM instead.</td></tr>
     </table>
     </div>
-    <p class="note">One borderline case was kept in: a question about what's included in the maintenance program (no phone number given) — a real prospect question, so it counts under the broad lead definition already decided below.</p>
-    <p class="note" style="margin-top:8px;"><b>RHM data-quality flag:</b> checking the full RHM buyer history in Spectora, not just August, for anyone whose earliest visible record is a service visit rather than a quote turned up 6 buyers with a "Routine Home Maintenance" visit that predates their earliest visible quote by 1–7 months, plus 3 more with a service visit and no quote anywhere in the export at all. None of these 9 buyers' relevant dates fall in August, so this month's count isn't affected, but it's why the quote-only rule (see Definitions) exists: a bare service visit almost always means the real lead moment happened earlier than what's visible in the export.</p>
-    <p class="note" style="margin-top:8px;"><b>Data-quality flag on the MHI radon-testing export:</b> "Zach Gustafson" appears as the test subject at 25 different addresses across the export — clearly a placeholder/scheduling-contact name in MHI's system, not one repeat individual. This is why the MHI referral match is always done by address, never by name.</p>
-    <p class="note" style="margin-top:8px;"><b>Employee RHM accounts excluded:</b> Curtis Larson, Blake Pederson-Perovich, Deb Pulskamp, and Jeff Larson are staff getting the employee RHM discount, not marketing leads. None of their first RHM records fall in August, so this month's count isn't affected, but staff turnover means new employee names can show up over time — see Definitions for the ongoing check.</p>
-    <p class="note" style="margin-top:8px;"><b>HCP native-pipeline check, mitigation (Aug 11–19):</b> 3 August-created entries in HCP's native lead pipeline. Eli Sunderland (8/11, tagged "Previous Customer") turned out to be an MHI referral — an MHI inspection at his address predates this export window and his mitigation job, found after the initial pass; moved to the MHI-referral exclusion row above (see Lead journeys). John Zattoni (8/14) is also an MHI referral — an MHI home inspection at 18677 Ponderosa Ct, Eden Prairie (8/13) predates his mitigation estimate there by a day — excluded, not added to the mitigation MHI-referral total since a "John Zattoni" is already in that total at a different address (1277 Imperial Ln) and MHI's contact names aren't reliable at the address level (see the Zach Gustafson flag above); worth a look at whether it's the same person with two properties or a second MHI naming mixup (see Flags). Jennifer Bjorklund (8/19, tagged "Referral") had no matching HCP job, Spectora, or MHI record anywhere — a genuinely new lead, folded into the Direct to estimate count (see Lead journeys and Weekly leads).</p>
+    <p class="note">One borderline case stayed in: a maintenance-program question with no phone number given — a real prospect question, so it counts under the broad lead definition below.</p>
+    <p class="note" style="margin-top:8px;"><b>RHM data-quality flag:</b> a full RHM buyer-history check (not just August) found 9 buyers whose earliest visible record is a service visit rather than a quote — 6 predate their earliest quote by 1–7 months, 3 have no quote in the export at all. None fall in August, so this month's count is unaffected, but it's why the quote-only rule (see Definitions) exists: a bare service visit usually means the real lead moment happened earlier than the export shows.</p>
+    <p class="note" style="margin-top:8px;"><b>MHI radon-testing export flag:</b> "Zach Gustafson" appears as the test subject at 25 different addresses — clearly a placeholder/scheduling-contact name, not one person. This is why MHI referral matching is always done by address, never by name.</p>
+    <p class="note" style="margin-top:8px;"><b>Employee RHM accounts excluded:</b> Curtis Larson, Blake Pederson-Perovich, and Deb Pulskamp get the employee RHM discount, so those accounts aren't marketing leads. None fall in August, but re-checked monthly since new hires can add names (see Definitions).</p>
+    <p class="note" style="margin-top:8px;"><b>HCP native-pipeline check, mitigation (Aug 11–19):</b> 3 August entries. Eli Sunderland (8/11) turned out to be an MHI referral — moved to that exclusion row (see Lead journeys). John Zattoni (8/14) is also an MHI referral, at a different address than the John Zattoni already excluded (1277 Imperial Ln) — worth confirming whether it's one person or an MHI naming mixup (see Flags). Jennifer Bjorklund (8/19) had no matching HCP, Spectora, or MHI record — a genuine new lead, folded into Direct to estimate (see Lead journeys).</p>
   </section>
 
   <section>
     <h2>Definitions — decided</h2>
     <ul class="method-list">
-      <li><b>What counts as a lead:</b> any inbound contact expressing interest counts as a new lead — including price-shoppers and existing customers asking about a different service. Broadest definition, chosen for consistency across sources over precision; revisit once real volume is visible.</li>
-      <li><b>RHM leads are quotes only:</b> a first-time "Routine Maintenance Quote" is the RHM lead moment. A "Routine Home Maintenance" or "Initial Routine Home Maintenance" service visit never counts as the lead by itself, even when it's the earliest RHM record visible for that buyer — a visit with no quote on file almost always means the actual quote happened before this export's window (or off-system), so counting the visit would misdate an older lead into whichever month the visit lands in.</li>
+      <li><b>What counts as a lead:</b> any inbound contact expressing interest — including price-shoppers and existing customers asking about a different service. Broadest definition, chosen for consistency over precision; revisit once real volume is visible.</li>
+      <li><b>RHM leads are quotes only:</b> a first-time "Routine Maintenance Quote" is the RHM lead moment — a bare service visit never counts by itself, even as the earliest RHM record on file, since it usually means the real quote happened earlier (off-system or before this export's window).</li>
       <li><b>Dedupe rule:</b> one lead per person per 30 days, matched on phone and email, regardless of how many channels or times they reach out in that window.</li>
-      <li><b>Booked jobs as leads:</b> a first-time customer's HCP "Radon Testing" job <i>is</i> counted as a lead here, but only as their point of first contact with Marigold — the count doesn't also add a separate "estimate" or "job" line for them elsewhere, so there's no double-count with Driver 4 (follow-up close rate) or Driver 9 (sales KPIs), which track what happens after a lead converts, not whether it existed. Where each lead landed in that downstream journey is shown in "Lead journeys" above, not folded into this page's headline lead count.</li>
-      <li><b>Direct-to-estimate leads:</b> a new customer whose first-ever contact with Marigold is a mitigation estimate, not a radon test, still counts as a lead — most likely they were tested by someone else (e.g. during a home-purchase inspection) and called Marigold specifically for mitigation. Same first-contact logic as above, just a different entry point. Judged against HCP's own job records as the source of truth for mitigation, not Spectora — Spectora is just the online-intake echo of a job that should already exist in HCP. Includes the rare lead caught only via HCP's own native pipeline (a tagged referral with no job or Spectora record) — same bucket, same counting logic.</li>
-      <li><b>Employee RHM accounts don't count:</b> employees get a discounted RHM rate, so those accounts aren't marketing-driven leads — excluded the same way MHI referrals are. Matched by name against the current employee roster; re-checked each month since new hires can add new names over time (see Data quality for the current list).</li>
-      <li><b>MHI referrals don't count here:</b> when the "someone else" who tested them (mitigation) or inspected the home before them (RHM) was Marigold's own inspection arm (MHI), that's not a marketing-driven lead — it's Marigold referring business to itself. Excluded from this page's headline and weekly counts even when it's the customer's first-ever MHS purchase; shown separately in Lead journeys for the full picture. Applies to both mitigation and RHM leads, matched by property address in both cases — MHI's Tests Performed export for mitigation, MHI's Spectora order exports for RHM.</li>
-      <li><b>Matching stays private:</b> cross-referencing lead names against HCP/Spectora/MHI job records to build the Lead journeys section was done offline from your files. Only the resulting counts are published here — the matching itself, and any contact info used to do it, stayed off this public page.</li>
+      <li><b>Booked jobs as leads:</b> a first-time customer's HCP "Radon Testing" job counts as their lead moment only — not also as a separate estimate/job elsewhere, so there's no double-count with Driver 4 (follow-up close rate) or Driver 9 (sales KPIs). Downstream progress is shown in Lead journeys, not folded into the headline count.</li>
+      <li><b>Direct-to-estimate leads:</b> a new customer whose first contact is a mitigation estimate, not a radon test, still counts — most likely tested elsewhere and called specifically for mitigation. Judged against HCP's job records, not Spectora. Includes the rare lead caught only via HCP's native pipeline.</li>
+      <li><b>Employee RHM accounts don't count:</b> employees get a discounted RHM rate, so those accounts aren't marketing leads — matched against the current roster and re-checked monthly (see Data quality).</li>
+      <li><b>MHI referrals don't count here:</b> when the prior tester (mitigation) or inspector (RHM) was Marigold's own inspection arm (MHI), that's self-referral, not a marketing lead. Excluded from headline and weekly counts even on a customer's first MHS purchase; shown separately in Lead journeys. Matched by property address for both mitigation and RHM.</li>
+      <li><b>Matching stays private:</b> cross-referencing lead names against HCP/Spectora/MHI records to build Lead journeys was done offline. Only the resulting counts are published here — the matching and any contact info used stayed off this page.</li>
     </ul>
   </section>
 
   <section>
     <h2>Data sources</h2>
     <ul class="method-list">
-      <li><b>Email notifications:</b> Marigold's email notifications for new Google leads and contact-us submissions, parsed manually/semi-manually. Doesn't require access to Minh's system, but loses whatever metrics his system calculates natively, and is more manual than a direct pull.</li>
-      <li><b>Housecall Pro job records — the source of truth for mitigation:</b> used three ways — first, filtered to genuine first-time "Radon Testing" jobs to catch callers who booked a test directly (excludes Post-Mitigation Testing, valve/repair work, and system evaluations, which are downstream of an existing customer relationship, not a new lead); second, filtered to first-time mitigation jobs (quote through install) for people with no radon-testing job at all, since mitigation moved off Square to HCP this year; third, to check whether a lead's mitigation estimate turned into a completed install. Mitigation-side (MHI) only — RHM doesn't run through HCP.</li>
-      <li><b>Spectora order history:</b> now mostly a duplicate of HCP for mitigation — customers submit a request in Spectora and it becomes an HCP job, so the same person usually shows up in both. Counted as its own mitigation lead only in the rare case where no matching HCP job exists at all (currently 2 people: Annie Slimmer, Stevan Pekich — see Flags). Spectora is also the system of record for RHM, where every first-time "Routine Maintenance Quote" counts as a Spectora-sourced lead — quotes only, never a bare service visit (see Definitions) — see Lead journeys — RHM.</li>
-      <li><b>MHI Tests Performed export (radon testing division):</b> real-estate-transaction radon tests placed during MHI home inspections — a separate business line from MHS mitigation. Matched to Spectora/HCP mitigation records by property address (street + zip), never by name — the test is recorded under whoever's on file at the time, often the buyer, while the eventual mitigation customer is the seller calling in under a different name. "High" is &ge;4.0 pCi/L, the EPA residential action level. Where a high MHI test leads to a mitigation estimate, that's a real referral, but it's Marigold's own inspection arm feeding its own mitigation arm — tracked in Lead journeys for visibility, excluded from this page's counts (see Definitions).</li>
-      <li><b>MHI Spectora order exports:</b> two general MHI booking exports covering Order Dates April–August 2026 — every MHI order (home inspection, radon, sewer scope, etc.), not radon-specific like the Tests Performed export above, and with no buyer-name column at all, only address. Used to address-match August's RHM leads against a prior MHI order at the same property — the RHM equivalent of the radon-test referral check. Only covers Apr–Aug 2026, so an MHI order before April wouldn't be caught (see Flags).</li>
-      <li><b>Target:</b> Minh's system is ActiveCampaign, tracking site form submissions — the intended system of record for this driver once access is set up. Closest to source, includes his existing calculated fields.</li>
-      <li><b>HCP's native lead pipeline (leads report):</b> HCP's own lead-tracking view, separate from job records — the source that caught Jennifer Bjorklund's referral lead, which had no job or Spectora record at all. The weekly-rollup version of this export has no names or contact info and can't be de-duped; the lead-level view (name, description, tags, status, dates) is what makes the check possible, done manually each month against the leads already counted.</li>
+      <li><b>Email notifications:</b> Marigold's email notifications for new Google leads and contact-us submissions, parsed manually. No system access needed, but more manual and loses Minh's native metrics.</li>
+      <li><b>Housecall Pro job records — the source of truth for mitigation:</b> catches direct test bookings, first-time mitigation jobs (quote through install) for people with no radon-testing job, and whether an estimate converted to an install. Mitigation only — RHM doesn't run through HCP.</li>
+      <li><b>Spectora order history:</b> mostly duplicates HCP for mitigation — counted as its own lead only when no matching HCP job exists (currently 2 people: Annie Slimmer, Stevan Pekich — see Flags). Also the system of record for RHM, where a first-time quote counts as the lead, never a bare service visit (see Definitions).</li>
+      <li><b>MHI Tests Performed export (Breeze):</b> real-estate-transaction radon tests from MHI home inspections. Matched to mitigation records by property address, never by name — buyer and mitigation customer are often listed under different names. "High" is &ge;4.0 pCi/L (EPA action level). A high test leading to an estimate is a real referral, but it's MHI feeding its own arm — tracked in Lead journeys, excluded from this page's counts (see Definitions).</li>
+      <li><b>MHI Spectora order exports:</b> two MHI booking exports, Order Dates April–August 2026, address only (no buyer name). Used to check RHM leads against a prior MHI order at the same address. Doesn't cover before April (see Flags).</li>
+      <li><b>HCP's native lead pipeline (leads report):</b> HCP's own lead-tracking view, separate from job records — caught Jennifer Bjorklund's referral lead, which had no job or Spectora record. Only the lead-level export (name, tags, status, dates) supports de-duping; checked manually each month.</li>
       <li><b>Paid channels (LSA, etc.):</b> platform-reported leads — to be added once channel status is confirmed (see Flags).</li>
     </ul>
   </section>
@@ -338,31 +342,15 @@
     <h2>Flags — open decisions</h2>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p style="margin:0;"><b>Emily Ames (RHM quote, 8/21)</b> wrote in her referral field that she'd used Marigold Home Inspections for her home purchase, agent Jado Hark. That's the same "Marigold's own inspection arm feeding another Marigold arm" pattern that gets MHI referrals excluded elsewhere on this page — checked against the MHI Spectora exports and no address match turned up for 721 Shawnee Woods Rd in either the Apr–Jun or Jun–Aug window. Still counted as a marketing lead. Two explanations: her MHI inspection genuinely predates April 2026 (outside what these two exports cover), or it's a different address (maybe her prior rental, not the home she bought). Worth a look at MHI's older records if this needs a firmer answer before the Sept 24 L10; otherwise leaving her counted is the safer default given the mitigation-side rule requires a confirmed address match, not just a mention.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p style="margin:0;"><b>MHI Spectora export coverage window:</b> the two exports used for the RHM referral check only cover Order Dates April–August 2026. An MHI order before April wouldn't be caught by this pass — worth extending back further if a firmer answer is needed on Emily Ames above, or if a future month's RHM lead has an MHI connection close to the edge of this window.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p style="margin:0;"><b>John Zattoni</b> now shows up twice across the MHI-referral checks: previously grouped with Victoria Campbell and Zach Gustafson at 1277 Imperial Ln (mitigation MHI referral, moved out of the count), and now again via this month's HCP pipeline pull, at a different property — 18677 Ponderosa Ct, Eden Prairie — with its own confirmed MHI order predating the estimate. Excluded either way, but worth a look at whether this is one person with two properties or MHI's contact-name data mixing up two different people (see the Zach Gustafson data-quality flag above) before the mitigation MHI-referral total of 7 needs revisiting.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p style="margin:0;">HCP's native lead pipeline only had 9 leads total on record, spanning June–September — a very small, possibly filtered view (open leads plus recent activity, not necessarily full history). Worth checking with HCP support or Minh whether older entries roll off the default view, since a future month's dedupe pass would miss them if so.</p>
+      <p style="margin:0;"><b>MHI Spectora export coverage window:</b> the two exports used for the RHM referral check only cover Order Dates April–August 2026. An MHI order before April wouldn't be caught by this pass — worth extending back further if a future month's RHM lead has an MHI connection close to the edge of this window.</p>
     </div>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
       <p style="margin:0;">Whether any paid-channel (LSA, etc.) leads are tracked anywhere right now, separate from ActiveCampaign and the sources above.</p>
     </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p style="margin:0;">Annie Slimmer and Stevan Pekich each submitted an online Spectora request that never turned into an HCP job. Still counted as leads (someone reached out), but worth a look at whether they fell through during the HCP handoff, now that HCP is the system of record for mitigation.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p style="margin:0;">Janelle Kelly's Hillside Ct property (one of the 13 HCP radon-testing leads) has a mitigation install dated Aug 12, before her "first" test on Aug 24. Distinct from her separate Sheridan Ave W property (MHI referral, excluded — see Data quality). Still counted pending a gut-check on the date order.</p>
+    <div class="card decide">
+      <span class="tag decide">Decide</span>
+      <p style="margin:0;"><b>Target system of record:</b> Minh's system is ActiveCampaign, tracking site form submissions — closest to source, and it includes his existing calculated fields. It's the intended system of record for this driver, but access still needs to be set up before this page can pull from it directly.</p>
     </div>
   </section>
 
