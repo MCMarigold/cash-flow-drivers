@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Driver Methodology — Marigold Cash Flow Driver Dashboard</title>
+<style>
+:root {
+  --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+  --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+  --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+.wrap { max-width: 1000px; margin:0 auto; }
+.eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+.back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+.back:hover { text-decoration:underline; }
+h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+.sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+section { margin-top:32px; }
+.group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+.card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:20px 24px; margin-bottom:20px; }
+.card.decide { border-left:4px solid var(--gold); }
+.card.confirm { border-left:4px solid var(--gold); }
+.tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-left:8px; vertical-align:middle; }
+.tag.callout { display:block; width:fit-content; margin:0 0 6px 0; }
+.tag.unit { background:#F6F1E3; color:var(--gold-dark); }
+.tag.decide { background:#f7e9e2; color:var(--decide); }
+.tag.confirm { background:#e7eef5; color:var(--confirm); }
+.card p { margin:6px 0 0; font-size:14.5px; }
+.note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+.method-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0; }
+.method-list li { margin-bottom:4px; }
+.method-list b { color:var(--gold-dark); }
+footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+.summary-card { background:#FBF6E8; border:1px solid var(--border); border-left:4px solid var(--gold); border-radius:10px; padding:22px 26px; margin-bottom:28px; }
+.summary-card h2 { border:none; padding:0; margin:0 0 10px; font-family:Arial,sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); }
+.summary-card p { font-family:Arial,sans-serif; font-size:13.5px; color:var(--text); margin:0 0 10px; line-height:1.6; }
+.summary-figures { display:flex; flex-wrap:wrap; gap:22px; margin:14px 0 16px; }
+.summary-fig { text-align:left; }
+.summary-fig .sfval { font-family:Arial,sans-serif; font-size:24px; font-weight:700; color:var(--gold-dark); line-height:1.1; }
+.summary-fig .sflbl { font-family:Arial,sans-serif; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
+.summary-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0 0; }
+.summary-list li { margin-bottom:3px; }
+.summary-note { font-family:Arial,sans-serif; font-size:12px; color:var(--muted); font-style:italic; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+.driver-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:8px; }
+.driver-title { font-size:23px; font-weight:700; margin:4px 0 0; }
+.head-metrics { display:flex; flex-direction:row; align-items:flex-start; gap:24px; flex-shrink:0; }
+.target-big { font-family:Arial,sans-serif; font-size:22px; font-weight:700; color:var(--gold-dark); text-align:right; line-height:1.25; max-width:260px; }
+.target-big .lbl { display:block; color:var(--muted); font-weight:400; text-transform:uppercase; font-size:10.5px; letter-spacing:.05em; }
+.impact-big { font-family:Arial,sans-serif; font-size:19px; font-weight:700; color:var(--good); text-align:right; line-height:1.25; max-width:260px; }
+.impact-big.tbd { font-size:12px; font-weight:400; font-style:italic; color:var(--muted); }
+.impact-big .lbl { display:block; color:var(--muted); font-weight:400; text-transform:uppercase; font-size:10.5px; letter-spacing:.05em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow">Cash Flow Driver Dashboard</div>
+  <h1>Driver Methodology</h1>
+  <div class="sub">How each of the 9 drivers is calculated — formula, data sources, definitions, and owner. Targets only; this page is a reference and isn't updated monthly (only when a formula, source, or target actually changes).</div>
+
+  <div class="summary-card">
+    <h2>Dashboard-Wide Financial Impact</h2>
+    <p>Each driver's Est. Impact figure is the estimated annual financial impact of closing the gap to that driver's target. These figures represent potential revenue increases and/or cost savings — not guaranteed cash generated. Two of the nine drivers (8: Average Employee Tenure, 9: Sales KPIs Achieved) are deliberately not assigned a dollar figure, to avoid double-counting impact that's already captured in the other seven — so the totals below reflect those seven.</p>
+    <div class="summary-figures">
+      <div class="summary-fig"><div class="sfval">~$1.16M</div><div class="sflbl">Potential revenue impact</div></div>
+      <div class="summary-fig"><div class="sfval">~$112K</div><div class="sflbl">Potential cost savings</div></div>
+      <div class="summary-fig"><div class="sfval">~$1.28M</div><div class="sflbl">Combined financial impact</div></div>
+      <div class="summary-fig"><div class="sfval">~$520K</div><div class="sflbl">Cash-equivalent value (35% margin)</div></div>
+    </div>
+    <p>Because revenue does not equal cash, the revenue and cost-savings categories are kept separate rather than added together and labeled a single "cash impact." At a 35% contribution margin, the revenue portion converts to roughly $407K in cash-equivalent value; added to the $112K in direct cost savings (which drop straight to the bottom line, no margin applied), the combined cash-equivalent estimate is approximately $520K. This is shown alongside — not instead of — the revenue/savings split above.</p>
+    <ul class="summary-list">
+      <li>~$1.16M potential revenue impact — Drivers 1, 2, 4, 5, 6, and the revenue portion of Driver 3</li>
+      <li>~$112K potential cost savings — the labor-cost portion of Driver 3, plus Driver 7</li>
+      <li>~$1.28M combined financial impact (revenue + cost savings, kept as separate categories)</li>
+      <li>~$520K cash-equivalent value at a 35% contribution margin on the revenue portion, plus the full cost-savings figure</li>
+      <li>Revenue impact and cost savings should remain separate and should not be presented as a single cash-impact figure</li>
+    </ul>
+    <p class="summary-note">Some driver values are well-established calculations; others are estimates based on assumptions that will get more precise as the underlying data improves. See each driver's card below for its individual basis.</p>
+  </div>
+
+  <section>
+    <div class="card confirm">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 1 <span class="tag unit">MHI</span></h2>
+          <p class="driver-title">Inspector Available Capacity</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>5%</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$416K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> Weighted slots consumed ÷ available slots</p>
+      <ul class="method-list">
+        <li><b>Numerator:</b> each booking's weight = Spectora duration ÷ team average duration (3.26 hrs = "1 slot")</li>
+        <li><b>Denominator:</b> standard day = 2 slots, extended "long" day (8:30–7:00) = 3 slots, plus Saturday rotation adjustments (+2/month standard)</li>
+        <li><b>Adjustments:</b> PTO docks the day's slot value (2 or 3) via calendar + Spectora cross-check; Mark Rahja and trainees under 100 lifetime inspections excluded from core team</li>
+        <li><b>Data sources:</b> Spectora durations/events export, Inspector/Tech Schedule sheet, PTO calendar, Airtable Inspector Milestones table, Employee Directory "First Day" field</li>
+        <li><b>Financial impact:</b> ~$364K–$416K/yr — a revenue opportunity (not direct cost savings), based on ~$7,008/wk in additional revenue per additional inspector ($7,008 × 52 = $364,416/yr per hire); closing the current gap is modeled as needing about 1.0 additional standard inspector hire</li>
+        <li><b>Owner:</b> Blake</li>
+      </ul>
+      <p class="note"><b>Caveat:</b> assumes demand holds steady; a hire who also grows total bookings needs more slots to reach the same %.</p>
+    </div>
+
+    <div class="card confirm">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 2 <span class="tag unit">MHS</span></h2>
+          <p class="driver-title">MHS Marketing Leads</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>40/wk</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$409K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> unique new leads per week, deduped one-per-person-per-30-days, reported as a 4-week average.</p>
+      <ul class="method-list">
+        <li><b>Definitions:</b> any inbound contact expressing interest counts, including price-shoppers; RHM lead = first-time "Routine Maintenance Quote"; a direct-to-estimate mitigation contact (no prior test) still counts; MHI self-referrals and discounted employee RHM accounts excluded</li>
+        <li><b>Data sources:</b> email notifications (parsed manually), Housecall Pro (source of truth for mitigation), Spectora order history (system of record for RHM), MHI Tests Performed export (matched by address), HCP's native lead pipeline</li>
+        <li><b>Financial impact:</b> ~$409K/yr in potential revenue, based on the expected revenue from increasing lead volume and converting those leads into booked MHS work; the page notes this opportunity grows further as downstream drivers (like follow-up close rate) improve, so it isn't a fixed independent figure</li>
+        <li><b>Owner:</b> Minh</li>
+      </ul>
+      <p class="note"><b>Open:</b> MHI Spectora export only covers Apr–Aug 2026; paid-channel (LSA) tracking unconfirmed; ActiveCampaign intended as system of record but not yet configured; RHM conversion rate directional only (sample of 8 contacts).</p>
+    </div>
+
+    <div class="card decide">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 3 <span class="tag unit">OPS</span></h2>
+          <p class="driver-title">Wrong People / Wrong Seats</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>90%</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$142K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> right-seat % = people passing all three GWC checks (Get it / Want it / Capacity) ÷ total people in filled seats; vacant seats excluded from both sides.</p>
+      <ul class="method-list">
+        <li><b>Calculation:</b> scored population from accountability charts, segmented into revenue-producing and non-producing roles; a lower-output assumption is applied to wrong-seat employees; the wrong-seat rate is allocated proportionally to estimate revenue and labor-cost impact</li>
+        <li><b>Data sources:</b> Accountability Chart (main + MHI + MHS detail), Airtable Employee directory, Spectora/MHS exports (cancelled orders excluded), Mission &amp; Values doc (pending leadership approval)</li>
+        <li><b>Financial impact:</b> ~$142K/yr at the 90% target — ~$92,452/yr from added revenue (a 20% output lift assumed per corrected seat) plus ~$49,920/yr from reduced labor cost</li>
+      </ul>
+      <p class="note"><span class="tag decide callout">Decide</span>Who's actually failing (GWC scoring from Curtis pending); core values scores are placeholders; whether core values feed the right-seat % or stay a separate coaching signal; whether dept heads score their own people or Curtis owns all of it.</p>
+    </div>
+
+    <div class="card decide">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 4 <span class="tag unit">MHS</span></h2>
+          <p class="driver-title">Follow-Up Close Rate</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>70%</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$100K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> close rate = quotes accepted ÷ quotes sent, restricted to real (non-test, non-handyman) MHS quotes, evaluated as of report date.</p>
+      <ul class="method-list">
+        <li><b>Data sources:</b> Housecall Pro API <code>/estimates</code> endpoint (Mitigation), Square CSV export (Mitigation stragglers + RHM)</li>
+        <li><b>Definitions:</b> "sent" excludes Draft status, includes Pending/Undelivered; Handyman eliminated (discontinued May 2026)</li>
+        <li><b>Financial impact:</b> ~$100K/yr — hitting the 70% close-rate target on typical quote volume vs. actual close rate; note the live page also derives a month-specific gap by applying the target rate to that month's actual sent-quote value, which will run higher or lower than this figure depending on volume</li>
+        <li><b>Owner:</b> Minh</li>
+      </ul>
+      <p class="note"><span class="tag decide callout">Decide</span>70% target unconfirmed; unclear whether it should be per-line or combined.</p>
+    </div>
+
+    <div class="card confirm">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 5 <span class="tag unit">MHI</span></h2>
+          <p class="driver-title">Inspector/Tech Efficiency</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big" style="font-size:15px"><span class="lbl">Target</span>Insp 80% · Tech 85% · Radon 90%</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$73.6K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> Points ÷ Hours, split into the three role-based target groups.</p>
+      <ul class="method-list">
+        <li><b>Data sources:</b> Airtable Points Summary (points), Gusto time tracking (hours, excludes PTO), Gusto job titles (role groupings)</li>
+        <li><b>Financial impact:</b> ~$73.6K/yr — framed as "primarily a capacity/revenue opportunity rather than a direct payroll reduction"</li>
+        <li><b>Owner:</b> Blake</li>
+      </ul>
+      <p class="note"><span class="tag decide callout">Decide</span>Overlap with other capacity drivers still unconfirmed; trainees excluded pending a full post-training month; Mark Rahja's data flagged unreliable until cleaned up.</p>
+    </div>
+
+    <div class="card confirm">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 6 <span class="tag unit">MHI</span></h2>
+          <p class="driver-title">Cross-Selling / Ancillary Attach Rate</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>55%</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$72.8K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> (inspections with 1+ add-on ÷ total in-scope inspections) × 100. Also tracked: avg add-ons/inspection, total add-on revenue, add-on % of revenue.</p>
+      <ul class="method-list">
+        <li><b>Scope:</b> excludes Phase 2, TISH, Re-Inspection, Walk &amp; Talk, standalone add-on-only, Preventative Maintenance, Insurance Inspection, Recuperative Care, Annual Home Evaluation, CE Instruction — none have a real inspection to cross-sell onto</li>
+        <li><b>Data sources:</b> Spectora MCP export (attach detection), manual Spectora export (per-add-on revenue), reconciled by Order ID</li>
+        <li><b>Financial impact:</b> ~$72.8K/yr — modeled as a 5-percentage-point increase in attach rate generating ~$1,400/wk in additional revenue ($1,400 × 52 = $72,800/yr); actual add-on revenue, per-inspection average, and % of total revenue are also tracked directly off the monthly reports</li>
+        <li><b>Owner:</b> Maggie</li>
+      </ul>
+      <p class="note"><b>Caveats:</b> baseline period recalculated on identical rules for apples-to-apples comparison each month; condo/townhome consistently underperforms single-family; prelisting inspections run at zero attach.</p>
+    </div>
+
+    <div class="card confirm">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 7 <span class="tag unit">OPS</span></h2>
+          <p class="driver-title">AI Process Efficiencies</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>40 hrs/wk</div>
+          <div class="impact-big"><span class="lbl">Est. Impact</span>~$62.4K/yr</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> weekly time savings = sum of "Est. weekly time savings" across all live AI-supported processes. Annual labor value = hrs/wk × 52 × $30/hr average wage.</p>
+      <ul class="method-list">
+        <li><b>Data source:</b> manual register, logged as each process goes live (spreadsheet of AI-supported workflows with estimated weekly time savings)</li>
+        <li><b>Financial impact:</b> ~$62.4K/yr at the 40 hrs/wk target (40 × 52 weeks × $30/hr average wage) — an annual labor value, not automatically realized cash savings; only becomes real savings if the freed time reduces actual labor cost or is redeployed to revenue-producing work</li>
+        <li><b>Owner:</b> Britney</li>
+      </ul>
+      <p class="note"><b>Caveats:</b> this is annual labor value, not automatically realized cash savings — only real if freed time reduces actual labor cost or is redeployed to revenue work; $30/hr is a flat average wage that may shift to actual rates; no automated data source; placeholder examples still in the table awaiting real processes.</p>
+    </div>
+
+    <div class="card decide">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 8 <span class="tag unit">OPS</span></h2>
+          <p class="driver-title">Average Employee Tenure</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big" style="font-size:17px"><span class="lbl">Target</span>Hold 2.2 yrs</div>
+          <div class="impact-big tbd"><span class="lbl">Est. Impact</span>Not quantified in $</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> tenure = report date − hire date, in years, per active person. A rehire's clock resets (only current active record counts). Overall = mean across MHI + MHS + Office Staff.</p>
+      <ul class="method-list">
+        <li><b>Data source:</b> Marigold Home roster export (people table)</li>
+        <li><b>Financial impact:</b> no fixed annual dollar value is assigned — the page notes the financial benefit is primarily about avoiding hiring, onboarding, and training costs from turnover, not a figure that's been dollarized</li>
+      </ul>
+      <p class="note"><span class="tag decide callout">Decide</span>Tolerance band not yet confirmed (suggested 2.0–2.4 range); whether a tiered calculation would better reflect departmental differences.</p>
+    </div>
+
+    <div class="card decide">
+      <div class="driver-head">
+        <div>
+          <h2 style="border:none;padding:0;margin:0;font-family:Arial,sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark)">Driver 9 <span class="tag unit">MHS</span></h2>
+          <p class="driver-title">Sales KPIs Achieved</p>
+        </div>
+        <div class="head-metrics">
+          <div class="target-big"><span class="lbl">Target</span>100%</div>
+          <div class="impact-big tbd"><span class="lbl">Est. Impact</span>Not quantified in $</div>
+        </div>
+      </div>
+      <p class="note"><b>Formula:</b> for each of the 4 KPIs, each week: met if actual ≥ goal. Weekly score = KPIs met ÷ 4. Monthly headline = average of the four weekly scores.</p>
+      <ul class="method-list">
+        <li><b>KPIs:</b> meetings set, sales calls/touchpoints, estimates sent, estimates won/booked</li>
+        <li><b>Data source:</b> Marigold - EOS - Scorecard.xlsx (live, Drive) — Sales section</li>
+        <li><b>Financial impact:</b> deliberately not assigned a dollar value — the page states these sales activities feed into other revenue drivers (lead generation, follow-up close rate), and giving this driver its own dollar figure could double-count impact already captured elsewhere</li>
+        <li><b>Owner:</b> Ron</li>
+      </ul>
+      <p class="note"><span class="tag decide callout">Decide</span>Estimates sent/won are logged under Minh, not Ron — ownership split unconfirmed. Sales Calls target (currently 115/week) is up for discussion given recent staffing changes.</p>
+    </div>
+  </section>
+
+  <footer>Reference page — formulas, sources, and targets only. No monthly numbers here; update this page only when a formula, source, or target actually changes. <a class="back" href="index.html">&larr; Back to dashboard</a></footer>
+</div>
+</body>
+</html>
