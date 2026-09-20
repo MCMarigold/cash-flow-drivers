@@ -95,6 +95,9 @@
     margin-top:28px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
     border-top:1px solid var(--line); padding-top:14px;
   }
+  .legend{display:flex; gap:16px; flex-wrap:wrap; font-family:Arial,sans-serif; font-size:11px; color:#7a7a7a; margin-bottom:14px;}
+  .legend span{display:inline-flex; align-items:center; gap:5px;}
+  .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
 
   @media (max-width:640px){
     .row{flex-direction:column;}
@@ -215,7 +218,13 @@
   <div class="footer-links"><a href="methodology.html">&larr; Methodology</a><a href="trends.html">Trends</a><a href="insights.html">Insights</a><a href="archive/index.html">Archive &rarr;</a></div>
 
   <footer>
-    cash-flow-drivers-build-checklist-v3.md · rows grouped by business unit (MHI / MHS / OPS), per driver #1–9 assignment · click a driver for full methodology and numbers · each card is pulled live from its driver-N.html page — placeholder cards go live automatically once a page with a driver-summary block is dropped in, no index edits needed. Before overwriting a driver page with a new month's numbers, archive the outgoing version — see the Archive link below.
+    <div class="legend">
+      <span><i style="background:var(--ready)"></i> On/above target</span>
+      <span><i style="background:var(--waiting)"></i> In progress / partial</span>
+      <span><i style="background:var(--blocked)"></i> Below target</span>
+      <span><i style="background:#8a8a8a"></i> Not judged pos/neg (ops-style or unscored)</span>
+    </div>
+    Cash Flow Driver Dashboard v1 · rows grouped by business unit (MHI / MHS / OPS), per driver #1–9 assignment · click a driver for full methodology and numbers · each card is pulled live from its driver-N.html page — placeholder cards go live automatically once a page with a driver-summary block is dropped in, no index edits needed. Before overwriting a driver page with a new month's numbers, archive the outgoing version.
   </footer>
 
 </div>
