@@ -7,16 +7,16 @@
 :root {
   --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
   --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
-  --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a; --black: #1a1a1a;
 }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
 .wrap { max-width: 1000px; margin:0 auto; }
-.eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
-.back { font-family:Arial,sans-serif; font-size:12px; color:var(--confirm); text-decoration:none; font-weight:700; }
+header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
+.back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
 .back:hover { text-decoration:underline; }
-h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
-.sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+h1 { font-size:26px; margin:10px 0 4px 0; color:var(--black); }
+.meta { font-family:Arial,sans-serif; font-size:12.5px; color:#7a7a7a; }
 section { margin-top:32px; }
 .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
 .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:20px 24px; margin-bottom:20px; }
@@ -55,10 +55,11 @@ footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:va
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="index.html">&larr; Back to dashboard</a>
-  <div class="eyebrow">Cash Flow Driver Dashboard</div>
-  <h1>Driver Methodology</h1>
-  <div class="sub">How each of the 9 drivers is calculated — formula, data sources, definitions, and owner. Targets only; this page is a reference and isn't updated monthly (only when a formula, source, or target actually changes).</div>
+  <header>
+    <a class="back" href="index.html">&larr; Back to dashboard</a>
+    <h1>Driver Methodology</h1>
+    <div class="meta">How each of the 9 drivers is calculated — formula, data sources, definitions, and owner. Targets only; this page is a reference and isn't updated monthly (only when a formula, source, or target actually changes).</div>
+  </header>
 
   <div class="summary-card">
     <h2>Dashboard-Wide Financial Impact</h2>
