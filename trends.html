@@ -53,13 +53,11 @@
   td.month-cell{text-align:center; min-width:50px; padding:4px;}
   .cell-box{border-radius:5px; padding:3px 4px; display:inline-block; min-width:40px;}
   .cell-box .cval{font-size:11.5px; font-weight:bold; font-family:Arial,sans-serif; line-height:1.15;}
-  .cell-box .ctgt{font-size:7.5px; color:#8a8a8a; margin-top:0; line-height:1.2;}
-  .cell-box .cnote{font-size:7px; color:#8a8a8a; font-style:italic; margin-top:1px; line-height:1.2;}
   .cell-pos{background:var(--ready-bg);} .cell-pos .cval{color:var(--ready);}
   .cell-neg{background:var(--blocked-bg);} .cell-neg .cval{color:var(--blocked);}
   .cell-draft{background:var(--waiting-bg);} .cell-draft .cval{color:var(--waiting);}
   .cell-neutral{background:var(--neutral-bg);} .cell-neutral .cval{color:#7a7a7a;}
-  .cell-empty{color:#c4bfae; font-size:9.5px; font-style:italic; line-height:1.2;}
+  .cell-empty{color:#c4bfae; font-size:12px;}
   .cell-future{color:#d8d3c4; font-size:12px;}
 
   .revenue-card{
@@ -213,7 +211,10 @@
   }
 
   // Best-effort numeric average across a metrics[] array (e.g. driver 5's
-  // Insp/Tech/Radon role groups), for the single "team average" cell number.
+  // Insp/Tech/Radon role groups), used only when a driver has NO pre-computed
+  // combined headline of its own (see cellFromEntry below — a driver that
+  // already reports a combined number, like driver 4, always uses that
+  // instead of us re-averaging its per-category breakdown).
   // Color shown is the weakest (most conservative) of the group's states.
   const SEVERITY = { neg: 3, draft: 2, neutral: 1, pos: 0 };
   function averageMetrics(metrics) {
@@ -234,43 +235,45 @@
     });
     if (nums.length === metrics.length && nums.length > 0) {
       const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
-      return { value: `${avg % 1 === 0 ? avg : avg.toFixed(1)}${unit}`, state: worst, note: 'avg of ' + metrics.length + ' role groups' };
+      return { value: `${avg % 1 === 0 ? avg : avg.toFixed(1)}${unit}`, state: worst };
     }
     // Fallback if values aren't cleanly numeric — show them joined rather than guessing.
-    return { value: metrics.map(m => m.value).join(' / '), state: worst, note: metrics.length + ' role groups' };
+    return { value: metrics.map(m => m.value).join(' / '), state: worst };
   }
 
+  // A driver's combined headline (its own pre-computed figure, e.g. driver
+  // 4's "40.8% combined") always wins over averaging its metrics[] breakdown
+  // ourselves — we only average metrics as a fallback when a driver reports
+  // per-category numbers with no combined headline of its own (driver 5).
   function cellFromEntry(entry) {
     if (!entry) return null;
+    if (entry.headline) {
+      return { value: entry.headline.value, state: stateClass(entry.headline.state) };
+    }
     if (Array.isArray(entry.metrics) && entry.metrics.length) {
       const avg = averageMetrics(entry.metrics);
-      return { value: avg.value, state: avg.state, note: avg.note };
-    }
-    if (entry.headline) {
-      return { value: entry.headline.value, state: stateClass(entry.headline.state), note: entry.note || null };
+      return { value: avg.value, state: avg.state };
     }
     return null;
   }
 
-  // Target shown once per row (not repeated in every month cell). For a
-  // multi-metric driver (e.g. driver 5's role groups), combines each group's
-  // own target rather than picking just one.
+  // Target shown once per row (not repeated in every month cell). Same
+  // headline-first, metrics-fallback preference as cellFromEntry above.
   function targetFromEntry(entry) {
     if (!entry) return null;
+    if (entry.headline && entry.headline.target) return entry.headline.target;
     if (Array.isArray(entry.metrics) && entry.metrics.length) {
       const targets = entry.metrics.map(m => m.target).filter(Boolean);
       return targets.length ? targets.join(' · ') : null;
     }
-    if (entry.headline && entry.headline.target) return entry.headline.target;
     return null;
   }
 
   function renderCellHtml(cell) {
-    if (!cell) return `<span class="cell-empty">Not archived this month</span>`;
+    if (!cell) return `<span class="cell-empty">—</span>`;
     const cls = 'cell-' + stateClass(cell.state);
     return `<div class="cell-box ${cls}">
         <div class="cval">${cell.value}</div>
-        ${cell.note ? `<div class="cnote">${cell.note}</div>` : ''}
       </div>`;
   }
 
