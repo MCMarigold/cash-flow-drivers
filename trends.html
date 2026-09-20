@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trends — Marigold Cash Flow Driver Dashboard</title>
+<style>
+  :root{
+    --black:#1a1a1a; --gold:#f4c94c; --gold-dark:#b8922e;
+    --line:#e6e2d8; --ready:#4a8a5c; --blocked:#c0503f; --waiting:#c98a2c; --paper:#fdfcf9;
+    --ready-bg:#e8f2ea; --blocked-bg:#f8e9e6; --waiting-bg:#fbf1de; --neutral-bg:#f1efe9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 24px 60px;}
+  header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
+  .back{font-family:Arial,sans-serif;font-size:12px;color:var(--gold-dark);text-decoration:none;font-weight:bold;}
+  .back:hover{text-decoration:underline;}
+  h1{font-size:26px;margin:10px 0 4px 0;color:var(--black);}
+  .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
+
+  .load-note{font-family:Arial,sans-serif;font-size:12px;color:#8a8a8a;margin:14px 0 0;padding:10px 14px;background:#f5f2ea;border:1px solid var(--line);border-radius:6px;display:none;}
+  .load-note.visible{display:block;}
+  .load-note.err{color:var(--blocked); background:var(--blocked-bg);}
+
+  .sheet-wrap{margin-top:26px; overflow-x:auto; border:1px solid var(--line); border-radius:8px;}
+  table.sheet{width:100%; border-collapse:collapse; font-family:Arial,sans-serif; background:#fff; min-width:860px;}
+  table.sheet th, table.sheet td{padding:5px 6px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle;}
+  table.sheet thead th{
+    background:var(--black); color:#fff; font-size:9.5px; text-transform:uppercase;
+    letter-spacing:.04em; font-weight:bold; white-space:nowrap;
+  }
+  table.sheet thead th.month-col{text-align:center;}
+  table.sheet thead th.future-col{background:#3a3a3a; color:#bdbdbd; font-weight:normal;}
+  table.sheet thead th .live-pill{
+    display:inline-block; margin-left:4px; font-size:8px; background:var(--gold);
+    color:#3a2f00; padding:1px 5px; border-radius:7px; letter-spacing:0;
+    text-transform:uppercase; font-weight:bold; vertical-align:middle;
+  }
+  table.sheet tbody tr:nth-child(even) td{background:#fbfaf7;}
+  td.owner-col{font-size:10.5px; color:#8a8a8a; white-space:nowrap;}
+  td.driver-col{white-space:nowrap;}
+  td.target-col{font-size:10.5px; color:var(--gold-dark); font-weight:bold; white-space:nowrap; text-align:center;}
+  td.target-col.pending{color:#b0aa9c; font-weight:normal; font-style:italic;}
+  .driver-num{font-size:9px; color:var(--gold-dark); font-weight:bold; letter-spacing:.03em; text-transform:uppercase;}
+  .unit-tag{
+    display:inline-block; font-size:8px; font-weight:bold; letter-spacing:.03em; text-transform:uppercase;
+    background:#f6f1e3; color:var(--gold-dark); padding:1px 5px; border-radius:7px; margin-left:5px;
+  }
+  .driver-name{font-size:11.5px; font-weight:bold; color:#2a2a2a; margin-top:1px;}
+  .driver-name.pending{color:#b0aa9c; font-weight:normal; font-style:italic;}
+
+  td.month-cell{text-align:center; min-width:50px; padding:4px;}
+  .cell-box{border-radius:5px; padding:3px 4px; display:inline-block; min-width:40px;}
+  .cell-box .cval{font-size:11.5px; font-weight:bold; font-family:Arial,sans-serif; line-height:1.15;}
+  .cell-box .ctgt{font-size:7.5px; color:#8a8a8a; margin-top:0; line-height:1.2;}
+  .cell-box .cnote{font-size:7px; color:#8a8a8a; font-style:italic; margin-top:1px; line-height:1.2;}
+  .cell-pos{background:var(--ready-bg);} .cell-pos .cval{color:var(--ready);}
+  .cell-neg{background:var(--blocked-bg);} .cell-neg .cval{color:var(--blocked);}
+  .cell-draft{background:var(--waiting-bg);} .cell-draft .cval{color:var(--waiting);}
+  .cell-neutral{background:var(--neutral-bg);} .cell-neutral .cval{color:#7a7a7a;}
+  .cell-empty{color:#c4bfae; font-size:9.5px; font-style:italic; line-height:1.2;}
+  .cell-future{color:#d8d3c4; font-size:12px;}
+
+  .revenue-card{
+    margin-top:32px; background:#fbf6e8; border:1px solid var(--line); border-left:4px solid var(--gold-dark);
+    border-radius:10px; padding:20px 24px; font-family:Arial,sans-serif;
+  }
+  .revenue-card h2{
+    margin:0 0 8px; font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold-dark);
+  }
+  .revenue-card p{font-size:13px; color:#4a463c; line-height:1.55; margin:0 0 14px;}
+  .bar-track{
+    position:relative; height:26px; background:#eee6cf; border:1px solid var(--line); border-radius:13px; overflow:hidden;
+  }
+  .bar-fill{
+    position:absolute; top:0; left:0; height:100%; width:0%; background:var(--ready);
+    border-radius:13px 0 0 13px; transition:width .3s;
+  }
+  .bar-labels{display:flex; justify-content:space-between; font-size:11px; color:#8a8a8a; margin-top:6px;}
+  .bar-caveat{
+    margin-top:12px; font-size:11.5px; color:var(--gold-dark); background:#fdf1d6; border:1px solid #e8d3a0;
+    border-radius:6px; padding:8px 10px; line-height:1.5;
+  }
+
+  .legend{display:flex; gap:16px; flex-wrap:wrap; font-family:Arial,sans-serif; font-size:11px; color:#7a7a7a; margin-top:14px;}
+  .legend span{display:inline-flex; align-items:center; gap:5px;}
+  .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  footer{
+    margin-top:34px; font-family:Arial,sans-serif; font-size:11.5px; color:#8a8a8a;
+    border-top:1px solid var(--line); padding-top:14px;
+  }
+  .footer-links{font-family:Arial,sans-serif; font-size:12.5px; margin-top:10px;}
+  .footer-links a{color:var(--gold-dark); text-decoration:none; font-weight:bold;}
+  .footer-links a:hover{text-decoration:underline;}
+
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 40px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">&larr; Back to dashboard</a>
+    <h1>Driver Trends</h1>
+    <div class="meta">EOS-scorecard style view — each driver's headline over time, pulled live from the archive and the current driver pages. The next 9 months are shown as reserved, empty columns so the sheet doesn't need to be rebuilt as time passes; they fill in on their own once each month goes live, then gets archived.</div>
+  </header>
+
+  <div class="load-note" id="loadNote"></div>
+
+  <div class="sheet-wrap">
+    <table class="sheet" id="sheetTable">
+      <thead>
+        <tr id="sheetHeadRow">
+          <th>Owner</th>
+          <th>Driver</th>
+          <th>Target</th>
+          <!-- month columns injected here -->
+        </tr>
+      </thead>
+      <tbody id="sheetBody">
+        <!-- rows injected here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span>Target column: this driver's current goal — pulled from the live page, same source the % headline uses.</span>
+    <span><i style="background:var(--ready)"></i> On/above target</span>
+    <span><i style="background:var(--waiting)"></i> In progress / partial</span>
+    <span><i style="background:var(--blocked)"></i> Below target</span>
+    <span><i style="background:#7a7a7a"></i> Not judged pos/neg (ops-style or unscored)</span>
+  </div>
+
+  <div class="revenue-card">
+    <h2>Potential Revenue Gains &amp; Impact</h2>
+    <p>Total potential revenue impact across the drivers with a dollarized target (see the <a href="methodology.html">methodology page</a> for each driver's Est. Impact figure): <strong id="potentialTotalLabel">~$1.16M/yr</strong>.</p>
+    <div class="bar-track">
+      <div class="bar-fill" id="revenueBarFill" style="width:0%;"></div>
+    </div>
+    <div class="bar-labels">
+      <span>$0 actual</span>
+      <span id="potentialEndLabel">~$1.16M potential</span>
+    </div>
+    <div class="bar-caveat">
+      TBD — this bar is a placeholder until backlog item #5 (live $ headline math on each driver card) is built. Right now the dashboard only has percentage-based headlines, so there's no reliable "actual $ captured" figure to fill this in with yet. Once #5 lands, this bar will fill in with real actual-vs-potential revenue.
+    </div>
+  </div>
+
+  <footer>
+    Rows are the same 9 drivers as the dashboard, in the same MHI / MHS / OPS grouping. Columns are pulled automatically: archived months come from <code>data/history.json</code>, and the rightmost column is always whatever's live on the current <code>driver-N.html</code> pages right now. Add a month by using the "Generate archive snapshot" tool on the dashboard — no edits needed here.
+    <div class="footer-links"><a href="index.html">&larr; Back to dashboard</a></div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Structural grouping only (mirrors the row layout on index.html) — driver
+  // name/owner/values themselves are never hardcoded here, they're always
+  // pulled live from driver-summary blocks or data/history.json so this page
+  // never needs manual edits as months and driver pages change.
+  const DRIVER_ORDER = [
+    { n: 1, unit: 'MHI' },
+    { n: 5, unit: 'MHI' },
+    { n: 6, unit: 'MHI' },
+    { n: 2, unit: 'MHS' },
+    { n: 4, unit: 'MHS' },
+    { n: 9, unit: 'MHS' },
+    { n: 3, unit: 'OPS' },
+    { n: 7, unit: 'OPS' },
+    { n: 8, unit: 'OPS' },
+  ];
+
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function monthLabel(monthKey) {
+    const [y, m] = monthKey.split('-').map(Number);
+    return `${MONTH_NAMES[m - 1]} ${y}`;
+  }
+  // Short form for column headers, so 9+ months of columns stay narrow —
+  // e.g. "Sep '26" instead of "September 2026".
+  function shortMonthLabel(monthKey) {
+    const [y, m] = monthKey.split('-').map(Number);
+    return `${MONTH_ABBR[m - 1]} '${String(y).slice(2)}`;
+  }
+  function currentMonthKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+  function addMonths(monthKey, delta) {
+    const [y, m] = monthKey.split('-').map(Number);
+    const total = (y * 12 + (m - 1)) + delta;
+    const ny = Math.floor(total / 12);
+    const nm = (total % 12) + 1;
+    return `${ny}-${String(nm).padStart(2, '0')}`;
+  }
+  const FUTURE_MONTHS_AHEAD = 9;
+
+  function setNote(msg, isErr) {
+    const el = document.getElementById('loadNote');
+    if (!msg) { el.classList.remove('visible', 'err'); return; }
+    el.textContent = msg;
+    el.classList.add('visible');
+    el.classList.toggle('err', !!isErr);
+  }
+
+  function stateClass(state) {
+    return ['pos', 'neg', 'draft', 'neutral'].includes(state) ? state : 'neutral';
+  }
+
+  // Best-effort numeric average across a metrics[] array (e.g. driver 5's
+  // Insp/Tech/Radon role groups), for the single "team average" cell number.
+  // Color shown is the weakest (most conservative) of the group's states.
+  const SEVERITY = { neg: 3, draft: 2, neutral: 1, pos: 0 };
+  function averageMetrics(metrics) {
+    const nums = [];
+    let unit = '';
+    metrics.forEach(m => {
+      const match = String(m.value).match(/-?\d+(\.\d+)?/);
+      if (match) {
+        nums.push(parseFloat(match[0]));
+        const u = String(m.value).replace(match[0], '').trim();
+        if (u) unit = u;
+      }
+    });
+    let worst = 'neutral';
+    metrics.forEach(m => {
+      const s = stateClass(m.state);
+      if (SEVERITY[s] > SEVERITY[worst]) worst = s;
+    });
+    if (nums.length === metrics.length && nums.length > 0) {
+      const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+      return { value: `${avg % 1 === 0 ? avg : avg.toFixed(1)}${unit}`, state: worst, note: 'avg of ' + metrics.length + ' role groups' };
+    }
+    // Fallback if values aren't cleanly numeric — show them joined rather than guessing.
+    return { value: metrics.map(m => m.value).join(' / '), state: worst, note: metrics.length + ' role groups' };
+  }
+
+  function cellFromEntry(entry) {
+    if (!entry) return null;
+    if (Array.isArray(entry.metrics) && entry.metrics.length) {
+      const avg = averageMetrics(entry.metrics);
+      return { value: avg.value, state: avg.state, note: avg.note };
+    }
+    if (entry.headline) {
+      return { value: entry.headline.value, state: stateClass(entry.headline.state), note: entry.note || null };
+    }
+    return null;
+  }
+
+  // Target shown once per row (not repeated in every month cell). For a
+  // multi-metric driver (e.g. driver 5's role groups), combines each group's
+  // own target rather than picking just one.
+  function targetFromEntry(entry) {
+    if (!entry) return null;
+    if (Array.isArray(entry.metrics) && entry.metrics.length) {
+      const targets = entry.metrics.map(m => m.target).filter(Boolean);
+      return targets.length ? targets.join(' · ') : null;
+    }
+    if (entry.headline && entry.headline.target) return entry.headline.target;
+    return null;
+  }
+
+  function renderCellHtml(cell) {
+    if (!cell) return `<span class="cell-empty">Not archived this month</span>`;
+    const cls = 'cell-' + stateClass(cell.state);
+    return `<div class="cell-box ${cls}">
+        <div class="cval">${cell.value}</div>
+        ${cell.note ? `<div class="cnote">${cell.note}</div>` : ''}
+      </div>`;
+  }
+
+  async function fetchHistory() {
+    try {
+      const res = await fetch('data/history.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('not found');
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function fetchLiveDriver(n) {
+    try {
+      const res = await fetch(`driver-${n}.html`, { cache: 'no-cache' });
+      if (!res.ok) return null;
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const block = doc.getElementById('driver-summary');
+      if (!block) return null;
+      return JSON.parse(block.textContent);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function init() {
+    const headRow = document.getElementById('sheetHeadRow');
+    const body = document.getElementById('sheetBody');
+
+    const history = await fetchHistory();
+    const monthKeys = history && history.months ? Object.keys(history.months).sort() : [];
+    if (!history) {
+      setNote('Couldn\'t load data/history.json (either it doesn\'t exist yet, or this page was opened as a local file rather than the published site). Showing the current live column only.');
+    } else if (monthKeys.length === 0) {
+      setNote('data/history.json has no archived months yet — showing the current live column only. Use "Generate archive snapshot" on the dashboard once a month is ready to freeze.');
+    }
+
+    // Live current-state fetch for every driver, in parallel.
+    const liveData = {};
+    await Promise.all(DRIVER_ORDER.map(async d => {
+      liveData[d.n] = await fetchLiveDriver(d.n);
+    }));
+
+    // Build column list: archived months (oldest -> newest), then current
+    // live month, then the next 9 months as reserved (empty) columns so the
+    // sheet's width doesn't have to be rebuilt every time a new month rolls
+    // around — they fill themselves in automatically once each one is live,
+    // then gets archived.
+    const liveKey = currentMonthKey();
+    const columns = monthKeys.map(k => ({ key: k, label: shortMonthLabel(k), archived: true }));
+    columns.push({ key: liveKey, label: shortMonthLabel(liveKey), archived: false, live: true });
+    for (let i = 1; i <= FUTURE_MONTHS_AHEAD; i++) {
+      const fk = addMonths(liveKey, i);
+      columns.push({ key: fk, label: shortMonthLabel(fk), future: true });
+    }
+
+    columns.forEach(col => {
+      const th = document.createElement('th');
+      th.className = 'month-col' + (col.future ? ' future-col' : '');
+      th.innerHTML = col.live ? `${col.label}<span class="live-pill">Live</span>` : col.label;
+      headRow.appendChild(th);
+    });
+
+    DRIVER_ORDER.forEach(d => {
+      const live = liveData[d.n];
+      // Prefer the live page's name/owner; fall back to the newest archived
+      // entry for this driver if the live page hasn't been built/fetched yet.
+      let name = live ? live.name : null;
+      let owner = live ? live.owner : null;
+      let target = targetFromEntry(live);
+      if (!name || !owner || !target) {
+        for (let i = monthKeys.length - 1; i >= 0 && (!name || !owner || !target); i--) {
+          const arch = history && history.months[monthKeys[i]].drivers[String(d.n)];
+          if (arch) {
+            name = name || arch.name;
+            owner = owner || arch.owner;
+            target = target || targetFromEntry(arch);
+          }
+        }
+      }
+
+      const tr = document.createElement('tr');
+
+      const ownerTd = document.createElement('td');
+      ownerTd.className = 'owner-col';
+      ownerTd.textContent = owner || '—';
+      tr.appendChild(ownerTd);
+
+      const driverTd = document.createElement('td');
+      driverTd.className = 'driver-col';
+      driverTd.innerHTML = `<div class="driver-num">Driver ${d.n}<span class="unit-tag">${d.unit}</span></div>
+        <div class="driver-name ${name ? '' : 'pending'}">${name || 'Not yet built'}</div>`;
+      tr.appendChild(driverTd);
+
+      const targetTd = document.createElement('td');
+      targetTd.className = 'target-col' + (target ? '' : ' pending');
+      targetTd.textContent = target || '—';
+      tr.appendChild(targetTd);
+
+      columns.forEach(col => {
+        const td = document.createElement('td');
+        td.className = 'month-cell';
+        if (col.future) {
+          td.innerHTML = '<span class="cell-future">—</span>';
+          tr.appendChild(td);
+          return;
+        }
+        let cell = null;
+        if (col.archived) {
+          const entry = history.months[col.key].drivers[String(d.n)];
+          cell = cellFromEntry(entry);
+        } else if (col.live && live) {
+          cell = cellFromEntry(live);
+        }
+        td.innerHTML = renderCellHtml(cell);
+        tr.appendChild(td);
+      });
+
+      body.appendChild(tr);
+    });
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
