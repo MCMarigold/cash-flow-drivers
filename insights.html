@@ -18,12 +18,6 @@
   h1{font-size:26px;margin:10px 0 4px 0;color:var(--black);}
   .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
 
-  .placeholder-banner{
-    background:#fdf1d6;border:1px solid #e9c876;border-radius:8px;
-    padding:12px 16px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;
-    margin-bottom:24px;line-height:1.5;
-  }
-
   .summary-card{
     background:#fff;border:1px solid var(--line);border-radius:8px;
     padding:20px 22px;margin-bottom:24px;
@@ -34,6 +28,12 @@
   .summary-card .tag{
     font-family:Arial,sans-serif;font-size:10px;text-transform:uppercase;
     letter-spacing:0.5px;color:var(--gold-dark);font-weight:bold;margin-bottom:6px;display:block;
+  }
+
+  .row-label{
+    font-family:Arial,sans-serif; font-size:11.5px; font-weight:bold; letter-spacing:1px;
+    text-transform:uppercase; color:#fff; background:var(--black);
+    padding:4px 10px; border-radius:5px; display:inline-block; margin:22px 0 10px 0;
   }
 
   .driver-card{
@@ -58,6 +58,18 @@
   .standing .pct.draft{color:var(--waiting);}
   .standing .pct.neutral{color:#8a8a8a;}
   .standing .target{font-size:10.5px;color:#8a8a8a;}
+  .multi-standing{display:flex;flex-direction:column;gap:3px;text-align:right;}
+  .multi-standing .mrow{font-family:Arial,sans-serif;font-size:12px;}
+  .multi-standing .mrow .mlbl{color:#8a8a8a;margin-right:6px;}
+  .multi-standing .mrow .mval{font-weight:bold;}
+  .multi-standing .mrow .mval.pos{color:var(--ready);}
+  .multi-standing .mrow .mval.neg{color:var(--blocked);}
+  .multi-standing .mrow .mval.draft{color:var(--waiting);}
+  .multi-standing .mrow .mval.neutral{color:#8a8a8a;}
+
+  .ops-flag{
+    font-family:Arial,sans-serif;font-size:10.5px;color:var(--gold-dark);font-style:italic;margin:-4px 0 10px 0;
+  }
 
   .section-label{
     font-family:Arial,sans-serif;font-size:10.5px;text-transform:uppercase;
@@ -71,6 +83,9 @@
     margin-top:28px;font-family:Arial,sans-serif;font-size:11.5px;color:#8a8a8a;
     border-top:1px solid var(--line);padding-top:14px;
   }
+  .footer-links{font-family:Arial,sans-serif; font-size:12.5px; margin-top:10px;}
+  .footer-links a{color:var(--gold-dark); text-decoration:none; font-weight:bold;}
+  .footer-links a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -79,24 +94,18 @@
   <header>
     <a class="back" href="index.html">&larr; Back to dashboard</a>
     <h1>Cash Flow Insights</h1>
-    <div class="meta">Generated monthly from the full driver dashboard · period: <strong>[not yet generated]</strong></div>
+    <div class="meta">August 2026 checkpoint · Drivers 3, 7 &amp; 8 reflect live state as of the Sept 2026 checkpoint · ahead of the Sept 24 L10</div>
   </header>
-
-  <div class="placeholder-banner">
-    &#128230; This page is a placeholder. Each month, a Claude skill (in development) will read the dashboard's current numbers and history, and rewrite this page with that month's highlights, per-driver notes, and ideas for closing the gap to target — the same way driver pages get overwritten with a new month's numbers. Nothing below is real data yet.
-  </div>
 
   <div class="summary-card">
     <span class="tag">Big Picture</span>
-    <h2>[Placeholder] This Month at a Glance</h2>
-    <p>[Placeholder] A short, plain-language summary of how the dashboard moved as a whole this month — which drivers are trending toward target, which are furthest off, and anything time-sensitive ahead of the next L10.</p>
-    <p>[Placeholder] A second paragraph or two calling out the 1–3 things most worth a conversation at the next L10, in priority order.</p>
+    <h2>This Month at a Glance</h2>
+    <p>This is the first Insights read against the dashboard, built from the August 2026 checkpoint (plus current live state for the three ops-style drivers) — so it's a baseline snapshot rather than a month-over-month trend; that comparison becomes possible once a second month is archived. Of the nine drivers, three are at or above target (Cross-Selling at 57.7% vs. 55%, Wrong People/Wrong Seats at 98% vs. 90%, and Average Employee Tenure at 2.56 yrs vs. a 2.2-yr hold), and one is essentially on the line (Inspector Efficiency, 79.9% vs. 80%). The other five are meaningfully below target, several by a wide margin.</p>
+    <p>Three items stand out as most worth time at the Sept 24 L10, in order: <strong>Sales KPIs Achieved</strong> is the widest gap on the board (18.75% vs. a 100% target) and has an open ownership question — two of its four KPIs are logged under Minh rather than Ron, which needs settling before anyone can be expected to move that number. <strong>AI Process Efficiencies</strong> is tracking only 2 of a targeted 40 hours/week saved, but since it's a manual register updated as each process goes live, it's worth confirming whether that reflects true progress or a logging gap. And <strong>Follow-Up Close Rate</strong>'s RHM line (16.7%) is far enough below its Mitigation counterpart (42.9%) that the open question of whether this driver should carry one combined target or two separate ones is worth resolving now rather than later.</p>
+    <p>Several other drivers carry open "Decide" items on the methodology page (Wrong People/Wrong Seats' GWC scoring, Employee Tenure's tolerance band) that don't block this month's numbers but are worth a status check while the team is together.</p>
   </div>
 
-  <!-- Per-driver insight cards. One per driver, MHI/MHS/OPS order to match the board.
-       Each card: current standing (pulled from the live page or history.json),
-       a short "what happened" note, and a short list of ideas to help close the
-       gap to target. Replaced in full each month by the insights skill. -->
+  <div class="row-label">MHI</div>
 
   <div class="driver-card">
     <div class="driver-card-head">
@@ -105,14 +114,15 @@
         <div class="driver-name">Inspector Available Capacity</div>
         <div class="driver-owner">Owner: Blake</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="standing"><div class="pct neg">–3.7%</div><div class="target">Target: 5%</div></div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Available capacity is running negative — bookings are currently outpacing open inspection slots rather than leaving the 5% cushion targeted. The formula and data sources here are locked (Confirm status), so this is a clean read: closing the gap is modeled as needing roughly one additional standard inspector hire, worth about $364K–$416K/yr in revenue opportunity.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Move ahead on the ~1.0 additional standard inspector hire the methodology already models as closing this gap.</li>
+      <li>Keep in mind the caveat that a hire who also grows total bookings will need more slots to hit the same %, so don't expect one hire alone to fully close it if demand rises too.</li>
+      <li>Worth checking for overlap with Driver 5's efficiency numbers — if inspector efficiency has room to improve first, that's cheaper than a new hire.</li>
     </ul>
   </div>
 
@@ -123,14 +133,19 @@
         <div class="driver-name">Inspector/Tech Efficiency</div>
         <div class="driver-owner">Owner: Blake</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="multi-standing">
+        <div class="mrow"><span class="mlbl">Inspector</span><span class="mval neg">79.9%</span> <span class="target">/ 80%</span></div>
+        <div class="mrow"><span class="mlbl">Service Tech</span><span class="mval pos">100.6%</span> <span class="target">/ 85%</span></div>
+        <div class="mrow"><span class="mlbl">Radon Tech</span><span class="mval neg">71.2%</span> <span class="target">/ 90%</span></div>
+      </div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>A mixed picture across the three role groups. Inspector efficiency is essentially at target (79.9% vs. 80% — a rounding-distance miss), Service Tech is well above target, and Radon Tech is the clear laggard at 71.2% against a 90% goal. Three open items on the methodology page could be shaping these numbers: unresolved overlap with Driver 1's capacity measure, trainees still excluded pending a full post-training month, and a known data-reliability flag on one inspector's numbers.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Radon Tech's 71.2% is the biggest lever here — worth a root-cause look before assuming it's a performance issue rather than a routing or volume one.</li>
+      <li>Resolve the flagged data-reliability issue so one person's numbers aren't skewing (or masking) the Radon Tech average.</li>
+      <li>Once trainees clear a full post-training month, revisit Inspector efficiency — it's close enough to target that this exclusion may already be hiding a pass.</li>
     </ul>
   </div>
 
@@ -141,16 +156,18 @@
         <div class="driver-name">Cross-Selling / Ancillary Attach Rate</div>
         <div class="driver-owner">Owner: Maggie</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="standing"><div class="pct pos">57.7%</div><div class="target">Target: 55%</div></div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Running 2.7 points above target — the strongest driver on the board relative to its goal. The methodology models further upside too: each additional 5 points of attach rate is worth roughly $72.8K/yr, so there's headroom to keep pushing even past the current target. The known soft spots are structural rather than new: condo/townhome inspections consistently underperform single-family, and prelisting inspections run at zero attach by design.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Holding above target — mainly worth watching for erosion rather than urgent action.</li>
+      <li>If there's appetite to push further, condo/townhome-specific add-on offers are the one segment-level gap called out on the methodology page.</li>
     </ul>
   </div>
+
+  <div class="row-label">MHS</div>
 
   <div class="driver-card">
     <div class="driver-card-head">
@@ -159,14 +176,15 @@
         <div class="driver-name">MHS Marketing Leads</div>
         <div class="driver-owner">Owner: Minh</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="standing"><div class="pct draft">11.5/wk</div><div class="target">Goal: 40/wk</div></div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Current pace is well under a third of the 40/wk goal. Part of the challenge is measurement, not just volume: the methodology page flags that the MHI Spectora export used to match RHM leads only covers April–August 2026, paid-channel (LSA) tracking isn't confirmed complete, and ActiveCampaign — meant to be the eventual system of record — isn't configured yet. This driver's $409K/yr potential also isn't fixed on its own; it compounds with how well Driver 4 (Follow-Up Close Rate) converts whatever leads do come in.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Get ActiveCampaign configured as the intended system of record — right now the lead count is stitched together from several partial sources, which makes the 11.5/wk figure harder to trust at face value.</li>
+      <li>Confirm paid-channel (LSA) tracking is capturing everything it should before reading too much into the current pace.</li>
+      <li>Since this driver and Driver 4 share an owner, coordinating lead volume pushes with follow-up capacity may be worth a joint look rather than treating them separately.</li>
     </ul>
   </div>
 
@@ -177,14 +195,19 @@
         <div class="driver-name">Follow-Up Close Rate</div>
         <div class="driver-owner">Owner: Minh</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="multi-standing">
+        <div class="mrow"><span class="mlbl">Combined</span><span class="mval neg">40.8%</span> <span class="target">/ 70%</span></div>
+        <div class="mrow"><span class="mlbl">Mitigation</span><span class="mval neg">42.9%</span></div>
+        <div class="mrow"><span class="mlbl">RHM</span><span class="mval neg">16.7%</span></div>
+      </div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>All three cuts are below target, and the two lines are far apart — Mitigation is closing on 43% of quotes while RHM is closing under 17%. The 70% target itself is an open Decide item, including whether it should apply per-line or as one combined number, which matters a lot given how differently Mitigation and RHM are performing right now.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Settle the per-line vs. combined target question first — RHM's 16.7% may be getting judged against a bar that was never meant for it.</li>
+      <li>RHM's gap is large enough to warrant its own root-cause look — quote follow-up cadence, timing, or quote content are the usual levers.</li>
+      <li>Given the shared owner with Driver 2, check whether follow-up capacity has kept pace as lead volume efforts ramp up.</li>
     </ul>
   </div>
 
@@ -195,16 +218,19 @@
         <div class="driver-name">Sales KPIs Achieved</div>
         <div class="driver-owner">Owner: Ron</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="standing"><div class="pct neg">18.75%</div><div class="target">Target: 100%</div></div>
     </div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>This is the widest gap on the dashboard — on average, under a fifth of the four weekly KPIs (meetings set, sales calls/touchpoints, estimates sent, estimates won/booked) are being hit. Two open items complicate reading this cleanly: estimates sent and won are currently logged under Minh rather than Ron, and the Sales Calls target (115/week) is up for discussion given recent staffing changes.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Resolve the estimates sent/won ownership split first — half this driver's inputs sit outside Ron's own tracking today.</li>
+      <li>Revisit the 115/week Sales Calls target given the staffing changes already flagged — if it's no longer realistic, 18.75% may understate actual sales activity.</li>
+      <li>Once ownership and target realism are settled, this driver is worth a fresh baseline rather than continuing to score against the current KPI set.</li>
     </ul>
   </div>
+
+  <div class="row-label">OPS</div>
 
   <div class="driver-card">
     <div class="driver-card-head">
@@ -213,14 +239,20 @@
         <div class="driver-name">Wrong People / Wrong Seats</div>
         <div class="driver-owner">Owner: Curtis</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="multi-standing">
+        <div class="mrow"><span class="mlbl">Combined</span><span class="mval pos">98%</span> <span class="target">/ 90%</span></div>
+        <div class="mrow"><span class="mlbl">Leadership &amp; Support</span><span class="mval pos">94%</span></div>
+        <div class="mrow"><span class="mlbl">MHI Field Ops</span><span class="mval pos">100%</span></div>
+        <div class="mrow"><span class="mlbl">MHS Field Ops</span><span class="mval pos">100%</span></div>
+      </div>
     </div>
+    <div class="ops-flag">Live/current state as of the Sept 2026 checkpoint, not a closed prior month.</div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Right-seat rate is comfortably above the 90% target across every segment. Worth reading with one caveat: this rests on GWC scoring that Curtis hasn't finalized, and core-values scores in the underlying data are still placeholders — so the strong headline is real but not yet on fully locked footing.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Given the strong number, prioritize locking the GWC scoring methodology so future readings aren't resting on placeholder core-values data.</li>
+      <li>Decide whether department heads score their own people or Curtis owns all of it — this is what's currently keeping the process manual each cycle.</li>
     </ul>
   </div>
 
@@ -231,14 +263,16 @@
         <div class="driver-name">AI Process Efficiencies</div>
         <div class="driver-owner">Owner: Britney</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="standing"><div class="pct neg">2 hrs</div><div class="target">Target: 40 hrs/wk</div></div>
     </div>
+    <div class="ops-flag">Live/current state as of the Sept 2026 checkpoint, not a closed prior month.</div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Only 2 of the targeted 40 hours/week in AI-driven time savings are currently logged. This is a manual register updated as each process goes live rather than an automated measure, so the low number likely reflects how early this driver is in being built out — the tracking table still has placeholder example rows in it. At target, this represents about $62.4K/yr in labor value, though that's only realized if the freed time actually reduces cost or gets redeployed.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Confirm whether AI-supported processes already in use simply haven't been logged yet, versus genuinely few being live — that changes what "closing the gap" even means here.</li>
+      <li>Replace the placeholder example rows in the tracking table with real logged processes so the number reflects reality.</li>
+      <li>Pair any new AI process rollout with a concrete plan for what the freed time goes toward, since labor value only counts if it's actually redeployed or cut.</li>
     </ul>
   </div>
 
@@ -249,19 +283,26 @@
         <div class="driver-name">Average Employee Tenure</div>
         <div class="driver-owner">Owner: Britney</div>
       </div>
-      <div class="standing"><div class="pct tbd">—</div><div class="target">[not yet generated]</div></div>
+      <div class="multi-standing">
+        <div class="mrow"><span class="mlbl">Overall</span><span class="mval pos">2.56 yrs</span> <span class="target">/ hold 2.2</span></div>
+        <div class="mrow"><span class="mlbl">MHI</span><span class="mval neutral">2.38 yrs</span></div>
+        <div class="mrow"><span class="mlbl">MHS</span><span class="mval neutral">1.60 yrs</span></div>
+        <div class="mrow"><span class="mlbl">Office Staff</span><span class="mval neutral">3.42 yrs</span></div>
+      </div>
     </div>
+    <div class="ops-flag">Live/current state as of the Sept 2026 checkpoint, not a closed prior month.</div>
     <div class="section-label">What Happened</div>
-    <p>[Placeholder] Narrative on this driver's movement this month.</p>
+    <p>Overall tenure sits comfortably above the 2.2-year hold line. MHS tenure (1.60 yrs) is noticeably below the other two segments, though it isn't flagged pos/neg on its own since a per-segment tolerance band hasn't been confirmed yet — only the overall average carries a judged target today.</p>
     <div class="section-label">Ideas To Close The Gap</div>
     <ul>
-      <li>[Placeholder idea]</li>
-      <li>[Placeholder idea]</li>
+      <li>Confirm the suggested 2.0–2.4 yr tolerance band so MHS's 1.60 yrs can be read against an actual target instead of sitting neutral.</li>
+      <li>Consider whether a tiered, per-department calculation would surface the MHS gap more clearly than the single overall average does today.</li>
     </ul>
   </div>
 
   <footer>
-    Rewritten monthly by the (in-development) cash-flow-insights skill, from data/history.json, the live driver pages, and methodology.html · driver order matches the dashboard board (MHI / MHS / OPS) · linked from the index page footer between Trends and Archive.
+    Built from the August 2026 archived checkpoint (data/history.json) and the live driver-1.html–driver-9.html pages, with formula/target/$-impact context from methodology.html · driver order matches the dashboard board (MHI / MHS / OPS) · rewritten in full each month by the cash-flow-insights skill — no history of past months' insights is kept on this page. Next scheduled read: after the September 2026 checkpoint is archived.
+    <div class="footer-links"><a href="index.html">&larr; Back to dashboard</a></div>
   </footer>
 
 </div>
