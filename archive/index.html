@@ -13,11 +13,10 @@
   body{margin:0;background:var(--paper);font-family:Georgia,'Times New Roman',serif;color:#2a2a2a;}
   .wrap{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
   header{border-bottom:3px solid var(--black);padding-bottom:16px;margin-bottom:24px;}
-  h1{font-size:26px;margin:0 0 4px 0;color:var(--black);}
+  .back{font-family:Arial,sans-serif;font-size:12px;color:var(--gold-dark);text-decoration:none;font-weight:bold;}
+  .back:hover{text-decoration:underline;}
+  h1{font-size:26px;margin:10px 0 4px 0;color:var(--black);}
   .meta{font-family:Arial,sans-serif;font-size:12.5px;color:#7a7a7a;}
-  .backlink{font-family:Arial,sans-serif;font-size:12.5px;margin-bottom:18px;display:inline-block;}
-  .backlink a{color:var(--gold-dark);text-decoration:none;font-weight:bold;}
-  .backlink a:hover{text-decoration:underline;}
 
   /* Month-to-month navigator */
   .nav-bar{
@@ -115,9 +114,8 @@
 <body>
 <div class="wrap">
 
-  <div class="backlink"><a href="../index.html">&larr; Back to dashboard</a></div>
-
   <header>
+    <a class="back" href="../index.html">&larr; Back to dashboard</a>
     <h1>Cash Flow Driver Archive</h1>
     <div class="meta">Frozen month-end checkpoints of the full dashboard &middot; same layout as the live board &middot; use the arrows below to page through months</div>
   </header>
