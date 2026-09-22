@@ -254,11 +254,11 @@
   }
 
   function stateClass(state) {
-    // Mirrors the state vocabulary driver pages use in their driver-summary
-    // block: pos/neg are the clear win/loss colors, draft is the in-progress
-    // gold used for "under goal, work ongoing" numbers, neutral is muted gray
-    // for a metric that isn't being judged pos/neg. Anything else (missing,
-    // or a state we don't recognize) falls back to plain body-text color.
+    // Canonical vocabulary: pos/neg/draft/neutral.
+    // "good"/"bad" are legacy aliases used by some early driver pages — map them
+    // to pos/neg so their cards color correctly. New driver pages should use pos/neg.
+    if (state === 'good') return 'pos';
+    if (state === 'bad') return 'neg';
     return ['pos', 'neg', 'draft', 'neutral'].includes(state) ? state : '';
   }
 
