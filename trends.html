@@ -245,10 +245,27 @@
   // 4's "40.8% combined") always wins over averaging its metrics[] breakdown
   // ourselves — we only average metrics as a fallback when a driver reports
   // per-category numbers with no combined headline of its own (driver 5).
+  //
+  // A combined headline can arrive two ways: an explicit entry.headline
+  // object, or a metric inside metrics[] labeled "Combined" / "Total" /
+  // "Overall" (driver 4 reports it this way: Combined, Mitigation, RHM).
+  // Either one counts, so a combined figure is never re-averaged.
+  const COMBINED_LABEL = /^(combined|total|overall)\b/i;
+  function combinedHeadline(entry) {
+    if (!entry) return null;
+    if (entry.headline) return entry.headline;
+    if (Array.isArray(entry.metrics)) {
+      const m = entry.metrics.find(x => COMBINED_LABEL.test(String(x.label || '').trim()));
+      if (m) return m;
+    }
+    return null;
+  }
+
   function cellFromEntry(entry) {
     if (!entry) return null;
-    if (entry.headline) {
-      return { value: entry.headline.value, state: stateClass(entry.headline.state) };
+    const head = combinedHeadline(entry);
+    if (head) {
+      return { value: head.value, state: stateClass(head.state) };
     }
     if (Array.isArray(entry.metrics) && entry.metrics.length) {
       const avg = averageMetrics(entry.metrics);
@@ -261,7 +278,8 @@
   // headline-first, metrics-fallback preference as cellFromEntry above.
   function targetFromEntry(entry) {
     if (!entry) return null;
-    if (entry.headline && entry.headline.target) return entry.headline.target;
+    const head = combinedHeadline(entry);
+    if (head && head.target) return head.target;
     if (Array.isArray(entry.metrics) && entry.metrics.length) {
       const targets = entry.metrics.map(m => m.target).filter(Boolean);
       return targets.length ? targets.join(' · ') : null;
