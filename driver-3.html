@@ -11,10 +11,10 @@
   "owner": "Curtis",
   "period": "Sept 2026",
   "metrics": [
-    {"label": "Combined", "value": "98%", "target": "/ 90% target", "state": "pos"},
-    {"label": "Leadership & Support", "value": "94%", "state": "pos"},
-    {"label": "MHI Field Ops", "value": "100%", "state": "pos"},
-    {"label": "MHS Field Ops", "value": "100%", "state": "pos"}
+    {"label": "Combined", "value": "83%", "target": "/ 90% target", "state": "neg"},
+    {"label": "Leadership & Support", "value": "81%", "state": "neg"},
+    {"label": "MHI Field Ops", "value": "90%", "state": "pos"},
+    {"label": "MHS Field Ops", "value": "50%", "state": "neg"}
   ]
 }
 </script>
@@ -256,17 +256,23 @@
   // order [Excellent work, Personal best, Meet people, Relationship, Humble &
   // growing], each "+" / "+/-" / "-". Omit it (or leave any slot undefined)
   // to default to "+" as a placeholder until real scoring is entered.
-  var p = function(name, g, w, c, cv){
+  // wrong (optional 6th arg): marks the person as wrong person/wrong seat
+  // (red name, counted as failing) WITHOUT touching their GWC or core-values
+  // badges, which are still Airtable placeholders. Use the wrong("Name") shorthand.
+  var p = function(name, g, w, c, cv, wrong){
     var defaults = ["+","+","+","+","+"];
     var vals = (cv || []).slice(0, 5);
     while (vals.length < 5) vals.push(defaults[vals.length]);
-    return { name: name, g: (g !== false), w: (w !== false), c: (c !== false), cv: vals };
+    return { name: name, g: (g !== false), w: (w !== false), c: (c !== false), cv: vals, wrong: !!wrong };
   };
+  var wrong = function(name){ return p(name, true, true, true, null, true); };
 
   var CHART_MAIN = [
-    { tier: "Visionary / Integrator", seats: [
+    { tier: "Visionary", seats: [
       { title:"Visionary", people:[ p("Curtis Larson") ] },
-      { title:"Integrator", people:[ p("Curtis Larson") ] },
+    ]},
+    { tier: "Integrator", seats: [
+      { title:"Integrator", people:[ wrong("Curtis Larson") ] },
     ]},
     { tier: "Department Heads", seats: [
       { title:"MHI", people:[ p("Blake Pederson-Perovich") ] },
@@ -289,7 +295,7 @@
     [ { title:"Engineer", people:[ p("Britney Ahlmann") ] } ],
     [ { title:"Client Care", people:[ p("Maggie Cox") ] },
       { title:"Lead Client Care Coordinator", people:[ p("Deb Pulskamp") ] },
-      { title:"Client Care Coordinator", people:[ p("Sara Bonk"), p("Monique Ocon"), p("Alicia Ortloff") ] } ],
+      { title:"Client Care Coordinator", people:[ p("Sara Bonk"), p("Monique Ocon"), wrong("Alicia Ortloff") ] } ],
   ];
 
   var CHART_MHI_COLUMNS = [
@@ -300,22 +306,22 @@
         p("Kelly Brill"), p("Kyle Grovenstein"), p("Anthony Link-Danko"), p("Matt Clarity"),
         p("Joel Terry"), p("Travis East")
       ] } ],
-    [ { title:"Service Lead", people:[ p("Mark Rahja") ] },
-      { title:"Service Tech", people:[ p("Noah Carlson"), p("Derek Lanz"), p("Brayden Rogosheske"), p("Austin Cooper") ] } ],
+    [ { title:"Service Lead", people:[ wrong("Mark Rahja") ] },
+      { title:"Service Tech", people:[ wrong("Noah Carlson"), p("Derek Lanz"), p("Brayden Rogosheske"), p("Austin Cooper") ] } ],
   ];
 
   var CHART_MHS_COLUMNS = [
     [ { title:"Radon Mitigation Lead", people:[ p("Brett Fredrichs") ] },
       { title:"Assistant Mitigation Tech", people:[ p("Dominic Reed") ] } ],
-    [ { title:"RHM Technician", people:[ p("Alycia Bonneville") ] } ],
-    [ { title:"Estimator", people:[ p("Josh Miller") ] } ],
+    [ { title:"RHM Technician", people:[ wrong("Alycia Bonneville") ] } ],
+    [ { title:"Estimator", people:[ wrong("Josh Miller") ] } ],
   ];
 
   // ============================================================
   // Rendering — no need to touch anything below this line.
   // ============================================================
 
-  function personPasses(person){ return !!(person.g && person.w && person.c); }
+  function personPasses(person){ return !person.wrong && !!(person.g && person.w && person.c); }
 
   function badge(letter, on){
     return '<span class="gwc-badge ' + (on ? "on" : "off") + '">' + letter + '</span>';
@@ -347,7 +353,7 @@
   function renderSeatCard(seat){
     var el = document.createElement("div");
     el.className = "seat-card" + (seat.vacant ? " vacant" : "") + (seat.exclude ? " context" : "") +
-      (seat.seatConflict ? " conflict" : "");
+      ((seat.seatConflict || seat.people.some(function(x){ return x.wrong; })) ? " conflict" : "");
     var titleRow = '<div class="seat-title-row"><span class="seat-title">' + seat.title + '</span>';
     if (seat.vacant){
       titleRow += '<span class="seat-agg">Vacant</span></div>';
