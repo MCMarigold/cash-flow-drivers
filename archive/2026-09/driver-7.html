@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>September 2026 — AI Process Efficiencies</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 7,
+  "name": "AI Process Efficiencies",
+  "owner": "Britney",
+  "period": "Sep 2026",
+  "headline": {"value": "6.4 hrs", "target": "Target: 40 hrs/wk", "state": "draft"}
+}
+</script>
+<style>
+  :root {
+    --gold:#A9822B; --gold-dark:#7d5f1c; --bg:#FBF9F4; --card:#FFFFFF;
+    --text:#2b2820; --muted:#6f6a5c; --border:#e6ddc4;
+    --confirm:#3f6f9e; --decide:#b25a34; --good:#4a7a4a;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  h3 { font-family:Arial,sans-serif; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:18px 0 6px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow:0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.applied { border-left:4px solid var(--gold); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.applied { background:#F6F1E3; color:var(--gold-dark); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  th.num { text-align:right; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.pname { font-weight:700; color:#33301f; min-width:150px; }
+  td.desc { color:var(--muted); font-size:12.5px; min-width:260px; }
+  tr.withheld td { color:var(--muted); font-style:italic; background:#fcfaf5; }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .table-wrap.muted table { opacity:.75; }
+  .pill { display:inline-block; font-size:10.5px; font-weight:700; padding:1px 8px; border-radius:9px; white-space:nowrap; background:#F6F1E3; color:var(--gold-dark); }
+  .pill.measured { background:#e6efe4; color:var(--good); }
+  .pill.estimated { background:#f6efd9; color:var(--gold-dark); }
+  .pill.rough { background:#f7e9e2; color:var(--decide); }
+  .pill.recurring, .pill.periodic { background:#eef0ea; color:#4f5a45; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom:8px; }
+  .headline-row { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+  .headline-figure { display:flex; flex-direction:column; align-items:flex-start; flex-shrink:0; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct.draft { color:var(--gold); }
+  .headline-tgt { font-family:Arial,sans-serif; font-size:12.5px; color:var(--muted); margin-top:6px; white-space:nowrap; }
+  .headline-divider { width:1px; align-self:stretch; background:var(--border); flex-shrink:0; }
+  .headline-note { margin:0; max-width:420px; }
+  .fin-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; }
+  .fin-tile { flex:1; min-width:180px; background:#F6F1E3; border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
+  .fin-label { font-family:Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:4px; }
+  .fin-value { font-family:Arial,sans-serif; font-size:22px; font-weight:700; color:var(--gold-dark); }
+  .fin-sub { font-family:Arial,sans-serif; font-size:11.5px; color:var(--muted); margin-top:2px; }
+  .basis-bar { display:flex; height:12px; border-radius:6px; overflow:hidden; margin:8px 0 6px; gap:2px; }
+  .basis-bar span { display:block; }
+  .basis-key { font-family:Arial,sans-serif; font-size:12px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:-1px; }
+</style>
+</head>
+<body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; part of the September 2026 dashboard checkpoint (this driver runs on live/current data, not a closed prior month). <a href="../../driver-7.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #7</div>
+  <h1>September 2026 — AI Process Efficiencies</h1>
+  <div class="sub">Live log · as of September 22, 2026 · 17 live processes carrying hours (5 proposed)</div>
+
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">AI Process Efficiencies tracks staff time freed by live AI-supported workflows. There are two goals: 40 hours a week saved across the team, worth about $62.4K a year at a flat $30/hr average wage, and 15 live processes. Each row below is one process in the AI Processes log, and only live, repeating work counts toward the hours.</p>
+      <p>This is a record of what has been built so far, not a claim of having arrived. The dollar figure is annual labor value, not realized cash. It becomes a cost saving only if the freed time reduces labor costs, or revenue only if that time moves to revenue-producing work.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-figure">
+        <div class="headline-pct draft">6.4 hrs</div>
+        <div class="headline-tgt">saved / week · target 40 hrs/wk</div>
+      </div>
+      <div class="headline-divider"></div>
+      <div class="headline-figure">
+        <div class="headline-pct pos">17</div>
+        <div class="headline-tgt">live processes · target 15</div>
+      </div>
+      <p class="note headline-note">The process-count goal is met. The hours goal is not: 33.6 more hours a week are needed to reach 40. The biggest single gain available is the Service Technician Points Counter (1.6 hrs/wk). It is built and validated, but it only counts once it is scheduled.</p>
+    </div>
+    <div class="fin-row">
+      <div class="fin-tile"><div class="fin-label">Annual value at current pace</div><div class="fin-value">$9,984</div><div class="fin-sub">6.4 hrs/wk × 52 × $30/hr</div></div>
+      <div class="fin-tile"><div class="fin-label">Annual value at goal</div><div class="fin-value">$62,400</div><div class="fin-sub">40 hrs/wk × 52 × $30/hr</div></div>
+      <div class="fin-tile"><div class="fin-label">Gap to close</div><div class="fin-value">33.6 hrs/wk</div><div class="fin-sub">16% of the hours goal reached</div></div>
+      <div class="fin-tile"><div class="fin-label">One-time hours (not counted)</div><div class="fin-value">19 hrs</div><div class="fin-sub">$570 one-off, never × 52</div></div>
+    </div>
+    <h3>How solid the 6.4 hours are</h3>
+    <div class="basis-bar">
+      <span style="flex:3.3;background:var(--good);"></span>
+      <span style="flex:1.9;background:var(--gold);"></span>
+      <span style="flex:1.2;background:var(--decide);"></span>
+    </div>
+    <div class="basis-key">
+      <span><span class="sw" style="background:var(--good)"></span>Measured 3.3 hrs (timed or counted against a real before/after)</span>
+      <span><span class="sw" style="background:var(--gold)"></span>Estimated 1.9 hrs (reasoned from the steps)</span>
+      <span><span class="sw" style="background:var(--decide)"></span>Rough 1.2 hrs (a defensible guess)</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Live processes — counted</h2>
+    <div class="group-meta">Status = Live and Savings Type = Recurring or Periodic · sorted by weekly hours · periodic work is converted to a weekly equivalent</div>
+    <div class="table-wrap"><table>
+      <tr><th>Process</th><th>Description</th><th>Type</th><th>Basis</th><th class="num">Date live</th><th class="num">Hrs/wk</th><th class="num">Annual $</th></tr>
+      <tr><td class="pname">Pay Period Reconciliation</td><td class="desc">Cross-checks the Airtable Sales + Commissions base against Spectora for a pay period: missing records, orphaned records, quote/total mismatches, rescheduled inspections, and commission tag verification. Replaces a manual spreadsheet reconciliation.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill measured">Measured</span></td><td class="num">7/1/26</td><td class="num eff">1.0</td><td class="num">$1,560</td></tr>
+<tr><td class="pname">Commissions Daily Review</td><td class="desc">Scheduled weekday review of MHI and MHS commission records against Spectora and Housecall Pro: no-agent records, cancellations, fee changes, estimator tags. Posts a two-column summary to Slack. The Wolfpack agent-attribution review chains off it automatically and is included here.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill measured">Measured</span></td><td class="num">7/1/26</td><td class="num eff">0.8</td><td class="num">$1,248</td></tr>
+<tr><td class="pname">Radon Daily Fleet Job</td><td class="desc">Weekday scheduled job that checks for a fresh monitor export, runs the pipeline when one is there and sends a reminder when one is not, with a late-morning recheck behind it. On a good run it goes from a dropped export to a published TV board, a published field sheet, updated deployment records and a regenerated quarterly workbook without anyone touching it.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill rough">Rough</span></td><td class="num">9/4/26</td><td class="num eff">0.8</td><td class="num">$1,248</td></tr>
+<tr><td class="pname">Monthly Quad Chart</td><td class="desc">Gathers every figure for the monthly staff-meeting Quad Chart from Airtable, Spectora and the projections sheet, and lays them out in sheet order. Encodes the judgment calls that used to live only in one person&#x27;s head, and flags data problems rather than diagnosing them.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill measured">Measured</span></td><td class="num">8/1/26</td><td class="num eff">0.7</td><td class="num">$1,092</td></tr>
+<tr><td class="pname">Weekly Social Intel Report</td><td class="desc">Scheduled weekly brief on Instagram algorithm signals, trending formats and audio, with content ideas mapped to Marigold&#x27;s content pillars. Delivered as an artifact without anyone requesting it.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">8/9/26</td><td class="num eff">0.7</td><td class="num">$1,092</td></tr>
+<tr><td class="pname">Social Media Stats Pipeline</td><td class="desc">Airtable base for social operations with a nightly job that pulls live Instagram performance metrics for both brands and writes them to the post records. Replaces screenshots and manual metric keying.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">7/1/26</td><td class="num eff">0.5</td><td class="num">$780</td></tr>
+<tr><td class="pname">Business Brain / Personal Assistant</td><td class="desc">A structured knowledge base plus an assistant skill that keeps it current: working preferences, decision log, in-flight projects, process maps and a wins log. Stops the recurring cost of re-explaining the same context to every new session. Published so any leader can run their own.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill measured">Measured</span></td><td class="num">8/1/26</td><td class="num eff">0.3</td><td class="num">$468</td></tr>
+<tr><td class="pname">Weekly Metrics</td><td class="desc">Replaces the Monday number hunt (pull two systems by hand, key the metrics sheet, retype the year-over-year block into the meeting notes) with one Airtable table, a sync that fills it, and an intranet page that shows it the way the sheet did. Four years of history rebuilt on one counting rule.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill measured">Measured</span></td><td class="num">9/21/26</td><td class="num eff">0.3</td><td class="num">$468</td></tr>
+<tr><td class="pname">AGNT Storyboard Builder</td><td class="desc">Turns shoot content into branded, production-ready storyboard documents formatted to the video team&#x27;s spec: storyboards for both brands, exec summaries, shot lists and production notes.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">7/1/26</td><td class="num eff">0.2</td><td class="num">$312</td></tr>
+<tr><td class="pname">Employee File Audit</td><td class="desc">Scheduled report-only audit of every employee folder in Drive against the standard folder and naming structure. Catches misfiling and drift automatically instead of someone checking by hand each quarter. Never moves or renames anything.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">8/1/26</td><td class="num eff">0.2</td><td class="num">$312</td></tr>
+<tr><td class="pname">Inspector Milestone Check and Alert</td><td class="desc">Daily scheduled job that pulls live inspection counts per active inspector, reconciles the roster so newly licensed people are never missed, writes counts to Airtable, and fires alerts as people approach and cross milestones.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">7/1/26</td><td class="num eff">0.2</td><td class="num">$312</td></tr>
+<tr><td class="pname">Monthly Team Reviews Slideshow</td><td class="desc">Pulls the month&#x27;s public reviews for both brands, cross-references reviewers against the inspection record to identify who performed the job, organizes quotes by employee, and produces a ready-to-paste prompt for the staff-meeting slideshow.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill measured">Measured</span></td><td class="num">7/1/26</td><td class="num eff">0.2</td><td class="num">$312</td></tr>
+<tr><td class="pname">Branded Document Formatter</td><td class="desc">House document skill that owns the company&#x27;s branded .docx style and is called by other skills to do their formatting. Includes the letterhead variant for anything that leaves the building, so any leader can produce a client-ready letter without a template or a designer.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill measured">Measured</span></td><td class="num">7/1/26</td><td class="num eff">0.0</td><td class="num">$0</td></tr>
+<tr><td class="pname">Business Card Builder</td><td class="desc">Creates or fixes an employee&#x27;s branded business card, pulling title, phone, email and license numbers from the systems where they actually live instead of hunting three places for numbers stored inconsistently.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill rough">Rough</span></td><td class="num">8/1/26</td><td class="num eff">0.0</td><td class="num">$0</td></tr><tr class="withheld"><td colspan="5">3 internal-only processes withheld from this public page (Share Level: Internal only)</td><td class="num">0.5</td><td class="num">$780</td></tr><tr class="avg-row"><td colspan="5">Total, all live processes (17)</td><td class="num">6.4</td><td class="num">$9,984</td></tr>
+    </table></div>
+    <p class="note">Rows showing 0.0 are periodic processes that save only a couple of hours a year. They count toward the 15-process goal, but their hours round to zero. Internal-only rows count in every total, but their names and descriptions stay off this page while the dashboard is publicly reachable.</p>
+  </section>
+
+  <section>
+    <h2>Proposed — pipeline, not counted</h2>
+    <div class="group-meta">Built or designed but not yet in routine use. Kept out of the headline on purpose.</div>
+    <div class="table-wrap"><table>
+      <tr><th>Process</th><th>Description</th><th>Type</th><th>Basis</th><th class="num">Hrs/wk if live</th><th class="num">Annual $ if live</th></tr>
+      <tr><td class="pname">Service Technician Points Counter</td><td class="desc">Reads the service technicians&#x27; calendars, counts the ancillary services performed each day and writes the counts to the tracking table, replacing two office staff keying those counts in by hand every night. Flags the one service type that does not sync to the calendar for human confirmation rather than counting it.</td><td><span class="pill recurring">Recurring</span></td><td><span class="pill estimated">Estimated</span></td><td class="num">1.6</td><td class="num">$2,496</td></tr>
+<tr><td class="pname">Radon State Reporting and QA</td><td class="desc">Skill and verified pipeline for the quarterly state radon report, duplicate and calibration QA, and machine utilization analysis, with the regulatory requirements researched once and written down.</td><td><span class="pill periodic">Periodic</span></td><td><span class="pill rough">Rough</span></td><td class="num">0.0</td><td class="num">$0</td></tr><tr class="withheld"><td colspan="4">1 internal-only process withheld from this public page</td><td class="num">0.2</td><td class="num">$312</td></tr>
+    </table></div>
+    <p class="note">None of this counts toward the headline. If every proposed process went live the total would reach 8.2 hrs/wk.</p>
+  </section>
+  
+  <section>
+    <h2>Credited, not counted</h2>
+    <div class="group-meta">Real work AI did that doesn't belong in a weekly labor-savings rate. Neither group touches the headline.</div>
+    <h3>One-time — hours saved once, never multiplied by 52</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Process</th><th>Description</th><th>Basis</th><th class="num">Hours saved</th><th class="num">One-time value</th></tr>
+      <tr><td class="pname">SOP Builder</td><td class="desc">Turns a brain dump, interview or transcript into a branded standard operating procedure with a clickable table of contents, runs it through a structure and compliance check, and lands a record in the SOP library. Routes to one of four paths so a formatting-only job takes about 10 minutes instead of the full build.</td><td><span class="pill measured">Measured</span></td><td class="num">14</td><td class="num">$420</td></tr><tr><td class="pname">Monthly Agent Newsletter</td><td class="desc">Drafts the monthly agent newsletter on its fixed structure, built from the last issue actually sent rather than a stale draft, pulling spotlight content from the systems where it lives.</td><td><span class="pill rough">Rough</span></td><td class="num">2</td><td class="num">$60</td></tr><tr><td class="pname">Company-Wide Employee File Reorganization</td><td class="desc">Restructured every employee folder across both entities from a year-based mess into a standard category system, with every file renamed date-first so it self-sorts and never needs annual re-filing. Onboarding now creates the structure by default.</td><td><span class="pill rough">Rough</span></td><td class="num">not sized</td><td class="num">—</td></tr><tr class="withheld"><td colspan="3">2 internal-only one-time items withheld from this public page</td><td class="num">3</td><td class="num">$90</td></tr><tr class="avg-row"><td colspan="3">One-time total</td><td class="num">19</td><td class="num">$570</td></tr>
+    </table></div>
+    <h3>New capability — work nobody was doing or paying for before</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Process</th><th>Description</th><th class="num">Date live</th></tr>
+      <tr><td class="pname">Knowledge File Manifest</td><td class="desc">Maps every knowledge file across the organization&#x27;s AI workspaces and separates the two ways a workspace goes wrong: a copied file goes stale silently and forever, while a linked file can never go stale but breaks when a folder is moved or renamed.</td><td class="num">8/18/26</td></tr><tr><td class="pname">Walkthrough Standard From Recordings</td><td class="desc">Transcribed 14 real inspector walkthroughs across 10 inspectors with a locally built speech-to-text pipeline, then turned them into a documented standard, a 10-item scorecard with worked examples, and an inventory of every talking point in use.</td><td class="num">8/1/26</td></tr><tr><td class="pname">Employee Intranet</td><td class="desc">The company intranet: six role-gated tabs covering onboarding checklists, field training, licenses and certifications, personal forms, the staff directory with SOPs and links, and leadership reporting. Identity is read live from the employee roster, so access follows the roster and a departure revokes itself.</td><td class="num">9/18/26</td></tr><tr><td class="pname">1-on-1 Snapshot Cards</td><td class="desc">Builds a one-page card for each client care coordinator&#x27;s weekly 1-on-1. It compares their key numbers to the prior week and the team average, adds workload context, and generates talking points from the data.</td><td class="num">8/10/26</td></tr><tr><td class="pname">CC Score</td><td class="desc">Rolls answer rate, missed-call streaks, add-on attach, AI call quality, and average ticket into one weighted score per agent. The score maps to four tiers, and 100 means every standard was met.</td><td class="num">8/10/26</td></tr><tr><td class="pname">Weekly Client Care Metrics Dashboard</td><td class="desc">Combines six weekly exports (calls, bookings, email, texts, and AI call scores) into a four-tab dashboard covering team results, agents, capacity, and CC Score. Each source is cleaned first, so duplicate calls, automated email, and system alerts don&#x27;t inflate the numbers.</td><td class="num">8/10/26</td></tr>
+    </table></div>
+    <p class="note">New capability rows carry no hours. They are credited here so the work is visible, not counted as labor savings.</p>
+  </section>
+
+  <section>
+    <h2>Formula</h2>
+    <p class="note" style="font-size:14px;">Weekly hours saved = sum of Est. Weekly Hours Saved across Live rows. Periodic work enters as (hours per run × runs per year) ÷ 52; one-time and new-capability rows carry 0. Annual labor value = weekly hours × 52 × $30/hr. Process count = Live rows whose Savings Type is Recurring or Periodic.</p>
+  </section>
+
+  <section>
+    <h2>Decisions applied</h2>
+    <div class="card applied"><span class="tag applied">Data entry &amp; conventions</span>
+      <p>The AI Processes table in the dashboard's Airtable base is the system of record. This page is rebuilt from it, not edited by hand. Each row carries a Savings Type (Recurring, Periodic, One-time, New capability), a Basis (Measured, Estimated, Rough), and a Source so it can be re-verified. Proposed rows stay out of the total until they are in routine use.</p></div>
+    <div class="card applied"><span class="tag applied">Public page privacy</span>
+      <p>Rows marked Internal only never appear here by name or description. Internal rows that carry hours still count in the totals and show as one anonymous "withheld" line. Internal rows with no hours are not shown or counted on this page at all. This holds until the dashboard moves behind the intranet login.</p></div>
+  </section>
+
+  <section>
+    <h2>Open items</h2>
+    <div class="card decide"><span class="tag decide">Decide</span>
+      <p><b>Wage costing.</b> $30/hr is applied as a flat rate to every process. With 17 processes logged, it's worth deciding whether to keep one blended rate or cost each process at the actual rate of whoever's time was freed.</p></div>
+    <div class="card decide"><span class="tag decide">Decide</span>
+      <p><b>How solid is solid enough.</b> 3.3 of the 6.4 hours are measured; the rest are estimates or rough guesses. The checklist calls this the most gameable driver on the dashboard. Decide whether Rough rows should need a before-and-after timing before they count.</p></div>
+    <div class="card confirm"><span class="tag confirm">Confirm</span>
+      <p><b>Two numbers flagged to challenge first.</b> The Radon Daily Fleet Job's 0.8 hrs/wk hasn't been rate-checked yet, and it's the least certain figure in the log. The Social Media Stats Pipeline's 0.5 hrs/wk was being counted while the pipeline was silently down from Jul 30 to Sep 17. It's fixed now, but its platform access token expires Sep 27.</p></div>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #7 · as of September 22, 2026 (n=17 live, 5 proposed) · Owner: Britney (backup: Maggie) · Sept 24 L10 is 2 days out. Source: AI Processes (Airtable).
+  </footer>
+</div>
+</body>
+</html>
