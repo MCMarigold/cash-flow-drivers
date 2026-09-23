@@ -189,8 +189,8 @@
           "name": "MHS Marketing Leads",
           "owner": "Minh",
           "headline": {
-            "value": "11.5/wk",
-            "target": "Goal: 40/wk",
+            "value": "13.0/wk",
+            "target": "Goal: 40/wk · Baseline: 9/wk",
             "state": "draft"
           }
         },
@@ -200,24 +200,24 @@
           "metrics": [
             {
               "label": "Combined",
-              "value": "98%",
+              "value": "83%",
               "target": "/ 90% target",
-              "state": "pos"
+              "state": "neg"
             },
             {
               "label": "Leadership & Support",
-              "value": "94%",
-              "state": "pos"
+              "value": "81%",
+              "state": "neg"
             },
             {
               "label": "MHI Field Ops",
-              "value": "100%",
+              "value": "90%",
               "state": "pos"
             },
             {
               "label": "MHS Field Ops",
-              "value": "100%",
-              "state": "pos"
+              "value": "50%",
+              "state": "neg"
             }
           ],
           "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
