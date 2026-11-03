@@ -180,9 +180,9 @@
           "name": "Inspector Available Capacity",
           "owner": "Blake",
           "headline": {
-            "value": "6.5%",
-            "target": "Target: 5%",
-            "state": "pos"
+            "value": "10.4%",
+            "target": "Target: 5–10%",
+            "state": "neg"
           }
         },
         "2": {
@@ -252,19 +252,19 @@
           "metrics": [
             {
               "label": "Inspector",
-              "value": "75.8%",
+              "value": "74.7%",
               "target": "/ 80%",
               "state": "neg"
             },
             {
               "label": "Service Tech",
-              "value": "88.0%",
+              "value": "89.0%",
               "target": "/ 85%",
               "state": "pos"
             },
             {
               "label": "Radon Tech",
-              "value": "56.5%",
+              "value": "61.1%",
               "target": "/ 90%",
               "state": "neg"
             }
