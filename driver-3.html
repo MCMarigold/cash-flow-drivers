@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>September 2026 — Wrong People / Wrong Seats</title>
+<title>October 2026 — Wrong People / Wrong Seats</title>
 <script type="application/json" id="driver-summary">
 {
   "driver": 3,
   "name": "Wrong People / Wrong Seats",
   "owner": "Curtis",
-  "period": "Sept 2026",
+  "period": "Oct 2026",
   "metrics": [
-    {"label": "Combined", "value": "83%", "target": "/ 90% target", "state": "neg"},
-    {"label": "Leadership & Support", "value": "81%", "state": "neg"},
+    {"label": "Combined", "value": "88%", "target": "/ 90% target", "state": "neg"},
+    {"label": "Leadership & Support", "value": "94%", "state": "pos"},
     {"label": "MHI Field Ops", "value": "90%", "state": "pos"},
     {"label": "MHS Field Ops", "value": "50%", "state": "neg"}
   ]
@@ -142,7 +142,7 @@
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #3</div>
-  <h1>September 2026 — Wrong People / Wrong Seats</h1>
+  <h1>October 2026 — Wrong People / Wrong Seats</h1>
   <div class="sub">All business units — Leadership, Business Support, MHI, MHS · Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory (roster verification)</div>
 
   <section style="margin-top:20px;">
@@ -272,7 +272,7 @@
       { title:"Visionary", people:[ p("Curtis Larson") ] },
     ]},
     { tier: "Integrator", seats: [
-      { title:"Integrator", people:[ wrong("Curtis Larson") ] },
+      { title:"Integrator", people:[ p("Britney Ahlmann") ] },
     ]},
     { tier: "Department Heads", seats: [
       { title:"MHI", people:[ p("Blake Pederson-Perovich") ] },
@@ -290,7 +290,7 @@
       { title:"Relationship Manager", vacant:true, people:[] } ],
     [ { title:"Marketing", people:[ p("Britney Ahlmann") ] },
       { title:"Social Media Manager", people:[ p("Megan Kouri") ] } ],
-    [ { title:"Finance / HR", seatConflict:true, people:[ p("Curtis Larson"), p("Britney Ahlmann") ] },
+    [ { title:"Finance / HR", people:[ p("Britney Ahlmann") ] },
       { title:"Operations Coordinator", people:[ p("Carolyn Derksen") ] } ],
     [ { title:"Engineer", people:[ p("Britney Ahlmann") ] } ],
     [ { title:"Client Care", people:[ p("Maggie Cox") ] },
@@ -524,9 +524,9 @@
     var seatCount = seats.length;
     var vacantSeatCount = seats.filter(function(s){return s.vacant;}).length;
     document.getElementById("footerNote").textContent =
-      "Marigold Cash Flow Driver Dashboard · Driver #3 · Sept 2026 (" + seatCount + " named seats: " +
+      "Marigold Cash Flow Driver Dashboard · Driver #3 · Oct 2026 (" + seatCount + " named seats: " +
       (seatCount - vacantSeatCount) + " filled, " + vacantSeatCount + " vacant; " + overall.people +
-      " people scored) · Owner: Curtis · Sept 24 L10 is 6 days out. Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory.";
+      " people scored) · Owner: Curtis · Nov 5 L10 is 2 days out. Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory.";
   }
 
   // These two are shown only for clarity — Blake and Minh are already scored
