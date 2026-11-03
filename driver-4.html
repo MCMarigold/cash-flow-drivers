@@ -2,27 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>September 2026 (Sep 1–20) — Follow-Up Close Rate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 2026 — Follow-Up Close Rate</title>
 <script type="application/json" id="driver-summary">
 {
   "driver": 4,
   "name": "Follow-Up Close Rate",
   "owner": "Minh",
-  "period": "Sep 2026",
+  "period": "Oct 2026",
   "metrics": [
-    {"label": "Combined", "value": "47.2%", "target": "/ 70%", "state": "neg"},
-    {"label": "Mitigation", "value": "50.0%", "target": "/ 70%", "state": "neg"},
-    {"label": "RHM", "value": "0.0%", "target": "/ 70%", "state": "neg"}
+    {
+      "label": "Mitigation (HCP)",
+      "value": "41.4%",
+      "target": "/ 70%",
+      "state": "neg"
+    }
   ]
-}
-</script>
-<script type="application/json" id="driver-funnel">
-{
-  "period": "Sep 2026",
-  "estimate_sent": 36,
-  "estimate_accepted": 17,
-  "still_resolving": 17,
-  "job_completed": 7
 }
 </script>
 <style>
@@ -85,160 +80,136 @@
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #4</div>
-  <h1>September 2026 (Sep 1–20) — Follow-Up Close Rate</h1>
-  <div class="sub">MHS — Mitigation + RHM, September 1–20, 2026 (month to date) · 36 real quotes sent · Sources: Housecall Pro (Mitigation, live API /estimates + /jobs) + Square (Mitigation stragglers + RHM) · Spectora order history not pulled this cut</div>
+  <h1>October 2026 — Follow-Up Close Rate</h1>
+  <div class="sub">MHS — Mitigation only, October 1–31, 2026 · 70 real quotes sent · Source: Housecall Pro (live API, /estimates + /jobs, pulled Nov 2)</div>
 
   <section style="margin-top:20px;">
     <div class="card">
-      <p style="margin:0;">Follow-up close rate measures what share of MHS quotes sent turn into accepted jobs, across both product lines: Radon Mitigation and Routine Home Maintenance (RHM, launched April 2026). Mitigation now runs fully on Housecall Pro; RHM has always run on Square, which is also where any Mitigation quotes that slipped through outside HCP are still tracked. No Mitigation stragglers showed up in Square for September 1–20 — every Mitigation quote this period is in HCP.</p>
-      <p>Handyman estimates are excluded entirely — MHS discontinued handyman services, and no Handyman quote has been sent since May 2026.</p>
-      <p>This is a <b>month-to-date cut through September 20</b>, run September 22, so the cohort is young: 17 of 36 quotes (47%) are still undecided, and several were sent only days ago. Expect this rate to move more than August's did between now and month-end. Financially, closing this period's sent quotes at the 70% target instead of the actual rate would have produced about $17,055 more (see Revenue at target below) — almost entirely from Mitigation.</p>
+      <p style="margin:0;">Follow-up close rate measures what share of MHS quotes sent turn into accepted jobs. From October this driver is <b>Radon Mitigation only, sourced entirely from Housecall Pro</b>: Routine Home Maintenance (RHM) is being wound down and is no longer part of the number, and Square is no longer a source, so there is no combined line anymore. The September page showed Combined, Mitigation and RHM; October's headline is the Mitigation rate.</p>
+      <p>This is a cohort measure: every real quote sent in October, judged as of November 2. <b>33 of the 70 quotes (47%) are still undecided</b>, and most of those were sent in the last two weeks of the month, so the rate will move before the next report. Closing this month's sent quotes at the 70% target instead of the actual rate would have produced about $42,548 more (see Revenue at target below).</p>
     </div>
   </section>
 
   <section>
-    <h2>Headline — combined (Mitigation + RHM)</h2>
+    <h2>Headline — Mitigation close rate</h2>
     <div class="headline-row">
-      <div class="headline-pct neg">47.2%<span class="tgt">Close rate · target 70%</span></div>
+      <div class="headline-pct neg">41.4%<span class="tgt">Close rate · target 70% · 28.6 pts short</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;">
-      <div class="compare-stat"><div class="cnum">36</div><div class="clbl">Real quotes sent</div></div>
-      <div class="compare-stat"><div class="cnum">17</div><div class="clbl">Accepted</div></div>
-      <div class="compare-stat"><div class="cnum">2</div><div class="clbl">Declined / expired</div></div>
-      <div class="compare-stat"><div class="cnum">17</div><div class="clbl">Still resolving</div></div>
+      <div class="compare-stat"><div class="cnum">70</div><div class="clbl">Real quotes sent</div></div>
+      <div class="compare-stat"><div class="cnum">29</div><div class="clbl">Accepted</div></div>
+      <div class="compare-stat"><div class="cnum">8</div><div class="clbl">Declined / expired / canceled</div></div>
+      <div class="compare-stat"><div class="cnum">33</div><div class="clbl">Still resolving</div></div>
     </div>
-    <p class="note" style="margin-top:14px;">17 of the 36 September 1–20 quotes (47%) haven't been decided yet as of this report — much higher than August's 21% because this cut is only two days past the period end. That's expected lag, not a data gap. Of the 19 that <i>have</i> been decided, 17 were accepted (89%), so the headline is being held down by the undecided pile, not by losses. The final September report will show how these 17 landed. 5 $0 records (site visits with no price built) are not counted as sent — see flagged for review below.</p>
-
-    <div class="split-row">
-      <div class="split-card">
-        <div class="slbl">Mitigation</div>
-        <div class="spct" style="color:var(--decide);">50.0%</div>
-        <div class="stgt">17 accepted ÷ 34 sent (34 HCP + 0 Square stragglers)</div>
-      </div>
-      <div class="split-card">
-        <div class="slbl">RHM</div>
-        <div class="spct" style="color:var(--decide);">0.0%</div>
-        <div class="stgt">0 accepted ÷ 2 sent — both still pending; thin sample, always has been</div>
-      </div>
-    </div>
+    <p class="note" style="margin-top:14px;">Of the 37 quotes that have been decided, 29 were accepted (78%), so the headline is being held down by the undecided pile more than by losses. For reference, the Sep 1–20 page read 50.0% (17 of 34) with 15 still undecided at the time. 18 records with a $0 price (visits not yet priced, canceled placeholders) are not counted as sent and are listed below.</p>
   </section>
 
   <section>
-    <h2>Outcome detail, by line</h2>
-    <div class="group-meta">Real (non-test, non-handyman) quotes sent September 1–20, by current outcome</div>
+    <h2>Outcome detail</h2>
+    <div class="group-meta">Real (non-test) Mitigation quotes sent October 1–31 (Central time), by current outcome, and by the week the quote was created</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Line</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still resolving</th><th class="num">Close rate</th></tr>
-      <tr><td>Mitigation</td><td class="num">34</td><td class="num">17</td><td class="num">2</td><td class="num">15</td><td class="num eff">50.0%</td></tr>
-      <tr><td>RHM</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td class="num eff">0.0%</td></tr>
-      <tr class="avg-row"><td>Combined</td><td class="num">36</td><td class="num">17</td><td class="num">2</td><td class="num">17</td><td class="num">47.2%</td></tr>
+      <tr><th>Period</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still resolving</th><th class="num">Close rate</th></tr>
+      <tr><td>Oct 1–4 (Thu–Sun)</td><td class="num">6</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num eff">50.0%</td></tr><tr><td>Oct 5–11</td><td class="num">16</td><td class="num">8</td><td class="num">2</td><td class="num">6</td><td class="num eff">50.0%</td></tr><tr><td>Oct 12–18</td><td class="num">14</td><td class="num">8</td><td class="num">1</td><td class="num">5</td><td class="num eff">57.1%</td></tr><tr><td>Oct 19–25</td><td class="num">21</td><td class="num">8</td><td class="num">1</td><td class="num">12</td><td class="num eff">38.1%</td></tr><tr><td>Oct 26–31</td><td class="num">13</td><td class="num">2</td><td class="num">1</td><td class="num">10</td><td class="num eff">15.4%</td></tr>
+      <tr class="avg-row"><td>October total</td><td class="num">70</td><td class="num">29</td><td class="num">8</td><td class="num">33</td><td class="num">41.4%</td></tr>
     </table>
     </div>
+    <p class="note">Quotes created Oct 1–18 have mostly landed: 19 of 36 accepted, 6 lost, 11 still open. The open pile sits in the last two weeks: 22 of the 33 undecided quotes were created Oct 19 or later, so they are days old, not stale.</p>
   </section>
 
   <section>
-    <h2>Revenue — September 1–20, real dollars</h2>
-    <div class="group-meta">The 5 zero-dollar records below were never sent and aren't in any count or $ figure — see flagged-for-review below. "Completed &amp; earned" is cross-referenced against Housecall Pro job records (actual billed job totals). Spectora order history wasn't pulled for this cut.</div>
+    <h2>Revenue — October 1–31, real dollars</h2>
+    <div class="group-meta">$0 records are not in any count or dollar figure. "Completed &amp; earned" is cross-referenced to Housecall Pro job records (actual billed job totals). Multi-option quotes use the accepted option, else the highest live option, not the sum.</div>
     <div class="table-wrap">
     <table>
       <tr><th>Line</th><th class="num">Sent value</th><th class="num">Accepted</th><th class="num">Completed &amp; earned</th><th class="num">Booked, not yet done</th><th class="num">Declined/expired</th><th class="num">Still pending</th></tr>
-      <tr><td>Mitigation</td><td class="num">$67,603.00</td><td class="num">$30,423.00</td><td class="num eff">7 jobs, $13,448.00</td><td class="num">10 jobs, $17,175.00</td><td class="num">$4,200.00</td><td class="num">$32,980.00</td></tr>
-      <tr><td>RHM</td><td class="num">$222.00</td><td class="num">$0.00</td><td class="num eff">—</td><td class="num">—</td><td class="num">—</td><td class="num">$222.00</td></tr>
-      <tr class="avg-row"><td>Combined</td><td class="num">$67,825.00</td><td class="num eff">$30,423.00</td><td class="num">7 jobs, $13,448.00</td><td class="num">10 jobs, $17,175.00</td><td class="num">$4,200.00</td><td class="num">$33,202.00</td></tr>
+      <tr class="avg-row"><td>Mitigation</td><td class="num">$142,655</td><td class="num eff">$57,310</td><td class="num">11 jobs, $20,515</td><td class="num">18 accepted, $36,445</td><td class="num">$19,070</td><td class="num">$66,275</td></tr>
     </table>
     </div>
-    <p class="note"><b>7 of 17 accepted Mitigation quotes (41%) have already been completed and earned</b> — the other 10 have a job created in HCP and are scheduled or waiting to be scheduled (Lerberg, Brimeyer, Stenman, Arp, Goulding, Rogal, Harper; Counters and Andrews still need scheduling; Ettinger in progress). That's a lower completed share than August's because September's acceptances are only days to weeks old, not a slowdown. Completed jobs billed $200 <i>over</i> quote in total (Huebner's job came in at $2,175 against a $1,975 quote), the reverse of August's small under-quote gap.</p>
-    <p class="note"><b>Multi-option quotes:</b> where a customer was sent two or more options (e.g., exterior vs. interior system), sent value uses the accepted option if one was accepted, otherwise the highest live option — not the sum of all options, which would overstate the pipeline.</p>
+    <p class="note"><b>11 of 29 accepted quotes (38%) are already completed and billed</b>; the other 18 are accepted and booked or waiting to be scheduled (Greg Kearn's accepted interior quote has no job yet, see Confirm). Completed jobs billed $20,515 against $20,865 quoted, $350 under in total.</p>
 
     <h2 style="margin-top:22px;">Revenue at target (70% close rate)</h2>
-    <div class="group-meta">Holding September 1–20's sent pipeline fixed and asking what closing at target instead of actual would have produced</div>
+    <div class="group-meta">Holding October's sent pipeline fixed and asking what closing at target instead of actual would have produced</div>
     <div class="table-wrap">
     <table>
       <tr><th>Line</th><th class="num">Actual accepted</th><th class="num">Accepted @ 70%</th><th class="num">Period gap</th></tr>
-      <tr><td>Mitigation</td><td class="num">$30,423.00</td><td class="num">$47,322.10</td><td class="num eff">+$16,899.10</td></tr>
-      <tr><td>RHM</td><td class="num">$0.00</td><td class="num">$155.40</td><td class="num eff">+$155.40</td></tr>
-      <tr class="avg-row"><td>Combined</td><td class="num">$30,423.00</td><td class="num">$47,477.50</td><td class="num">+$17,054.50</td></tr>
+      <tr class="avg-row"><td>Mitigation</td><td class="num">$57,310</td><td class="num">$99,858</td><td class="num eff">+$42,548</td></tr>
     </table>
     </div>
-    <p class="note">Method: target close rate × this period's total sent value, compared to what actually closed — a simple "same pipeline, better conversion" read, not a forecast. With 47% of this cohort still undecided, most of this gap is unresolved rather than lost: $33,202 is still pending, and if even half of it closes, the gap shrinks to roughly $450. No annualized figure is shown for a 20-day partial month; the methodology page carries ~$100K/yr as this driver's impact figure.</p>
-    <p class="note">Nearly all the dollar opportunity sits in Mitigation — RHM's whole sent pipeline this period is $222, so its 0% close rate on two still-open quotes barely registers in dollars.</p>
+    <p class="note">Method: target close rate × this month's total sent value, compared to what actually closed. It is a "same pipeline, better conversion" read, not a forecast. With 47% of the cohort undecided, much of this gap is unresolved rather than lost: $66,275 is still pending, and if half of it closes the gap shrinks to about $9,411. The methodology page carries about $100K/yr as this driver's impact figure; no annualized number is shown here for one month's cohort.</p>
 
     <h2 style="margin-top:22px;">$0 quotes — not sent, flagged for review</h2>
-    <div class="group-meta">A $0 quote was never priced, so it was never actually sent to the customer — excluded from the sent denominator and every other count on this page, same as a Draft</div>
+    <div class="group-meta">A $0 quote was never priced, so it was never actually sent; it is excluded from every count and dollar figure on this page, same as a Draft</div>
     <div class="table-wrap">
     <table>
       <tr><th>Customer</th><th class="num">Amount</th><th>Status</th><th>Why flagged</th></tr>
-      <tr><td>Clinton LaBeau (Est. #173)</td><td class="num">$0.00</td><td>User canceled</td><td>Site visit booked for 10/19, canceled by the customer before any price was built</td></tr>
-      <tr><td>Allie Compaan (Est. #170)</td><td class="num">$0.00</td><td>Pending</td><td>Site visit scheduled 9/23 — not yet priced</td></tr>
-      <tr><td>Ben Brokaw (Est. #174)</td><td class="num">$0.00</td><td>Pending</td><td>Site visit scheduled 9/23 — not yet priced</td></tr>
-      <tr><td>Ben &amp; Makayla Worwa (Est. #180)</td><td class="num">$0.00</td><td>Pending</td><td>Site visit scheduled 9/23 — not yet priced</td></tr>
-      <tr><td>Michele &amp; Tanner Wipper (Est. #177)</td><td class="num">$0.00</td><td>Pending</td><td>Site visit scheduled 9/24 — not yet priced</td></tr>
+      <tr><td>Julie Landy (Est. #304)</td><td class="num">$0.00</td><td>Scheduled</td><td>Site visit scheduled, not yet priced</td></tr><tr><td>Colleen Healy (Est. #303)</td><td class="num">$0.00</td><td>Complete unrated</td><td>Visit complete, no price built</td></tr><tr><td>Shelly Decker (Est. #302)</td><td class="num">$0.00</td><td>Scheduled</td><td>Site visit scheduled, not yet priced</td></tr><tr><td>Taylor Hays (Est. #299)</td><td class="num">$0.00</td><td>Scheduled</td><td>Site visit scheduled, not yet priced</td></tr><tr><td>Jamie Scherf (Est. #296)</td><td class="num">$0.00</td><td>Needs scheduling</td><td>Needs scheduling, no price built</td></tr><tr><td>Savinay Singh (Est. #292)</td><td class="num">$0.00</td><td>Needs scheduling</td><td>Needs scheduling, no price built</td></tr><tr><td>Amelia Ophoven (Est. #290)</td><td class="num">$0.00</td><td>Scheduled</td><td>Site visit scheduled, not yet priced</td></tr><tr><td>Gage Langum (Est. #277)</td><td class="num">$0.00</td><td>Pro canceled</td><td>Canceled or deleted placeholder with no price</td></tr><tr><td>Carolyn Jackson (Est. #281)</td><td class="num">$0.00</td><td>Complete unrated</td><td>Visit complete, no price built</td></tr><tr><td>Realtor Jon McLaughlin (Est. #273)</td><td class="num">$0.00</td><td>Needs scheduling</td><td>Needs scheduling, no price built</td></tr><tr><td>Chad Dubbeldee (Est. #266)</td><td class="num">$0.00</td><td>User canceled</td><td>Canceled or deleted placeholder with no price</td></tr><tr><td>Susan Ritchie (Est. #264)</td><td class="num">$0.00</td><td>Pro canceled</td><td>Canceled or deleted placeholder with no price</td></tr><tr><td>Cynthia Spangler (Est. #255)</td><td class="num">$0.00</td><td>Pro canceled</td><td>Canceled or deleted placeholder with no price</td></tr><tr><td>Kiflu Hailu (Est. #253)</td><td class="num">$0.00</td><td>In progress</td><td>Visit complete, no price built</td></tr><tr><td>Cynthia Spangler (Est. #252)</td><td class="num">$0.00</td><td>Needs scheduling</td><td>Needs scheduling, no price built</td></tr><tr><td>Katherine "Mahala" Burn (Est. #248)</td><td class="num">$0.00</td><td>Scheduled</td><td>Site visit scheduled, not yet priced</td></tr><tr><td>David Tillman (Est. #245)</td><td class="num">$0.00</td><td>Pro canceled</td><td>Canceled or deleted placeholder with no price</td></tr><tr><td>Zach Gustafson (Est. #213)</td><td class="num">$0.00</td><td>Needs scheduling</td><td>Needs scheduling, no price built</td></tr>
     </table>
     </div>
-    <p class="note">No Longwell-style outliers this period — the largest quote is $3,400 (Karen Resch) against a $2,058 median. 4 of the 5 are upcoming site-visit appointments, so a price hasn't been built because the visit hasn't happened yet. If they turn into priced quotes, they'll count in the period they're sent. LaBeau canceled before anyone priced a quote. Worth Minh's team confirming none of these are quotes that were delivered without an amount.</p>
+    <p class="note">Most are site-visit appointments that have not been priced yet; once a price is built they count in the month they are sent. Kiflu Hailu (#253, in progress), Colleen Healy (#303) and Carolyn Jackson (#281) show a started or completed visit with no price; worth Minh's team confirming none were quotes delivered without an amount.</p>
 
-    <h2 style="margin-top:22px;">Excluded from every count</h2>
-    <div class="group-meta">Removed before any number on this page was computed</div>
+    <h2 style="margin-top:22px;">Excluded from every count — duplicates</h2>
+    <div class="group-meta">Removed before any number on this page was computed. No staff or test names were found in October.</div>
     <div class="table-wrap">
     <table>
       <tr><th>Record</th><th class="num">Amount</th><th>Why excluded</th></tr>
-      <tr><td>Minh Nguyen (HCP #144)</td><td class="num">—</td><td>Staff/test name (Pass 1)</td></tr>
-      <tr><td>Curtis Larson (Square #3444)</td><td class="num">$46.75</td><td>Accepted RHM quote under the owner's name, office@callmarigold.com, and the MHS main line — reads as internal (see Confirm item)</td></tr>
-      <tr><td>William Franklin (HCP #135)</td><td class="num">$0.00</td><td>RHM site visit logged in HCP; the actual quote went out through Square (#3445) and is counted there</td></tr>
-      <tr><td>8 superseded duplicates</td><td class="num">—</td><td>Estimates deleted and re-created, or $0 visit placeholders, where the same customer/address has a live quote this period: Deleuw #133, Slack #136 (same address as Lerberg #143), Resch #140, Goulding #145 + #175, Tung Le #149 (same address as Dixie Lewis #155), Himley #156, Charlton #166</td></tr>
+      <tr><td>#271 Greg Kearn</td><td class="num">$2,150</td><td>Re-created after #235 (Greg Kearn interior option already approved); counted once as accepted under #235</td></tr><tr><td>#238 Kurt Bauer</td><td class="num">$2,150</td><td>Duplicate of #239 (same customer, blank address)</td></tr><tr><td>#237 Cade Schanzenbach</td><td class="num">$2,010</td><td>Same address as #257 (Strock household); counted once under #257</td></tr><tr><td>#217 (no name)</td><td class="num">$0</td><td>Superseded: no-name placeholder at the same address as #220 (accepted)</td></tr>
     </table>
     </div>
   </section>
 
   <section>
-    <h2>Backlog check — quotes sent before September</h2>
-    <div class="group-meta">Includes August's cohort re-cut as of today, so August's 16 undecided quotes can be tracked to landing</div>
+    <h2>Backlog check — quotes sent before October</h2>
+    <div class="group-meta">HCP only. Re-cut today on the same status rules, without hand-reviewing duplicates, so treat as approximate</div>
     <div class="table-wrap">
     <table>
-      <tr><th>Line</th><th class="num">Sent before Sep 1</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still undecided</th></tr>
-      <tr><td>Mitigation (HCP, August cohort)</td><td class="num">64</td><td class="num">37</td><td class="num">19</td><td class="num eff">8</td></tr>
-      <tr><td>Mitigation (Square, pre-cutover history)</td><td class="num">1,100</td><td class="num">545</td><td class="num">548</td><td class="num" style="color:var(--decide); font-weight:700;">7</td></tr>
-      <tr><td>Mitigation (Square, August stragglers)</td><td class="num">3</td><td class="num">0</td><td class="num">3</td><td class="num">0</td></tr>
-      <tr><td>RHM (Square)</td><td class="num">84</td><td class="num">30</td><td class="num">51</td><td class="num">3</td></tr>
+      <tr><th>Cohort</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still undecided</th></tr>
+      <tr><td>September 1–30 (priced quotes)</td><td class="num">44</td><td class="num">25</td><td class="num eff">0</td></tr>
+      <tr><td>August 10–31 (priced quotes)</td><td class="num">30</td><td class="num">26</td><td class="num eff">0</td></tr>
     </table>
     </div>
-    <p class="note"><b>How August landed:</b> re-cut today on the same rules as this page, August stands at <b>52.1% combined</b> (38 accepted ÷ 73 sent; 24 declined/expired; 11 still undecided), up from 40.8% on the original August page. Three things moved it: 5 of the 16 undecided quotes resolved (3 accepted, 2 lost); 3 $0 August records (John Zattoni #88, Emily Ames #85, Jeff Sheffield #49) are no longer counted as sent; and a correction: 4 August HCP estimates marked "pro canceled" had actually become jobs (Loren Brimeyer, Lyn Wayne, Janelle Kelly, John Zattoni) and were originally counted as $0 expired losses — see the Corrected card below. August Mitigation re-cut: 55.2% (37 ÷ 67). August RHM is unchanged at 1 of 6 — Whitcraft, Fisher, and Emily Ames are still pending, sent 8/31 and inside their 30-day window until 9/30.</p>
-    <p class="note"><b>August's 8 undecided HCP quotes</b> (all sent 8/23–8/31): Ben Coutts, Janelle Kelly (second estimate), Michelle Ramier, Robert Gagner, Courtney Gross, Aaron Barlow, Erin Stone, Maren Broadstan. They're 3–4 weeks old — not stale yet, but worth a follow-up push before they age out.</p>
-    <p class="note"><b>The 7 genuinely stale pre-cutover Square Mitigation quotes are unchanged</b> — none resolved since the August report: Beth Steen and Joel Reis (both 3/2025, Undelivered), Patrick Chuckas and Jeff Barraclough (7/2025, Pending), Troy Seberson and Jeff Vitko (11/2025, Pending), Cameron Serk (1/2026, Pending). None are in this period's headline. Once these 7 are resolved (accepted, declined, or written off), Square can be dropped from Mitigation's data sources entirely.</p>
-    <p class="note"><b>Truest baseline for comparison: 49.6%</b> — the full pre-cutover Square Mitigation history, effectively Marigold's steady-state Mitigation close rate before the system change. This export carries more history rows than the August cut (1,100 sent vs. 962) but lands at the same rate (49.5%), so the baseline stands. September 1–20's 50.0% Mitigation rate is already slightly above it, with 15 quotes still undecided.</p>
+    <p class="note">No HCP quote from August or September is still undecided: everything has been accepted, declined, canceled or has expired. September lands near 64% accepted (44 of 69) on this quick cut, up from 50.0% on the Sep 1–20 page, though the lost column still includes some deleted and re-created duplicates, so the true September rate is a little higher. The old pre-cutover Square Mitigation quotes are no longer a source for this page; they are noted at the bottom.</p>
   </section>
 
   <section>
     <h2>Mitigation — site visit vs. phone quote</h2>
-    <div class="group-meta">HCP-only, Mitigation only — RHM always requires a site visit to quote, so this split doesn't apply there</div>
+    <div class="group-meta">Split using schedule.scheduled_start: set = a site visit was booked, null = no appointment was ever scheduled</div>
     <div class="table-wrap">
     <table>
       <tr><th>Quote type</th><th class="num">Sent</th><th class="num">Accepted</th><th class="num">Declined/expired</th><th class="num">Still pending</th><th class="num">Close rate</th></tr>
-      <tr><td>Site-visit quotes</td><td class="num">21</td><td class="num">10</td><td class="num">0</td><td class="num">11</td><td class="num eff">47.6%</td></tr>
-      <tr><td>Phone quotes</td><td class="num">13</td><td class="num">7</td><td class="num">2</td><td class="num">4</td><td class="num eff">53.8%</td></tr>
+      <tr><td>Site-visit quotes</td><td class="num">41</td><td class="num">23</td><td class="num">2</td><td class="num">16</td><td class="num eff">56.1%</td></tr>
+      <tr><td>Phone quotes</td><td class="num">29</td><td class="num">6</td><td class="num">6</td><td class="num">17</td><td class="num eff">20.7%</td></tr>
     </table>
     </div>
-    <p class="note">Split using <code>schedule.scheduled_start</code>: set = a site visit was actually booked, null = no appointment was ever scheduled, consistent with the "phone quotes without a site visit" workflow in the CCC-MHS Mitigation SOP. It's a proxy, not an explicit quote-type field. This period flips August's pattern (site visit 51.6% vs. phone 38.9%), but most of the still-pending quotes sit in the site-visit row (11 of 21), and none of its decided quotes were lost. With samples this small and this much still undecided, the flip isn't a signal yet.</p>
+    <p class="note">Site-visit quotes closed far better this month (56% vs 21%). Phone quotes carry most of the open pile (17 of 29 still pending), and among phone quotes that have been decided, 6 of 12 were accepted. It is a proxy, not an explicit quote-type field, and the open pile is large, so read it as a direction, not a result.</p>
   </section>
 
   <section>
     <h2>Formula</h2>
-    <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Close rate = quotes accepted ÷ quotes sent</strong>, for real (non-test, non-handyman) MHS quotes with a send date September 1–20 (Central time), judged as of September 22. Combined = Mitigation + RHM pooled together; each line is also reported separately since they're different sales motions on different systems. "Sent" excludes Drafts (never delivered) in both systems and $0 quotes (never priced, so never sent). In HCP, an estimate counts as accepted if any option was approved or converted to a job; lost if the estimate was canceled or every option expired/declined; otherwise still resolving.</p>
+    <p class="note" style="font-size:14px;"><strong style="color:var(--text);">Close rate = quotes accepted ÷ quotes sent</strong>, for real (non-test) Mitigation quotes created October 1–31 (Central time), judged as of November 2. "Sent" excludes $0 quotes (never priced). Quotes are counted <b>one per property address</b> (see Decisions applied). An estimate counts as accepted if any option was approved or converted to a job (checked before the estimate's own status, so a "pro canceled" estimate with an approved option counts as won); lost if the estimate was canceled or every priced option expired or was declined; otherwise still resolving, which stays in the denominator.</p>
   </section>
 
   <section>
     <h2>Decisions applied</h2>
     <div class="card locked">
       <span class="tag locked">Decided</span>
-      <p><b>Draft-status quotes don't count as "sent."</b> Applies to both Mitigation and RHM — a Draft was never delivered to the customer, so it's excluded from the sent denominator and from the backlog count. Pending/Undelivered quotes did go out and count as sent, whether or not they were ever decided.</p>
+      <p><b>Mitigation only, Housecall Pro only</b> (Maggie, Nov 3). RHM is dropped because the service is being wound down, and Square is no longer a source. There is no Combined line.</p>
     </div>
     <div class="card locked">
       <span class="tag locked">Decided</span>
-      <p><b>Cohort-based, pending stays in the denominator.</b> All real quotes sent in the period, judged as of run date. Decided-in-period-only overstates the rate (tested in August: 75.0% vs. 45.6%), and this period shows why — decided-only would read 89%.</p>
+      <p><b>Target is 70%, Mitigation only</b> (Maggie, Nov 3). Confirmed as still the target now that RHM is gone.</p>
     </div>
     <div class="card locked">
       <span class="tag locked">Decided</span>
-      <p><b>$0 quotes don't count as "sent"</b> (Maggie, Sept 22). A quote with no price was never actually sent to the customer. Like a Draft, it's excluded from the sent denominator and from every count, and it's listed in the flagged table so nothing disappears silently. This period that's 5 records (4 upcoming site visits and 1 canceled visit), so Mitigation reads 50.0% (17 ÷ 34) instead of 43.6% (17 ÷ 39). August's re-cut in the backlog section uses the same rule.</p>
+      <p><b>One quote per property address</b> (Maggie, Nov 3). This is common: the buyer asks for a quote after their radon test, then the seller or their agents reach out to book the install and are sent the quote too. Those count once. Applied to the four duplicates removed above, and checked across every other October quote: no other address has more than one estimate. Two estimates for the same customer at different addresses (Gustafson, #212 and #214) are two quotes.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Unlabeled small quotes are Mitigation</b> (Maggie, Nov 3). Alison Heathcote ($650), Donna Seys ($500) and Ashley Cecil-Folds ($695) are radon/mitigation bids and stay in the count.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Cohort-based, pending stays in the denominator; $0 quotes are not sent; accepted is judged at option level</b> (carried from September). Decided-only would read 78% this month, which is why the cohort rate is the headline.</p>
     </div>
   </section>
 
@@ -246,41 +217,27 @@
     <h2>Open items</h2>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p><b>Target value.</b> This page shows 70%, matching the v5 checklist's inline meta note — but that number doesn't appear to have gone through a written Decide closure anywhere, and a separate working tracker had 55%/70%/77% all floating as candidates. Worth a direct confirm with Minh before this is presented at the Sept 24 L10 as a locked target. Unclear whether 70% was meant as a combined target or Mitigation-only — RHM's 0% on n=2 (and 16.7% on n=6 in August) would need its own conversation if the target applies per-line.</p>
-    </div>
-    
-    <div class="card decide">
-      <span class="tag decide">Decide</span>
-      <p><b>The 7-quote Mitigation backlog still needs an owner and a next step.</b> None of the 7 resolved since August. These are real, answerable quotes sitting unresolved for months — some over 18 months. Worth deciding whether the estimator does a fresh follow-up round on these specific 7 before they're written off, and whether "stale quote backlog" becomes its own tracked line on this page going forward.</p>
-    </div>
-    <div class="card locked">
-      <span class="tag locked">Corrected</span>
-      <p><b>"Pro canceled" estimates that became jobs are now counted as accepted.</b> HCP sometimes marks an estimate "pro canceled" even though one of its options was approved and converted into a job. August's run read these as $0 expired losses (Brimeyer, Wayne, Kelly, Zattoni — all installed per Driver 2). This run checks option-level approval and job conversion first, which reclassifies those 4 in the August re-cut and applies to Frank Huebner this period (estimate "pro canceled," job completed and billed at $2,175).</p>
+      <p><b>Chad Dubbeldee (#224 and #272).</b> Counted as two separate quotes (Maggie, Nov 3): #224 is a canceled $1,950/$2,150 quote with no address on the record, and #272 is an accepted $200 estimate at Vance Cir NW. They are probably different properties given the very different amounts, but that is not certain. If they were the same property, the rate would read 29 of 69 (42.0%).</p>
     </div>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p><b>Michelle Van Santen (#153) is counted as lost but may not be.</b> The estimate is "pro canceled," yet two of its options show completed statuses and no linked job was found. Worth a quick look in HCP to see whether a job was created some other way — if so, it's an accepted $2,150 quote.</p>
+      <p><b>$0 visits already started.</b> Kiflu Hailu (#253, in progress), Colleen Healy (#303) and Carolyn Jackson (#281) show a started or completed visit with no price. Confirm none were quotes delivered without an amount.</p>
     </div>
     <div class="card confirm">
       <span class="tag confirm">Confirm</span>
-      <p><b>Curtis Larson's $46.75 RHM quote is excluded as internal.</b> It was accepted the day it was sent, under office@callmarigold.com and the MHS main line. Driver 2 already flagged staff-named RHM accounts as an open question. If it's a real owner-occupied RHM account, RHM becomes 1 of 3 (33.3%) and combined becomes 48.6% (18 ÷ 37).</p>
+      <p><b>Annual impact figure.</b> The methodology page carries about $100K/yr for this driver, while one month's same-pipeline gap annualizes much higher (about $218K in September's math). Left open for now; no annualized number is shown on this page.</p>
     </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p><b>August's 2 booked-not-done jobs:</b> Bethany Harshbarger ($2,550) is now in progress and Lynette Albrecht ($3,865) is scheduled — both moving, neither completed yet. Worth one more glance at month-end.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p><b>RHM's quote-to-subscription conversion is still one data point, not a pattern.</b> Pete Bittorf's $109 quote became a $1,200 annual package in August; no RHM quote was accepted this period, so there's nothing new to add yet.</p>
-    </div>
-    <div class="card confirm">
-      <span class="tag confirm">Confirm</span>
-      <p><b>Annual impact figure.</b> The methodology page carries ~$100K/yr for this driver. August's page also showed a ~$218K/yr ×12 extrapolation; this page doesn't annualize a 20-day partial month, so the ~$100K figure is the only one in play here. Worth confirming that's the number the L10 carries.</p>
+  </section>
+
+  <section>
+    <h2>Note — old Square Mitigation quotes</h2>
+    <div class="card">
+      <p>Seven pre-cutover Square Mitigation quotes (Beth Steen, Joel Reis, Patrick Chuckas, Jeff Barraclough, Troy Seberson, Jeff Vitko, Cameron Serk) are no longer tracked here. They are treated as expired. One very old quote did book its install on Nov 2, so an old quote can still come back; if one does, it would count in the month it is re-quoted or accepted.</p>
     </div>
   </section>
 
   <footer>
-    Marigold Cash Flow Driver Dashboard · Driver #4 · September 1–20, 2026 (n=36 real quotes sent: 34 Mitigation, 2 RHM) · Owner: Minh · Sept 24 L10 is 2 days out. Sources: Housecall Pro API (/estimates + /jobs, pulled Sept 22) + Square estimates export (Sept 23 01:15 UTC) · Spectora order history not used this cut.
+    Marigold Cash Flow Driver Dashboard · Driver #4 · October 1–31, 2026 (n=70 real quotes sent, Mitigation) · Owner: Minh · Thursday Nov 5 L10 is the near-term deadline. Source: Housecall Pro API (/estimates + /jobs, pulled Nov 2).
   </footer>
 </div>
 </body>
