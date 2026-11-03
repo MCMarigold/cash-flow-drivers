@@ -464,7 +464,7 @@
           "name": "Sales KPIs Achieved",
           "owner": "Ron",
           "headline": {
-            "value": "41.67%",
+            "value": "41.7%",
             "target": "Target: 100%",
             "state": "neg"
           }
