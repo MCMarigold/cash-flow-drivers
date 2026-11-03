@@ -99,6 +99,35 @@
   .oc-pill { display:inline-block; background:#EFE8D6; color:var(--text); font-family:Arial,sans-serif; font-size:12.5px; border-radius:999px; padding:3px 11px; margin:3px 2px; }
   .oc-pill.fail { background:#f7e9e2; color:var(--decide); font-weight:700; }
   .oc-vacant { font-family:Arial,sans-serif; font-size:11.5px; font-style:italic; color:var(--muted); border:1px dashed var(--border); background:#F6F1E3; border-radius:10px; padding:5px 12px; margin-top:12px; }
+
+  /* G / W / C checks + 5 core-value icons (same look as before, scaled down) */
+  .gwc-badge { width:14px; height:14px; border-radius:4px; font-family:Arial,sans-serif; font-size:8.5px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; line-height:1; }
+  .gwc-badge.on { background:var(--good); color:#fff; }
+  .gwc-badge.off { background:transparent; border:1px solid var(--decide); color:var(--decide); }
+  .cv-state { font-family:Arial,sans-serif; font-size:8.5px; font-weight:700; line-height:1.2; }
+  .cv-state.plus { color:var(--good); }
+  .cv-state.mixed { color:var(--gold-dark); }
+  .cv-state.minus { color:var(--decide); }
+  .oc-gwc, .oc-cvs { display:inline-flex; gap:3px; align-items:flex-start; }
+  .cvi { display:inline-flex; flex-direction:column; align-items:center; width:18px; font-size:13px; line-height:1; }
+  .cvi .cv-state { margin-top:2px; }
+
+  /* Scoring tables (one per group) */
+  .dt { width:100%; border-collapse:separate; border-spacing:0; background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.04); margin-bottom:22px; font-family:Arial,sans-serif; font-size:13px; }
+  .dt { table-layout:fixed; }
+  .dt th:nth-child(1) { width:26%; } .dt th:nth-child(2) { width:29%; } .dt th:nth-child(3) { width:14%; } .dt th:nth-child(4) { width:19%; } .dt th:nth-child(5) { width:12%; }
+  .dt caption { caption-side:top; text-align:left; font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-dark); padding:0 2px 8px; }
+  .dt th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); background:#F6F1E3; padding:8px 14px; border-bottom:1px solid var(--border); }
+  .dt td { padding:8px 14px; border-bottom:1px solid #f0e9d4; vertical-align:middle; }
+  .dt tbody tr:last-child td { border-bottom:0; }
+  .dt .nm { font-family:Georgia,serif; font-size:14.5px; color:var(--text); }
+  .dt .seat { color:var(--muted); }
+  .dt tr.fail td { background:#fbf1ec; }
+  .dt tr.fail .nm { color:var(--decide); font-weight:700; }
+  .dt tr.vac td { font-style:italic; color:var(--muted); background:#faf6ea; }
+  .res { display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 10px; border-radius:10px; }
+  .res.pass { background:#e6efe3; color:var(--good); }
+  .res.fail { background:#f7e9e2; color:var(--decide); }
 </style>
 </head>
 <body>
@@ -121,14 +150,19 @@
       <div class="headline-pct" id="headlinePct">—<span class="tgt" id="headlineTgt">loading…</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;" id="compareRow"></div>
-    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Names in rust are marked wrong person / wrong seat. Hover any name to see its G / W / C detail.</p>
-    <p class="note" style="margin-top:6px;">Each person is also tracked on 5 core values — ✨ Excellent work, 📈 Personal best, 🤝 Meet people where they are, ❤️ Relationship, 🌱 Humble &amp; growing (per the Mission &amp; Values doc, still pending leadership approval) — each rated + / ± / – and shown on hover. These are not yet folded into the right-seat % above (see Open Items). Every person defaults to all-+ as a placeholder until real per-person scoring comes in.</p>
+    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Legend: <span class="gwc-badge on" style="display:inline-flex;">G</span> pass &nbsp; <span class="gwc-badge off" style="display:inline-flex;">W</span> fail. Names in rust are marked wrong person / wrong seat.</p>
+    <p class="note" style="margin-top:6px;">Each person also has a row of 5 core-values icons (see the scoring tables below the chart) — ✨ Excellent work, 📈 Personal best, 🤝 Meet people where they are, ❤️ Relationship, 🌱 Humble &amp; growing (per the Mission &amp; Values doc, still pending leadership approval) — each with a <span class="cv-state plus" style="display:inline;">+</span> strong / <span class="cv-state mixed" style="display:inline;">±</span> mixed / <span class="cv-state minus" style="display:inline;">–</span> weak rating next to it. These are shown for reference and are not yet folded into the right-seat % above (see Open Items). Every person defaults to all-+ as a placeholder until real per-person scoring comes in.</p>
     <div class="split-row" id="splitRow"></div>
   </section>
 
   <section>
     <h2>Accountability chart</h2>
     <div class="oc-scroll"><div class="oc" id="orgChart"></div></div>
+  </section>
+
+  <section>
+    <h2>Scoring detail — G / W / C and core values</h2>
+    <div id="detailTables"></div>
   </section>
 
   <section>
@@ -373,6 +407,30 @@
       " · Core values " + person.cv.join(" ") + (person.wrong ? " · marked wrong person / wrong seat" : "");
   }
 
+  // One emoji per core value, in the same order as each person's cv array.
+  var CV_ICONS = [
+    { emoji: "✨", label: "Excellent work" },
+    { emoji: "📈", label: "Personal best" },
+    { emoji: "🤝", label: "Meet people where they are" },
+    { emoji: "❤️", label: "Relationship" },
+    { emoji: "🌱", label: "Humble & growing" }
+  ];
+  function gwcBadge(letter, on){
+    return '<span class="gwc-badge ' + (on ? "on" : "off") + '">' + letter + '</span>';
+  }
+  function cvIcon(icon, state){
+    var cls = state === "+" ? "plus" : state === "-" ? "minus" : "mixed";
+    var sign = state === "+" ? "+" : state === "-" ? "–" : "±";
+    return '<span class="cvi" title="' + esc(icon.label + ': ' + state) + '">' + icon.emoji +
+      '<span class="cv-state ' + cls + '">' + sign + '</span></span>';
+  }
+  function gwcCell(person){
+    return '<span class="oc-gwc">' + gwcBadge("G", person.g) + gwcBadge("W", person.w) + gwcBadge("C", person.c) + '</span>';
+  }
+  function cvCell(person){
+    return '<span class="oc-cvs">' + CV_ICONS.map(function(ic, i){ return cvIcon(ic, person.cv[i]); }).join("") + '</span>';
+  }
+
   function personCard(seat, accent, extraHtml){
     var person = seat.people[0];
     var fail = !personPasses(person);
@@ -443,6 +501,32 @@
   }
   fitChart();
   window.addEventListener("resize", fitChart);
+
+  // Scoring tables below the chart: one per group, same people and same pass/fail logic as the headline.
+  function detailTable(label, seats){
+    var st = computeStats(seats), rows = [];
+    seats.filter(function(s){ return !s.exclude; }).forEach(function(s){
+      if (s.vacant){
+        rows.push('<tr class="vac"><td class="nm">—</td><td class="seat">' + esc(s.title) + '</td><td colspan="3">Open — not counted in the score</td></tr>');
+        return;
+      }
+      s.people.forEach(function(person){
+        var ok = personPasses(person);
+        rows.push('<tr' + (ok ? '' : ' class="fail"') + '><td class="nm">' + esc(person.name) + '</td>' +
+          '<td class="seat">' + esc(ROLE_LABELS[s.title] || s.title) + '</td>' +
+          '<td>' + gwcCell(person) + '</td><td>' + cvCell(person) + '</td>' +
+          '<td><span class="res ' + (ok ? 'pass' : 'fail') + '">' + (ok ? 'Pass' : 'Fail') + '</span></td></tr>');
+      });
+    });
+    return '<table class="dt"><caption>' + esc(label) + ' · ' + st.passing + ' of ' + st.people + ' passing</caption>' +
+      '<thead><tr><th>Name</th><th>Seat</th><th>G / W / C</th><th>Core values</th><th>Right seat</th></tr></thead>' +
+      '<tbody>' + rows.join("") + '</tbody></table>';
+  }
+  document.getElementById("detailTables").innerHTML =
+    detailTable("Leadership & Support", tierSeats(CHART_MAIN).concat(columnsSeats(MAIN_LEAD_COLUMNS))) +
+    detailTable("MHI Field Ops", columnsSeats(CHART_MHI_COLUMNS)) +
+    detailTable("MHS Field Ops", columnsSeats(CHART_MHS_COLUMNS));
+
   renderHeadline();
 })();
 </script>
