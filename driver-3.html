@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>October 2026 — Wrong People / Wrong Seats</title>
+<title>November 2026 — Wrong People / Wrong Seats</title>
 <script type="application/json" id="driver-summary">
 {
   "driver": 3,
   "name": "Wrong People / Wrong Seats",
   "owner": "Curtis",
-  "period": "Oct 2026",
+  "period": "Nov 2026",
   "metrics": [
-    {"label": "Combined", "value": "88%", "target": "/ 90% target", "state": "neg"},
-    {"label": "Leadership & Support", "value": "94%", "state": "pos"},
-    {"label": "MHI Field Ops", "value": "90%", "state": "pos"},
-    {"label": "MHS Field Ops", "value": "50%", "state": "neg"}
+    {"label": "Combined", "value": "94%", "target": "/ 90% target", "state": "pos"},
+    {"label": "Leadership & Support", "value": "100%", "state": "pos"},
+    {"label": "MHI Field Ops", "value": "94%", "state": "pos"},
+    {"label": "MHS Field Ops", "value": "67%", "state": "neg"}
   ]
 }
 </script>
@@ -67,82 +67,45 @@
   .split-card .spct { font-family:Arial,sans-serif; font-size:30px; font-weight:700; margin-top:4px; }
   .split-card .stgt { font-family:Arial,sans-serif; font-size:11.5px; color:var(--muted); margin-top:2px; }
 
-  /* Accountability-chart style layout */
-  .chart-block { margin-bottom: 30px; }
-  .chart-block-label { font-family:Arial,sans-serif; font-size:12.5px; color:var(--muted); margin-bottom:14px; }
-  .tier { margin-bottom: 20px; }
-  .tier-label {
-    font-family:Arial,sans-serif; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em;
-    color:var(--muted); text-align:center; margin-bottom:9px;
-  }
-  .tier-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
-  .connector { width:1px; height:14px; background:var(--border); margin:0 auto; }
+  /* Simplified accountability chart — department cards with a colored top bar,
+     people as small pills, connected by plain lines. Failing (wrong-seat) people
+     show in rust. Hover any name for its G/W/C and core-values detail. */
+  .oc-scroll { width:min(1640px, calc(100vw - 48px)); position:relative; left:50%; transform:translateX(-50%); overflow-x:auto; padding:6px 0 18px; }
+  .oc { --line:#cdc2a0; display:flex; justify-content:center; min-width:max-content; }
+  .oc ul { list-style:none; margin:0; padding:24px 0 0; display:flex; justify-content:center; position:relative; }
+  .oc > ul { padding-top:0; }
+  .oc li { position:relative; padding:24px 6px 0; display:flex; flex-direction:column; align-items:center; }
+  .oc li::before, .oc li::after { content:""; position:absolute; top:0; right:50%; width:50%; height:24px; border-top:2px solid var(--line); }
+  .oc li::after { right:auto; left:50%; border-left:2px solid var(--line); }
+  .oc li:only-child::before, .oc li:only-child::after { display:none; }
+  .oc li:only-child { padding-top:0; }
+  .oc li:first-child::before, .oc li:last-child::after { border:0 none; }
+  .oc li:last-child::before { border-right:2px solid var(--line); border-radius:0 6px 0 0; }
+  .oc li:first-child::after { border-radius:6px 0 0 0; }
+  .oc ul ul::before { content:""; position:absolute; top:0; left:50%; border-left:2px solid var(--line); width:0; height:24px; }
 
-  .org-grid { display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:20px 14px; }
-  .org-col { display:flex; flex-direction:column; align-items:center; flex:0 1 210px; }
-  /* Functional Leads has 5 chains — narrow them just enough (and keep them
-     all the same width) so all 5 sit on one row instead of wrapping. */
-  .org-grid.leads-5 { gap:20px 10px; }
-  .org-grid.leads-5 .org-col { flex-basis:172px; }
-  .org-grid.leads-5 .seat-card { min-width:0; }
-  /* Inside a column, the main axis is vertical, so the seat-card's row-context
-     "flex: 1 1 190px" would set a 190px HEIGHT basis instead of a width one —
-     forcing every card to the same height no matter how many names it holds.
-     Reset flex sizing here so height stays purely content-driven. */
-  .org-col .seat-card { width:100%; flex:0 0 auto; }
-  .org-connector { width:2px; background:var(--border); height:18px; margin:0 auto; }
+  .oc-card { background:var(--card); border:1px solid var(--border); border-top:6px solid var(--accent, var(--gold)); border-radius:10px; padding:9px 18px 11px; min-width:140px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  .oc-name { font-family:Georgia,serif; font-weight:700; font-size:20px; line-height:1.15; color:#33301f; }
+  .oc-name-sm { font-size:15px; }
+  .oc-role { font-family:Arial,sans-serif; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin:4px auto 0; max-width:150px; line-height:1.3; }
+  .oc-also { font-family:Arial,sans-serif; font-size:10.5px; color:var(--muted); margin-top:6px; padding-top:6px; border-top:1px dotted var(--border); max-width:210px; line-height:1.35; }
+  .oc-card.fail { border-color:var(--decide); border-top-color:var(--decide); }
+  .oc-card.fail .oc-name { color:var(--decide); }
+  .oc-flag { display:inline-block; font-family:Arial,sans-serif; font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--decide); background:#f7e9e2; border-radius:8px; padding:1px 8px; margin-top:6px; }
 
-  .seat-card {
-    background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:9px 13px; flex:1 1 190px; max-width:250px; min-width:170px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.04);
-  }
-  .seat-card.vacant { background:#F6F1E3; border-style:dashed; }
-  .seat-card.conflict { border-left:4px solid var(--decide); }
-  /* Title gets the card's full width, on its own line, with the count
-     underneath — so a long job title doesn't wrap and inflate the card's
-     height just because it's competing for space with the count badge.
-     This keeps every one-person seat (Curtis's Visionary/Integrator boxes,
-     etc.) the same compact height. */
-  .seat-title-row { display:flex; flex-direction:column; gap:1px; border-bottom:1px solid var(--border); padding-bottom:5px; margin-bottom:6px; }
-  .seat-title { font-family:Arial,sans-serif; font-weight:700; font-size:11.5px; color:var(--gold-dark); text-transform:uppercase; letter-spacing:.01em; line-height:1.25; }
-  .seat-agg { font-family:Arial,sans-serif; font-size:10px; color:var(--muted); white-space:nowrap; }
-  .person-row, .person-top { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:3px 0; }
-  .person-entry + .person-entry { border-top:1px dotted var(--border); }
-  .person-entry { padding:3px 0; }
-  .person-entry .person-top { padding:0; }
-  .person-name { font-size:13.5px; color:var(--text); }
-  .person-name.fail { color:var(--decide); font-weight:700; }
-  .gwc { display:flex; gap:3px; flex-shrink:0; }
-  .gwc-badge {
-    width:16px; height:16px; border-radius:4px; font-family:Arial,sans-serif; font-size:9px; font-weight:700;
-    display:flex; align-items:center; justify-content:center; line-height:1;
-  }
-  .gwc-badge.on { background:var(--good); color:#fff; }
-  .gwc-badge.off { background:transparent; border:1px solid var(--decide); color:var(--decide); }
-  /* Core values row — 5 icon badges (one emoji per value) under each name,
-     separate from the GWC checks above. Each icon carries a +/±/- rating
-     underneath it, colored green/gold/rust. */
-  .cv-row { display:flex; align-items:flex-start; gap:7px; margin-top:4px; flex-wrap:wrap; }
-  .cv-badge { display:flex; flex-direction:column; align-items:center; width:16px; }
-  .cv-emoji { font-size:13px; line-height:1; }
-  .cv-state { font-family:Arial,sans-serif; font-size:8.5px; font-weight:700; line-height:1.2; margin-top:2px; }
-  .cv-state.plus { color:var(--good); }
-  .cv-state.mixed { color:var(--gold-dark); }
-  .cv-state.minus { color:var(--decide); }
-  .vacant-label { font-family:Arial,sans-serif; font-size:12.5px; color:var(--muted); font-style:italic; }
-  .seat-card.context .person-name { color:var(--muted); }
-
-  @media (max-width:640px){
-    .seat-card { flex:1 1 100%; max-width:100%; }
-  }
+  .oc-group { position:relative; margin-top:14px; padding-top:2px; max-width:215px; text-align:center; }
+  .oc-group::before { content:""; position:absolute; top:-14px; left:50%; height:14px; border-left:2px solid var(--line); }
+  .oc-group-label { font-family:Arial,sans-serif; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text); margin-bottom:4px; }
+  .oc-pill { display:inline-block; background:#EFE8D6; color:var(--text); font-family:Arial,sans-serif; font-size:12.5px; border-radius:999px; padding:3px 11px; margin:3px 2px; }
+  .oc-pill.fail { background:#f7e9e2; color:var(--decide); font-weight:700; }
+  .oc-vacant { font-family:Arial,sans-serif; font-size:11.5px; font-style:italic; color:var(--muted); border:1px dashed var(--border); background:#F6F1E3; border-radius:10px; padding:5px 12px; margin-top:12px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back to dashboard</a>
   <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #3</div>
-  <h1>October 2026 — Wrong People / Wrong Seats</h1>
+  <h1>November 2026 — Wrong People / Wrong Seats</h1>
   <div class="sub">All business units — Leadership, Business Support, MHI, MHS · Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory (roster verification)</div>
 
   <section style="margin-top:20px;">
@@ -158,24 +121,14 @@
       <div class="headline-pct" id="headlinePct">—<span class="tgt" id="headlineTgt">loading…</span></div>
     </div>
     <div class="compare-row" style="margin-top:14px;" id="compareRow"></div>
-    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Legend: <span class="gwc-badge on" style="display:inline-flex;">G</span> pass &nbsp; <span class="gwc-badge off" style="display:inline-flex;">W</span> fail.</p>
-    <p class="note" style="margin-top:6px;">Each person also shows a row of 5 core-values icons — ✨ Excellent work, 📈 Personal best, 🤝 Meet people where they are, ❤️ Relationship, 🌱 Humble &amp; growing (per the Mission &amp; Values doc, still pending leadership approval) — each with a <span class="cv-state plus" style="display:inline;">+</span> strong / <span class="cv-state mixed" style="display:inline;">±</span> mixed / <span class="cv-state minus" style="display:inline;">–</span> weak rating underneath. These are shown for reference and are not yet folded into the right-seat % above (see Open Items). Every person defaults to all-+ as a placeholder until real per-person scoring comes in.</p>
+    <p class="note" style="margin-top:14px;">Every filled seat below defaults to a pass on all three GWC checks until marked otherwise — treat as provisional until real monthly scoring is applied (see Open Items for who owns that scoring). Names in rust are marked wrong person / wrong seat. Hover any name to see its G / W / C detail.</p>
+    <p class="note" style="margin-top:6px;">Each person is also tracked on 5 core values — ✨ Excellent work, 📈 Personal best, 🤝 Meet people where they are, ❤️ Relationship, 🌱 Humble &amp; growing (per the Mission &amp; Values doc, still pending leadership approval) — each rated + / ± / – and shown on hover. These are not yet folded into the right-seat % above (see Open Items). Every person defaults to all-+ as a placeholder until real per-person scoring comes in.</p>
     <div class="split-row" id="splitRow"></div>
   </section>
 
   <section>
-    <h2>Accountability chart — Leadership &amp; Operations</h2>
-    <div class="chart-block" id="chartMain"></div>
-  </section>
-
-  <section>
-    <h2>Accountability chart — MHI Field Ops</h2>
-    <div class="chart-block" id="chartMHI"></div>
-  </section>
-
-  <section>
-    <h2>Accountability chart — MHS Field Ops</h2>
-    <div class="chart-block" id="chartMHS"></div>
+    <h2>Accountability chart</h2>
+    <div class="oc-scroll"><div class="oc" id="orgChart"></div></div>
   </section>
 
   <section>
@@ -294,8 +247,7 @@
       { title:"Operations Coordinator", people:[ p("Carolyn Derksen") ] } ],
     [ { title:"Engineer", people:[ p("Britney Ahlmann") ] } ],
     [ { title:"Client Care", people:[ p("Maggie Cox") ] },
-      { title:"Lead Client Care Coordinator", people:[ p("Deb Pulskamp") ] },
-      { title:"Client Care Coordinator", people:[ p("Sara Bonk"), p("Monique Ocon"), wrong("Alicia Ortloff") ] } ],
+      { title:"Client Care Coordinator", people:[ p("Deb Pulskamp"), p("Sara Bonk"), p("Monique Ocon") ] } ],
   ];
 
   var CHART_MHI_COLUMNS = [
@@ -303,17 +255,16 @@
       { title:"Team Lead", people:[ p("Mitchell Bowser"), p("Tony Weinand"), p("Matt Mossey"), p("Walker Russek") ] },
       { title:"Home Inspector", people:[
         p("Jake Miller"), p("Kyle Kanipes"), p("Stephen Hines"), p("Aaron Vandeventer"),
-        p("Kelly Brill"), p("Kyle Grovenstein"), p("Anthony Link-Danko"), p("Matt Clarity"),
+        p("Kelly Brill"), p("Matt Clarity"),
         p("Joel Terry"), p("Travis East")
       ] } ],
     [ { title:"Service Lead", people:[ wrong("Mark Rahja") ] },
-      { title:"Service Tech", people:[ wrong("Noah Carlson"), p("Derek Lanz"), p("Brayden Rogosheske"), p("Austin Cooper") ] } ],
+      { title:"Service Tech", people:[ p("Derek Lanz"), p("Brayden Rogosheske"), p("Austin Cooper") ] } ],
   ];
 
   var CHART_MHS_COLUMNS = [
     [ { title:"Radon Mitigation Lead", people:[ p("Brett Fredrichs") ] },
       { title:"Assistant Mitigation Tech", people:[ p("Dominic Reed") ] } ],
-    [ { title:"RHM Technician", people:[ wrong("Alycia Bonneville") ] } ],
     [ { title:"Estimator", people:[ wrong("Josh Miller") ] } ],
   ];
 
@@ -322,139 +273,6 @@
   // ============================================================
 
   function personPasses(person){ return !person.wrong && !!(person.g && person.w && person.c); }
-
-  function badge(letter, on){
-    return '<span class="gwc-badge ' + (on ? "on" : "off") + '">' + letter + '</span>';
-  }
-
-  // One emoji per core value, in the same order as the cv arrays:
-  // [Excellent work, Personal best, Meet people, Relationship, Humble & growing]
-  var CV_ICONS = [
-    { emoji: "✨", label: "Excellent work" },
-    { emoji: "📈", label: "Personal best" },
-    { emoji: "🤝", label: "Meet people where they are" },
-    { emoji: "❤️", label: "Relationship" },
-    { emoji: "🌱", label: "Humble & growing" }
-  ];
-  function cvBadge(icon, state){
-    var cls = state === "+" ? "plus" : state === "-" ? "minus" : "mixed";
-    var label = state === "+" ? "+" : state === "-" ? "–" : "±";
-    return '<span class="cv-badge" title="' + icon.label + ': ' + state + '">' +
-      '<span class="cv-emoji">' + icon.emoji + '</span>' +
-      '<span class="cv-state ' + cls + '">' + label + '</span>' +
-      '</span>';
-  }
-  function cvRow(person){
-    return '<div class="cv-row">' + CV_ICONS.map(function(icon, i){
-      return cvBadge(icon, person.cv[i]);
-    }).join("") + '</div>';
-  }
-
-  function renderSeatCard(seat){
-    var el = document.createElement("div");
-    el.className = "seat-card" + (seat.vacant ? " vacant" : "") + (seat.exclude ? " context" : "") +
-      ((seat.seatConflict || seat.people.some(function(x){ return x.wrong; })) ? " conflict" : "");
-    var titleRow = '<div class="seat-title-row"><span class="seat-title">' + seat.title + '</span>';
-    if (seat.vacant){
-      titleRow += '<span class="seat-agg">Vacant</span></div>';
-      el.innerHTML = titleRow + '<div class="vacant-label">Open — not counted in the score</div>';
-      return el;
-    }
-    if (seat.exclude){
-      // Shown for org-chart context only (e.g. the department head already
-      // scored above) — no GWC badges, not counted in any stat.
-      titleRow += '<span class="seat-agg">Context only</span></div>';
-      var ctxRows = seat.people.map(function(person){
-        return '<div class="person-row"><span class="person-name">' + person.name + '</span></div>';
-      }).join("");
-      el.innerHTML = titleRow + ctxRows;
-      return el;
-    }
-    if (seat.seatConflict){
-      // More than one person in a seat the EOS model says should hold only
-      // one — that's itself a wrong-seat condition, regardless of each
-      // person's individual GWC. Shown as 0/1 and counted as one wrong seat.
-      titleRow += '<span class="seat-agg">0/1</span></div>';
-      var conflictRows = seat.people.map(function(person){
-        return '<div class="person-entry">' +
-          '<div class="person-top">' +
-            '<span class="person-name fail">' + person.name + '</span>' +
-            '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
-          '</div>' + cvRow(person) +
-          '</div>';
-      }).join("");
-      el.innerHTML = titleRow + conflictRows +
-        '<div class="vacant-label" style="margin-top:6px;">Two people in a one-person seat — counts as 1 wrong seat, not 2.</div>';
-      return el;
-    }
-    var passing = seat.people.filter(personPasses).length;
-    titleRow += '<span class="seat-agg">' + passing + '/' + seat.people.length + '</span></div>';
-    var rows = seat.people.map(function(person){
-      var ok = personPasses(person);
-      return '<div class="person-entry">' +
-        '<div class="person-top">' +
-          '<span class="person-name' + (ok ? "" : " fail") + '">' + person.name + '</span>' +
-          '<span class="gwc">' + badge("G", person.g) + badge("W", person.w) + badge("C", person.c) + '</span>' +
-        '</div>' + cvRow(person) +
-        '</div>';
-    }).join("");
-    el.innerHTML = titleRow + rows;
-    return el;
-  }
-
-  function renderChart(containerId, tiers, appendConnectorAfter){
-    var container = document.getElementById(containerId);
-    tiers.forEach(function(tier, i){
-      var tierEl = document.createElement("div");
-      tierEl.className = "tier";
-      var label = document.createElement("div");
-      label.className = "tier-label";
-      label.textContent = tier.tier;
-      tierEl.appendChild(label);
-      var row = document.createElement("div");
-      row.className = "tier-row";
-      tier.seats.forEach(function(seat){ row.appendChild(renderSeatCard(seat)); });
-      tierEl.appendChild(row);
-      container.appendChild(tierEl);
-      if (i < tiers.length - 1 || appendConnectorAfter){
-        var conn = document.createElement("div");
-        conn.className = "connector";
-        container.appendChild(conn);
-      }
-    });
-  }
-
-  // Renders each reporting chain as its own column, with a connector line
-  // between every consecutive pair of seats in that chain — this is what
-  // keeps a report visually attached to the seat above it. A column with
-  // only one seat (Engineer, RHM Technician, Estimator) just has no
-  // connector below it.
-  function renderColumns(containerId, columns, tierLabel, gridClass){
-    var container = document.getElementById(containerId);
-    var tierEl = document.createElement("div");
-    tierEl.className = "tier";
-    var label = document.createElement("div");
-    label.className = "tier-label";
-    label.textContent = tierLabel;
-    tierEl.appendChild(label);
-    var grid = document.createElement("div");
-    grid.className = "org-grid" + (gridClass ? " " + gridClass : "");
-    columns.forEach(function(chain){
-      var col = document.createElement("div");
-      col.className = "org-col";
-      chain.forEach(function(seat, i){
-        if (i > 0){
-          var conn = document.createElement("div");
-          conn.className = "org-connector";
-          col.appendChild(conn);
-        }
-        col.appendChild(renderSeatCard(seat));
-      });
-      grid.appendChild(col);
-    });
-    tierEl.appendChild(grid);
-    container.appendChild(tierEl);
-  }
 
   function columnsSeats(columns){
     return columns.reduce(function(acc, chain){ return acc.concat(chain); }, []);
@@ -524,28 +342,107 @@
     var seatCount = seats.length;
     var vacantSeatCount = seats.filter(function(s){return s.vacant;}).length;
     document.getElementById("footerNote").textContent =
-      "Marigold Cash Flow Driver Dashboard · Driver #3 · Oct 2026 (" + seatCount + " named seats: " +
+      "Marigold Cash Flow Driver Dashboard · Driver #3 · Nov 2026 (" + seatCount + " named seats: " +
       (seatCount - vacantSeatCount) + " filled, " + vacantSeatCount + " vacant; " + overall.people +
       " people scored) · Owner: Curtis · Nov 5 L10 is 2 days out. Source: Sept 2026 Accountability Chart (main + MHI detail + MHS detail) + Airtable Employee directory.";
   }
 
-  // These two are shown only for clarity — Blake and Minh are already scored
-  // once, in the Department Heads tier on the main chart above. They're not
-  // added to CHART_MHI_COLUMNS / CHART_MHS_COLUMNS, so they never enter the
-  // headline math or the field-ops split stats.
-  var MHI_HEAD_CONTEXT = [{ tier: "Reports to", seats: [
-    { title:"GM, MHI", people:[ p("Blake Pederson-Perovich") ], exclude:true }
-  ]}];
-  var MHS_HEAD_CONTEXT = [{ tier: "Reports to", seats: [
-    { title:"GM, MHS", people:[ p("Minh Nguyen") ], exclude:true }
-  ]}];
+  // ============================================================
+  // Simplified org chart — drawn from the same roster arrays above, so
+  // scoring and the headline math are unchanged. Display-only labels:
+  // ============================================================
+  var ROLE_LABELS = { "MHI": "GM, MHI", "MHS": "GM, MHS", "Client Care": "Client Care Manager" };
 
-  renderChart("chartMain", CHART_MAIN, true);
-  renderColumns("chartMain", MAIN_LEAD_COLUMNS, "Functional Leads & Direct Reports", "leads-5");
-  renderChart("chartMHI", MHI_HEAD_CONTEXT, true);
-  renderColumns("chartMHI", CHART_MHI_COLUMNS, "Field reporting lines");
-  renderChart("chartMHS", MHS_HEAD_CONTEXT, true);
-  renderColumns("chartMHS", CHART_MHS_COLUMNS, "Field reporting lines");
+  function esc(s){ return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+
+  function seatByTitle(title){
+    return allSeats().filter(function(s){ return s.title === title; })[0];
+  }
+
+  // First names for display; if two people share a first name, add a last initial.
+  var SHORT = (function(){
+    var names = [], count = {}, out = {};
+    allSeats().forEach(function(s){ s.people.forEach(function(x){ if (names.indexOf(x.name) < 0) names.push(x.name); }); });
+    names.forEach(function(n){ var f = n.split(" ")[0]; count[f] = (count[f] || 0) + 1; });
+    names.forEach(function(n){ var parts = n.split(" "); out[n] = count[parts[0]] > 1 ? parts[0] + " " + parts[1].charAt(0) + "." : parts[0]; });
+    return out;
+  })();
+
+  function tip(person){
+    return person.name + " — G " + (person.g ? "✓" : "✗") + " · W " + (person.w ? "✓" : "✗") + " · C " + (person.c ? "✓" : "✗") +
+      " · Core values " + person.cv.join(" ") + (person.wrong ? " · marked wrong person / wrong seat" : "");
+  }
+
+  function personCard(seat, accent, extraHtml){
+    var person = seat.people[0];
+    var fail = !personPasses(person);
+    return '<div class="oc-card' + (fail ? ' fail' : '') + '" style="--accent:' + accent + ';" title="' + esc(tip(person)) + '">' +
+      '<div class="oc-name">' + esc(SHORT[person.name]) + '</div>' +
+      '<div class="oc-role">' + esc(ROLE_LABELS[seat.title] || seat.title) + '</div>' +
+      (fail ? '<div class="oc-flag">Wrong seat</div>' : '') +
+      (extraHtml || '') + '</div>';
+  }
+  function titleCard(title, accent){
+    return '<div class="oc-card" style="--accent:' + accent + ';"><div class="oc-name oc-name-sm">' + esc(title) + '</div></div>';
+  }
+  function pillList(seat){
+    return seat.people.map(function(person){
+      return '<span class="oc-pill' + (personPasses(person) ? '' : ' fail') + '" title="' + esc(tip(person)) + '">' + esc(SHORT[person.name]) + '</span>';
+    }).join("");
+  }
+  function groupBlock(label, seat){
+    return '<div class="oc-group"><div class="oc-group-label">' + esc(label) + ' · ' + seat.people.length + '</div>' + pillList(seat) + '</div>';
+  }
+  function node(inner, kids){
+    return '<li>' + inner + (kids && kids.length ? '<ul>' + kids.join("") + '</ul>' : '') + '</li>';
+  }
+
+  var COLORS = { curtis:"#2b2820", britney:"#A9822B", mhi:"#3f6f9e", sales:"#7a5c7e", care:"#3a7d7a", mhs:"#4a7a4a" };
+
+  // Britney also holds these other seats on the chart (shown as a small caption on her card).
+  var BRITNEY_HATS = allSeats().filter(function(s){
+    return s.title !== "Integrator" && s.people.some(function(x){ return x.name === "Britney Ahlmann"; });
+  }).map(function(s){ return s.title; });
+  var britneyExtra = BRITNEY_HATS.length ? '<div class="oc-also">Also: ' + esc(BRITNEY_HATS.join(" · ")) + '</div>' : '';
+
+  var rmSeat = seatByTitle("Relationship Manager");
+  var salesHtml = personCard(seatByTitle("Sales"), COLORS.sales) +
+    (rmSeat && rmSeat.vacant ? '<div class="oc-vacant">Relationship Manager — open</div>' : '');
+
+  document.getElementById("orgChart").innerHTML = '<ul>' +
+    node(personCard(seatByTitle("Visionary"), COLORS.curtis), [
+      node(personCard(seatByTitle("Integrator"), COLORS.britney, britneyExtra), [
+        node(personCard(seatByTitle("MHI"), COLORS.mhi), [
+          node(personCard(seatByTitle("Assistant Inspector Manager"), COLORS.mhi) +
+               groupBlock("Team Leads", seatByTitle("Team Lead")) +
+               groupBlock("Home Inspectors", seatByTitle("Home Inspector"))),
+          node(personCard(seatByTitle("Service Lead"), COLORS.mhi) +
+               groupBlock("Service Techs", seatByTitle("Service Tech")))
+        ]),
+        node(salesHtml),
+        node(personCard(seatByTitle("Operations Coordinator"), COLORS.britney)),
+        node(personCard(seatByTitle("Social Media Manager"), COLORS.britney)),
+        node(personCard(seatByTitle("Client Care"), COLORS.care), [
+          node(titleCard("Client Care Coordinators", COLORS.care) +
+               '<div class="oc-group">' + pillList(seatByTitle("Client Care Coordinator")) + '</div>')
+        ]),
+        node(personCard(seatByTitle("MHS"), COLORS.mhs), [
+          node(personCard(seatByTitle("Radon Mitigation Lead"), COLORS.mhs) +
+               groupBlock("Assistant Mitigation Tech", seatByTitle("Assistant Mitigation Tech"))),
+          node(personCard(seatByTitle("Estimator"), COLORS.mhs))
+        ])
+      ])
+    ]) + '</ul>';
+
+  // Scale the chart down (never below 70%) so it fits the page width; scrolls sideways if still too wide.
+  function fitChart(){
+    var box = document.querySelector(".oc-scroll"), oc = document.getElementById("orgChart");
+    oc.style.zoom = 1;
+    var need = oc.scrollWidth, have = box.clientWidth;
+    oc.style.zoom = need > have ? Math.max(0.7, have / need) : 1;
+  }
+  fitChart();
+  window.addEventListener("resize", fitChart);
   renderHeadline();
 })();
 </script>
