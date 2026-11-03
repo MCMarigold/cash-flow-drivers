@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 2026 — MHS Marketing Leads</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 2,
+  "name": "MHS Marketing Leads",
+  "owner": "Minh",
+  "period": "October 2026",
+  "headline": {"value": "8.1/wk", "target": "Goal: 40/wk", "state": "neg"}
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a; --draft: #c98a2c;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  h3 { font-family:Arial,sans-serif; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text); font-weight:700; margin:22px 0 8px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.draft { border-left:4px solid var(--draft); }
+  .card.closed { border-left:4px solid var(--good); opacity:.85; }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.draft { background:#fdf1d6; color:#8a6d1f; }
+  .tag.closed { background:#e5efe5; color:var(--good); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  th.num { text-align:right; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.tbd { color:#b0aa9c; font-style:italic; }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  .method-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0; }
+  .method-list li { margin-bottom:4px; }
+  .method-list b { color:var(--gold-dark); }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct.draft { color:var(--draft); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+
+  .gantt-legend { display:flex; gap:18px; flex-wrap:wrap; font-family:Arial,sans-serif; font-size:11.5px; color:var(--muted); margin-bottom:14px; }
+  .gantt-legend span { display:inline-flex; align-items:center; gap:6px; }
+  .gantt-legend i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+  .gantt-wrap { overflow-x:auto; }
+  .gantt-inner { min-width:640px; }
+  .gantt-header { display:grid; grid-template-columns: 240px repeat(5, 1fr); font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:.03em; color:var(--gold-dark); font-weight:700; padding-bottom:8px; border-bottom:2px solid var(--border); margin-bottom:2px; }
+  .gantt-header div:not(:first-child) { text-align:left; padding:0 4px; }
+  .gantt-row { display:grid; grid-template-columns: 240px repeat(5, 1fr); align-items:center; padding:9px 0; border-bottom:1px solid var(--border); font-family:Arial,sans-serif; }
+  .gantt-row:last-child { border-bottom:none; }
+  .gantt-label b { display:block; color:var(--text); font-size:13px; line-height:1.3; }
+  .gantt-label span { color:var(--muted); font-size:10.5px; }
+  .gantt-track { grid-column: 2 / span 5; display:grid; grid-template-columns: repeat(5,1fr); height:24px; position:relative; }
+  .gantt-track::before { content:''; position:absolute; inset:0; background-image: repeating-linear-gradient(to right, var(--border) 0, var(--border) 1px, transparent 1px, transparent 20%); }
+  .gantt-bar { height:18px; align-self:center; border-radius:9px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; z-index:1; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
+  .gantt-bar .gcount { color:#fff; font-size:11px; font-weight:700; }
+  .gantt-bar.done { background:var(--good); }
+  .gantt-bar.progress { background:var(--draft); }
+  .gantt-bar.stalled { background:#b7ae95; }
+  .gantt-bar.resolved { background:#5b84a3; }
+  .gantt-bar.referral.done { background:#80A280; }
+  .gantt-bar.referral.progress { background:#D9AD6B; }
+  .gantt-bar.referral.stalled { background:#CDC6B5; }
+  .gantt-bar.referral .gcount { color:var(--text); }
+  tr.muted td { color:var(--muted); font-style:italic; }
+</style></head><body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; October 2026, frozen at this checkpoint. <a href="../../driver-2.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div><div class="wrap">
+<a class="back" href="../../index.html">&larr; Back to dashboard</a>
+<div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #2</div>
+<h1>October 2026 — MHS Marketing Leads</h1>
+<div class="sub">MHS · 8.1 leads/wk (October total ÷ 4.43 weeks) · 36 counted leads for the month</div>
+<div class="card"><p>Driver 2 counts unique new MHS mitigation leads: people who contacted MHS for the first time, one per person per 30 days (phone or email). Same definition as September: Housecall Pro (lead cards and new customers with jobs) plus Spectora online-only mitigation orders. Email is no longer a separate source because paid leads now land directly in HCP. MHI referrals (a radon test at the same address in MHI's Spectora records, dated before first contact) are tracked and not counted. Goal: 40 leads/week.</p></div>
+<section><h2>Headline</h2><div class="card"><div class="headline-row"><div class="headline-pct neg">8.1/wk<span class="tgt">Goal: 40/wk · 31.9/wk short</span></div>
+<div class="compare-row"><div class="compare-stat"><div class="cnum">36</div><div class="clbl">Counted leads, Oct 1–31</div></div><div class="compare-stat"><div class="cnum">13</div><div class="clbl">MHI referrals, not counted</div></div></div></div>
+<p class="note">vs September 13.0/wk (-4.9/wk). Same definition as September, except RHM quotes are shown separately and not counted. Email is no longer a separate source because those leads now arrive in HCP, and RHM quotes (1 in October) are tracked below.</p></div></section>
+<section><h2>Weekly breakdown</h2><div class="table-wrap"><table><tr><th>Week</th><th class="num">HCP (all new contacts)</th><th class="num">Spectora</th><th class="num">Total</th></tr><tr><td>Oct 1 – 4 (partial)</td><td class='num'>3</td><td class='num'>0</td><td class='num'><b>3</b></td></tr><tr><td>Oct 5 – 11</td><td class='num'>8</td><td class='num'>0</td><td class='num'><b>8</b></td></tr><tr><td>Oct 12 – 18</td><td class='num'>10</td><td class='num'>0</td><td class='num'><b>10</b></td></tr><tr><td>Oct 19 – 25</td><td class='num'>9</td><td class='num'>0</td><td class='num'><b>9</b></td></tr><tr><td>Oct 26 – 31 (partial)</td><td class='num'>6</td><td class='num'>0</td><td class='num'><b>6</b></td></tr><tr class='avg-row'><td>October total</td><td class='num'>36</td><td class='num'>0</td><td class='num'>36</td></tr></table></div>
+<p class="note">Lead date is the earlier of the HCP customer record or first job. October 1 is a Thursday, so Oct 1–4 and Oct 26–31 are partial weeks; the headline divides the month total by 4.43 weeks. Spectora added no counted leads. The only new radon mitigation intake not in HCP (Cade Schanzenbach, 10/10) is at the same address as an MHI radon test, so it is an MHI referral. Other Spectora MHS orders (such as the dryer-vent promo) are disregarded.</p></section>
+<section><h2>Leads by source</h2><div class="table-wrap"><table><tr><th>Source</th><th class="num">Oct total</th><th class="num">Per week (÷ 4.43)</th><th class="num">Sept per week</th><th>Note</th></tr><tr><td>Email (web form)</td><td class='num'>—</td><td class='num'>—</td><td class='num'>2.3</td><td>Now arrives in HCP, so it is inside the HCP rows</td></tr>
+<tr><td>HCP — booked to radon test first</td><td class='num'>8</td><td class='num'>1.8</td><td class='num'>1.3</td><td></td></tr>
+<tr><td>HCP — direct to estimate (incl. lead card only)</td><td class='num'>28</td><td class='num'>6.3</td><td class='num'>7.3</td><td></td></tr>
+<tr><td>Spectora — mitigation online-only</td><td class='num'>0</td><td class='num'>0.0</td><td class='num'>0.0</td><td></td></tr>
+<tr><td>Spectora — RHM first-time quote</td><td class='num'>0</td><td class='num'>0.0</td><td class='num'>2.0</td><td>Not counted; see RHM quotes below</td></tr>
+<tr class='avg-row'><td>Total counted</td><td class='num'>36</td><td class='num'>8.1</td><td class='num'>13.0</td><td></td></tr></table></div><p class="note">September's window was Aug 31–Sept 20 (three weeks) and included RHM quotes and email. Hennepin County and realtor-booked leads count, as in September.</p></section>
+<section><h2>Activity this month</h2><div class="card"><div class="compare-row">
+<div class="compare-stat"><div class="cnum">82</div><div class="clbl">Addresses estimated in HCP</div></div>
+<div class="compare-stat"><div class="cnum">29</div><div class="clbl">With an accepted estimate</div></div>
+<div class="compare-stat"><div class="cnum">6</div><div class="clbl">Fully canceled</div></div>
+<div class="compare-stat"><div class="cnum">12</div><div class="clbl">Customers with a radon test scheduled</div></div></div>
+<p class="note" style="margin-top:10px">Estimates are counted once per address (92 HCP estimate records at 82 addresses). Only 43 of those addresses belong to customers first seen in October; the rest are earlier leads, including September's, whose estimates were created or redone this month. Driver 4 has the cleaned sent and accepted figures. Radon tests are customers with a non-canceled Radon Testing job scheduled in October, excluding post-mitigation tests.</p></div></section>
+<section><h2>Lead journeys</h2>
+<div class="card"><p class="note" style="margin:0"><b>What this is:</b> each October lead traced forward through HCP to the furthest stage reached as of Nov 2. Late-October leads have had little time to move. MHI leads are shown muted and not counted.</p></div>
+<div class="gantt-legend"><span><i style="background:var(--good)"></i>Installed</span><span><i style="background:var(--draft)"></i>In progress</span><span><i style="background:#b7ae95"></i>Stalled, nothing booked</span><span><i style="background:#80A280"></i>Muted: not counted</span></div>
+<div class="gantt-wrap"><div class="gantt-inner">
+<div class="gantt-header"><div></div><div>1. Lead</div><div>2. Test scheduled</div><div>3. Estimate sent</div><div>4. Install booked</div><div>5. Installed</div></div>
+<div style='font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark);padding:14px 0 4px'>Counted leads (HCP + Spectora) · 36</div><div class='gantt-row'><div class='gantt-label'><b>Lead only, nothing booked</b></div><div class='gantt-track'><div class='gantt-bar stalled' style='grid-column:1 / span 1'><span class='gcount'>5</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Radon test scheduled</b></div><div class='gantt-track'><div class='gantt-bar progress' style='grid-column:1 / span 2'><span class='gcount'>3</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Estimate sent, no install yet</b></div><div class='gantt-track'><div class='gantt-bar progress' style='grid-column:1 / span 3'><span class='gcount'>10</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Install booked or in progress</b></div><div class='gantt-track'><div class='gantt-bar progress' style='grid-column:1 / span 4'><span class='gcount'>12</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Installed</b></div><div class='gantt-track'><div class='gantt-bar done' style='grid-column:1 / span 5'><span class='gcount'>6</span></div></div></div><div style='font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark);padding:14px 0 4px'>MHI leads (not counted) · 13</div><div class='gantt-row'><div class='gantt-label'><b>Lead only, nothing booked</b></div><div class='gantt-track'><div class='gantt-bar stalled referral' style='grid-column:1 / span 1'><span class='gcount'>2</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Estimate sent, no install yet</b></div><div class='gantt-track'><div class='gantt-bar progress referral' style='grid-column:1 / span 3'><span class='gcount'>3</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Install booked or in progress</b></div><div class='gantt-track'><div class='gantt-bar progress referral' style='grid-column:1 / span 4'><span class='gcount'>5</span></div></div></div><div class='gantt-row'><div class='gantt-label'><b>Installed</b></div><div class='gantt-track'><div class='gantt-bar done referral' style='grid-column:1 / span 5'><span class='gcount'>3</span></div></div></div></div></div></section>
+<section><h2>RHM quotes (tracked, not counted)</h2><div class="card"><div class="compare-row"><div class="compare-stat"><div class="cnum">1</div><div class="clbl">RHM quote created in October</div></div><div class="compare-stat"><div class="cnum">6</div><div class="clbl">RHM quotes created in September (Sept 1–30)</div></div></div><p class="note" style="margin-top:10px">Source: Spectora MHS, quotes shown as a Routine Maintenance Home Intake Form ordered at $0. October has Farley Mohammed Fahleh Hoque (created 10/5, canceled the same day). RHM quotes are not in the headline or any other number on this page. September's 6 are Krivov, Campbell, Franklin, Braun, Ambroday and Wahlin (live quotes created Sept 1–30; a seventh, Brooke Huerkamp created 9/28, was deleted and is not counted). Nothing live was created between Sept 21 and Sept 30. This is a raw Spectora count by created date and does not apply the first-time or MHI-referral checks the September page used.</p></div></section>
+<section><h2>MHI referrals (tracked, not counted)</h2><div class="table-wrap"><table><tr><th>Name</th><th>First MHS contact</th><th>How identified</th></tr><tr><td>Dawn Falkenburg</td><td>10-02</td><td>MHI address match (no lead card)</td></tr><tr><td>Matt Elder</td><td>10-05</td><td>Realtor</td></tr><tr><td>Chad Dubbeldee</td><td>10-05</td><td>Google</td></tr><tr><td>Kayln Sheak-Blair</td><td>10-05</td><td>MHI High Radon</td></tr><tr><td>Alison Wentworth</td><td>10-05</td><td>Existing MHI client (HCP source: Previous Customer)</td></tr><tr><td>Mikolaj Frymire</td><td>10-07</td><td>Lead Form</td></tr><tr><td>Greg Kearn</td><td>10-09</td><td>MHI address match (no lead card)</td></tr><tr><td>Greg and Kori Strock</td><td>10-10</td><td>MHI address match (no lead card)</td></tr><tr><td>Shannon McDonough</td><td>10-14</td><td>MHI address match (no lead card)</td></tr><tr><td>Ian Stonehouse</td><td>10-16</td><td>MHI address match (no lead card)</td></tr><tr><td>Giaco Higashi</td><td>10-16</td><td>MHI address match (no lead card)</td></tr><tr><td>Andrew Smith</td><td>10-19</td><td>MHI address match (no lead card)</td></tr><tr><td>Amanda Stahl</td><td>10-23</td><td>MHI address match (no lead card)</td></tr></table></div>
+<p class="note">Matched by property address against MHI radon inspections dated before the first MHS contact, or an MHI lead source in HCP. Giaco Higashi and Alison Wentworth are still MHI clients, so they are excluded.</p></section>
+<section><h2>Open items</h2>
+<div class="card decide"><span class="tag decide">Decide</span><p>The 40/wk goal stands, but this month's count is about a fifth of it. The methodology page and Driver 2 skill need updating to the HCP plus Spectora definition.</p></div></section>
+<footer>Marigold Cash Flow Driver Dashboard · Driver #2 · October 2026 · Owner: Minh · Nov 5 L10 is 3 days out. Sources: Housecall Pro API (leads, jobs, estimates, pulled Nov 2), Spectora MHS and MHI.</footer>
+</div></body></html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 2026 — Cross-Selling / Ancillary Attach Rate</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 6,
+  "name": "Cross-Selling / Ancillary Attach Rate",
+  "owner": "Maggie",
+  "period": "Oct 2026",
+  "headline": {
+    "value": "59.6%",
+    "target": "Target: 60%",
+    "state": "draft"
+  }
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.locked { border-left:4px solid var(--good); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.locked { background:#e6efe3; color:var(--good); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  th.num, td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.num { color:#33301f; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  tr.flagged td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+  td.muted, tr.muted td { color:var(--muted) !important; }
+  @media (max-width:600px){ body{padding:24px 16px 60px;} .headline-pct{font-size:36px;} }
+</style>
+</head>
+<body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; October 2026, frozen at this checkpoint. <a href="../../driver-6.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #6</div>
+  <h1>October 2026 — Cross-Selling / Ancillary Attach Rate</h1>
+  <div class="sub">MHI only, Oct 1–31, 2026 · 399 in-scope inspections (80 excluded — see Scope below) · separate build from the CC ancillary attach rate skill</div>
+
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">Cross-selling measures how often MHI inspections include at least one ancillary service. The goal is an attach rate of 60% (raised from 55%).</p>
+      <p>The checklist's estimated annual impact is approximately $72.8K in additional revenue; it was sized for the earlier 50% to 55% goal (see Confirm below). The model assumes 140 inspections per week. Bundled radon testing counts as an attached service. Prepaid, complimentary, and zero-fee inspections are included in the denominator — a client can still add a service to a pre-paid inspection the same as any other. Phase 2, TISH, Re-Inspection, Walk &amp; Talk, standalone add-on-only, Preventative Maintenance, and CE courses are excluded, since there's no real home inspection to cross-sell onto.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct ">59.6%<span class="tgt">Attach rate · target 60% · 0.4 pts below</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">1.00</div><div class="clbl">Avg add-ons / inspection</div></div>
+      <div class="compare-stat"><div class="cnum">$84,772</div><div class="clbl">Total add-on revenue</div></div>
+      <div class="compare-stat"><div class="cnum">28.1%</div><div class="clbl">Add-on % of revenue</div></div>
+      <div class="compare-stat"><div class="cnum">399</div><div class="clbl">Total inspections</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">238 of 399 in-scope inspections had at least one add-on. That is 2 attached bookings short of 60% (240 needed). 399 excludes 80 bookings with no real home inspection to cross-sell onto. The number is for the full calendar month and uses the same scope rules as September.</p>
+  </section>
+
+  <section>
+    <h2>Headline vs. prior periods, in detail</h2>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Metric</th><th class="num">October</th><th class="num">Sep 1–20</th><th class="num">vs. Sep</th><th class="num">August 2026</th></tr>
+      <tr><td>Attach rate (1+ add-on)</td><td class="num eff">59.6%</td><td class="num">54.0%</td><td class="num" style="color:var(--good);">+5.6 pts</td><td class="num">57.7%</td></tr>
+      <tr><td>Target</td><td class="num">60.0%</td><td class="num">55.0%</td><td class="num"></td><td class="num">55.0%</td></tr>
+      <tr><td>Avg add-ons per inspection</td><td class="num">1.00</td><td class="num">0.89</td><td class="num" style="color:var(--good);">+0.11</td><td class="num">0.94</td></tr>
+      <tr><td>Total inspections (denominator)</td><td class="num">399</td><td class="num">289</td><td class="num"></td><td class="num">485</td></tr>
+      <tr><td>Total booking revenue (all, incl. excluded)</td><td class="num">$321,217</td><td class="num">$215,820</td><td class="num"></td><td class="num">$377,983</td></tr>
+      <tr><td>Total add-on revenue</td><td class="num eff">$84,772</td><td class="num">$55,220</td><td class="num"></td><td class="num">$95,078</td></tr>
+      <tr><td>Add-on revenue, % of all booking revenue</td><td class="num">26.4%</td><td class="num">25.6%</td><td class="num" style="color:var(--good);">+0.8 pts</td><td class="num">25.2%</td></tr>
+      <tr><td>Add-on revenue per inspection</td><td class="num eff">$212.46</td><td class="num">$191.07</td><td class="num" style="color:var(--good);">+11.2%</td><td class="num">$196.04</td></tr>
+    </table>
+    </div>
+    <p class="note">Apples-to-apples with September on scope, family definitions and MCP-authoritative attach detection. The September column is the Sep 1–20 page as published, not a full-month September re-cut, so the length differs (month to date vs. a full month); per-inspection figures are the fairer comparison. Two new calls this period (Dryer Vent Cleaning excluded, Intrusive Moisture added as a family) do not change the attach rate.</p>
+  </section>
+
+  <section>
+    <h2>Add-on count distribution</h2>
+    <div class="group-meta">In-scope bookings only (n=399) · counted by distinct add-on family per booking (e.g. two chimneys on one job = 1 "Chimney" add-on, not 2)</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Add-ons on booking</th><th class="num">Bookings</th><th class="num">%</th></tr>
+      <tr><td>0</td><td class="num">161</td><td class="num">40.4%</td></tr><tr><td>1</td><td class="num">104</td><td class="num">26.1%</td></tr><tr><td>2</td><td class="num">106</td><td class="num">26.6%</td></tr><tr><td>3</td><td class="num">28</td><td class="num">7.0%</td></tr>
+    </table>
+    </div>
+    <p class="note">No booking carried more than three add-on families. Most attached jobs carry one or two.</p>
+  </section>
+
+  <section>
+    <h2>Attach rate &amp; revenue by add-on family</h2>
+    <div class="group-meta">Avg fee is the mean over bookings that actually attached, so a $0 comp add-on pulls it down</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Add-on</th><th class="num">Bookings</th><th class="num">Attach rate</th><th class="num">Avg fee</th><th class="num">Total revenue</th></tr>
+      <tr><td>Radon</td><td class="num">172</td><td class="num eff">43.1%</td><td class="num">$201</td><td class="num">$34,545</td></tr><tr><td>Sewer scope</td><td class="num">151</td><td class="num eff">37.8%</td><td class="num">$198</td><td class="num">$29,947</td></tr><tr><td>Chimney</td><td class="num">17</td><td class="num eff">4.3%</td><td class="num">$275</td><td class="num">$4,670</td></tr><tr><td>Mold testing</td><td class="num">15</td><td class="num eff">3.8%</td><td class="num">$393</td><td class="num">$5,900</td></tr><tr><td>Detached structure</td><td class="num">11</td><td class="num eff">2.8%</td><td class="num">$73</td><td class="num">$800</td></tr><tr><td>Water testing</td><td class="num">9</td><td class="num eff">2.3%</td><td class="num">$331</td><td class="num">$2,975</td></tr><tr><td>Tree assessment</td><td class="num">6</td><td class="num eff">1.5%</td><td class="num">$200</td><td class="num">$1,200</td></tr><tr><td>Pool</td><td class="num">4</td><td class="num eff">1.0%</td><td class="num">$450</td><td class="num">$1,800</td></tr><tr><td>2nd Kitchen</td><td class="num">4</td><td class="num eff">1.0%</td><td class="num">$56</td><td class="num">$225</td></tr><tr><td>Roof & Exterior</td><td class="num">4</td><td class="num eff">1.0%</td><td class="num">$15</td><td class="num">$60</td></tr><tr><td>Drone roof</td><td class="num">3</td><td class="num eff">0.8%</td><td class="num">$133</td><td class="num">$400</td></tr><tr><td>Whole Home Infrared</td><td class="num">2</td><td class="num eff">0.5%</td><td class="num">$200</td><td class="num">$400</td></tr><tr><td>Intrusive moisture (Stucco) <i>(new)</i></td><td class="num">2</td><td class="num eff">0.5%</td><td class="num">$925</td><td class="num">$1,850</td></tr><tr><td>Lead-Based Paint</td><td class="num">0</td><td class="num eff">0.0%</td><td class="num">—</td><td class="num">$0</td></tr><tr><td>Asbestos</td><td class="num">0</td><td class="num eff">0.0%</td><td class="num">—</td><td class="num">$0</td></tr><tr class="avg-row"><td>All add-ons</td><td class="num">400</td><td class="num">1.00 per inspection</td><td class="num">$212</td><td class="num">$84,772</td></tr>
+    </table>
+    </div>
+    <p class="note">Radon (43.1%) and sewer scope (37.8%) carry the driver, as in every period. $0 comp or bundled add-ons, caught by presence rather than price: #23742 (radon), #23857 (2nd kitchen), #23913 (sewer scope), #23951 (sewer scope), #24127 (drone roof, bundled in a commercial inspection). Order #24023 shows a $221.96 sewer scope, which looks like a discount. Intrusive Moisture (Stucco) is new this period: two orders, $1,250 whole-house and $600 one-wall, both already attached through radon. Lead-Based Paint and Asbestos had no attaches this month.</p>
+  </section>
+
+  <section>
+    <h2>Attach rate by service type — in scope (n=399)</h2>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Service type</th><th class="num">Bookings</th><th class="num">% with 1+ add-on</th><th class="num">Sep 1–20</th></tr>
+      <tr><td>Single family</td><td class="num">291</td><td class="num eff">69.4%</td><td class="num">62.2%</td></tr><tr><td>Condo/townhome</td><td class="num">64</td><td class="num eff">34.4%</td><td class="num">35.3%</td></tr><tr><td>Multifamily</td><td class="num">10</td><td class="num eff">60.0%</td><td class="num">50.0%</td></tr><tr><td>5-Point</td><td class="num">4</td><td class="num eff">75.0%</td><td class="num">0.0%</td></tr><tr><td>Commercial</td><td class="num">4</td><td class="num eff">25.0%</td><td class="num">—</td></tr><tr><td>11-Month</td><td class="num">11</td><td class="num eff">9.1%</td><td class="num">20.0%</td></tr><tr><td>Prelisting</td><td class="num">14</td><td class="num eff">14.3%</td><td class="num">28.6%</td></tr><tr class="muted"><td>Single item</td><td class="num">0</td><td class="num eff">—</td><td class="num">50.0%</td></tr><tr class="muted"><td class="muted">Other <i>(cancelled inspection, ancillary still paid)</i></td><td class="num muted">1</td><td class="num muted">100%</td><td class="num muted">—</td></tr>
+    </table>
+    </div>
+    <p class="note"><b>Condo/townhome is still the biggest gap</b> at 34.4% (n=64) vs. single family's 69.4% (n=291); single family rebounded from September's 62.2%, which is most of the headline gain. Prelisting (2 of 14) and 11-Month (1 of 11) stay very low. The "Other" row is one cancelled inspection whose sewer and radon add-ons were still paid; it stays in scope.</p>
+  </section>
+
+  <section>
+    <h2>Excluded from the denominator (n=80)</h2>
+    <div class="group-meta">No real home inspection to cross-sell onto — these don't count toward the attach rate at all, in either the numerator or denominator</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Category</th><th class="num">Bookings</th><th class="num">Revenue</th><th>Why excluded</th></tr>
+      <tr><td>Standalone add-on only</td><td class="num">27</td><td class="num">$7,000</td><td>Radon, sewer, chimney, mold, well water, asbestos and tree bookings with no home inspection attached</td></tr><tr><td>Data gap (blank services and add-ons)</td><td class="num">23</td><td class="num">$300</td><td>22 cancelled before the inspection (two kept a $150 cancellation fee) and 1 uncancelled order (#23817) with blank services and $0 — see Confirm</td></tr><tr><td>TISH</td><td class="num">12</td><td class="num">$2,975</td><td>Technician evaluation, no home inspection to cross-sell onto</td></tr><tr><td>Re-Inspection</td><td class="num">5</td><td class="num">$900</td><td>Follow-up visit on an existing inspection</td></tr><tr><td>Preventative Maintenance</td><td class="num">3</td><td class="num">$1,590</td><td>Townhome-association work</td></tr><tr><td>Phase 2</td><td class="num">3</td><td class="num">$4,675</td><td>Pre-drywall construction visit, standalone</td></tr><tr><td>Inspectify</td><td class="num">2</td><td class="num">$1,460</td><td>Third-party platform bookings, excluded per Sept 22 call</td></tr><tr><td>Dryer Vent Cleaning <i>(new)</i></td><td class="num">2</td><td class="num">$175</td><td>Standalone service (#23836 with a battery change, #23879), no inspection; excluded per Maggie, Nov 3</td></tr><tr><td>CE Instruction</td><td class="num">2</td><td class="num">$200</td><td>A class, not an inspection</td></tr><tr><td>Appraisal Inspection</td><td class="num">1</td><td class="num">$450</td><td>Excluded per Sept 22 call</td></tr><tr class="avg-row"><td>Total excluded</td><td class="num">80</td><td class="num">$19,725</td><td></td></tr>
+    </table>
+    </div>
+    <p class="note">Mixed bookings are scoped by their in-scope inspection: #23733 (Condo/Townhome + 11-Month + Phase 2) counts as condo/townhome, and #23127 (Client Care Request Form + Condo/Townhome, $0) counts as condo/townhome with no add-ons. Two bookings (#23730, #23838) use the service name "Single Family/Twin Home Inspection*" and are counted as single family.</p>
+  </section>
+
+  <section>
+    <h2>Decisions applied</h2>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Scope — what counts as an inspection:</b> all inspections stay in by default, including pre-paid/comp/zero-fee. Excluded entirely: Phase 2, TISH, Re-Inspection, Walk &amp; Talk, standalone add-on-only, Preventative Maintenance, Insurance Inspection, Recuperative Care, Annual Home Evaluation, Appraisal, Inspectify, CE Instruction, and (new, Nov 3) Dryer Vent Cleaning. Prelisting, 11-Month and Single Item stay in scope, as do cancelled-inspection bookings whose ancillary was still paid. Mixed bookings are scoped by their in-scope inspection. Goal is 60%; color tiers keep the same 5-point band below goal: green at 60% or more, gold from 55% to under 60%, red under 55% (recalculated from the old 55/50 tiers, Nov 3).</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Add-on definitions:</b> 2nd Kitchen counts, bundled radon always counts as attached, Whole Home Infrared and Pool are their own families, and "Intrusive Moisture (Stucco)" is now its own family (Nov 3: rare, but a service we offer and add on). CE-course line items ("name + numeric ID") are excluded. Toilet Pull/Roof Access (Nov 3) counts toward revenue, rolled into Sewer scope since it only happens on a sewer scope job, and never counts as an attach on its own. None were booked in October.</p>
+    </div>
+    <div class="card locked">
+      <span class="tag locked">Decided</span>
+      <p><b>Revenue methodology:</b> Spectora MCP scope and attach calls are authoritative (service and add-on names for all 479 October orders, cancelled included). The wide export supplies dollar amounts only, for those same Order IDs: all 479 matched 1:1, booking fees matched quotes on every order, and each order's fee reconciles to its service and add-on columns with no residual. The wide export repeats three column names (Radon (SF), Level 2 Chimney (SF), Mold Testing (SF)), so those columns are summed, not overwritten.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Open items</h2>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Order #23817</b> (Oct 15) has blank services and add-ons and $0 but is not marked cancelled. Excluded as a data gap. Worth checking whether it was a real booking.</p>
+    </div>
+    <div class="card confirm">
+      <span class="tag confirm">Confirm</span>
+      <p><b>Annual impact figure.</b> The $72.8K estimate (140 inspections a week, 5-point lift) was sized for the 50% to 55% goal. With the goal now 60%, confirm what impact figure the L10 should carry.</p>
+    </div>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #6 · Oct 1–31, 2026 (n=399 in scope, 80 excluded) · Owner: Maggie · Thursday Nov 5 L10 is 3 days out. Sources: Spectora MHI live pull Oct 1–31 (service and add-on names, attach detection) + Inspections Export-393598.csv (wide format, 479 orders, dollar amounts), reconciled by Order ID, MHI only.
+  </footer>
+</div>
+</body>
+</html>

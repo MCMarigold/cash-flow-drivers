@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 2026 — Inspector/Tech Efficiency</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 5,
+  "name": "Inspector/Tech Efficiency",
+  "owner": "Blake",
+  "period": "Oct 2026",
+  "metrics": [
+    {
+      "label": "Inspector",
+      "value": "77.0%",
+      "target": "/ 80%",
+      "state": "neg"
+    },
+    {
+      "label": "Service Tech",
+      "value": "95.8%",
+      "target": "/ 85%",
+      "state": "pos"
+    },
+    {
+      "label": "Radon Tech",
+      "value": "62.6%",
+      "target": "/ 90%",
+      "state": "neg"
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card.decide { border-left:4px solid var(--decide); }
+  .card.confirm { border-left:4px solid var(--confirm); }
+  .card.good { border-left:4px solid var(--good); }
+  .tag { display:inline-block; font-family:Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:10px; margin-bottom:8px; }
+  .tag.decide { background:#f7e9e2; color:var(--decide); }
+  .tag.confirm { background:#e7eef5; color:var(--confirm); }
+  .tag.good { background:#e6efe3; color:var(--good); }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  th.num { text-align:right; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  tr.trainee td { color: var(--confirm); }
+  tr.under td { color: var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  td.hi-cell { background:#f7e9e2; color:var(--decide); font-weight:700; }
+  td.lo-cell { background:#e6efe3; color:var(--good); font-weight:700; }
+  .vs { display:block; font-size:10.5px; font-weight:400; color:var(--muted); white-space:nowrap; }
+  h3 { font-family:Arial,sans-serif; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold-dark); margin:22px 0 2px; }
+</style>
+</head>
+<body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; October 2026, frozen at this checkpoint. <a href="../../driver-5.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #5</div>
+  <h1>October 2026 — Inspector/Tech Efficiency</h1>
+  <div class="sub">Points ÷ Hours worked. Full month, Oct 1–31. Points pulled directly from Airtable's Points Tracking table (ground truth), not estimated from calendar exports. Booked, estimated drive and other hours are added beside efficiency for Home Inspectors. The Driving (estimated) miles section and the tech driving are not in this October build (see Note).</div>
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">Inspector and tech efficiency measures productivity against role-specific benchmarks using points completed per hour worked. The goal is to bring inspectors and technicians toward their defined efficiency benchmarks.</p>
+      <p>The estimated annual financial impact is approximately $73.6K. This represents the potential value associated with improving efficiency and creating additional productive capacity. The older model estimated approximately $1,416 in additional weekly income if both inspector and tech efficiency targets were achieved, annualized to $73,632. This is primarily a capacity/revenue opportunity rather than a direct payroll reduction, and the current model still needs to confirm whether any overlap exists with other capacity drivers.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row"><div class="headline-pct">78.9%<span class="tgt">Team average · targets vary by role (see below)</span></div></div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum neg">77.0%</div><div class="clbl">Inspector (n=12) · target 80%</div></div>
+      <div class="compare-stat"><div class="cnum pos">95.8%</div><div class="clbl">Service Tech (n=2) · target 85%</div></div>
+      <div class="compare-stat"><div class="cnum neg">62.6%</div><div class="clbl">Radon Tech (n=1) · target 90%</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">Team average (pooled points ÷ hours, 15 people) excludes Travis East and Joel Terry (still under 100 lifetime inspections, see below) and the Other bucket (Dan Kosel, Mark Rahja). The Service Tech group is Brayden Rogosheske and Austin Cooper only (n=2): Stanford Baker is not scored in October (ramp month, see below) and Noah Carlson is excluded. Radon Tech is a group of one (Derek Lanz).</p>
+  </section>
+  <section><h2>Service Techs — target 85%</h2><div class="group-meta">2 people scored · group avg 95.8%</div>
+  <div class="table-wrap">
+<table>
+<tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+<tr class=""><td>Austin Cooper</td><td class="num">156.50</td><td class="num">157.98</td><td class="num eff">99.1%</td></tr>
+<tr class=""><td>Brayden Rogosheske</td><td class="num">156.50</td><td class="num">168.83</td><td class="num eff">92.7%</td></tr>
+<tr class="avg-row"><td>Group average</td><td class="num">313.00</td><td class="num">326.82</td><td class="num eff">95.8%</td></tr></table>
+</div>
+  <p class="note">Stanford Baker (Service Tech, started Sept 21) is <b>not scored in October</b>: October is his ramp month, and he counts from his second full month (November), when this will be re-evaluated. For reference only, his October was 56.75 points over 162.48 hours, not counted in the group number. Noah Carlson is excluded: he was used as needed through October and is no longer with Marigold. With two people in the group, one person moving changes the group number a lot. Alycia Bonneville is excluded (Airtable Team: MHS).</p></section>
+  <section><h2>Radon Tech — target 90%</h2><div class="group-meta">1 person</div>
+  <div class="table-wrap">
+<table>
+<tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+<tr class="under"><td>Derek Lanz</td><td class="num">87.75</td><td class="num">140.20</td><td class="num eff">62.6%</td></tr>
+</table>
+</div>
+  <p class="note">Only one person in this bucket, so a 90% target with a sample size of one is worth keeping in mind. Derek's stops are mostly short radon drop-offs and pick-ups, so a larger share of his clock is neither onsite nor driving.</p></section>
+  <section><h2>Home Inspectors — target 80%</h2><div class="group-meta">12 regular + Travis East and Joel Terry flagged · group avg 77.0% (regular only)</div>
+  <div class="table-wrap">
+<table>
+<tr><th>Name</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Booked hrs</th><th class="num">Est. drive hours</th><th class="num">Other hours</th><th class="num">Booked + drive %</th><th class="num">Efficiency</th></tr>
+<tr class="trainee"><td>Joel Terry (trainee)</td><td class="num">38.50</td><td class="num">43.27</td><td class="num">34.5</td><td class="num">2.7<span class="vs">−6.9h vs avg</span></td><td class="num">6.1</td><td class="num">86%</td><td class="num eff">89.0%</td></tr>
+<tr class="trainee"><td>Travis East (trainee)</td><td class="num">126.50</td><td class="num">144.15</td><td class="num">113.2<span class="vs">−7.7h vs avg</span></td><td class="num">33.5</td><td class="num">-2.5<span class="vs">−12.2h vs avg</span></td><td class="num">102%</td><td class="num eff">87.8%</td></tr>
+<tr class=""><td>Aaron Vandeventer</td><td class="num">91.75</td><td class="num">112.02</td><td class="num">87.3</td><td class="num">23.9</td><td class="num">0.8<span class="vs">−6.2h vs avg</span></td><td class="num">99%</td><td class="num eff">81.9%</td></tr>
+<tr class=""><td>Kyle Kanipes</td><td class="num">84.50</td><td class="num">105.27</td><td class="num">80.3</td><td class="num">13.0<span class="vs">−8.1h vs avg</span></td><td class="num">12.0</td><td class="num">89%</td><td class="num eff">80.3%</td></tr>
+<tr class="under"><td>Jake Miller</td><td class="num">112.25</td><td class="num">140.55</td><td class="num">104.5</td><td class="num">44.3<span class="vs">+16.3h vs avg</span></td><td class="num">-8.2<span class="vs">−16.8h vs avg</span></td><td class="num">106%</td><td class="num eff">79.9%</td></tr>
+<tr class="under"><td>Matt Mossey</td><td class="num">107.00</td><td class="num">134.25</td><td class="num">98.7</td><td class="num">27.6</td><td class="num">7.9</td><td class="num">94%</td><td class="num eff">79.7%</td></tr>
+<tr class="under"><td>Mitchell Bowser</td><td class="num">111.50</td><td class="num">140.60</td><td class="num">107.1</td><td class="num">28.8</td><td class="num">4.7</td><td class="num">97%</td><td class="num eff">79.3%</td></tr>
+<tr class="under"><td>Stephen Hines</td><td class="num">99.00</td><td class="num">125.70</td><td class="num">93.5</td><td class="num">29.5</td><td class="num">2.7</td><td class="num">98%</td><td class="num eff">78.8%</td></tr>
+<tr class="under"><td>Kelly Brill</td><td class="num">127.25</td><td class="num">162.85</td><td class="num">122.7</td><td class="num">30.2</td><td class="num">9.9</td><td class="num">94%</td><td class="num eff">78.1%</td></tr>
+<tr class="under"><td>Walker Russek</td><td class="num">115.75</td><td class="num">148.80</td><td class="num">115.7</td><td class="num">23.6</td><td class="num">9.5</td><td class="num">94%</td><td class="num eff">77.8%</td></tr>
+<tr class="under"><td>Anthony Link-Danko</td><td class="num">104.00</td><td class="num">134.75</td><td class="num">97.5</td><td class="num">25.0</td><td class="num">12.2</td><td class="num">91%</td><td class="num eff">77.2%</td></tr>
+<tr class="under"><td>Kyle Grovenstein</td><td class="num">96.50</td><td class="num">131.23</td><td class="num">96.7</td><td class="num">15.4<span class="vs">−8.6h vs avg</span></td><td class="num">19.1<span class="vs">+11.8h vs avg</span></td><td class="num">85%</td><td class="num eff">73.5%</td></tr>
+<tr class="under"><td>Matt Clarity</td><td class="num">119.50</td><td class="num">167.37</td><td class="num">125.8<span class="vs">+11.6h vs avg</span></td><td class="num">22.8<span class="vs">−7.0h vs avg</span></td><td class="num">18.8<span class="vs">+9.7h vs avg</span></td><td class="num">89%</td><td class="num eff">71.4%</td></tr>
+<tr class="under"><td>Tony Weinand</td><td class="num">106.00</td><td class="num">153.33</td><td class="num">102.0</td><td class="num">59.7<span class="vs">+33.3h vs avg</span></td><td class="num">-8.4<span class="vs">−16.4h vs avg</span></td><td class="num">105%</td><td class="num eff">69.1%</td></tr>
+<tr class="avg-row"><td>Group average</td><td class="num">1275.00</td><td class="num">1656.72</td><td class="num">1231.8</td><td class="num">343.8</td><td class="num">81.1</td><td class="num">95%</td><td class="num eff">77.0%</td></tr></table>
+</div>
+  <p class="note">Travis East (93 lifetime inspections in Airtable through Oct 31) and Joel Terry (62) are still under the 100-inspection trainee line, so they are shown in blue and left out of the group average and the headline. Joel clocked only 43.3 hours in October. Both were solo for the whole month, so their hours need no trimming. Brett Fredrichs (Gusto title Home Inspector) is excluded as MHS, as is Dominic Reed. Booked hours come from Spectora bookings. Est. drive hours are home to first job, job to job and last job home, minus the unpaid first and last 30 minutes of driving each day. Other hours are total (Gusto) hours minus booked minus estimated drive: report writing, gaps between jobs, days with no booking, and any stretched clock-in or clock-out. Booked + drive % is those first two divided by total hours. A small gray line under a number appears only when that person is 6 or more hours above (+) or below (−) the typical (median) inspector for the same points; no line means close to typical. Travis and Joel are shown but do not set the typical. Booked and drive come from the Drive Time Weekly Log (Airtable) for Oct 5 to Oct 31 plus a fresh calculation for Oct 1 to 4, so October is exact to the day. Drive is estimated from ZIP centers, so treat it as directional.</p></section>
+  <section><h2>Other</h2><div class="group-meta">2 people · not scored against a target</div>
+  <div class="table-wrap"><table><tr><th>Name</th><th>Job Title</th><th class="num">Points</th><th class="num">Hours</th><th class="num">Efficiency</th></tr>
+  <tr><td>Dan Kosel</td><td>Assistant Manager</td><td class="num">52.75</td><td class="num">133.50</td><td class="num eff">39.5%</td></tr>
+  <tr><td>Mark Rahja</td><td>Service Lead</td><td class="num">26.25</td><td class="num">110.50</td><td class="num eff">23.8%</td></tr></table></div>
+  <p class="note">Held out of the scored group and averages per your call, even though Airtable's own Team field tags both as "Inspector." Points are still sourced from Airtable.</p></section>
+  <section><h2>Note</h2>
+    <div class="card"><span class="tag locked">Standing policy</span><p>Trainees are Home Inspectors with fewer than 100 lifetime inspections in Airtable. Travis East is 7 short at 93; Joel Terry is at 62. Dan Kosel and Mark Rahja stay in the Other bucket, not scored as regular Inspectors.</p></div>
+    <div class="card confirm"><span class="tag confirm">What this build does not include</span><p>The Driving (estimated) miles section and the tech driving are still left out. Inspector miles need every October booking address (Oct 5 to 18 were not re-pulled), and tech driving needs each tech's Spectora calendar stops, which have not been pulled. The hours split for Home Inspectors above is complete. The weeks of Oct 19 and Oct 26 were backfilled into the Drive Time Weekly Log (Status: Backfilled) for this build. Efficiency does not depend on any of this.</p></div>
+    <div class="card confirm"><span class="tag confirm">Confirm</span><p>Joel Terry has 3.5 points in the week of Oct 26 but no Gusto hours that week, so those points are in his efficiency number (38.5 points) but not in the Drive Time log. Sunday Nov 1 is outside the month, so Aaron Vandeventer's Nov 1 inspection is not counted anywhere. Weekly-log hours differ from the monthly Gusto totals by under about 1 hour for a few people, so Other hours here are computed from the monthly Gusto total.</p></div>
+    <div class="card"><span class="tag confirm">Data check</span><p>Points are entered through Nov 2, so October is complete. Daily point totals look steady through the month; Oct 29 is the lightest weekday (63), which matches a light booking day, not missing entries.</p></div>
+    <div class="card locked"><span class="tag locked">Decision applied</span><p><b>Stanford Baker</b> is not scored in October (ramp, first full month) and is re-evaluated in November, when his second full month counts toward the Service Tech number. <b>Noah Carlson</b> is excluded from Driver 5 (used as needed through October, no longer with Marigold). With both out, the Service Tech group is Brayden Rogosheske and Austin Cooper.</p></div>
+  </section>
+  <footer>Marigold Cash Flow Driver Dashboard · Driver #5 · October 2026 (Oct 1–31) · Points sourced directly from Airtable's Points Tracking table (Scheduling Tracking // Radon base). Trainee status from lifetime inspection counts in Points Tracking. Role groupings: Service Tech and Radon Tech from Gusto job titles; Stanford Baker not scored in October (ramp) and Noah Carlson excluded; Dan Kosel and Mark Rahja held in Other. Hours from Gusto time tracking (Total hours, excludes PTO). Blake Pederson-Perovich excluded. Brett Fredrichs, Alycia Bonneville and Dominic Reed excluded (Airtable Team: MHS). Owner: Blake · Thursday Nov 5 L10 is 3 days out.</footer>
+</div>
+</body>
+</html>

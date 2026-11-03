@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 1–31, 2026 — Inspector Available Capacity</title>
+<script type="application/json" id="driver-summary">
+{
+  "driver": 1,
+  "name": "Inspector Available Capacity",
+  "owner": "Blake",
+  "period": "Oct 1\u201331, 2026",
+  "headline": {
+    "value": "18.2%",
+    "target": "Target: 5\u201310%",
+    "state": "neg"
+  }
+}
+</script>
+<style>
+  :root {
+    --gold: #A9822B; --gold-dark: #7d5f1c; --bg: #FBF9F4; --card: #FFFFFF;
+    --text: #2b2820; --muted: #6f6a5c; --border: #e6ddc4;
+    --confirm: #3f6f9e; --decide: #b25a34; --good: #4a7a4a;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.5; padding:40px 24px 80px; }
+  .wrap { max-width: 1000px; margin:0 auto; }
+  .eyebrow { color:var(--gold-dark); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-family:Arial,sans-serif; font-weight:700; margin-bottom:6px; }
+  .back { font-family:Arial,sans-serif; font-size:12px; color:var(--gold-dark); text-decoration:none; font-weight:700; }
+  .back:hover { text-decoration:underline; }
+  h1 { font-size:28px; margin:10px 0 4px; color:#33301f; }
+  .sub { color:var(--muted); font-family:Arial,sans-serif; font-size:14px; margin-bottom:10px; }
+  section { margin-top:32px; }
+  h2 { font-family:Arial,sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-dark); border-bottom:2px solid var(--border); padding-bottom:8px; margin-bottom:4px; }
+  .group-meta { font-family:Arial,sans-serif; color:var(--muted); font-size:12.5px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+  .card p { margin:6px 0 0; font-size:14.5px; }
+  table { width:100%; border-collapse:collapse; font-family:Arial,sans-serif; font-size:13px; background:var(--card); }
+  th, td { text-align:left; padding:8px 9px; border-bottom:1px solid var(--border); }
+  th { color:var(--gold-dark); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; background:#F6F1E3; }
+  th.num { text-align:right; }
+  td.num { text-align:right; color:#33301f; font-variant-numeric:tabular-nums; }
+  td.eff { font-weight:700; color:var(--gold-dark); }
+  td.eff.neg { color:var(--decide); }
+  .avg-row td { font-weight:700; background:#F6F1E3; }
+  .note { font-family:Arial,sans-serif; color:var(--muted); font-size:13px; }
+  .method-list { font-family:Arial,sans-serif; font-size:13px; color:var(--text); line-height:1.7; padding-left:20px; margin:8px 0; }
+  .method-list li { margin-bottom:4px; }
+  .method-list b { color:var(--gold-dark); }
+  footer { margin-top:36px; font-family:Arial,sans-serif; font-size:12px; color:var(--muted); border-top:1px solid var(--border); padding-top:12px; }
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin-bottom: 8px;}
+  .headline-row { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; }
+  .headline-pct { font-family:Arial,sans-serif; font-size:44px; font-weight:700; color:var(--gold-dark); line-height:1; }
+  .headline-pct.pos { color:var(--good); }
+  .headline-pct.neg { color:var(--decide); }
+  .headline-pct .tgt { display:block; font-size:12.5px; font-weight:400; color:var(--muted); margin-top:4px; }
+  .compare-row { display:flex; gap:24px; flex-wrap:wrap; font-family:Arial,sans-serif; }
+  .compare-stat .cnum { font-size:20px; font-weight:700; color:var(--gold-dark); }
+  .compare-stat .cnum.pos { color:var(--good); }
+  .compare-stat .cnum.neg { color:var(--decide); }
+  .compare-stat .clbl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div style="background:#fdf1d6;border-bottom:2px solid #c98a2c;padding:10px 24px;font-family:Arial,sans-serif;font-size:12.5px;color:#7d5f1c;text-align:center;">&#128230; Archived snapshot &mdash; October 2026, frozen at this checkpoint. <a href="../../driver-1.html" style="color:#7d5f1c;font-weight:bold;">View current live page &rarr;</a> &middot; <a href="../index.html" style="color:#7d5f1c;font-weight:bold;">Back to archive &rarr;</a></div>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; Back to dashboard</a>
+  <div class="eyebrow" style="margin-top:14px;">Marigold · Cash Flow Driver Dashboard · Driver #1</div>
+  <h1>October 1–31, 2026 — Inspector Available Capacity</h1>
+  <div class="sub">Weighted slots consumed ÷ available slots, whole inspector team. Joel Terry excluded.</div>
+
+  <section style="margin-top:20px;">
+    <div class="card">
+      <p style="margin:0;">Inspector available capacity measures how much inspection capacity is actually available after accounting for scheduled work. The goal is to keep available capacity between 5% and 10%. At least 5% gives the team enough room to absorb demand without consistently operating over capacity, and more than 10% open slots is not sustainable revenue-wise.</p>
+      <p>The estimated annual financial impact is approximately $364K–$416K. This represents a potential annual revenue opportunity associated with adding enough inspector capacity to reach the 5% floor of the target range. The underlying model estimates about $7,008 in additional weekly revenue per additional inspector, annualized to $364,416. This is a revenue opportunity, not direct cash savings, and the total increases if more than one inspector is needed.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Headline</h2>
+    <div class="headline-row">
+      <div class="headline-pct neg">18.2%<span class="tgt">Team (14; Joel Terry excluded) · target 5–10% · full October</span></div>
+    </div>
+    <div class="compare-row" style="margin-top:14px;">
+      <div class="compare-stat"><div class="cnum">526.5</div><div class="clbl">Available slots</div></div>
+      <div class="compare-stat"><div class="cnum">430.9</div><div class="clbl">Weighted slots consumed</div></div>
+      <div class="compare-stat"><div class="cnum neg">81.8%</div><div class="clbl">Filled</div></div>
+    </div>
+    <p class="note" style="margin-top:14px;">October was far looser than the 5–10% target range: 18.2% available, about 8 points over the 10% ceiling and a big swing from September's 10.4% (which was already marginally over). The team had 526.5 available slots against 430.9 weighted slots consumed (429 bookings counted per inspector). Every one of the 14 people on the team finished above 10% available, and nobody ran under 5% or over capacity for the month. The weekly log (which still counts Joel Terry, so its numbers differ slightly from this page) runs Mon–Sun and crosses month edges: Oct 5–11 was 12.6%, Oct 12–18 14.5%, Oct 19–25 10.8% and Oct 26–Nov 1 29.5%, and Oct 1–4 sat in the Sep 28–Oct 4 week (21.6%). The last week of the month was by far the lightest: bookings fell to 92. (The weekly log has not yet applied the Oct 30 blocks below, so its Oct 26–Nov 1 figure will come down slightly.) This is a full calendar month with 22 workdays (no company holiday) and five Saturdays (Oct 3, 10, 17, 24, 31). Slow-season slot rules start Mon Oct 5, so Oct 1–2 and Sat Oct 3 use the earlier rules (3-slot long days, Dan Kosel at 9 slots a week) and Oct 5 onward use the new ones (no 3-slot days, Dan Kosel 1 slot a day, a Saturday worked gets +2 slots and flexes that week's Thursday). This page excludes Joel Terry (Maggie, Nov 3), so the team is 14; Travis East stays in as a trainee under the Oct 12 ruling, and Aaron Vandeventer is counted. Against the band: the team had about 73 more slots than it needed to sit at 5% available (roughly 1.7 standard inspectors) and about 48 more than the 10% ceiling allows.</p>
+  </section>
+
+  <section>
+    <h2>Home Inspectors — team</h2>
+    <div class="group-meta">14 inspectors · group avg 18.2% available (weighted)</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th class="num">Slots</th><th class="num">Raw count</th><th class="num">Weighted</th><th class="num">% Avail (raw)</th><th class="num">% Avail (weighted)</th></tr>
+      <tr><td>Stephen Hines</td><td class="num">43</td><td class="num">30</td><td class="num">28.8</td><td class="num eff">30.2%</td><td class="num eff">33.1%</td></tr>
+      <tr><td>Dan Kosel</td><td class="num">22.5</td><td class="num">16</td><td class="num">15.6</td><td class="num eff">28.9%</td><td class="num eff">30.9%</td></tr>
+      <tr><td>Travis East</td><td class="num">46</td><td class="num">36</td><td class="num">35.7</td><td class="num eff">21.7%</td><td class="num eff">22.4%</td></tr>
+      <tr><td>Tony Weinand</td><td class="num">40</td><td class="num">31</td><td class="num">31.4</td><td class="num eff">22.5%</td><td class="num eff">21.5%</td></tr>
+      <tr><td>Jake Miller</td><td class="num">40</td><td class="num">34</td><td class="num">32.1</td><td class="num eff">15.0%</td><td class="num eff">19.6%</td></tr>
+      <tr><td>Kyle Grovenstein</td><td class="num">37</td><td class="num">28</td><td class="num">29.8</td><td class="num eff">24.3%</td><td class="num eff">19.5%</td></tr>
+      <tr><td>Anthony Link-Danko</td><td class="num">37</td><td class="num">31</td><td class="num">30.0</td><td class="num eff">16.2%</td><td class="num eff">18.9%</td></tr>
+      <tr><td>Matt Mossey</td><td class="num">36</td><td class="num">31</td><td class="num">30.4</td><td class="num eff">13.9%</td><td class="num eff">15.6%</td></tr>
+      <tr><td>Mitchell Bowser</td><td class="num">38</td><td class="num">31</td><td class="num">32.9</td><td class="num eff">18.4%</td><td class="num eff">13.3%</td></tr>
+      <tr><td>Aaron Vandeventer</td><td class="num">31</td><td class="num">26</td><td class="num">26.9</td><td class="num eff">16.1%</td><td class="num eff">13.2%</td></tr>
+      <tr><td>Kelly Brill</td><td class="num">44</td><td class="num">37</td><td class="num">38.4</td><td class="num eff">15.9%</td><td class="num eff">12.8%</td></tr>
+      <tr><td>Matt Clarity</td><td class="num">44</td><td class="num">37</td><td class="num">38.7</td><td class="num eff">15.9%</td><td class="num eff">12.1%</td></tr>
+      <tr><td>Kyle Kanipes</td><td class="num">28</td><td class="num">25</td><td class="num">24.7</td><td class="num eff">10.7%</td><td class="num eff">11.8%</td></tr>
+      <tr><td>Walker Russek</td><td class="num">40</td><td class="num">36</td><td class="num">35.6</td><td class="num eff">10.0%</td><td class="num eff">11.0%</td></tr>
+      <tr class="avg-row"><td>Team total (14)</td><td class="num">526.5</td><td class="num">429</td><td class="num">430.9</td><td class="num eff">18.5%</td><td class="num eff">18.2%</td></tr>
+    </table>
+    </div>
+    <p class="note">Nobody on the team was inside the 5–10% band, and nobody was below it. Closest to the ceiling: Walker Russek (11.0%), Kyle Kanipes (11.8%), Matt Clarity (12.1%), Kelly Brill (12.8%) and Aaron Vandeventer (13.2%). Most room: Stephen Hines (33.1%), Dan Kosel (30.9%, on only 22.5 slots because the slow-season 1-slot-a-day rule, drive docks and his Oct 30 block shrink his denominator), Travis East (22.4%, a trainee kept in under the Oct 12 ruling) and Tony Weinand (21.5%). Individual weights use the locked 3.25-hr slot, the same as the weekly log (actual averages by week were 3.29, 3.38, 3.14 and 3.21 hrs, all inside the 0.25 tolerance). Pool Inspection events count as booked time at hours ÷ 3.25 (standing ruling, Oct 11). Drive and radon drop-off events do not count as booked time, but a day with 3.25+ hrs of Drive docks 1 slot (Maggie, Oct 26), applied the week of Oct 19 to Jake Miller, Tony Weinand, Mitchell Bowser and Dan Kosel (Mon 10/19) and Matt Mossey (Fri 10/23). Saturday slots follow the swaps logged in Spectora each week.</p>
+  </section>
+
+  <section>
+    <h2>Excluded</h2>
+    <div class="group-meta">1 person · not scored against the team target</div>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Name</th><th>Reason</th><th class="num">Slots</th><th class="num">Raw count</th><th class="num">Weighted</th><th class="num">% Avail (weighted)</th></tr>
+      <tr><td>Joel Terry</td><td>Extended leave — sample too small (Maggie, Nov 3)</td><td class="num">14</td><td class="num">10</td><td class="num">10.6</td><td class="num eff">24.1%</td></tr>
+    </table>
+    </div>
+    <p class="note">Joel Terry: on extended leave for much of October (out Oct 12–30 on the PTO calendar), so his sample is too small to score (Maggie, Nov 3). He is shown for reference only. Travis East (solo since Aug 14) stays in under the Oct 12 trainee ruling; his lifetime count was re-pulled on Nov 3 at 98 (Airtable Inspector Milestones), still under 100. Aaron Vandeventer is counted from Oct 1: Maggie confirmed on Oct 11 that his light duty ran Sep 8–14 only. His Sat Oct 31 (1 slot) is counted; his Sun Nov 1 slot falls in November.</p>
+  </section>
+
+  <section>
+    <h2>Methodology</h2>
+    <ul class="method-list">
+      <li><b>Numerator (weighted):</b> each booking's weight = its Spectora duration ÷ 3.25 hrs (the locked "1 slot"). The weekly log checked each week's actual average against that value and it never drifted more than 0.25 hrs, so the locked value is used for the whole month (September's page used that month's own average, 3.26 hrs, which is effectively the same). TISH/Brett Fredrichs, Blake Pederson-Perovich commercial jobs and the unassigned "Marigold Home Inspections" placeholder rows are excluded. Multi-inspector bookings count full duration for each person; Maggie ruled the 3-person jobs in the week of Oct 19 are big properties, not padding.</li>
+      <li><b>Window:</b> Oct 1–31, 2026 — 22 workdays (no company holiday) and five Saturdays (Oct 3, 10, 17, 24, 31). Daily rows come from the Inspector Day Capacity table in Airtable, every row marked "Actual (past)".</li>
+      <li><b>Slot rules by date:</b> Oct 1–4 use the earlier rules (2 slots a day, 3-slot long days, Dan Kosel 9 a week, +2 for an unstarred Saturday). From Mon Oct 5 the slow-season rules apply: no 3-slot days, Dan Kosel 1 slot a day, everyone who works a Saturday gets +2 slots and has that week's Thursday flexed to 0, starred designates included. A flexed Thursday is never docked as time off.</li>
+      <li><b>Saturdays:</b> Oct 3 Stephen Hines (swap for Matt Mossey) and Travis East; Oct 10 Aaron Vandeventer (Mitchell Bowser worked the Sunday shift instead); Oct 17 Kelly Brill and Kyle Kanipes (swaps logged); Oct 24 Matt Clarity, Matt Mossey and Walker Russek (swaps logged); Oct 31 Travis East (5th Saturday) plus Aaron Vandeventer at 1 slot with Thu 10/29 flexed (Maggie, Nov 3).</li>
+      <li><b>PTO and blocks:</b> docks the actual day's slot value, half for AM/PM entries, from the PTO calendar plus every "Off"/"Out"/block entry in the Spectora events export, with Maggie's weekly rulings applied (block/BPP/off = off). Blocks under 3 hrs are not docked unless Maggie said so (Kyle Grovenstein's Wed 10/21 11:30–3:30 hold was docked as a half day).</li>
+      <li><b>Drive-time rule (Oct 26):</b> 3.25+ hrs of Drive blocks on one day docks 1 slot that day, once per person per day. Applied only to the week of Oct 19; no other week had a day that long.</li>
+      <li><b>Team (Nov 3):</b> everyone with slots except Joel Terry (extended leave, sample too small), per Maggie. Dan Kosel is included at his scheduled slots (his day-by-day availability changes are reflected in his docks). Trainee Travis East is included (Oct 12 ruling). These exclusions apply to October; ask again next run.</li>
+      <li><b>Data sources:</b> Spectora inspections and events, the live 2026-27 Inspector/Tech Schedule sheet, the PTO calendar and Airtable were pulled fresh for each weekly log run (Oct 7, 11, 19, 26 and Nov 2–3). October per-inspector totals were summed from the Airtable daily rows on Nov 3 and reconcile to the weekly log's final rows.</li>
+      <li><b>Target range (Oct 7, 2026):</b> 5–10% available. Inside the range is on target; below 5% is too tight and above 10% is too loose (not sustainable revenue-wise). Outside the range shows in the off-target color either way.</li>
+      </ul>
+  </section>
+
+  <section>
+    <h2>Confirmed planned blocks</h2>
+    <p class="note"><b>Confirmed Nov 3 (Maggie), Oct 26–31 week:</b> Anthony Link-Danko and Kyle Grovenstein were blocked for all of Fri Oct 30 (2 slots each docked); Dan Kosel's Fri Oct 30 "Hold per BPP" is docked as a half day (0.5 slot). Mitchell Bowser and Walker Russek's open Thu Oct 29 was confirmed as real availability and stays open. Kelly Brill's Oct 14 vs Oct 15 flex day does not matter for the number.</p><p class="note"><b>Docked as time off, from the weekly log:</b> Aaron Vandeventer (Oct 1 full, Oct 2 half, Oct 5, 6, 7, 9); Mitchell Bowser (Oct 1; Oct 15–16); Kelly Brill (Oct 5 PM); Kyle Kanipes (Oct 5–9; Oct 16); Stephen Hines (Oct 7; Oct 14 PM); Tony Weinand (Oct 8 PM; Oct 12; Oct 27 PM); Walker Russek (Oct 9; Oct 12 AM; Oct 30 PM); Matt Mossey (Oct 13–16); Jake Miller (Oct 15–16); Anthony Link-Danko (Oct 21 PM, Oct 23, Oct 26, Oct 30); Kyle Grovenstein (Oct 21 half, Oct 23, Oct 26, Oct 30); Dan Kosel (Oct 30, half day).</p><p class="note"><b>Drive-time docks (1 slot each):</b> Mon Oct 19 Jake Miller, Tony Weinand, Mitchell Bowser and Dan Kosel (4.5 hrs each); Fri Oct 23 Matt Mossey (6.0 hrs).</p><p class="note"><b>Events-export blocks worth adding to the PTO calendar:</b> Matt Mossey (Oct 13, 14), Stephen Hines (Oct 14 PM), Jake Miller (Oct 15, 16), Kyle Kanipes (Oct 16), Kyle Grovenstein (Oct 21 half day) and Tony Weinand (Oct 27 PM, BPP block).</p><p class="note"><b>Flexed Thursdays, not docked:</b> Aaron Vandeventer Oct 8 and Oct 29; Kelly Brill and Kyle Kanipes Oct 15; Walker Russek Oct 21 (flexed Wednesday); Matt Clarity and Matt Mossey Oct 22; Travis East Oct 29. Kyle Kanipes was booked on his flexed Oct 15 anyway, so those jobs count against him.</p>
+  </section>
+
+  <section>
+    <h2>Still genuinely open</h2>
+    <p class="note"><b>Open-slot answers:</b> Maggie's weekly reviews and her Nov 3 answers confirmed every open-slot question for October: remaining open slots are real availability (the Tuesday Inspector Meeting was ruled real availability, no dock), and the planned blocks above are docked. Weekly figures from the log: 12.6%, 14.5%, 10.8% and 29.5% available (before the Oct 30 blocks).</p><p class="note"><b>Standing treatments, unchanged:</b> multi-inspector jobs count in full for each inspector; drive and radon drop-off events are not counted as booked time (the 1.5 hrs/day of lunch and drive is already built into a 2-slot day), except the 3.25+ hr drive-day dock; Pool Inspection events count at hours ÷ 3.25.</p><p class="note"><b>Housekeeping:</b> events-export blocks listed above are worth adding to the PTO calendar so future pulls catch them. No open Confirm or Decide items remain for October.</p>
+  </section>
+
+  <section>
+    <h2>Hiring impact</h2>
+    <p class="note">Per Curtis's original meeting notes: "Each additional inspector brings approximately $7,008 a week." <b>This is the revenue base behind the checklist's $364–416K driver impact</b> — $7,008 × 52 weeks = $364,416 for one hire. Confirmed: the dollar figure was never "5% of a separate MHI/MHS revenue pool," it's the direct value of hiring enough inspectors to close the availability gap.</p>
+    <p class="note">Holding demand (weighted consumption, 430.9) constant, the team needs <b>453.6 total slots</b> to sit at 5% available. That's <b>72.9 fewer</b> than the 526.5 it had this month. A standard inspector contributes about 44 slots over these 22 workdays, so October shows <b>no additional hire needed</b>, with about 1.7 of a standard inspector's worth of room above the 5% line. That margin is a slow-season effect, not a structural surplus: the last week of October alone ran at 29.5% available, and the earlier rules (3-slot long days) only applied to Oct 1–4. Assumes demand holds steady; a hire who also grows total bookings needs more slots to reach the same %.</p>
+    <p class="note"><b>Target band in slots:</b> with the 5–10% target, the same demand (430.9) is on target with anywhere from <b>453.6 to 478.8 total slots</b>. The team had 526.5, about 48 slots (roughly 1.1 of a standard inspector) above the 10% ceiling, so October is too loose rather than short of capacity.</p>
+  </section>
+
+  <footer>
+    Marigold Cash Flow Driver Dashboard · Driver #1 · Oct 1–31, 2026 · Numerator: Spectora inspection durations, weighted at the locked 3.25-hr slot. Denominator: a slot model built from the Inspector/Tech Schedule sheet, PTO calendar and Spectora events (earlier rules Oct 1–4; slow-season rules from Oct 5). Source of the daily rows: Airtable Inspector Day Capacity. Owner: Blake. Thursday Nov 5 L10 is the near-term deadline.
+  </footer>
+</div>
+</body>
+</html>

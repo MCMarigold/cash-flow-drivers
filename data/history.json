@@ -327,6 +327,149 @@
           }
         }
       }
+    },
+    "2026-10": {
+      "label": "October 2026",
+      "drivers": {
+        "1": {
+          "name": "Inspector Available Capacity",
+          "owner": "Blake",
+          "headline": {
+            "value": "18.2%",
+            "target": "Target: 5–10%",
+            "state": "neg"
+          }
+        },
+        "2": {
+          "name": "MHS Marketing Leads",
+          "owner": "Minh",
+          "headline": {
+            "value": "8.1/wk",
+            "target": "Goal: 40/wk",
+            "state": "neg"
+          }
+        },
+        "3": {
+          "name": "Wrong People / Wrong Seats",
+          "owner": "Curtis",
+          "metrics": [
+            {
+              "label": "Combined",
+              "value": "88%",
+              "target": "/ 90% target",
+              "state": "neg"
+            },
+            {
+              "label": "Leadership & Support",
+              "value": "94%",
+              "state": "pos"
+            },
+            {
+              "label": "MHI Field Ops",
+              "value": "90%",
+              "state": "pos"
+            },
+            {
+              "label": "MHS Field Ops",
+              "value": "50%",
+              "state": "neg"
+            }
+          ],
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "4": {
+          "name": "Follow-Up Close Rate",
+          "owner": "Minh",
+          "metrics": [
+            {
+              "label": "Mitigation (HCP)",
+              "value": "41.4%",
+              "target": "/ 70%",
+              "state": "neg"
+            }
+          ]
+        },
+        "5": {
+          "name": "Inspector/Tech Efficiency",
+          "owner": "Blake",
+          "metrics": [
+            {
+              "label": "Inspector",
+              "value": "77.0%",
+              "target": "/ 80%",
+              "state": "neg"
+            },
+            {
+              "label": "Service Tech",
+              "value": "95.8%",
+              "target": "/ 85%",
+              "state": "pos"
+            },
+            {
+              "label": "Radon Tech",
+              "value": "62.6%",
+              "target": "/ 90%",
+              "state": "neg"
+            }
+          ]
+        },
+        "6": {
+          "name": "Cross-Selling / Ancillary Attach Rate",
+          "owner": "Maggie",
+          "headline": {
+            "value": "59.6%",
+            "target": "Target: 60%",
+            "state": "draft"
+          }
+        },
+        "7": {
+          "name": "AI Process Efficiencies",
+          "owner": "Britney",
+          "headline": {
+            "value": "6.6 hrs",
+            "target": "Target: 40 hrs/wk",
+            "state": "draft"
+          },
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "8": {
+          "name": "Average Employee Tenure",
+          "owner": "Britney",
+          "metrics": [
+            {
+              "label": "Overall",
+              "value": "2.77 yrs",
+              "target": "/ hold 2.2",
+              "state": "pos"
+            },
+            {
+              "label": "MHI",
+              "value": "2.55 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "MHS",
+              "value": "1.73 yrs",
+              "state": "neutral"
+            },
+            {
+              "label": "Office Staff",
+              "value": "3.82 yrs",
+              "state": "neutral"
+            }
+          ],
+          "note": "ops-style driver, tracks live/current state — captured as of this checkpoint, not closed prior-month data"
+        },
+        "9": {
+          "name": "Sales KPIs Achieved",
+          "owner": "Ron",
+          "headline": {
+            "value": "41.67%",
+            "target": "Target: 100%",
+            "state": "neg"
+          }
+        }
+      }
     }
   }
 }
